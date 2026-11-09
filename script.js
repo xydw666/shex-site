@@ -8077,13 +8077,20 @@ SHE.X 会持续更新功能。
   // 免登录访客的数据恢复可能在 X世界入口绑定前就完成，导致入口停在加载态；多次兜底重试进入。
   const retryGuestXWorldEntry = () => {
     const session = window.SHEXAuth?.current?.();
-    if (!session?.guest || window.location.hash !== '#x-world') return;
+    if (!session?.guest) return;
     if (!document.querySelector('#xRestoreWaitingNotice')) return;
-    document.getElementById('showXWorld')?.click();
+    if (window.SHEXAuth?.getDataLoadStatus?.() !== 'success') return;
+    // 明确指向其它子页的深链不抢路由，其余情况（含首页无 hash）都自动进入 X世界。
+    const hash = window.location.hash;
+    if (hash && hash !== '#x-world') return;
+    if (typeof setXLinkView === 'function') setXLinkView('world', 'guest_auto_enter');
+    else document.getElementById('showXWorld')?.click();
   };
   document.addEventListener('DOMContentLoaded', () => window.setTimeout(retryGuestXWorldEntry, 200));
+  document.addEventListener('shex:user-data-restored', () => window.setTimeout(retryGuestXWorldEntry, 0));
   window.setTimeout(retryGuestXWorldEntry, 1000);
   window.setTimeout(retryGuestXWorldEntry, 2600);
+  window.setTimeout(retryGuestXWorldEntry, 5000);
   window.addEventListener('load', () => window.setTimeout(retryGuestXWorldEntry, 0));
 
   function clearXRestoreWaitingPanel() {
