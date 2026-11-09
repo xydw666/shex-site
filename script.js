@@ -27940,7 +27940,7 @@ SHE.X 会持续更新功能。
       if(Boolean(officialStageBackgroundSuppression.get(key))===value)return false;officialStageBackgroundSuppression.set(key,value);if(currentWorldDream(readState())?.id===identity.scope.scopeId)installWorldHome();return true;
     },
     captureNativeState:(state)=>{
-      const owner=window.SHEXAuth.current()?.userId,contract=window.SHEXBeautify.official.contract,dreams=[];
+      const contract=window.SHEXBeautify?.official?.contract;if(!contract)return null;const owner=window.SHEXAuth.current()?.userId,dreams=[];
       for(const dream of state.dreams||[])if(officialStageNativeVisuals.has(owner+':'+dream.id))dreams.push({id:dream.id,...contract.nativeBase(state,dream).dream});
       return dreams.length?{userAvatar:state.userAvatar,dreams}:null;
     },
