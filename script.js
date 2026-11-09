@@ -5839,7 +5839,7 @@ SHE.X 会持续更新功能。
         datingUserProfile: dream.datingUserProfile && typeof dream.datingUserProfile === 'object' ? dream.datingUserProfile : null,
         replyMode: window.SHEXCharacterAI?.isGalleryCharacter?.(dream)
           ? 'ai'
-          : dream.replyMode === 'ai' ? 'ai' : 'library',
+          : (dream.replyMode === 'ai' || Boolean(window.SHEXAuth?.current?.()?.guest)) ? 'ai' : 'library',
         aiOnlineMode: Object.prototype.hasOwnProperty.call(dream, 'aiOnlineMode')
           ? dream.aiOnlineMode === true
           : dream.aiActionMode === false,
