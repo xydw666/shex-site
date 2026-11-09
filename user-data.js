@@ -6437,6 +6437,14 @@
     if (window.SHEX_CLOUDBASE_CHALLENGE_CALLBACK_FRAME === true) return;
     if (!restoreReady) restoreReady = restoreSessionData({ reloadOnChange: true });
   });
+  // 免登录访客：本脚本先于 defer 的 script.js 执行，这里立即完成恢复，
+  // 避免路由初始化时数据状态还是 idle 而卡在「正在链接」加载页。
+  try {
+    const earlySession = session();
+    if (earlySession && shouldUsePlanPreview(earlySession) && !restoreReady) {
+      restoreReady = restoreSessionData({ reloadOnChange: true });
+    }
+  } catch (_) {}
   document.addEventListener("shex:auth-change", () => {
     renderAuthLinks();
     if (!session()) closeAccountPanel();
