@@ -7890,6 +7890,15 @@ SHE.X 会持续更新功能。
     const effective = api.effectiveReplyMode(active.dream, aiEnabled);
     // 广场角色的有效模式固定为 AI。即使客户端残留了字卡专属状态，也不得落入字卡链路。
     if (access.isGalleryCharacter && effective === 'ai') return 'ai';
+    // 免登录访客：没有字卡库，统一走 AI 单聊（特殊工具模式仍按原规则排除）。
+    if (Boolean(window.SHEXAuth?.current?.()?.guest) && api.shouldUseAI({
+      isAdmin: false,
+      aiEnabled: true,
+      replyMode: 'ai',
+      conversationKind: active.kind,
+      chatMode,
+      media
+    })) return 'ai';
     return api.shouldUseAI({
       isAdmin: xIsAdminUser(),
       aiEnabled,
