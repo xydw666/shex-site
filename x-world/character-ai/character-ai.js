@@ -697,6 +697,14 @@
     };
   }
 
+  // 演示站点：guest 用户云端 AI 不可用时，用本地词库生成一条可交付的回复。
+  function guestLocalReplyPayload(requestId) {
+    const text = typeof global.SHEXGenerateTypingSentence === 'function'
+      ? global.SHEXGenerateTypingSentence()
+      : '我在呢，慢慢说，我听着。';
+    return { ok: true, code: '', message: '', requestId: String(requestId || '').trim(), reply: { text } };
+  }
+
   async function generateReply(options = {}) {
     const app = options.app;
     const user = options.user || {};
@@ -723,16 +731,16 @@
       });
     } catch (error) {
       // 演示站点：guest 用户在云端 AI 不可用时，用本地词库生成回复，保证聊天能跑通。
-      if (user?.guest) {
-        const localText = typeof global.SHEXGenerateTypingSentence === 'function'
-          ? global.SHEXGenerateTypingSentence()
-          : '我在呢，慢慢说，我听着。';
-        return validateReplyPayload({ reply: { text: localText }, requestId }, requestId);
-      }
+      if (user?.guest) return guestLocalReplyPayload(requestId);
       throw createError(error?.code || 'CHARACTER_AI_NETWORK_FAILED', error?.message || 'AI聊天服务连接失败，请稍后重试');
     }
     const payload = result?.result || result || {};
-    return validateReplyPayload(payload, requestId);
+    try {
+      return validateReplyPayload(payload, requestId);
+    } catch (error) {
+      if (user?.guest) return guestLocalReplyPayload(requestId);
+      throw error;
+    }
   }
 
   async function consolidateMemory(options = {}) {
