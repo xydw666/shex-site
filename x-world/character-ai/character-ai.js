@@ -722,6 +722,13 @@
         data: requestData
       });
     } catch (error) {
+      // 演示站点：guest 用户在云端 AI 不可用时，用本地词库生成回复，保证聊天能跑通。
+      if (user?.guest) {
+        const localText = typeof global.SHEXGenerateTypingSentence === 'function'
+          ? global.SHEXGenerateTypingSentence()
+          : '我在呢，慢慢说，我听着。';
+        return validateReplyPayload({ reply: { text: localText }, requestId }, requestId);
+      }
       throw createError(error?.code || 'CHARACTER_AI_NETWORK_FAILED', error?.message || 'AI聊天服务连接失败，请稍后重试');
     }
     const payload = result?.result || result || {};
@@ -875,8 +882,14 @@
           await options.waitForSegmentDrain();
         }
       } catch (error) {
-        if (error?.fallbackAllowed !== true) throw error;
-        payload = await generateReply(options);
+        // guest 演示用户：streaming 失败时也回退到本地回复。
+        if (user?.guest) {
+          payload = await generateReply(options);
+        } else if (error?.fallbackAllowed !== true) {
+          throw error;
+        } else {
+          payload = await generateReply(options);
+        }
       }
     } else {
       payload = await generateReply(options);

@@ -6058,6 +6058,7 @@ SHE.X 会持续更新功能。
     const dreamId = createXId('dream');
     const dreamName = legacyIdentity.taName || legacyIdentity.xName || legacyIdentity.name || 'TA';
     const userName = legacyIdentity.selfName || legacyIdentity.userCode || legacyIdentity.userName || legacyIdentity.myName || '你';
+    const isGuestUser = Boolean(window.SHEXAuth?.current?.()?.guest);
     const next = normalizeState({
       ...state,
       userName,
@@ -6072,6 +6073,8 @@ SHE.X 会持续更新功能。
         backgroundPhotoId: '',
         albumDisplayPhotoId: '',
         worldAvatarCaption: '',
+        replyMode: isGuestUser ? 'ai' : undefined,
+        aiOnlineMode: isGuestUser ? false : undefined,
         createdAt: Date.now()
       }],
       singleChats: { [dreamId]: readJson(legacyChatKey(), []) },
@@ -7857,14 +7860,15 @@ SHE.X 会持续更新功能。
 
   function characterAIAccessForDream(dream = null) {
     const isAdmin = xIsAdminUser();
+    const isGuest = Boolean(window.SHEXAuth?.current?.()?.guest);
     const isGalleryCharacter = window.SHEXCharacterAI?.isGalleryCharacter?.(dream) === true;
     const hasCharacterAI = characterCapabilityEnabled('characterAIEnabled');
     const isOwnedPrivate = Boolean(dream?.id) && !isGalleryCharacter;
     return Object.freeze({
-      canUseAI: isAdmin || isGalleryCharacter || (hasCharacterAI && isOwnedPrivate),
-      canUseDualMode: isOwnedPrivate && (isAdmin || hasCharacterAI),
-      canConfigureAIModes: isGalleryCharacter || (isOwnedPrivate && (isAdmin || hasCharacterAI)),
-      canSelectModel: isGalleryCharacter || isAdmin || hasCharacterAI,
+      canUseAI: isGuest || isAdmin || isGalleryCharacter || (hasCharacterAI && isOwnedPrivate),
+      canUseDualMode: isOwnedPrivate && (isGuest || isAdmin || hasCharacterAI),
+      canConfigureAIModes: isGalleryCharacter || (isOwnedPrivate && (isGuest || isAdmin || hasCharacterAI)),
+      canSelectModel: isGuest || isGalleryCharacter || isAdmin || hasCharacterAI,
       isGalleryCharacter
     });
   }

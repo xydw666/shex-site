@@ -56,6 +56,33 @@
     }
   }
 
+  // 免登录 guest 自动获得默认身份（秦梧 / 你），避免卡在身份设置页。
+  // 真实账号自己设置的名字不受影响；用户手动改过身份也不覆盖。
+  try {
+    const rawSession2 = localStorage.getItem('shex_auth_session_v1');
+    const session2 = rawSession2 ? JSON.parse(rawSession2) : null;
+    if (session2 && session2.guest) {
+      const identityKey = 'shex_x_link_identity';
+      if (!localStorage.getItem(identityKey)) {
+        localStorage.setItem(identityKey, JSON.stringify({
+          dreamId: '',
+          taName: '秦梧',
+          userCode: '你',
+          taAvatar: '',
+          userAvatar: ''
+        }));
+      }
+      const disclaimerKey = 'shex_x_link_disclaimer_v1';
+      if (!localStorage.getItem(disclaimerKey)) {
+        localStorage.setItem(disclaimerKey, JSON.stringify({
+          xLinkDisclaimerRead: true,
+          xLinkDisclaimerAgreed: true,
+          xLinkDisclaimerAgreedAt: new Date().toISOString()
+        }));
+      }
+    }
+  } catch (_) {}
+
   // 免登录演示统一使用「秦梧 / 你」这两个称呼。
   // 只改本机访客数据，真实账号自己设置的名字不受影响。
   try {
@@ -92,7 +119,7 @@
   } catch (_) {}
 
   // ?demoChat=1 仅用于本地与临时预览域名，生产环境不开放演示身份。
-  const isPreviewHost = isLocalHost || /\.(pinggy-free\.link|free\.pinggy\.net|lhr\.life)$/i.test(window.location.hostname) || /\.remote-agent\.svc\.cluster\.local$/i.test(window.location.hostname);
+  const isPreviewHost = isLocalHost || /\.(pinggy-free\.link|free\.pinggy\.net|lhr\.life|github\.io)$/i.test(window.location.hostname) || /\.remote-agent\.svc\.cluster\.local$/i.test(window.location.hostname);
   if (!isPreviewHost || query.get('demoChat') !== '1') return;
   const ordinaryUserPreview = query.get('demoUser') === '1';
 
