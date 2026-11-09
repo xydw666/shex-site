@@ -1,0 +1,259 @@
+.shex-sim-workbench{--sim-accent:#b18658;--sim-ink:#5b442c;--sim-soft:#f8f4ef;box-sizing:border-box;width:100%;max-width:980px;margin:0 auto;color:var(--sim-ink);font-family:inherit;overflow:visible}.shex-sim-workbench *{box-sizing:border-box}.shex-sim-workbench button,.shex-sim-workbench input,.shex-sim-workbench textarea,.shex-sim-workbench select{font:inherit}.shex-sim-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:18px 20px;border:1px solid rgba(177,134,88,.18);border-radius:22px;background:linear-gradient(145deg,#fff,#f9f4ee)}.shex-sim-head small{letter-spacing:.12em;color:#b6926b}.shex-sim-head h2{margin:5px 0 4px;font-size:23px}.shex-sim-head p{margin:0;color:#a37e55;font-size:13px}.shex-sim-workbench button{min-height:40px;border:1px solid rgba(177,134,88,.24);border-radius:13px;padding:8px 15px;background:#fff;color:var(--sim-ink);cursor:pointer}.shex-sim-workbench button:hover{border-color:var(--sim-accent)}.shex-sim-workbench button.primary,.shex-sim-workbench .shex-sim-steps button.active{border-color:var(--sim-accent);background:var(--sim-accent);color:#fff}.shex-sim-workbench button.ghost{background:transparent}.shex-sim-workbench button.danger{color:#9a5063}.shex-sim-workbench button:disabled{opacity:.48;cursor:not-allowed}.shex-sim-steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px;margin:14px 0}.shex-sim-steps button{display:flex;align-items:center;justify-content:center;gap:6px;min-width:0;padding:8px 5px;font-size:12px}.shex-sim-steps span{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(177,134,88,.12)}.shex-sim-steps button.active span{background:rgba(255,255,255,.2)}.shex-sim-toolbar{position:sticky;top:0;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;padding:10px 14px;border:1px solid rgba(177,134,88,.16);border-radius:15px;background:rgba(255,255,255,.96);box-shadow:0 8px 24px rgba(89,66,41,.07)}.shex-sim-toolbar span{font-size:13px;color:#97744e}.shex-sim-step-panel{display:grid;gap:14px}.shex-sim-card{padding:17px;border:1px solid rgba(177,134,88,.17);border-radius:20px;background:#fff;box-shadow:0 10px 28px rgba(89,66,41,.05)}.shex-sim-card>header{display:flex;justify-content:space-between;gap:12px;margin-bottom:14px}.shex-sim-card h3{margin:0;font-size:18px}.shex-sim-card header p{margin:4px 0 0;color:#ac8861;font-size:13px}.shex-sim-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.shex-sim-field{display:flex;min-width:0;flex-direction:column;gap:6px}.shex-sim-field.wide,.shex-sim-readonly.wide,.shex-sim-ref.wide,.shex-sim-candidates.wide{grid-column:1/-1}.shex-sim-field>span,.shex-sim-readonly>span,.shex-sim-ref>span{font-size:12px;color:#a17c53}.shex-sim-field input,.shex-sim-field textarea,.shex-sim-field select,.shex-sim-picker input{width:100%;min-width:0;border:1px solid #e8dbcd;border-radius:12px;padding:10px 12px;background:#f9f4ee;color:var(--sim-ink)}.shex-sim-field textarea{resize:vertical;line-height:1.55}.shex-sim-field input[type=checkbox]{width:22px;height:22px;accent-color:var(--sim-accent)}.shex-sim-field small,.shex-sim-readonly small,.shex-sim-ref small{color:#b4936f;font-size:11px}.shex-sim-readonly,.shex-sim-ref{display:grid;gap:4px;padding:11px 12px;border:1px dashed #e5d6c5;border-radius:12px;background:var(--sim-soft)}.shex-sim-ref code{overflow-wrap:anywhere}.shex-sim-section-bar,.shex-sim-section-actions,.shex-sim-inline-actions{display:flex;align-items:center;justify-content:space-between;gap:9px;flex-wrap:wrap;margin:15px 0 10px}.shex-sim-section-bar h4{margin:0}.shex-sim-subcard,.shex-sim-event,.shex-sim-stage{margin-top:10px;padding:14px;border:1px solid #eee5db;border-radius:16px;background:#f9f4ee}.shex-sim-subcard>header,.shex-sim-event>header,.shex-sim-picker>header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.shex-sim-empty{padding:18px;border-radius:14px;background:var(--sim-soft);color:#ad8961;text-align:center}.shex-sim-picker{margin:12px 0;padding:14px;border:1px solid #ddc9b3;border-radius:16px;background:#f9f4ee}.shex-sim-picker form{display:flex;gap:8px}.shex-sim-picker-results{display:grid;gap:7px;margin-top:10px}.shex-sim-picker-results button{display:flex;justify-content:space-between;text-align:left}.shex-sim-picker-results small{color:#ae8a62}.shex-sim-story-layout{display:grid;grid-template-columns:190px minmax(0,1fr);gap:15px}.shex-sim-tree{display:flex;flex-direction:column;gap:7px;min-width:0}.shex-sim-tree>button{display:flex;flex-direction:column;align-items:flex-start;text-align:left}.shex-sim-tree>button.active,.shex-sim-stage-tabs button.active{border-color:var(--sim-accent);background:#f5ede5}.shex-sim-tree small{font-size:11px;color:#b08d66}.shex-sim-stage-tabs{display:flex;gap:7px;overflow:auto;padding-bottom:3px}.shex-sim-stage-tabs button{white-space:nowrap}.shex-sim-candidates{margin:0;padding:12px;border:1px solid #e8dbcd;border-radius:13px}.shex-sim-candidates legend{padding:0 5px;font-size:12px;color:#a17c53}.shex-sim-candidates label{display:inline-flex;align-items:center;gap:6px;margin:5px 14px 5px 0}.shex-sim-candidates input{accent-color:var(--sim-accent)}.shex-sim-check-summary{display:flex;gap:20px;flex-wrap:wrap}.shex-sim-check-result{padding:14px;border-radius:14px;background:var(--sim-soft)}.shex-sim-check-result ul{padding-left:20px}.shex-sim-check-result button.link{min-height:0;border:0;padding:0;background:transparent;color:var(--sim-accent);text-decoration:underline}.shex-sim-publication{margin-top:14px;padding:14px;border:1px solid #b9d4c0;border-radius:14px;background:#f2fbf4}.shex-sim-publication p{overflow-wrap:anywhere}.shex-sim-global-error,.shex-sim-picker .error,.shex-sim-check-result .error{color:#9b465d}.shex-sim-check-result .ok{color:#3d7a54}.shex-sim-draft-list{display:grid;gap:9px;margin-top:13px}.shex-sim-draft-list button{display:flex;justify-content:space-between;gap:12px;text-align:left}.shex-sim-draft-list span{color:#ae8a62}.shex-sim-workbench [hidden]{display:none!important}
+@media(max-width:720px){.shex-sim-head{padding:15px}.shex-sim-head h2{font-size:20px}.shex-sim-steps{grid-template-columns:repeat(3,minmax(0,1fr))}.shex-sim-form-grid{grid-template-columns:1fr}.shex-sim-field.wide,.shex-sim-readonly.wide,.shex-sim-ref.wide,.shex-sim-candidates.wide{grid-column:auto}.shex-sim-story-layout{grid-template-columns:1fr}.shex-sim-tree{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.shex-sim-tree .shex-sim-section-bar{grid-column:1/-1}.shex-sim-toolbar{top:4px}.shex-sim-picker form{align-items:stretch}.shex-sim-picker form input{min-width:0}.shex-sim-section-actions button{flex:1 1 140px}.shex-sim-draft-list button{flex-direction:column}.shex-sim-card{padding:14px}}
+@media(max-width:380px){.shex-sim-steps button{font-size:11px}.shex-sim-steps span{display:none}.shex-sim-head{flex-direction:column}.shex-sim-head>button{align-self:flex-end}.shex-sim-tree{grid-template-columns:1fr}}
+.shex-sim-head>div{min-width:0}.shex-sim-head small{overflow-wrap:anywhere}
+.shex-sim-taxonomy-section{display:grid;gap:14px}.shex-sim-taxonomy-group,.shex-sim-reference-field{margin:0;padding:12px;border:1px solid #e8dbcd;border-radius:14px;background:#f9f4ee}.shex-sim-taxonomy-group legend,.shex-sim-reference-field legend{padding:0 6px;color:#8d6c48;font-size:13px;font-weight:700}.shex-sim-taxonomy-group legend small{margin-left:6px;color:#b4936f;font-weight:400}.shex-sim-taxonomy-options,.shex-sim-reference-options{display:flex;flex-wrap:wrap;gap:8px}.shex-sim-taxonomy-options label,.shex-sim-reference-options label{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:7px 11px;border:1px solid #e8dbcd;border-radius:999px;background:#fff;cursor:pointer}.shex-sim-taxonomy-options label:has(input:checked),.shex-sim-reference-options label:has(input:checked){border-color:var(--sim-accent);background:#f5ede5}.shex-sim-taxonomy-options label.is-missing,.shex-sim-reference-options label.is-missing{border-style:dashed;color:#a5824f}.shex-sim-taxonomy-options input,.shex-sim-reference-options input{accent-color:var(--sim-accent)}.shex-sim-reference-field>small,.shex-sim-taxonomy-group>small{display:block;margin-top:8px;color:#b4936f;font-size:11px}.shex-sim-reference-empty{color:#b4936f;font-size:12px}.shex-sim-taxonomy-search{display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:0 11px;border:1px solid #e8dbcd;border-radius:999px;background:#fff}.shex-sim-taxonomy-search input{width:100%;min-width:0;border:0;padding:10px 0;background:transparent;color:var(--sim-ink);outline:0}.shex-sim-tag-create{display:flex;gap:8px;margin-top:10px}.shex-sim-tag-create input{min-width:0;flex:1;border:1px solid #e8dbcd;border-radius:12px;padding:10px 12px;background:#fff;color:var(--sim-ink)}.shex-sim-advanced-settings{grid-column:1/-1;margin-top:4px;border-top:1px solid #eee5db;padding-top:10px}.shex-sim-advanced-toggle{width:100%;justify-content:flex-start!important;border:0!important;padding:8px 2px!important;background:transparent!important;color:#8d6c48!important;text-align:left}.shex-sim-advanced-region{padding-top:10px}.shex-sim-advanced-region>.shex-sim-form-grid{padding:12px;border-radius:14px;background:var(--sim-soft)}
+.shex-sim-advanced{display:grid;gap:9px;margin-top:14px;padding-top:12px;border-top:1px solid #eee5db}.shex-sim-advanced h5{margin:6px 0 0;font-size:14px}.shex-sim-condition,.shex-sim-effect,.shex-sim-condition-group{display:grid;gap:9px;padding:11px;border:1px solid #ece2d6;border-radius:13px;background:#fff}.shex-sim-empty.compact{margin:0;padding:10px;text-align:left}.shex-sim-condition>button,.shex-sim-effect>button{justify-self:end}
+.shex-sim-direction{display:grid;place-items:center;align-self:end;min-height:42px;color:var(--sim-accent);font-size:22px}.shex-sim-edge{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:end;gap:10px}.shex-sim-edge label{display:grid;gap:6px;min-width:0}.shex-sim-edge label>span{color:#a17c53;font-size:12px}.shex-sim-edge select{width:100%;min-width:0;border:1px solid #e8dbcd;border-radius:12px;padding:10px 12px;background:#f9f4ee;color:var(--sim-ink)}.shex-sim-rule-summary small{color:#ad8961}.shex-sim-rule-summary ul{margin:4px 0;padding-left:20px}.shex-sim-rule-summary li{margin:5px 0}
+.shex-sim-readonly img{display:block;width:100%;max-height:160px;border-radius:10px;object-fit:cover}
+.shex-sim-role-avatar{display:flex;align-items:center;gap:12px;min-width:0;padding:10px 12px;border:1px solid #eee5db;border-radius:16px;background:linear-gradient(135deg,#fff,#f9f4ee)}.shex-sim-role-avatar-image{display:grid;place-items:center;flex:0 0 56px;width:56px;height:56px;overflow:hidden;border:1px solid #e9dbcc;border-radius:50%;background:#f6f0e9;color:#b79067;font-size:28px}.shex-sim-role-avatar-image img{width:100%;height:100%;object-fit:cover}.shex-sim-role-avatar-body{display:grid;gap:3px;min-width:0}.shex-sim-role-avatar-body>strong{font-size:13px}.shex-sim-role-avatar-body>small{color:#ac8861;font-size:11px}.shex-sim-role-avatar-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:3px}.shex-sim-role-avatar-actions label{display:inline-flex;align-items:center;min-height:32px;padding:5px 10px;border:1px solid #e6d5c3;border-radius:11px;background:#fff;color:#987148;font-size:12px;cursor:pointer}.shex-sim-role-avatar-actions button{min-height:32px;padding:5px 10px;font-size:12px}.shex-sim-subcard>header>strong{min-width:0;overflow-wrap:anywhere}
+.shex-sim-effect-axes{display:grid;gap:9px}.shex-sim-effect-axis-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;align-items:end;gap:9px;padding:9px;border:1px solid #f1e8de;border-radius:12px;background:#f9f4ee}.shex-sim-effect-axis-row select{width:100%;min-width:0;border:1px solid #e8dbcd;border-radius:12px;padding:10px 12px;background:#fff;color:var(--sim-ink)}
+.shex-sim-picker-source{display:grid;gap:3px;margin:0 0 10px;padding:10px 12px;border-radius:12px;background:#f5eee7}.shex-sim-picker-source small{color:#a37e55}.shex-sim-picker-option{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #e8dbcd;border-radius:13px;background:#fff;cursor:pointer}.shex-sim-picker-option>input{flex:0 0 auto;width:20px;height:20px;accent-color:var(--sim-accent)}.shex-sim-picker-option>span{display:flex;min-width:0;flex:1;align-items:center;justify-content:space-between;gap:10px}.shex-sim-picker-option.is-selected{border-color:var(--sim-accent);background:#f5ede5}.shex-sim-picker-option.is-joined{opacity:.62;cursor:not-allowed}.shex-sim-picker-footer{display:flex;justify-content:flex-end;margin-top:12px;padding-top:12px;border-top:1px solid #ede2d6}.shex-sim-readonly.is-warning{border-color:#d9a9b6;background:#fff6f8}.shex-sim-subcard.is-source-unavailable{border-color:#d9a9b6}
+@media(max-width:720px){.shex-sim-edge,.shex-sim-effect-axis-row{grid-template-columns:1fr}.shex-sim-edge>span{min-height:auto;transform:rotate(90deg)}}
+.shex-sim-workbench{padding:0 0 96px;overflow-x:clip;overflow-y:visible}.shex-sim-head.is-compact{flex-direction:row;align-items:center;justify-content:flex-start;padding:6px 2px 9px;border:0;border-radius:0;background:transparent}.shex-sim-head.is-compact h2{margin:0 0 2px}.shex-sim-back{align-self:center!important;flex:0 0 42px;width:42px;padding:0!important;border-radius:50%!important;font-size:28px;line-height:1}.shex-sim-step-panel{min-height:0;overflow:visible;padding-bottom:8px}
+.shex-sim-toolbar{position:sticky;top:4px;z-index:7;display:flex;align-items:center;justify-content:space-between;gap:10px}.shex-sim-toolbar-actions{display:flex;gap:8px;flex:0 0 auto}.shex-sim-toolbar-actions button{min-width:82px}.shex-sim-media-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:12px}.shex-sim-media{display:grid;gap:9px;padding:12px;border:1px solid rgba(170,127,82,.16);border-radius:16px;background:rgba(250,244,238,.78)}.shex-sim-media header{display:grid;gap:2px}.shex-sim-media header small{color:#ae8a63;font-size:11px}.shex-sim-media-preview{display:grid;place-items:center;overflow:hidden;min-height:132px;border-radius:13px;background:linear-gradient(145deg,#f5ede5,#f9f4ef);color:#ad8962}.shex-sim-media.is-portrait .shex-sim-media-preview{aspect-ratio:9/16;max-height:230px}.shex-sim-media.is-landscape .shex-sim-media-preview{aspect-ratio:16/9}.shex-sim-media-preview img{width:100%;height:100%;object-fit:cover}.shex-sim-media-actions{display:flex;gap:7px}.shex-sim-media-actions label,.shex-sim-media-actions button{display:grid;place-items:center;min-height:38px;flex:1;border:1px solid rgba(170,127,82,.2);border-radius:12px;background:#fff;color:#826341;cursor:pointer}.shex-sim-media-actions label span{pointer-events:none}
+@media(max-width:640px){.shex-sim-toolbar{align-items:flex-start;flex-direction:column}.shex-sim-toolbar-actions{width:100%}.shex-sim-toolbar-actions button{min-width:0;flex:1}.shex-sim-media-grid{grid-template-columns:1fr}.shex-sim-media.is-portrait .shex-sim-media-preview{max-height:300px}.shex-sim-tag-create{align-items:stretch}.shex-sim-tag-create button{flex:0 0 auto}.shex-sim-taxonomy-options,.shex-sim-reference-options{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px}.shex-sim-taxonomy-options label,.shex-sim-reference-options label{flex:0 0 auto}}
+
+/* X103 创作者端移动布局：真实收缩、换行与底栏留白，不靠裁切隐藏坏布局。 */
+.shex-sim-workbench {
+  min-width: 0;
+  max-width: min(980px, 100%);
+  padding-bottom: calc(108px + env(safe-area-inset-bottom));
+  overflow-x: visible;
+}
+.shex-sim-workbench > *,
+.shex-sim-step-panel > *,
+.shex-sim-card,
+.shex-sim-subcard,
+.shex-sim-event,
+.shex-sim-stage,
+.shex-sim-toolbar,
+.shex-sim-toolbar-actions,
+.shex-sim-media-grid,
+.shex-sim-media-grid > * { min-width: 0; max-width: 100%; }
+.shex-sim-head h2,
+.shex-sim-head p,
+.shex-sim-card h3,
+.shex-sim-subcard strong,
+.shex-sim-event strong,
+.shex-sim-stage strong { overflow-wrap: anywhere; word-break: break-word; }
+.shex-sim-steps button { white-space: normal; line-height: 1.25; overflow-wrap: anywhere; }
+.shex-sim-toolbar-actions { min-width: 0; flex-wrap: nowrap; }
+.shex-sim-field,
+.shex-sim-subcard,
+.shex-sim-event,
+.shex-sim-stage,
+.shex-sim-card { scroll-margin-top: 112px; }
+.shex-sim-media.is-landscape { width: min(100%, 420px); justify-self: center; }
+.shex-sim-media.is-landscape .shex-sim-media-preview { min-height: 0; aspect-ratio: 16/9; }
+.shex-sim-taxonomy-options,
+.shex-sim-reference-options { flex-wrap: wrap; overflow-x: visible; }
+.shex-sim-taxonomy-options label,
+.shex-sim-reference-options label { min-width: 0; max-width: 100%; flex: 0 1 auto; white-space: normal; overflow-wrap: anywhere; }
+.shex-sim-taxonomy-search,
+.shex-sim-tag-create { width: 100%; max-width: 100%; }
+@media(max-width:720px) {
+  .shex-sim-workbench { width: 100%; }
+  .shex-sim-head.is-compact { gap: 9px; padding: 5px 0 8px; }
+  .shex-sim-head.is-compact > div { min-width: 0; }
+  .shex-sim-steps { gap: 6px; margin: 10px 0; }
+  .shex-sim-steps button { min-height: 48px; padding: 7px 4px; }
+  .shex-sim-toolbar { top: max(3px, env(safe-area-inset-top)); align-items: stretch; flex-direction: column; gap: 7px; padding: 9px 11px; }
+  .shex-sim-toolbar-actions { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); width: 100%; }
+  .shex-sim-toolbar-actions button { width: 100%; min-width: 0; min-height: 38px; padding: 7px 5px; font-size: 12px; white-space: nowrap; }
+  .shex-sim-card { padding: 13px; border-radius: 18px; }
+  .shex-sim-subcard,.shex-sim-event,.shex-sim-stage { padding: 12px; }
+  .shex-sim-media-grid { grid-template-columns: 1fr; }
+  .shex-sim-media.is-landscape { width: min(76%, 340px); }
+  .shex-sim-taxonomy-options,.shex-sim-reference-options { flex-wrap: wrap; overflow-x: visible; padding-bottom: 0; }
+  .shex-sim-taxonomy-options label,.shex-sim-reference-options label { flex: 0 1 auto; }
+  .shex-sim-tag-create { flex-wrap: wrap; }
+  .shex-sim-tag-create input { flex: 1 1 190px; width: 100%; }
+  .shex-sim-tag-create button { flex: 0 1 auto; }
+}
+@media(max-width:380px) {
+  .shex-sim-steps span { display: grid; width: 18px; height: 18px; }
+  .shex-sim-steps button { font-size: 10.5px; }
+  .shex-sim-media.is-landscape { width: min(78%, 300px); }
+}
+
+/* 公共标签固定两行，超出部分只在标签区域横向滑动。 */
+[data-simulator-taxonomy],
+.shex-sim-taxonomy-section,
+.shex-sim-taxonomy-group {
+  min-width: 0;
+  max-width: 100%;
+}
+.shex-sim-tag-options {
+  display: grid;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: 84px;
+  grid-template-rows: repeat(2, 36px);
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 4px;
+  overscroll-behavior-inline: contain;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+}
+.shex-sim-tag-options label { width: max-content; white-space: nowrap; }
+.shex-sim-steps button { gap: 0; }
+
+/* 编辑器返回入口保留完整热区，视觉只显示箭头。 */
+.shex-sim-workbench .shex-sim-back {
+  min-width: 42px;
+  min-height: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 0 !important;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* 编辑器标题栏与保存栏共享同一滚动容器：标题栏始终可见，保存栏按实测标题高度避让。 */
+.shex-sim-head.is-compact {
+  position: sticky;
+  top: max(0px, env(safe-area-inset-top));
+  z-index: 9;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: blur(12px);
+}
+.shex-sim-toolbar {
+  top: calc(var(--sim-sticky-head-height, 62px) + max(3px, env(safe-area-inset-top)));
+}
+.shex-sim-issue-list { display:grid; gap:9px; margin-top:12px; }
+.shex-sim-issue-card { display:grid; gap:5px; padding:11px 12px; border:1px solid #ece1d4; border-radius:13px; background:#fff; }
+.shex-sim-issue-card strong { overflow-wrap:anywhere; }
+.shex-sim-issue-card p { margin:0; color:#97744e; line-height:1.55; }
+.shex-sim-issue-list.blocker .shex-sim-issue-card { border-color:#e2c1ca; background:#fff8fa; }
+.shex-sim-recommendations { margin-top:15px; padding-top:13px; border-top:1px solid #ece1d4; }
+.shex-sim-recommendations h4,.shex-sim-recommendations>p { margin:0 0 6px; }
+.shex-sim-recommendations>p { color:#ac8861; font-size:12px; }
+@media(max-width:720px) {
+  .shex-sim-head.is-compact { padding-top:5px; padding-bottom:8px; }
+  .shex-sim-head.is-compact h2 { display:-webkit-box; overflow:hidden; font-size:18px; line-height:1.2; -webkit-box-orient:vertical; -webkit-line-clamp:2; }
+  .shex-sim-head.is-compact p { font-size:12px; }
+}
+
+.shex-sim-section-title { display:flex; min-width:0; align-items:center; gap:8px; }
+.shex-sim-workbench button.shex-sim-help { display:grid; width:28px; min-width:28px; min-height:28px; height:28px; padding:0; place-items:center; border-radius:50%; color:var(--sim-accent); font-size:13px; font-weight:700; }
+.shex-sim-relationship-edge { display:grid; grid-column:1/-1; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:end; gap:10px; min-width:0; }
+.shex-sim-relationship-edge>.shex-sim-field { min-width:0; }
+.shex-sim-relation-slider-head { display:flex; min-width:0; align-items:center; justify-content:space-between; gap:10px; }
+.shex-sim-relation-slider-head output { flex:none; color:var(--sim-accent); font-size:12px; font-weight:700; }
+.shex-sim-field input[type=range][data-simulator-relation-slider] { height:26px; padding:0; border:0; border-radius:0; outline:0; background:transparent; accent-color:var(--sim-accent); cursor:pointer; }
+.shex-sim-field input[type=range][data-simulator-relation-slider]::-webkit-slider-runnable-track { height:6px; border-radius:999px; background:#f1e8de; }
+.shex-sim-field input[type=range][data-simulator-relation-slider]::-webkit-slider-thumb { width:20px; height:20px; margin-top:-7px; border:3px solid #fff; border-radius:50%; appearance:none; background:var(--sim-accent); box-shadow:0 2px 8px rgba(89,66,41,.22); }
+.shex-sim-field input[type=range][data-simulator-relation-slider]::-moz-range-track { height:6px; border:0; border-radius:999px; background:#f1e8de; }
+.shex-sim-field input[type=range][data-simulator-relation-slider]::-moz-range-thumb { width:14px; height:14px; border:3px solid #fff; border-radius:50%; background:var(--sim-accent); box-shadow:0 2px 8px rgba(89,66,41,.22); }
+.ix-card-confirm-mask.shex-astro-help-modal.shex-sim-help-modal .ix-card-confirm-sheet { border-color:rgba(177,134,88,.22); background:rgba(255,255,255,.94); box-shadow:0 24px 70px rgba(109,81,50,.2); color:#5f482f; }
+.ix-card-confirm-mask.shex-astro-help-modal.shex-sim-help-modal .ix-card-confirm-sheet:before { border-color:rgba(177,134,88,.18); background:rgba(249,244,238,.86); box-shadow:0 5px 16px rgba(119,89,57,.12); color:#a57c4f; }
+.ix-card-confirm-mask.shex-astro-help-modal.shex-sim-help-modal .ix-card-confirm-sheet h3 { color:#5f482f; }
+.ix-card-confirm-mask.shex-astro-help-modal.shex-sim-help-modal #ixCardConfirmBody { color:rgba(97,74,48,.68); scrollbar-color:rgba(177,134,88,.22) transparent; }
+.ix-card-confirm-mask.shex-astro-help-modal.shex-sim-help-modal #ixCardConfirmBody::-webkit-scrollbar-thumb { background:rgba(177,134,88,.22); }
+.ix-card-confirm-mask.shex-astro-help-modal.shex-sim-help-modal .ix-card-confirm-actions { border-top-color:rgba(177,134,88,.16); }
+.ix-card-confirm-mask.shex-astro-help-modal.shex-sim-help-modal #ixCardConfirmOk { background:#be976e; color:#fff; box-shadow:0 9px 22px rgba(177,134,88,.2); }
+.ix-card-confirm-mask.shex-astro-help-modal.shex-sim-help-modal #ixCardConfirmOk:hover { background:#b68c5f; }
+
+/* 说明入口统一形态：标题旁的小圆形 ?，全部共用一个弹窗。 */
+.shex-sim-card-title { display:flex; min-width:0; align-items:center; gap:8px; }
+.shex-sim-card-title h3 { min-width:0; }
+.shex-sim-field-label { display:flex; min-width:0; align-items:center; gap:6px; }
+.shex-sim-field-label>label { min-width:0; cursor:pointer; }
+.shex-sim-field-with-help>small { display:flex; flex-wrap:wrap; align-items:center; gap:6px; }
+.shex-sim-workbench button.shex-sim-help.shex-sim-help-inline { width:22px; min-width:22px; min-height:22px; height:22px; font-size:11px; }
+.shex-sim-field-with-help .shex-sim-help { flex:none; }
+.shex-sim-section-title .shex-sim-help,
+.shex-sim-card-title .shex-sim-help { flex:none; }
+@media(max-width:380px) {
+  .shex-sim-relationship-edge { gap:6px; }
+  .shex-sim-relationship-edge .shex-sim-field>span { font-size:11px; }
+  .shex-sim-relationship-edge .shex-sim-field select { padding-right:7px; padding-left:7px; }
+  .shex-sim-relationship-edge>.shex-sim-direction { font-size:18px; }
+}
+.shex-sim-story-accordion { --sim-tree-indent:24px; display:grid; gap:18px; min-width:0; margin-bottom:14px; }
+.shex-sim-chapter-card { --sim-tree-ink:#977046; --sim-tree-line:#dfcab4; --sim-tree-soft:#f9f4ee; }
+.shex-sim-chapter-card[data-simulator-chapter-tone="1"] { --sim-tree-ink:#416585; --sim-tree-line:#adc8dc; --sim-tree-soft:#edf4fa; }
+.shex-sim-chapter-card[data-simulator-chapter-tone="2"] { --sim-tree-ink:#386c59; --sim-tree-line:#acd2c2; --sim-tree-soft:#edf7f1; }
+.shex-sim-chapter-card[data-simulator-chapter-tone="3"] { --sim-tree-ink:#805d35; --sim-tree-line:#dfc6a7; --sim-tree-soft:#fcf3e8; }
+.shex-sim-chapter-card[data-simulator-chapter-tone="4"] { --sim-tree-ink:#895669; --sim-tree-line:#dfb8c7; --sim-tree-soft:#f9f5ee; }
+.shex-sim-chapter-card[data-simulator-chapter-tone="5"] { --sim-tree-ink:#426e72; --sim-tree-line:#b0cecf; --sim-tree-soft:#edf5f5; }
+.shex-sim-chapter-card, .shex-sim-stage-card { position:relative; min-width:0; border:0; background:transparent; }
+.shex-sim-chapter-card > header, .shex-sim-stage-card > header { display:flex; align-items:center; gap:6px; min-width:0; padding:6px 10px; border:1px solid var(--sim-tree-line); border-radius:13px; }
+.shex-sim-chapter-card > header { border-left:4px solid var(--sim-tree-ink); background:var(--sim-tree-soft); }
+.shex-sim-stage-card > header { background:#fff; }
+.shex-sim-workbench .shex-sim-accordion-toggle { display: flex; flex: 1 1 0; align-items: center; gap: 10px; min-width: 0; min-height: 44px; padding: 5px 2px; border: 0; border-radius: 8px; background: transparent; color: inherit; text-align: left; box-shadow: none; }
+.shex-sim-accordion-toggle > span { display: grid; flex: 1 1 0; gap: 3px; min-width: 0; }
+.shex-sim-accordion-toggle small, .shex-sim-accordion-toggle strong { min-width: 0; overflow-wrap: anywhere; }
+.shex-sim-accordion-toggle small { color:var(--sim-tree-ink); font-size:12px; font-weight:400; }
+.shex-sim-chapter-card > header strong { font-size:18px; color:var(--sim-tree-ink); }
+.shex-sim-stage-card > header strong { font-size:15px; }
+.shex-sim-accordion-toggle::after { content:''; flex:0 0 8px; width:8px; height:8px; margin-right:4px; border-right:2px solid var(--sim-tree-ink); border-bottom:2px solid var(--sim-tree-ink); transform:rotate(-45deg); }
+.shex-sim-accordion-toggle[aria-expanded="true"]::after { transform: rotate(45deg); }
+.shex-sim-chapter-card > header > .shex-sim-help, .shex-sim-stage-card > header > .shex-sim-help { flex-shrink: 0; }
+[data-simulator-chapter-host], [data-simulator-stage-host], [data-simulator-stage-list] { min-width: 0; }
+[data-simulator-stage-list], [data-simulator-event-list] { display:grid; gap:12px; margin:0; min-width:0; }
+[data-simulator-chapter-body], [data-simulator-stage-body] { padding:0; border:0; }
+[data-simulator-story] .shex-sim-tree-branch { position:relative; min-width:0; margin-left:var(--sim-tree-indent); padding-top:12px; }
+[data-simulator-story] .shex-sim-tree-branch::before { content:''; position:absolute; left:calc(var(--sim-tree-indent) / -2); top:0; bottom:20px; border-left:1px solid var(--sim-tree-line); pointer-events:none; }
+[data-simulator-stage-list] > .shex-sim-stage-card::before,
+[data-simulator-event-list] > .shex-sim-event::before,
+[data-simulator-story] .shex-sim-tree-add::before { content:''; position:absolute; left:calc(var(--sim-tree-indent) / -2); top:28px; width:calc(var(--sim-tree-indent) / 2); border-top:1px solid var(--sim-tree-line); pointer-events:none; }
+[data-simulator-stage-list] > .shex-sim-stage-card::after,
+[data-simulator-event-list] > .shex-sim-event::after { content:''; position:absolute; left:-3px; top:25px; width:6px; height:6px; border-radius:50%; background:var(--sim-tree-ink); pointer-events:none; }
+[data-simulator-story] .shex-sim-tree-add { position:relative; margin-top:10px; }
+[data-simulator-story] .shex-sim-tree-add::before { top:50%; }
+[data-simulator-story] .shex-sim-settings-button { flex:0 0 auto; min-height:40px; padding:6px 8px; border-color:var(--sim-tree-line); color:var(--sim-tree-ink); background:#fff; font-size:12px; }
+[data-simulator-story] .shex-sim-settings-button[aria-expanded="true"] { background:var(--sim-tree-soft); }
+[data-simulator-story] .shex-sim-node-settings { margin:8px 0 0; padding:10px; border:1px dashed var(--sim-tree-line); border-radius:12px; background:#fff; }
+[data-simulator-story] .shex-sim-node-settings > h4 { margin:0 0 10px; color:var(--sim-tree-ink); }
+.shex-sim-story-badges { display:flex; flex-wrap:wrap; gap:5px; }
+.shex-sim-story-badge { display:inline-block; justify-self:start; width:fit-content; max-width:100%; padding:2px 7px; border-radius:6px; background:var(--sim-tree-soft,#f9f4ee); color:var(--sim-tree-ink,#977046); font-size:11px; line-height:1.5; font-weight:400; }
+.shex-sim-story-badges:empty { display:none; }
+.shex-sim-event-heading { display:grid; gap:5px; flex:1 1 0; min-width:0; }
+.shex-sim-event-heading strong { overflow-wrap:anywhere; font-size:14px; }
+[data-simulator-story] .shex-sim-section-bar { flex-wrap: wrap; }
+[data-simulator-story] .shex-sim-event { position:relative; min-width:0; margin:0; padding:10px; border-color:var(--sim-tree-line); background:#fff; }
+[data-simulator-story] .shex-sim-event > header { align-items:flex-start; flex-wrap:wrap; }
+@media (max-width:720px) {
+  .shex-sim-story-accordion { --sim-tree-indent:14px; }
+  [data-simulator-story] .shex-sim-event { padding:8px; }
+  .shex-sim-chapter-card > header, .shex-sim-stage-card > header { padding:6px; gap:4px; }
+  [data-simulator-story] .shex-sim-node-settings { padding:8px; }
+}
+
+/* A chapter's palette continues through all of its editable descendants. */
+.shex-sim-workbench .shex-sim-chapter-card[data-simulator-chapter-tone]{--sim-accent:var(--sim-tree-ink);--sim-ink:var(--sim-tree-ink);--sim-soft:var(--sim-tree-soft)}
+.shex-sim-chapter-card .shex-sim-stage-card>header{background:var(--sim-tree-soft)}
+.shex-sim-chapter-card :is(.shex-sim-stage-card>header strong,.shex-sim-event-heading strong,.shex-sim-section-title,.shex-sim-card-title,.shex-sim-field>span,.shex-sim-field-label,.shex-sim-reference-field legend,.shex-sim-reference-empty,.shex-sim-edge label>span){color:var(--sim-tree-ink)}
+.shex-sim-chapter-card :is(.shex-sim-field input,.shex-sim-field textarea,.shex-sim-field select){color:var(--sim-tree-ink);border-color:var(--sim-tree-line);background:color-mix(in srgb,var(--sim-tree-soft) 40%,white)}
+.shex-sim-chapter-card input[type=checkbox]{accent-color:var(--sim-tree-ink)}
+.shex-sim-chapter-card :is(.shex-sim-subcard,.shex-sim-event-card,.shex-sim-reference-field){border-color:var(--sim-tree-line);background:color-mix(in srgb,var(--sim-tree-soft) 25%,white)}
+.shex-sim-chapter-card :is(.shex-sim-reference-options label,.shex-sim-help,button){border-color:var(--sim-tree-line)}
+.shex-sim-chapter-card .shex-sim-reference-options label:has(input:checked){background:var(--sim-tree-soft)}
+.shex-sim-chapter-card .shex-sim-help{color:var(--sim-tree-ink);background:var(--sim-tree-soft)}
+.shex-sim-chapter-card .shex-sim-advanced-settings{border-color:var(--sim-tree-line)}
+.shex-sim-chapter-card .shex-sim-advanced-toggle{color:var(--sim-tree-ink)!important}
+.shex-sim-chapter-card :is(small,.shex-sim-note){color:var(--sim-tree-ink)}
+.shex-sim-workbench .shex-sim-chapter-card button.danger{color:#9a5063}
+.shex-sim-role-profile{min-width:0;margin-top:12px}
+details.shex-sim-role-profile{border:1px solid #eee5da;border-radius:12px;margin-top:10px;padding:10px}
+details.shex-sim-role-profile>summary{cursor:pointer;color:var(--sim-ink);font-weight:600;padding:4px 0;overflow-wrap:anywhere}
+details.shex-sim-role-profile[open]>summary{margin-bottom:12px}
+.shex-sim-role-profile .wide{grid-column:1/-1;min-width:0}
+.shex-sim-role-copy-note{color:#a17c53;font-size:13px;line-height:1.6}
+
+.shex-sim-chapter-card .shex-sim-reference-options label:not(.is-missing){color:var(--sim-tree-ink)}
+.shex-sim-chapter-card :is(.shex-sim-condition,.shex-sim-effect,.shex-sim-condition-group,.shex-sim-effect-axis-row,.shex-sim-readonly,.shex-sim-ref,.shex-sim-candidates,.shex-sim-advanced){border-color:var(--sim-tree-line)}
+.shex-sim-chapter-card :is(.shex-sim-edge select,.shex-sim-effect-axis-row select){border-color:var(--sim-tree-line);background:#fff}
+.shex-sim-chapter-card :is(.shex-sim-effect-axis-row,.shex-sim-empty){background:var(--sim-tree-soft);color:var(--sim-tree-ink)}
+.shex-sim-budget,.shex-sim-budget-line{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:0 0 12px;padding:9px 14px;border:1px solid rgba(177,134,88,.16);border-radius:13px;background:var(--sim-soft);color:#8d6c48;font-size:13px;line-height:1.5}.shex-sim-budget strong,.shex-sim-budget-line strong{color:var(--sim-ink);font-variant-numeric:tabular-nums}.shex-sim-budget small{flex-basis:100%;color:#b4936f;font-size:11px}.shex-sim-budget-line{margin:8px 0;padding:7px 12px;font-size:12px}.shex-sim-budget.is-over,.shex-sim-budget-line.is-over{border-color:#d9a3b1;background:#fdf1f4;color:#9b465d}.shex-sim-budget.is-over strong,.shex-sim-budget-line.is-over strong{color:#9b465d}

@@ -1,0 +1,1321 @@
+:root {
+  --x-energy-bg: var(--lavender-1);
+  --x-energy-bg-top: var(--moon);
+  --x-energy-card: var(--moon);
+  --x-energy-card-soft: var(--lavender-2);
+  --x-energy-input: var(--moon);
+  --x-energy-line: var(--line);
+  --x-energy-text: var(--ink);
+  --x-energy-muted: var(--slate);
+  --x-energy-accent: var(--violet);
+  --x-energy-accent-soft: var(--lavender-2);
+  --x-energy-on-accent: var(--moon);
+  --x-energy-shadow: rgba(119,87,55,.12);
+}
+.x-energy-panel {
+  --energy-bg: var(--x-energy-bg);
+  --energy-card: var(--x-energy-card);
+  --energy-card-soft: var(--x-energy-card-soft);
+  --energy-line: var(--x-energy-line);
+  --energy-text: var(--x-energy-text);
+  --energy-muted: var(--x-energy-muted);
+  --energy-accent: var(--x-energy-accent);
+  min-height: 100vh;
+  color: var(--energy-text);
+  background:
+    radial-gradient(circle at 88% 5%, var(--x-energy-accent-soft), transparent 28rem),
+    linear-gradient(180deg, var(--x-energy-bg-top), var(--energy-bg));
+}
+.x-energy-feedback { min-width: 0; }
+.x-energy-feedback-intro { margin: 0 0 18px; color: var(--energy-muted); font-size: 13px; line-height: 1.7; }
+.x-energy-feedback h3 { margin: 0 0 14px; font-size: 16px; color: var(--energy-text); }
+.x-energy-feedback-submit-card { padding-bottom: 22px; border-bottom: 1px solid var(--energy-line); }
+.x-energy-feedback-submit-card form { display: grid; gap: 10px; min-width: 0; }
+.x-energy-feedback-submit-card label { color: var(--energy-text); font-size: 13px; font-weight: 650; }
+.x-energy-feedback-submit-card textarea { width: 100%; min-width: 0; box-sizing: border-box; resize: vertical; border: 1px solid var(--energy-line); border-radius: 14px; padding: 12px 14px; color: var(--energy-text); background: var(--energy-card); font: inherit; font-size: 13px; line-height: 1.6; }
+.x-energy-feedback-submit-card textarea:focus-visible { outline: 2px solid var(--energy-accent); outline-offset: 2px; }
+.x-energy-feedback-upload { margin-top: 5px; color: var(--energy-text); font-size: 13px; font-weight: 650; }
+.x-energy-feedback-submit-card .x-energy-feedback-file-input { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.x-energy-feedback-submit-card .x-energy-feedback-picker { display: inline-flex; align-items: center; justify-content: center; justify-self: start; gap: 7px; min-height: 36px; max-width: 100%; box-sizing: border-box; padding: 7px 13px; border: 1px solid var(--energy-line); border-radius: 11px; color: var(--energy-accent); background: var(--energy-card-soft); font-size: 12px; font-weight: 650; cursor: pointer; }
+.x-energy-feedback-picker:hover { border-color: var(--energy-accent); }
+.x-energy-feedback-file-input:focus-visible + .x-energy-feedback-picker { outline: 2px solid var(--energy-accent); outline-offset: 2px; }
+.x-energy-feedback-previews, .x-energy-feedback-images { display: flex; flex-wrap: wrap; gap: 9px; min-width: 0; }
+.x-energy-feedback-preview { position: relative; width: 76px; height: 76px; }
+.x-energy-feedback-preview img, .x-energy-feedback-images img { display: block; width: 76px; height: 76px; max-width: 100%; object-fit: cover; border: 1px solid var(--energy-line); border-radius: 11px; }
+.x-energy-feedback-image-error { display: grid; place-items: center; width: 96px; min-height: 76px; padding: 5px; box-sizing: border-box; border: 1px solid var(--energy-line); border-radius: 11px; color: var(--energy-muted); background: var(--energy-card); text-align: center; font-size: 10px; }
+.x-energy-feedback-preview button { position: absolute; top: -7px; right: -7px; width: 23px; height: 23px; border: 0; border-radius: 50%; color: var(--energy-text); background: var(--energy-card-soft); cursor: pointer; }
+.x-energy-feedback-status { min-height: 1.3em; margin: 0; font-size: 12px; color: var(--energy-muted); }
+.x-energy-feedback-submit { justify-self: start; border: 0; border-radius: 999px; padding: 10px 20px; color: var(--x-energy-on-accent); background: var(--energy-accent); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.x-energy-feedback-submit:disabled, .x-energy-feedback-more:disabled { opacity: .55; cursor: default; }
+.x-energy-feedback-history { margin-top: 24px; }
+.x-energy-feedback-list { display: grid; gap: 12px; }
+.x-energy-feedback-item { min-width: 0; padding: 15px; border: 1px solid var(--energy-line); border-radius: 16px; background: var(--energy-card-soft); }
+.x-energy-feedback-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--energy-muted); font-size: 11px; }
+.x-energy-feedback-meta span { flex: 0 0 auto; }
+.x-energy-feedback-meta .is-replied { color: var(--energy-accent); font-weight: 700; }
+.x-energy-feedback-question, .x-energy-feedback-reply p { margin: 12px 0; overflow-wrap: anywhere; white-space: pre-wrap; color: var(--energy-text); font-size: 13px; line-height: 1.7; }
+.x-energy-feedback-images { margin-top: 10px; }
+.x-energy-feedback-reply { margin-top: 14px; padding: 12px; border-radius: 12px; background: var(--energy-card); }
+.x-energy-feedback-reply strong { color: var(--energy-accent); font-size: 12px; }
+.x-energy-feedback-reply p { margin: 7px 0; }
+.x-energy-feedback-reply time { color: var(--energy-muted); font-size: 11px; }
+.x-energy-feedback-empty { margin: 0; padding: 20px 4px; text-align: center; color: var(--energy-muted); font-size: 13px; }
+.x-energy-feedback-empty small { display: block; margin-top: 7px; font-size: 11px; line-height: 1.6; }
+.x-energy-feedback-more { display: block; margin: 18px auto 0; padding: 8px 16px; border: 1px solid var(--energy-line); border-radius: 999px; color: var(--energy-accent); background: var(--energy-card); font: inherit; font-size: 12px; cursor: pointer; }
+
+/* X能量是全屏子页面，但内容本身需要在这个容器内纵向滚动。 */
+body.x-clean-page .x-energy-panel.x-clean-active {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: auto !important;
+  left: 0 !important;
+  width: 100vw !important;
+  min-height: var(--shex-energy-vh, 100dvh) !important;
+  height: var(--shex-energy-vh, 100dvh) !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+body.x-clean-page .x-energy-panel.x-clean-active::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+.x-energy-panel .x-energy-back {
+  color: var(--energy-text);
+  margin-bottom: 0;
+}
+.x-energy-panel .x-energy-back[hidden] {
+  display: none !important;
+}
+.x-energy-shell {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  padding: 12px 18px 110px;
+  box-sizing: border-box;
+}
+.x-energy-header,
+.x-energy-balance-title,
+.x-energy-ledger-heading,
+.x-energy-campaign,
+.x-energy-log-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.x-energy-header { margin-bottom: 22px; }
+.x-energy-panel.is-hub-view .x-energy-header { display: none; }
+.x-energy-header small,
+.x-energy-ledger-heading small,
+.x-energy-campaign-copy > small {
+  color: var(--energy-accent);
+  letter-spacing: .16em;
+  font-weight: 700;
+}
+.x-energy-header h2 {
+  margin: 4px 0 0;
+  color: var(--energy-text);
+  font-size: 27px;
+  font-weight: 800;
+}
+.x-energy-ledger-heading h3,
+.x-energy-campaign h3 {
+  margin: 3px 0 0;
+  color: var(--energy-text);
+}
+.x-energy-refresh {
+  display: grid;
+  flex: 0 0 42px;
+  place-items: center;
+  width: 42px;
+  min-width: 42px;
+  max-width: 42px;
+  height: 42px;
+  min-height: 42px;
+  max-height: 42px;
+  padding: 0;
+  border: 1px solid var(--energy-line);
+  border-radius: 50%;
+  color: var(--energy-text);
+  background: var(--energy-card);
+  font-size: 22px;
+}
+.x-energy-panel.is-loading .x-energy-refresh { animation: x-energy-spin .8s linear infinite; }
+@keyframes x-energy-spin { to { transform: rotate(360deg); } }
+.x-energy-balance-card,
+.x-energy-campaign,
+.x-energy-redeem,
+.x-energy-ledger {
+  border: 1px solid var(--energy-line);
+  border-radius: 22px;
+  background: var(--energy-card);
+  box-shadow: 0 6px 18px var(--x-energy-shadow);
+}
+.x-energy-balance-card { padding: 20px; }
+.x-energy-balance-title span { color: var(--energy-muted); }
+.x-energy-balance-title strong { font-size: 14px; }
+.x-energy-balance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 18px;
+}
+.x-energy-balance-grid article {
+  min-width: 0;
+  padding: 14px 12px;
+  border-radius: 16px;
+  background: var(--energy-card-soft);
+}
+.x-energy-balance-grid small,
+.x-energy-balance-grid strong { display: block; }
+.x-energy-balance-grid small { color: var(--energy-muted); }
+.x-energy-balance-grid strong { margin-top: 8px; font-size: 18px; }
+.x-energy-campaign {
+  position: relative;
+  align-items: center;
+  gap: 16px;
+  margin-top: 14px;
+  padding: 18px 20px;
+  overflow: hidden;
+  background: var(--energy-card);
+}
+.x-energy-campaign[hidden] { display: none !important; }
+.x-energy-campaign-copy { flex: 1; min-width: 0; }
+.x-energy-campaign-copy p {
+  margin: 7px 0 0;
+  color: var(--energy-muted);
+  line-height: 1.55;
+}
+.x-energy-gift-promo .x-energy-campaign-copy p { font-size: 14px; }
+.x-energy-campaign-status {
+  margin: 6px 0 0;
+  color: var(--energy-accent);
+  font-size: 12px;
+}
+.x-energy-campaign-action { flex: 0 0 auto; }
+.x-energy-campaign-action button,
+.x-energy-redeem button,
+.x-energy-load-more {
+  border: 0;
+  border-radius: 999px;
+  color: var(--x-energy-on-accent);
+  background: var(--energy-accent);
+  font-weight: 700;
+}
+.x-energy-campaign-action button { padding: 9px 16px; }
+.x-energy-campaign-action button:disabled { opacity: .58; }
+.x-energy-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 14px 0;
+}
+.x-energy-actions button {
+  min-height: 105px;
+  padding: 15px 10px;
+  border: 1px solid var(--energy-line);
+  border-radius: 18px;
+  color: var(--energy-text);
+  background: var(--energy-card);
+}
+.x-energy-actions span,
+.x-energy-actions b,
+.x-energy-actions small { display: block; }
+.x-energy-actions span { color: var(--energy-accent); font-size: 21px; }
+.x-energy-actions b { margin-top: 8px; }
+.x-energy-actions small { margin-top: 3px; color: var(--energy-muted); }
+.x-energy-redeem { margin-bottom: 14px; padding: 16px; }
+.x-energy-redeem[hidden] { display: none !important; }
+.x-energy-redeem label { display: block; margin-bottom: 8px; color: var(--energy-muted); }
+.x-energy-redeem > div { display: flex; gap: 8px; }
+.x-energy-redeem input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--energy-line);
+  border-radius: 12px;
+  color: var(--energy-text);
+  background: var(--x-energy-input);
+}
+.x-energy-redeem button { padding: 0 18px; }
+.x-energy-redeem p { margin: 8px 0 0; color: var(--energy-muted); }
+.x-energy-ledger { overflow: hidden; }
+.x-energy-ledger-heading { padding: 18px 20px 9px; }
+.x-energy-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 7px;
+  padding: 8px 14px 15px;
+  border-bottom: 1px solid var(--energy-line);
+}
+.x-energy-tabs button {
+  padding: 9px 5px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--energy-muted);
+  background: var(--energy-card-soft);
+}
+.x-energy-tabs button.active { color: var(--x-energy-on-accent); background: var(--energy-accent); }
+.x-energy-log-row {
+  gap: 12px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--energy-line);
+}
+.x-energy-log-row:last-child { border-bottom: 0; }
+.x-energy-log-copy { flex: 1; min-width: 0; }
+.x-energy-log-copy strong,
+.x-energy-log-copy small,
+.x-energy-log-value strong,
+.x-energy-log-value small { display: block; }
+.x-energy-log-copy strong { line-height: 1.4; }
+.x-energy-log-copy small,
+.x-energy-log-value small { margin-top: 5px; color: var(--energy-muted); }
+.x-energy-log-balance {
+  display: grid !important;
+  gap: 2px;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+.x-energy-log-balance span { display: block; }
+.x-energy-log-value { flex: 0 0 auto; text-align: right; }
+.x-energy-log-value strong { color: var(--ink); font-size: 18px; }
+.x-energy-log-row[data-category="reward"] .x-energy-log-value strong,
+.x-energy-log-row[data-category="recharge"] .x-energy-log-value strong { color: var(--energy-accent); }
+.x-energy-empty { margin: 0; padding: 44px 20px; color: var(--energy-muted); text-align: center; }
+.x-energy-empty.is-error { color: #ef8c8c; }
+.x-energy-load-more {
+  display: block;
+  margin: 14px auto 18px;
+  padding: 10px 22px;
+}
+.x-energy-load-more[hidden] { display: none !important; }
+.x-energy-header p {
+  margin: 10px 0 0;
+  color: var(--energy-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.x-energy-header [data-energy-eyebrow][hidden],
+.x-energy-header p[hidden],
+.x-energy-refresh[hidden] { display: none !important; }
+.x-energy-header:has([data-energy-eyebrow][hidden]) { margin-bottom: 14px; }
+
+/* ---- hub view: account overview card + 3-column icon grid ---- */
+.x-energy-overview {
+  margin-top: 14px;
+  padding: 18px 20px;
+  border: 1px solid var(--energy-line);
+  border-radius: 22px;
+  background: var(--energy-card);
+  box-shadow: 0 18px 46px var(--x-energy-shadow);
+}
+.x-energy-overview-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+.x-energy-overview-head small {
+  color: var(--energy-muted);
+  letter-spacing: .08em;
+}
+.x-energy-overview-head strong {
+  color: var(--energy-text);
+  font-size: 16px;
+  font-weight: 700;
+}
+.x-energy-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+.x-energy-overview-grid article {
+  min-width: 0;
+  padding: 12px 6px;
+  border-radius: 14px;
+  background: var(--energy-card-soft);
+  text-align: center;
+}
+.x-energy-overview-grid small,
+.x-energy-overview-grid strong { display: block; }
+.x-energy-overview-grid small { color: var(--energy-muted); font-size: 10.5px; }
+.x-energy-overview-grid strong {
+  margin-top: 6px;
+  color: var(--energy-accent);
+  font-size: 14px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.x-energy-hub-hint {
+  padding: 20px 2px 12px;
+  color: var(--energy-muted);
+  font-size: 12px;
+  letter-spacing: .06em;
+}
+.x-energy-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px 12px;
+}
+.x-energy-hub-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--energy-text);
+}
+.x-energy-hub-tile-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  color: var(--energy-accent);
+  background: var(--energy-card);
+  border: 1px solid var(--energy-line);
+  box-shadow: 0 10px 26px var(--x-energy-shadow);
+}
+.x-energy-hub-tile-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--energy-text);
+}
+
+/* ---- detail view: back-to-hub affordance, sits above the page title ---- */
+.x-energy-detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  padding: 9px 16px 9px 12px;
+  border: 1px solid var(--energy-line);
+  border-radius: 999px;
+  color: var(--energy-text);
+  background: var(--energy-card);
+  font-size: 13px;
+  font-weight: 600;
+}
+.x-energy-detail-back[hidden] {
+  display: none !important;
+}
+.x-energy-redeem-group {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.x-energy-redeem-group .x-energy-page-section {
+  margin-top: 16px;
+}
+.x-energy-redeem-group .x-energy-page-section:first-child {
+  margin-top: 0;
+}
+@media (max-width: 520px) {
+  .x-energy-overview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .x-energy-hub-grid { gap: 14px 8px; }
+  .x-energy-hub-tile-icon { width: 56px; height: 56px; border-radius: 17px; }
+}
+.x-energy-page-section {
+  margin-top: 16px;
+  padding: 22px;
+  scroll-margin-top: 20px;
+  border: 1px solid var(--energy-line);
+  border-radius: 22px;
+  background: var(--energy-card);
+  box-shadow: 0 18px 46px var(--x-energy-shadow);
+}
+.x-energy-panel.is-plan-view,
+.x-energy-panel.is-ledger-view {
+  background: var(--energy-card);
+}
+.x-energy-panel.is-plan-view .x-energy-header,
+.x-energy-panel.is-ledger-view .x-energy-header {
+  display: none;
+}
+.x-energy-panel.is-plan-view [data-energy-section="plans"] {
+  margin-top: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.x-energy-panel.is-ledger-view [data-energy-section="ledger"] {
+  margin-top: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.x-energy-section-heading,
+.x-energy-ledger-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+.x-energy-section-heading h3,
+.x-energy-ledger-heading h3 {
+  margin: 0 0 4px;
+  color: var(--energy-text);
+  font-size: 16px;
+  font-weight: 700;
+}
+.x-energy-section-heading > div > p,
+.x-energy-ledger-heading > div > p {
+  max-width: none;
+  margin: 0;
+  color: var(--energy-muted);
+  text-align: left;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.x-energy-tier-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.x-energy-tier-row button {
+  padding: 14px 0;
+  border: 0;
+  border-radius: 14px;
+  color: var(--energy-text);
+  background: var(--energy-card-soft);
+  font-size: 14px;
+  font-weight: 700;
+}
+.x-energy-tier-row button.is-selected {
+  color: var(--x-energy-on-accent);
+  background: var(--energy-accent);
+  box-shadow: 0 8px 18px var(--x-energy-shadow);
+}
+.x-energy-tier-card {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+}
+.x-energy-tier-card[hidden] { display: none !important; }
+.x-energy-tier-name {
+  display: block;
+  color: var(--energy-text);
+  font-size: 18px;
+  font-weight: 800;
+}
+.x-energy-tier-purchase {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid var(--energy-line);
+  border-color: color-mix(in srgb, var(--energy-accent) 38%, transparent);
+  border-radius: 16px;
+  background: var(--energy-card);
+  box-shadow: none;
+}
+.x-energy-tier-quota-note {
+  margin: 16px 0 8px;
+  color: var(--energy-muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+.x-energy-tier-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+.x-energy-tier-stats article {
+  min-width: 0;
+  padding: 12px 6px;
+  border: 1px solid var(--energy-line);
+  border-color: color-mix(in srgb, var(--energy-accent) 32%, transparent);
+  border-radius: 12px;
+  background: var(--energy-card);
+  text-align: center;
+}
+.x-energy-tier-stats small,
+.x-energy-tier-stats strong { display: block; }
+.x-energy-tier-stats small { color: var(--energy-muted); font-size: 10.5px; }
+.x-energy-tier-stats strong {
+  margin-top: 5px;
+  color: var(--energy-accent);
+  font-size: 19px;
+  font-weight: 800;
+}
+.x-energy-tier-free-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.x-energy-tier-free-note p {
+  margin: 0;
+  color: var(--energy-muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+.x-energy-tier-free-note button {
+  flex: 0 0 auto;
+  border: 1px solid var(--energy-accent);
+  border-radius: 999px;
+  padding: 9px 15px;
+  color: var(--energy-accent);
+  background: transparent;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.x-energy-tier-duration-label {
+  margin-bottom: 10px;
+  color: var(--energy-muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+.x-energy-tier-duration-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.x-energy-tier-duration-row button {
+  flex: 1;
+  padding: 10px 0;
+  border: 0;
+  border-radius: 14px;
+  color: var(--energy-text);
+  background: var(--energy-card);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.x-energy-tier-duration-row button.is-selected {
+  color: var(--x-energy-on-accent);
+  background: var(--energy-accent);
+  font-weight: 700;
+}
+.x-energy-tier-buy-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.x-energy-tier-buy-row strong {
+  color: var(--energy-accent);
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.1;
+  animation: x-energy-price-change .18s ease-out both;
+}
+@keyframes x-energy-price-change {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.x-energy-tier-buy {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 24px;
+  color: var(--x-energy-on-accent);
+  background: var(--energy-accent);
+  font-size: 13px;
+  font-weight: 700;
+}
+.x-energy-benefits {
+  margin-top: 18px;
+}
+.x-energy-benefit-table {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--energy-line);
+  border-radius: 14px;
+  background: var(--energy-card);
+}
+.x-energy-benefit-head,
+.x-energy-benefit-row {
+  display: grid;
+  grid-template-columns: minmax(0, 40%) minmax(0, 30%) minmax(0, 30%);
+}
+.x-energy-benefit-head {
+  border-bottom: 1px solid var(--energy-line);
+}
+.x-energy-benefit-head > div,
+.x-energy-benefit-row > div {
+  min-width: 0;
+  padding: 11px 8px;
+  overflow-wrap: anywhere;
+}
+.x-energy-benefit-head > div {
+  display: flex;
+  align-items: center;
+  color: var(--energy-muted);
+  background: var(--energy-card);
+  font-size: 12px;
+  font-weight: 600;
+}
+.x-energy-benefit-head > div:last-child {
+  color: var(--energy-accent);
+  background: var(--x-energy-accent-soft);
+  font-weight: 800;
+}
+.x-energy-benefit-row {
+  border-bottom: 1px solid var(--energy-line);
+}
+.x-energy-benefit-row:last-child {
+  border-bottom: 0;
+}
+.x-energy-benefit-row > div {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  box-sizing: border-box;
+  color: var(--energy-muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.x-energy-benefit-label {
+  color: var(--energy-text) !important;
+  background: var(--energy-card);
+  font-weight: 600;
+}
+.x-energy-benefit-value {
+  justify-content: center;
+  text-align: center;
+}
+.x-energy-benefit-value.is-free {
+  background: var(--energy-card);
+}
+.x-energy-benefit-value.is-current {
+  position: relative;
+  background: var(--x-energy-accent-soft);
+}
+.x-energy-benefit-value.is-current .x-energy-benefit-text {
+  color: var(--energy-accent);
+  font-weight: 800;
+}
+.x-energy-benefit-state {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.x-energy-benefit-state.is-no {
+  opacity: .5;
+}
+.x-energy-benefit-state.is-yes {
+  color: var(--energy-accent);
+  font-weight: 700;
+}
+@media (prefers-reduced-motion: reduce) {
+  .x-energy-tier-price { animation: none; }
+}
+.x-energy-inline-refresh,
+.x-energy-contact-card button {
+  border: 1px solid var(--energy-line);
+  border-radius: 999px;
+  color: var(--energy-accent);
+  background: var(--x-energy-bg-top);
+  font-weight: 700;
+}
+.x-energy-pack-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.x-energy-pack-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 13px 15px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--energy-card-soft);
+  text-align: left;
+}
+.x-energy-pack-row-copy strong {
+  display: block;
+  color: var(--energy-text);
+  font-size: 13.5px;
+  font-weight: 700;
+}
+.x-energy-pack-row-copy small {
+  display: block;
+  margin-top: 2px;
+  color: var(--energy-muted);
+  font-size: 11px;
+}
+.x-energy-pack-row-buy {
+  flex: 0 0 auto;
+  border-radius: 999px;
+  padding: 7px 14px;
+  color: var(--x-energy-on-accent);
+  background: var(--energy-accent);
+  font-size: 12px;
+  font-weight: 700;
+}
+.x-energy-page-section.x-energy-redeem {
+  margin-bottom: 0;
+  padding: 22px;
+}
+.x-energy-redeem form > label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--energy-muted);
+}
+.x-energy-redeem form > div {
+  display: flex;
+  gap: 8px;
+}
+.x-energy-redeem input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--energy-line);
+  border-radius: 12px;
+  color: var(--energy-text);
+  background: var(--x-energy-input);
+}
+.x-energy-redeem form button {
+  padding: 0 20px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--x-energy-on-accent);
+  background: var(--energy-accent);
+  font-weight: 700;
+}
+.x-energy-redeem form > p {
+  min-height: 20px;
+  margin: 9px 0 0;
+  color: var(--energy-muted);
+}
+.x-energy-page-section.x-energy-faq {
+  margin-top: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.x-energy-faq-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.x-energy-faq-shortcut {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+button.x-energy-faq-shortcut { padding: 0; border: 0; background: transparent; font: inherit; cursor: pointer; }
+button.x-energy-faq-shortcut:focus-visible { outline: 2px solid var(--energy-accent); outline-offset: 5px; border-radius: 12px; }
+.x-energy-faq-shortcut .x-energy-hub-tile-icon { width: 52px; height: 52px; border-radius: 16px; }
+.x-energy-faq-shortcut strong { margin-top: 9px; color: var(--energy-text); font-size: 13px; }
+.x-energy-faq-shortcut small { margin-top: 5px; color: var(--energy-muted); font-size: 10.5px; line-height: 1.45; overflow-wrap: anywhere; }
+.x-energy-faq-popular {
+  margin-top: 25px;
+  padding: 20px;
+  border: 1px solid var(--energy-line);
+  border-radius: 22px;
+  background: var(--energy-card);
+  box-shadow: 0 7px 24px var(--x-energy-shadow);
+}
+.x-energy-faq-title { margin: 0 0 16px; color: var(--energy-text); font-size: 16px; }
+.x-energy-faq-list {
+  display: block;
+}
+.x-energy-faq-list details {
+  border: 0;
+  border-bottom: 1px solid var(--energy-line);
+  border-radius: 0;
+  background: transparent;
+  padding: 13px 0;
+}
+.x-energy-faq-list details:last-child { border-bottom: 0; padding-bottom: 0; }
+.x-energy-faq-list details:first-child { padding-top: 0; }
+.x-energy-faq-list summary {
+  padding: 0;
+  color: var(--energy-text);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+.x-energy-faq-list details p {
+  margin: 0;
+  padding: 8px 0 0;
+  color: var(--energy-muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.x-energy-faq-answer { color: var(--energy-muted); font-size: 12px; line-height: 1.7; overflow-wrap: anywhere; }
+.x-energy-faq-answer strong { color: var(--energy-text); font-weight: 700; }
+.x-energy-faq-answer ul { margin: 5px 0 2px; padding-left: 19px; }
+.x-energy-faq-answer li + li { margin-top: 3px; }
+.x-energy-faq-qr { display: grid; justify-items: center; margin: 14px 0 5px; }
+.x-energy-faq-qr img { display: block; width: min(144px, 100%); max-width: 100%; height: auto; border: 1px solid var(--energy-line); border-radius: 12px; }
+.x-energy-faq-qr figcaption { margin-top: 7px; color: var(--energy-muted); font-size: 12px; }
+.x-energy-page-section.x-energy-guide { margin-top: 0; padding: 0; border: 0; background: transparent; box-shadow: none; }
+.x-energy-guide-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid var(--energy-line); }
+.x-energy-beautify-guide .x-energy-guide-tabs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.x-energy-guide-tabs button { min-width: 0; margin: 0 0 -1px; padding: 12px 0 11px; border: 0; border-bottom: 2px solid transparent; color: var(--energy-muted); background: transparent; font: inherit; font-size: 11.5px; font-weight: 600; white-space: nowrap; cursor: pointer; }
+.x-energy-guide-tabs button[aria-selected="true"] { border-bottom-color: var(--energy-accent); color: var(--energy-accent); }
+.x-energy-guide-tabs button:focus-visible { outline: 2px solid var(--energy-accent); outline-offset: -3px; }
+.x-energy-guide-pane { margin-top: 18px; padding: 18px 20px; border: 1px solid var(--energy-line); border-radius: 22px; background: var(--energy-card); box-shadow: 0 18px 46px var(--x-energy-shadow); }
+.x-energy-guide-pane[hidden] { display: none !important; }
+.x-energy-guide-list details { padding: 13px 0; border-bottom: 1px solid var(--energy-line); }
+.x-energy-guide-list details:first-child { padding-top: 0; }
+.x-energy-guide-list details:last-child { padding-bottom: 0; border-bottom: 0; }
+.x-energy-guide-list summary { color: var(--energy-text); cursor: pointer; font-size: 13px; font-weight: 600; }
+.x-energy-guide-answer { padding-top: 8px; color: var(--energy-muted); font-size: 12px; line-height: 1.7; overflow-wrap: anywhere; }
+.x-energy-guide-answer p { margin: 0 0 8px; }
+.x-energy-guide-answer p:last-child { margin-bottom: 0; }
+.x-energy-guide-answer ul,.x-energy-guide-answer ol { margin: 6px 0 0; padding-left: 18px; }
+.x-energy-guide-answer li + li { margin-top: 4px; }
+.x-energy-guide-answer strong { color: var(--energy-text); }
+.x-energy-guide-answer table { width: 100%; margin: 6px 0 10px; border-collapse: collapse; table-layout: fixed; font-size: 12px; }
+.x-energy-guide-answer th,.x-energy-guide-answer td { padding: 5px 7px; border-bottom: 1px solid var(--energy-line); text-align: left; overflow-wrap: anywhere; }
+.x-energy-guide-answer th { color: var(--energy-text); font-weight: 600; }
+.x-energy-beautify-intro { margin: 0 0 15px; color: var(--energy-muted); font-size: 12px; }
+.x-energy-guide-coming { margin: 0; color: var(--energy-muted); font-size: 12px; }
+.x-energy-ai-guide-pane h3 { margin: 0 0 8px; color: var(--energy-text); font-size: 16px; }
+.x-energy-ai-guide-pane > p { margin: 0; color: var(--energy-muted); font-size: 12px; line-height: 1.7; }
+.x-energy-ai-guide-actions { display: flex; flex-wrap: wrap; gap: 9px; margin: 16px 0; }
+.x-energy-ai-guide-actions button,.x-energy-ai-guide-actions a {
+  display: inline-flex;
+  flex: 1 1 128px;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid var(--energy-line);
+  border-radius: 12px;
+  color: var(--energy-text);
+  background: var(--energy-card-soft);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.x-energy-ai-guide-actions button { color: var(--energy-accent); }
+.x-energy-ai-guide-actions button:focus-visible,.x-energy-ai-guide-actions a:focus-visible { outline: 2px solid var(--energy-accent); outline-offset: 2px; }
+.x-energy-ai-guide-pane > .x-energy-ai-guide-status:not(:empty) { margin-bottom: 10px; }
+.x-energy-ai-guide-text {
+  max-height: min(62vh, 640px);
+  margin: 0;
+  padding: 14px;
+  overflow: auto;
+  border: 1px solid var(--energy-line);
+  border-radius: 14px;
+  color: var(--energy-text);
+  background: var(--energy-card-soft);
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.x-energy-beautify-recap { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--energy-line); color: var(--energy-muted); font-size: 12px; line-height: 1.8; }
+.x-energy-beautify-recap strong { color: var(--energy-text); font-size: 13px; }
+.x-energy-beautify-recap p { margin: 8px 0 0; }
+@media (max-width: 520px) {
+  .x-energy-guide-tabs button { font-size: 11px; }
+  .x-energy-guide-pane { padding: 17px 13px; }
+  .x-energy-faq-popular { padding: 17px 13px; }
+}
+.x-energy-contact-card {
+  display: grid;
+  grid-template-columns: 138px 1fr;
+  align-items: center;
+  gap: 20px;
+  padding: 16px;
+  border-radius: 18px;
+  background: var(--energy-card-soft);
+}
+.x-energy-contact-card img {
+  width: 138px;
+  height: 138px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+.x-energy-contact-card strong {
+  color: var(--energy-text);
+  font-size: 18px;
+}
+.x-energy-contact-card p {
+  color: var(--energy-muted);
+  line-height: 1.7;
+}
+.x-energy-contact-card button,
+.x-energy-inline-refresh {
+  padding: 9px 15px;
+}
+
+/* 刷新控件固定为正圆，避免在较窄标题栏里被挤压成椭圆。 */
+.x-energy-inline-refresh {
+  display: grid;
+  flex: 0 0 38px;
+  place-items: center;
+  width: 38px;
+  min-width: 38px;
+  max-width: 38px;
+  height: 38px;
+  min-height: 38px;
+  max-height: 38px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 20px;
+  line-height: 1;
+}
+.x-energy-order-list {
+  display: grid;
+  gap: 9px;
+}
+.x-energy-order-row {
+  display: grid;
+  gap: 10px;
+  padding: 15px 16px;
+  border: 1px solid var(--energy-line);
+  border-radius: 16px;
+  background: var(--energy-card-soft);
+}
+.x-energy-order-row-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.x-energy-order-row-top > div:last-child {
+  text-align: right;
+}
+.x-energy-order-row strong,
+.x-energy-order-row small,
+.x-energy-order-row span {
+  display: block;
+}
+.x-energy-order-row-top small,
+.x-energy-order-row-top span {
+  margin-top: 5px;
+  color: var(--energy-muted);
+}
+.x-energy-order-row-top span[data-status="completed"] {
+  color: var(--energy-accent);
+}
+.x-energy-order-code {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--energy-line);
+}
+.x-energy-order-code code {
+  color: var(--energy-accent);
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+.x-energy-order-code button {
+  flex: 0 0 auto;
+  border: 1px solid var(--energy-line);
+  border-radius: 999px;
+  padding: 7px 13px;
+  color: var(--energy-accent);
+  background: var(--x-energy-bg-top);
+  font-size: 12px;
+  font-weight: 700;
+}
+.x-energy-page-section.x-energy-ledger {
+  overflow: hidden;
+  padding: 0;
+}
+.x-energy-page-section.x-energy-ledger .x-energy-ledger-heading {
+  padding: 22px 22px 4px;
+}
+@media (max-width: 520px) {
+  .x-energy-shell { padding-right: 12px; padding-left: 12px; }
+  .x-energy-balance-grid { gap: 6px; }
+  .x-energy-balance-grid article { padding: 12px 8px; }
+  .x-energy-balance-grid strong { font-size: 15px; }
+  .x-energy-actions { gap: 6px; }
+  .x-energy-actions button { min-height: 98px; padding: 12px 5px; }
+  .x-energy-campaign { align-items: flex-start; }
+  .x-energy-tabs { overflow-x: auto; display: flex; }
+  .x-energy-tabs button { flex: 0 0 66px; }
+  .x-energy-log-row { padding: 15px 12px; }
+  .x-energy-log-value small { max-width: none; }
+  .x-energy-page-section { padding: 17px 13px; }
+  .x-energy-section-heading,
+  .x-energy-ledger-heading {
+    display: block;
+  }
+  .x-energy-section-heading > p,
+  .x-energy-ledger-heading > p {
+    margin-top: 7px;
+    text-align: left;
+  }
+  .x-energy-tier-row { gap: 6px; }
+  .x-energy-tier-row button { padding: 11px 0; font-size: 12.5px; }
+  .x-energy-tier-stats { gap: 6px; }
+  .x-energy-tier-card { padding: 0; }
+  .x-energy-tier-purchase { padding: 12px; }
+  .x-energy-tier-buy-row strong { font-size: 27px; }
+  .x-energy-tier-buy { padding: 11px 18px; }
+  .x-energy-benefit-head > div,
+  .x-energy-benefit-row > div { padding-right: 5px; padding-left: 5px; }
+  .x-energy-benefit-row > div { font-size: 13px; }
+  .x-energy-pack-grid { gap: 8px; }
+  .x-energy-pack-row { padding: 12px 13px; }
+  .x-energy-contact-card {
+    grid-template-columns: 96px 1fr;
+    gap: 12px;
+    padding: 12px;
+  }
+  .x-energy-contact-card img {
+    width: 96px;
+    height: 96px;
+  }
+  .x-energy-order-row {
+    padding: 13px 12px;
+  }
+  .x-energy-page-section.x-energy-ledger .x-energy-ledger-heading {
+    padding: 18px 13px 3px;
+  }
+}
+
+/* 夜间模式沿用正式页面结构，只替换 X能量的视觉变量。
+   配色取向（本轮定稿）：纯黑 / 深灰 / 中性灰打底，低饱和紫只留给按钮、强调文字与状态点。
+   刻意不做的事：大面积紫、玻璃拟态、发光、页面级渐变紫。
+   页底不再出现"突兀黑块"的原因：页面底色与卡片底色收敛成同一条中性灰阶（#35281d → #35271c），
+   两者只差一档明度且色相一致，卡片结束处不会再出现一整块与卡片割裂的纯黑板块。 */
+body.x-dark-mode[data-x-page="energy"] .x-energy-panel {
+  --x-energy-bg: #35281d;
+  --x-energy-bg-top: #281d15;
+  --x-energy-card: #35271c;
+  --x-energy-card-soft: #35281d;
+  --x-energy-input: #35271c;
+  --x-energy-line: rgba(255, 255, 255, 0.09);
+  --x-energy-text: #f2ede8;
+  --x-energy-muted: #ab9f93;
+  --x-energy-accent: #cfb090;
+  --x-energy-accent-soft: rgba(207,176,144,0.14);
+  --x-energy-on-accent: #36281c;
+  --x-energy-shadow: rgba(40,29,21,0.36);
+  --ink: var(--x-energy-text);
+  color-scheme: dark;
+  background: linear-gradient(180deg, var(--x-energy-bg-top), var(--x-energy-bg));
+}
+
+body.x-dark-mode[data-x-page="energy"] .x-energy-panel.is-plan-view,
+body.x-dark-mode[data-x-page="energy"] .x-energy-panel.is-ledger-view {
+  background: var(--x-energy-card);
+}
+
+body.x-dark-mode[data-x-page="energy"] .x-energy-panel .x-energy-back,
+body.x-dark-mode[data-x-page="energy"] .x-energy-panel .x-energy-detail-back,
+body.x-dark-mode[data-x-page="energy"] .x-energy-panel .x-energy-refresh {
+  color: var(--x-energy-text);
+}
+
+body.x-dark-mode[data-x-page="energy"] .x-energy-panel input,
+body.x-dark-mode[data-x-page="energy"] .x-energy-panel button {
+  color-scheme: dark;
+}
+
+body.x-dark-mode[data-x-page="energy"] .x-energy-panel .x-energy-log-value strong {
+  color: var(--x-energy-text);
+}
+
+/* ==========================================================================
+   消费记录：白色铺底，取消卡片外观
+   - 页面整体白底，不再是"卡片浮在渐变背景上"
+   - 记录区去掉边框 / 圆角 / 阴影 / 卡片底色
+   - 分类标签与记录行改为贴边排布
+   夜间模式仍沿用 X能量 的深色变量，不使用纯白。
+   ========================================================================== */
+.x-energy-panel.is-ledger-view {
+  background: #fff;
+}
+.x-energy-panel.is-ledger-view .x-energy-shell {
+  padding-top: 6px;
+}
+.x-energy-page-section.x-energy-ledger {
+  margin-top: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.x-energy-panel.is-ledger-view .x-energy-tabs {
+  padding: 2px 0 12px;
+}
+.x-energy-panel.is-ledger-view .x-energy-log-row {
+  padding: 15px 2px;
+}
+.x-energy-panel.is-ledger-view .x-energy-load-more {
+  margin-top: 10px;
+}
+
+body.x-dark-mode[data-x-page="energy"] .x-energy-panel.is-ledger-view {
+  background: var(--x-energy-card);
+}
+body.x-dark-mode[data-x-page="energy"] .x-energy-page-section.x-energy-ledger {
+  background: transparent;
+}
+
+/* Account-center hub: one summary card stays compact and three-column at phone width. */
+.x-energy-account-card,
+.x-energy-reward-card {
+  border: 1px solid var(--energy-line);
+  border-radius: 22px;
+  background: var(--energy-card);
+  box-shadow: 0 6px 18px var(--x-energy-shadow);
+}
+.x-energy-account-card {
+  margin-top: 4px;
+  padding: 22px 22px 18px;
+  border-radius: 20px;
+  box-shadow: 0 6px 18px var(--x-energy-shadow);
+}
+.x-energy-account-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.x-energy-account-name {
+  min-width: 0;
+  font-size: 25px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.x-energy-account-plan-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 9px;
+  padding-top: 2px;
+}
+.x-energy-plan-badge {
+  border: 1px solid var(--energy-line);
+  border-radius: 999px;
+  padding: 4px 9px;
+  color: var(--energy-accent);
+  background: var(--energy-card-soft);
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 700;
+}
+.x-energy-open-plan {
+  border: 0;
+  padding: 4px 0;
+  color: var(--energy-accent);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.x-energy-reward-card small {
+  color: var(--energy-muted);
+  letter-spacing: .08em;
+  font-size: 11px;
+}
+.x-energy-account-meta { display: grid; gap: 6px; margin-top: 14px; color: var(--energy-muted); font-size: 12px; overflow-wrap: anywhere; }
+.x-energy-account-email-row { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; min-width: 0; }
+.x-energy-account-bind { margin: 0; border: 1px solid var(--energy-line); border-radius: 999px; padding: 2px 8px; min-height: 23px; color: var(--energy-accent); background: var(--energy-card-soft); font-size: 11px; line-height: 1.35; font-weight: 700; }
+.x-energy-account-bind[hidden] { display: none !important; }
+.x-energy-account-status { margin: 10px 0 0; color: var(--energy-accent); font-size: 12px; line-height: 1.5; }
+.x-energy-account-status.is-error,
+.x-energy-modal-status.is-error { color: #bd5d78; }
+/* 账户卡底部操作区。
+   —— 暗夜黑块根因（本轮实机截图定位）——
+   这个容器原本是 <footer>，而 static/style.css 里有两条**未限定作用域的全局元素选择器**：
+     body.entered footer      { display: block }        → 把这里的 flex 打回 block，四个操作项挤在左边
+     body.x-dark-mode footer  { background: #050607 }   → 给它铺满一整块纯黑底（截图里的黑色矩形）
+   它们本来只想作用于页面级页脚，却命中了账户卡内部这个嵌套 footer。
+   修法：DOM 上改成 <div>（语义上它也不是页脚），彻底脱离这两条全局选择器；
+   同时把 style.css 那条暗夜规则收窄为 body.x-dark-mode > footer，从源头去掉越界。
+   这里只保留一条上分隔线，容器自身**不设任何背景**，直接融入账户主卡。 */
+.x-energy-account-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; padding: 14px 2px 0; border-top: 1px solid var(--energy-line); background: transparent; box-shadow: none; border-radius: 0; }
+.x-energy-account-actions a,
+.x-energy-account-actions button { border: 0; padding: 0; color: var(--energy-muted); background: transparent; font-size: 12px; text-decoration: none; }
+.x-energy-account-actions .is-danger { color: #bd5d78; }
+.x-energy-account-actions [hidden] { display: none !important; }
+.x-energy-deletion-state { margin-top: 14px; padding: 12px; border-radius: 14px; background: var(--energy-card-soft); }
+.x-energy-deletion-state strong { display: block; color: var(--energy-accent); font-size: 13px; }
+.x-energy-deletion-state p { margin: 5px 0 0; color: var(--energy-muted); font-size: 12px; }
+.x-energy-deletion-state button { margin-top: 9px; border: 0; padding: 0; color: var(--energy-accent); background: transparent; font-size: 12px; font-weight: 700; }
+.x-energy-plan-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 18px; padding: 16px 0 4px; border-top: 1px solid var(--energy-line); }
+.x-energy-plan-metrics article { position: relative; min-width: 0; padding: 0 8px; background: var(--energy-card); text-align: center; }
+.x-energy-plan-metrics article + article::before { content: ""; position: absolute; top: 2px; bottom: 2px; left: 0; width: 1px; background: var(--energy-line); }
+.x-energy-plan-metrics small,
+.x-energy-plan-metrics strong { display: block; }
+.x-energy-plan-metrics small { color: var(--energy-muted); font-size: 10.5px; }
+.x-energy-plan-metrics strong { margin-top: 5px; color: var(--energy-text); font-size: 13px; overflow-wrap: anywhere; }
+.x-energy-hub-section { margin-top: 24px; }
+.x-energy-hub-section[hidden] { display: none !important; }
+.x-energy-hub-section > h3 { margin: 0 0 14px; color: var(--energy-text); font-size: 15px; }
+.x-energy-hub-grid { gap: 18px 10px; }
+.x-energy-rewards { display: grid; gap: 10px; }
+.x-energy-reward-card { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 16px; color: var(--energy-text); text-decoration: none; }
+.x-energy-reward-card[hidden] { display: none !important; }
+/* 「创作收益」改成 <button>（点击派发 shex:open-creator-center，不再直跳独立面板），
+   这里补齐按钮元素的默认样式差异，视觉与其他奖励卡片保持完全一致。 */
+button.x-energy-reward-card { width: 100%; font: inherit; text-align: left; cursor: pointer; }
+.x-energy-reward-card > div { min-width: 0; }
+.x-energy-reward-card strong { display: block; margin-top: 4px; font-size: 14px; }
+.x-energy-reward-card p { margin: 5px 0 0; color: var(--energy-muted); font-size: 12px; line-height: 1.5; }
+.x-energy-reward-card button { flex: 0 0 auto; border: 0; border-radius: 999px; padding: 8px 12px; color: var(--x-energy-on-accent); background: var(--energy-accent); font-size: 12px; font-weight: 700; }
+.x-energy-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(40,29,21,.46);
+  backdrop-filter: blur(3px);
+}
+.x-energy-modal[hidden] { display: none !important; }
+.x-energy-modal-card {
+  position: relative;
+  width: min(100%, 430px);
+  max-height: min(82vh, 620px);
+  overflow: auto;
+  border: 1px solid var(--energy-line);
+  border-radius: 20px;
+  padding: 22px;
+  color: var(--energy-text);
+  background: var(--energy-card);
+  box-shadow: 0 12px 36px var(--x-energy-shadow);
+}
+.x-energy-modal-card h3 { margin: 0 34px 8px 0; font-size: 19px; }
+.x-energy-modal-card > p,
+.x-energy-modal-card [data-energy-delete-step] > p { margin: 0 0 16px; color: var(--energy-muted); font-size: 13px; line-height: 1.65; }
+.x-energy-modal-card label { display: grid; gap: 7px; color: var(--energy-muted); font-size: 12px; }
+.x-energy-modal-card input { box-sizing: border-box; width: 100%; min-width: 0; border: 1px solid var(--energy-line); border-radius: 12px; padding: 11px 12px; color: var(--energy-text); background: var(--energy-input); font: inherit; }
+.x-energy-email-code-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 9px; margin-top: 13px; }
+.x-energy-email-code-row > button { min-height: 43px; border: 1px solid var(--energy-line); border-radius: 12px; padding: 0 13px; color: var(--energy-accent); background: var(--energy-card-soft); font-size: 12px; font-weight: 700; white-space: nowrap; }
+.x-energy-modal-close { position: absolute; top: 14px; right: 14px; border: 0; padding: 5px; color: var(--energy-muted); background: transparent; font-size: 23px; line-height: 1; }
+.x-energy-modal-status { min-height: 20px; margin: 10px 0 0 !important; color: var(--energy-accent) !important; font-size: 12px !important; }
+.x-energy-modal-status.is-error { color: #bd5d78 !important; }
+.x-energy-modal-actions { display: flex; justify-content: flex-end; gap: 9px; margin-top: 18px; }
+.x-energy-modal-actions button { border: 1px solid var(--energy-line); border-radius: 999px; padding: 9px 15px; color: var(--energy-text); background: var(--energy-card-soft); font-size: 12px; font-weight: 700; }
+.x-energy-modal-actions .is-primary { border-color: transparent; color: var(--x-energy-on-accent); background: var(--energy-accent); }
+.x-energy-modal-actions .is-danger { border-color: rgba(189, 93, 120, .28); color: #a84965; background: rgba(189, 93, 120, .09); }
+@media (max-width: 520px) {
+  .x-energy-account-card { padding: 18px 15px 15px; }
+  .x-energy-account-name { font-size: 23px; }
+  .x-energy-account-top { gap: 10px; }
+  .x-energy-account-plan-actions { gap: 7px; }
+  .x-energy-plan-metrics article { padding: 0 4px; }
+  .x-energy-hub-grid { gap: 16px 7px; }
+  .x-energy-modal { padding: 12px; }
+  .x-energy-modal-card { padding: 19px 15px; }
+  .x-energy-email-code-row { grid-template-columns: minmax(0, 1fr) 96px; }
+}

@@ -1,0 +1,7 @@
+(function(root,factory){const api=factory(root);if(typeof module==='object'&&module.exports)module.exports=api;if(root)root.SHEXPlayCanvas=api;})(typeof window!=='undefined'?window:globalThis,function(root){
+ 'use strict';
+ function loadImage(url,timeoutMs=3000){return new Promise(resolve=>{if(!url||!root.Image)return resolve(null);const img=new root.Image();let done=false;const end=value=>{if(done)return;done=true;root.clearTimeout(timer);resolve(value);},timer=root.setTimeout(()=>end(null),timeoutMs);img.crossOrigin='anonymous';img.onload=()=>end(img);img.onerror=()=>end(null);img.src=url;});}
+ function pixelHeart(ctx,x,y,pixel,color='#d9607a',rows=['0110110','1111111','1111111','0111110','0011100','0001000']){ctx.fillStyle=color;rows.forEach((line,r)=>[...line].forEach((cell,c)=>{if(cell==='1')ctx.fillRect(x+c*pixel,y+r*pixel,pixel,pixel);}));}
+ function qr(ctx,doc,Factory,url,{x,y,side,bg='#fffaf0',fg='#3b2a22'}={}){if(typeof Factory!=='function')throw Error('站点二维码暂时无法生成');const host=doc.createElement('div'),matrix=new Factory(host,{text:url,width:side,height:side,correctLevel:Factory.CorrectLevel.M})._oQRCode,count=matrix?.getModuleCount?.();if(!count)throw Error('二维码生成失败');const cell=Math.floor(side/(count+8));if(cell<2)throw Error('站点二维码容量不足');const used=(count+8)*cell,offset=(side-used)/2;ctx.fillStyle=bg;ctx.fillRect(x,y,side,side);ctx.fillStyle=fg;for(let r=0;r<count;r++)for(let c=0;c<count;c++)if(matrix.isDark(r,c))ctx.fillRect(x+offset+(c+4)*cell,y+offset+(r+4)*cell,cell,cell);}
+ return Object.freeze({loadImage,pixelHeart,qr});
+});

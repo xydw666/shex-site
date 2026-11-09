@@ -1,0 +1,807 @@
+/* Enlarge only the home book glyph; retain the shared app tile and responsive sizing. */
+#xWorldHome #showXLettersV1 .x-world-action-icon svg { transform:scale(1.25); }
+#xLettersV1Panel {
+  --ground:#e9ece7; --paper:#fbf9f2; --ink:#29352c; --muted:#5b6b60; --moss:#556d59; --gold:#af9462; --cover-ink:#29352c;
+  position:fixed; inset:0; z-index:200; width:100%; height:var(--x-letter-available-height,100%); min-height:0; padding:0; overflow:hidden; box-sizing:border-box; container-type:size; color:var(--ink); background:var(--ground);
+  font-family:"Noto Sans SC","Microsoft YaHei",sans-serif;
+}
+body.x-clean-page #xLettersV1Panel.x-clean-active { height:var(--x-letter-available-height,100%) !important; min-height:0 !important; overflow:hidden !important; }
+#xLettersV1Panel > .x-subpage-back { display:none; }
+#xLettersV1Panel #xLettersV1Mount { width:100%; height:100%; min-height:0; }
+#xLettersV1Panel .x-letter-access-gate { position:relative; display:grid; place-items:center; width:100%; height:100%; overflow:auto; padding:64px 20px 32px; background:radial-gradient(circle at 50% 28%,#faf3ed 0,#f9f4ee 65%,#f3e8de 100%); }
+#xLettersV1Panel .x-letter-access-back { position:absolute; top:20px; left:20px; z-index:1; width:44px; height:44px; border:1px solid #eee1d3; border-radius:50%; background:#ffffffbf; color:#a3774c; font-size:30px; line-height:1; }
+#xLettersV1Panel .x-letter-access-card { box-sizing:border-box; display:flex; flex-direction:column; width:min(100%,360px); gap:12px; padding:26px; border:1px solid #ffffffdb; border-radius:28px; background:#ffffffd9; box-shadow:0 18px 50px #b78d6422; color:#6d5033; }
+#xLettersV1Panel .x-letter-access-icon { display:grid; place-items:center; width:80px; height:80px; border:1px solid #ffffffdc; border-radius:22px; color:#b38659; background:linear-gradient(150deg,#faf3ed,#f9f4ee); box-shadow:0 8px 20px #b78d641f; }
+#xLettersV1Panel .x-letter-access-icon svg { width:42px; height:42px; }
+#xLettersV1Panel .x-letter-access-kicker { margin:4px 0 0; color:#ba936c; font-size:11px; letter-spacing:.13em; }
+#xLettersV1Panel .x-letter-access-card h1 { margin:0; font-size:23px; font-weight:600; }
+#xLettersV1Panel .x-letter-access-hint { margin:0 0 6px; color:#a57c53; font-size:14px; line-height:1.6; }
+#xLettersV1Panel .x-letter-access-card label { font-size:13px; }
+#xLettersV1Panel .x-letter-access-card input { box-sizing:border-box; width:100%; min-height:48px; padding:0 14px; border:1px solid #e9dacb; border-radius:14px; background:#fff; color:#6d5033; font:inherit; letter-spacing:.12em; outline:none; }
+#xLettersV1Panel .x-letter-access-card input:focus-visible { border-color:#c1986e; box-shadow:0 0 0 3px #c8a78433; }
+#xLettersV1Panel .x-letter-access-error { min-height:18px; margin:0; color:#ae5268; font-size:12px; }
+#xLettersV1Panel .x-letter-access-card .x-letter-access-submit { min-height:46px; border-radius:14px; background:#b38659; color:#fff; font-size:15px; font-weight:600; }
+#xLettersV1Panel .x-letter-app { position:relative; display:flex; justify-content:center; width:100%; height:100%; min-height:0; overflow:hidden; }
+#xLettersV1Panel *, #xLettersV1Panel *::before, #xLettersV1Panel *::after { box-sizing:border-box; }
+#xLettersV1Panel [hidden] { display:none !important; }
+#xLettersV1Panel .sr-only { position:absolute; width:1px; height:1px; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
+#xLettersV1Panel button, #xLettersV1Panel textarea, #xLettersV1Panel select { font:inherit; color:inherit; }
+#xLettersV1Panel button { min-height:44px; border:0; background:transparent; cursor:pointer; }
+#xLettersV1Panel button:disabled { cursor:not-allowed; opacity:.48; }
+#xLettersV1Panel :is(button,textarea,select,input):focus-visible { outline:2px solid var(--moss); outline-offset:3px; }
+#xLettersV1Panel svg { width:21px; height:21px; flex:none; }
+#xLettersV1Panel .x-letter-shell { display:flex; flex-direction:column; width:100%; max-width:720px; height:100%; min-height:0; margin:0 auto; padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom); }
+#xLettersV1Panel .x-letter-head { flex:none; min-height:64px; display:flex; align-items:center; gap:5px; }
+#xLettersV1Panel .x-letter-icon-button { width:44px; height:44px; display:grid; place-items:center; border-radius:12px; }
+#xLettersV1Panel .x-letter-dream { min-width:0; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:15px; font-weight:600; }
+#xLettersV1Panel .x-letter-quarter-button { display:flex; align-items:center; justify-content:center; gap:1px; min-width:90px; padding:0 4px; border-radius:12px; color:var(--muted); font-size:13px; }
+#xLettersV1Panel .x-letter-quarter-button svg { width:16px; height:16px; }
+#xLettersV1Panel .x-letter-send-top { min-width:62px; padding:0 9px; border:1px solid var(--moss); border-radius:10px; color:#fff; background:var(--moss); font-size:13px; }
+#xLettersV1Panel [data-letter-send-slot] { display:flex; flex:none; align-items:center; }
+#xLettersV1Panel [data-letter-send-slot]:empty { display:none; }
+#xLettersV1Panel .x-letter-send-top.is-retry { min-width:44px; padding:0 6px; border-color:transparent; border-radius:0; color:var(--moss); background:transparent; font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-weight:400; }
+#xLettersV1Panel .x-letter-save-top { min-width:48px; padding:0 7px; border:1px solid #cbd6c7; border-radius:10px; color:var(--moss); background:transparent; font-size:13px; }
+#xLettersV1Panel .x-letter-mode-badge { display:inline-block; margin-left:7px; padding:2px 6px; border:1px solid #cbd6c7; border-radius:8px; color:var(--muted); font-family:"Noto Sans SC","Microsoft YaHei",sans-serif; font-size:10px; font-weight:500; vertical-align:middle; }
+#xLettersV1Panel .x-letter-reader { position:relative; display:flex; flex:1 1 0; flex-direction:column; width:100%; min-height:0; min-width:0; margin:0 auto; }
+/* The book fits the available slot, never its text. Every skin shares the same 1055:1491 inner page. */
+#xLettersV1Panel .x-letter-book-space { position:relative; flex:1 1 0; min-height:0; min-width:0; width:100%; container-type:size; }
+#xLettersV1Panel .x-letter-quarter-book-shell { --book-spine-width:14px; position:absolute; inset:0; width:min(100%,calc((100cqh - 8px)*.707579 + 20px)); height:min(100%,calc((100cqw - 20px)*1.41327 + 8px)); margin:auto; isolation:isolate; }
+#xLettersV1Panel :is([data-cover="cover-default-1"],[data-cover="cover-default-2"]) { --book-cover-color:#294332; }
+#xLettersV1Panel :is(.x-letter-book-shadow,.x-letter-book-back-cover,.x-letter-book-spine,.x-letter-book-thickness) { position:absolute; pointer-events:none; }
+#xLettersV1Panel .x-letter-book-shadow { inset:4px 2px 0; border-radius:4px; box-shadow:0 5px 16px #3445361c; }
+#xLettersV1Panel .x-letter-book-back-cover { inset:0; border-radius:4px; background:var(--book-cover-color,#c8d4c1); border:1px solid #aab7a2; }
+#xLettersV1Panel .x-letter-book-spine { top:0; bottom:0; left:0; width:var(--book-spine-width); border-radius:4px 0 0 4px; background:var(--book-cover-color,#c8d4c1); box-shadow:inset -3px 0 5px #34453624,inset 1px 0 0 #eff0df80; }
+/* Four inexpensive paper edges, outside the replaceable/animated inner page. */
+#xLettersV1Panel .x-letter-book-thickness { top:3px; right:5px; bottom:7px; left:var(--book-spine-width); border-radius:2px; background:#eeede1; box-shadow:1px 1px 0 #cbd0bd,2px 2px 0 #f7f5e9,3px 3px 0 #cbd0bd,4px 4px 0 #f3f1e5; }
+#xLettersV1Panel .x-letter-paper-stage { position:absolute; top:0; right:6px; bottom:8px; left:var(--book-spine-width); min-height:0; min-width:0; overflow:hidden; container-type:size; }
+#xLettersV1Panel .x-letter-paper { position:absolute; inset:0; display:flex; flex-direction:column; width:100%; height:100%; min-height:0; min-width:0; padding:0; overflow:hidden; border:1px solid #dedccf; border-radius:2px; color:var(--ink); background:var(--paper); }
+#xLettersV1Panel .x-letter-paper-stage.is-turning > .x-letter-paper { pointer-events:none; }
+/* 正文优先：日期靠上、邮章靠下，文字可以跨过信纸装饰，不再挤进插画中央的空白。 */
+#xLettersV1Panel .x-letter-paper-safe { position:absolute; z-index:1; top:8%; right:7%; bottom:3%; left:7%; display:grid; grid-template-rows:auto minmax(0,1fr) auto; gap:8px; min-height:0; min-width:0; }
+#xLettersV1Panel .x-letter-content-frame { position:relative; min-height:0; min-width:0; overflow:hidden; }
+#xLettersV1Panel .x-letter-paper-footer { display:flex; align-items:flex-end; justify-content:flex-end; min-height:0; min-width:0; }
+#xLettersV1Panel .x-letter-paper-art { position:absolute; inset:0; width:100%; height:100%; max-width:none; object-fit:contain; pointer-events:none; user-select:none; }
+/* Both supplied images are 1055 x 1491. Fit the whole sheet, never stretch or crop its borders. */
+#xLettersV1Panel .x-letter-paper[data-paper-artwork] { --ink:#29352c; --muted:#536257; --moss:#556d59; }
+#xLettersV1Panel .x-letter-paper[data-paper-artwork]::after { display:none; }
+#xLettersV1Panel .x-letter-paper[data-paper-artwork] :is(.x-letter-answer-input,.x-letter-answer-options label) { color:var(--ink); background:#fffefa; border-color:#bac8b9; }
+#xLettersV1Panel .x-letter-paper-stage.is-turning > .is-turning-away { z-index:2; backface-visibility:hidden; will-change:transform,opacity; }
+#xLettersV1Panel .x-letter-turn-shade { position:absolute; inset:0; z-index:3; pointer-events:none; opacity:0; background:linear-gradient(90deg,#3445364a,transparent 25%,transparent 75%,#3445364a); }
+#xLettersV1Panel .is-turning-away .x-letter-turn-shade { opacity:.18; }
+#xLettersV1Panel .x-letter-nav button[aria-disabled="true"] { opacity:.48; }
+#xLettersV1Panel .x-letter-paper::after { content:""; position:absolute; right:6px; bottom:7px; width:104px; height:120px; background:url("./botanical-sprig.svg") center/contain no-repeat; opacity:.47; pointer-events:none; }
+#xLettersV1Panel .x-letter-paper[data-template="paper-default-1"]::after { display:none; }
+#xLettersV1Panel .x-letter-paper[data-template="paper-default-2"] { background:#f6f5ed; border-color:#d5dacd; }
+#xLettersV1Panel .x-letter-paper[data-template="paper-default-3"] { background:#f8f4ed; border-color:#ddd4c6; }
+#xLettersV1Panel .x-letter-paper-head { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:start; gap:8px; min-width:0; color:var(--muted); font-size:12px; }
+#xLettersV1Panel .x-letter-paper-head small { font-size:12px; line-height:1.6; }
+#xLettersV1Panel .x-letter-state { margin-left:auto; white-space:nowrap; }
+#xLettersV1Panel .x-letter-document-status { display:flex; align-items:center; justify-content:flex-end; gap:2px; min-height:24px; white-space:nowrap; }
+#xLettersV1Panel .x-letter-document-status .x-letter-state { margin:0; font-size:12px; line-height:1.6; }
+#xLettersV1Panel .x-letter-document-status .x-letter-state-details { min-width:44px; min-height:44px; padding:0 2px; color:var(--muted); text-decoration:underline dotted; text-underline-offset:4px; }
+#xLettersV1Panel .x-letter-state-action { min-width:44px; min-height:44px; padding:0 2px; color:var(--moss); font-size:12px; text-decoration:underline; text-underline-offset:4px; }
+#xLettersV1Panel [data-letter-status-details] p { margin:12px 0; color:var(--muted); font-size:14px; line-height:1.8; }
+#xLettersV1Panel .x-letter-error-code { display:block; color:var(--muted); font-size:12px; line-height:1.6; overflow-wrap:anywhere; }
+#xLettersV1Panel .x-letter-page-bookmark { position:absolute; top:42px; right:-1px; z-index:2; width:44px; height:56px; display:grid; place-items:center; border-radius:7px 0 0 7px; color:var(--muted); background:#e4e9df; }
+#xLettersV1Panel .x-letter-page-bookmark.is-marked { color:#fff; background:var(--moss); }
+#xLettersV1Panel .x-letter-paper-scroll { position:relative; z-index:1; width:100%; height:100%; min-height:0; min-width:0; padding:12px 2px 14px; overflow-y:auto; overflow-x:hidden; overscroll-behavior:contain; scrollbar-width:none; scrollbar-gutter:auto; -ms-overflow-style:none; white-space:pre-wrap; overflow-wrap:anywhere; scroll-padding-block:14px; -webkit-mask-image:linear-gradient(to bottom,transparent,#281d15 12px,#281d15 calc(100% - 12px),transparent); mask-image:linear-gradient(to bottom,transparent,#281d15 12px,#281d15 calc(100% - 12px),transparent); }
+#xLettersV1Panel .x-letter-paper-scroll::-webkit-scrollbar { display:none; width:0; height:0; }
+#xLettersV1Panel .x-letter-paper-scroll.is-reading { touch-action:pan-y pinch-zoom; }
+#xLettersV1Panel .x-letter-block { position:relative; margin:0 0 24px; font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:16px; line-height:1.85; }
+#xLettersV1Panel .x-letter-block.x-letter-block-text { margin-bottom:12px; }
+#xLettersV1Panel .x-letter-block p { margin:0; }
+#xLettersV1Panel .x-letter-prose { white-space:pre-wrap; }
+#xLettersV1Panel .x-letter-block-more { position:absolute; top:-5px; right:0; width:44px; height:44px; display:grid; place-items:center; color:var(--muted); }
+#xLettersV1Panel .x-letter-block:has(.x-letter-block-more):not(:has(.x-letter-inline-text)):not(:has(.x-letter-block-text)) { padding-right:32px; }
+#xLettersV1Panel .x-letter-inline-text { display:block; width:100%; min-height:1.85em; height:auto; margin:0; padding:0; border:0; border-radius:0; outline-offset:2px; color:inherit; background:transparent; box-shadow:none; resize:none; overflow:hidden; white-space:pre-wrap; overflow-wrap:anywhere; font:inherit; line-height:inherit; caret-color:var(--moss); }
+#xLettersV1Panel .x-letter-inline-text:focus-visible { outline:0; }
+#xLettersV1Panel .x-letter-block-text { position:relative; }
+#xLettersV1Panel .x-letter-block-text:focus-within::before { content:""; position:absolute; top:.5em; left:-10px; width:2px; height:12px; border-radius:2px; background:var(--moss); pointer-events:none; }
+#xLettersV1Panel .x-letter-inline-text::placeholder { color:var(--muted); opacity:.82; }
+#xLettersV1Panel .x-letter-write-here { width:100%; min-height:72px; padding:0; color:var(--muted); text-align:left; font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:16px; background:transparent; }
+#xLettersV1Panel .x-letter-field { display:grid; gap:6px; color:var(--muted); font-family:"Noto Sans SC","Microsoft YaHei",sans-serif; font-size:13px; }
+#xLettersV1Panel textarea, #xLettersV1Panel select { width:100%; min-height:44px; padding:10px 12px; border:1px solid #bac8b9; border-radius:10px; color:var(--ink); background:#fffefa; }
+#xLettersV1Panel textarea { min-height:92px; resize:vertical; line-height:1.7; }
+#xLettersV1Panel .x-letter-inline-text { min-height:1.85em; padding:0; border:0; border-radius:0; background:transparent; box-shadow:none; resize:none; overflow:hidden; font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:16px; line-height:1.85; }
+#xLettersV1Panel .x-letter-question, #xLettersV1Panel .x-letter-answer { position:relative; padding:4px 0 4px 15px; border-left:2px solid #a9ba9d; }
+#xLettersV1Panel :is(.x-letter-question,.x-letter-answer):focus-within::before { content:""; position:absolute; top:.75em; left:3px; width:5px; height:5px; border-radius:50%; background:var(--moss); pointer-events:none; }
+#xLettersV1Panel .x-letter-question > small, #xLettersV1Panel .x-letter-answer > small { display:block; color:var(--muted); font-family:"Noto Sans SC","Microsoft YaHei",sans-serif; font-size:12px; line-height:1.6; }
+#xLettersV1Panel .x-letter-question > p, #xLettersV1Panel .x-letter-answer > p { margin:5px 0 10px; }
+#xLettersV1Panel .x-letter-option-preview { color:var(--muted); font-size:14px; }
+#xLettersV1Panel .x-letter-answer-input { margin:8px 0; min-height:76px; }
+#xLettersV1Panel .x-letter-answer-options { display:grid; gap:6px; margin:10px 0; }
+#xLettersV1Panel .x-letter-answer-options label { display:flex; align-items:center; min-height:44px; gap:8px; padding:4px 8px; border-radius:10px; background:#f0f2ea; font-family:"Noto Sans SC","Microsoft YaHei",sans-serif; font-size:14px; }
+#xLettersV1Panel .x-letter-answer-options input { width:18px; height:18px; accent-color:var(--moss); }
+#xLettersV1Panel .x-letter-image { margin:0; padding:8px; border:1px solid #e2e2d7; background:#f6f5ee; }
+#xLettersV1Panel .x-letter-image :is(img,canvas) { display:block; max-width:100%; height:auto; margin:auto; }
+#xLettersV1Panel .x-letter-image figcaption { margin-top:4px; color:var(--muted); font-size:12px; text-align:center; }
+#xLettersV1Panel .x-letter-image button { width:100%; color:var(--moss); }
+#xLettersV1Panel .x-letter-relation-link { display:grid; gap:4px; margin-top:24px; }
+#xLettersV1Panel .x-letter-relation-link button { width:fit-content; padding:0 6px; color:var(--moss); text-align:left; font-size:13px; }
+#xLettersV1Panel .x-letter-voice-actions { display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:20px; padding:8px 0; border-bottom:1px solid #dfe2d8; color:var(--muted); font-family:"Noto Sans SC","Microsoft YaHei",sans-serif; font-size:12px; }
+#xLettersV1Panel .x-letter-voice-actions button, #xLettersV1Panel [data-letter-action="voice-block"] { padding:0 10px; border:1px solid #c3d1c2; border-radius:10px; color:var(--moss); font-family:"Noto Sans SC","Microsoft YaHei",sans-serif; font-size:12px; }
+#xLettersV1Panel .x-letter-sent-footer { flex:none; display:flex; align-items:flex-end; justify-content:flex-end; min-height:0; }
+#xLettersV1Panel .x-letter-sent-seal { position:relative; z-index:1; flex:none; align-self:flex-end; width:60px; height:60px; display:grid; place-items:center; margin:4px 0 0; border:3px double var(--moss); border-radius:50%; color:var(--moss); background:transparent; font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:13px; line-height:1.25; text-align:center; transform:rotate(-8deg); }
+#xLettersV1Panel .x-letter-sent-seal[data-seal-style="botanical-round"] { background:url("./botanical-sprig.svg") center/42px auto no-repeat; }
+#xLettersV1Panel .x-letter-sent-seal[data-seal-style="plain-round"] { background-image:none; }
+#xLettersV1Panel .x-letter-paper-footer .x-letter-sent-seal { width:clamp(28px,10cqh,60px); height:clamp(28px,10cqh,60px); margin:0; background-size:70% auto; font-size:clamp(9px,2.2cqh,13px); }
+#xLettersV1Panel .x-letter-seal-preview { width:44px; height:44px; display:grid; place-items:center; border:3px double var(--moss); border-radius:50%; color:var(--moss); background:url("./botanical-sprig.svg") center/31px auto no-repeat; font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:9px; }
+#xLettersV1Panel [data-seal-style="plain-round"].x-letter-seal-preview { background-image:none; }
+#xLettersV1Panel .x-letter-empty, #xLettersV1Panel .x-letter-hidden { color:var(--muted); font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:15px; line-height:1.8; }
+#xLettersV1Panel .x-letter-nav { display:flex; flex:none; align-items:center; justify-content:center; gap:18px; min-height:48px; color:var(--muted); font-size:13px; }
+#xLettersV1Panel .x-letter-nav button { width:44px; display:grid; place-items:center; border-radius:12px; }
+#xLettersV1Panel .x-letter-nav span { min-width:94px; text-align:center; }
+#xLettersV1Panel .x-letter-reading-actions { flex:none; display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:center; min-height:52px; }
+#xLettersV1Panel .x-letter-reading-actions .x-letter-nav { gap:0; }
+#xLettersV1Panel .x-letter-reading-actions .x-letter-nav span { min-width:68px; font-variant-numeric:tabular-nums; }
+#xLettersV1Panel .x-letter-reading-side { min-width:0; display:flex; justify-content:flex-start; }
+#xLettersV1Panel .x-letter-reading-side.is-reply { justify-content:flex-end; }
+#xLettersV1Panel .x-letter-reading-action { display:flex; align-items:center; justify-content:center; gap:4px; min-width:44px; min-height:44px; padding:0 2px; color:var(--moss); font-size:12px; }
+#xLettersV1Panel .x-letter-reading-action svg { width:20px; height:20px; }
+#xLettersV1Panel .x-letter-status { position:absolute; z-index:4; right:4px; bottom:52px; left:4px; max-height:96px; margin:0; padding:4px 8px; overflow-y:auto; border-radius:4px; color:var(--ink); background:var(--paper); font-size:12px; line-height:1.6; text-align:center; overflow-wrap:anywhere; }
+#xLettersV1Panel .x-letter-status:empty { display:none; }
+#xLettersV1Panel .x-letter-boundary { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); max-width:calc(100% - 40px); padding:9px 14px; border-radius:9px; background:var(--paper); color:var(--ink); box-shadow:0 4px 16px #34453620; font-size:13px; line-height:1.5; text-align:center; pointer-events:none; z-index:4; }
+#xLettersV1Panel .x-letter-player { display:flex; align-items:center; gap:12px; min-height:52px; margin:24px 0 0; padding:4px 0; background:transparent; color:var(--moss); white-space:normal; }
+#xLettersV1Panel .x-letter-player-toggle { flex:none; display:grid; place-items:center; width:44px; height:44px; border-radius:50%; background:#e4e9df; color:var(--moss); }
+#xLettersV1Panel .x-letter-player-toggle svg { width:20px; height:20px; }
+#xLettersV1Panel .x-letter-player [data-voice-status] { min-width:0; font-size:12px; line-height:1.6; overflow-wrap:anywhere; }
+#xLettersV1Panel .x-letter-tools-anchor { position:relative; }
+#xLettersV1Panel .x-letter-toolbar { position:absolute; z-index:5; right:0; bottom:calc(100% + 8px); display:flex; align-items:center; justify-content:space-around; width:min(340px,calc(100vw - 40px)); margin:0; padding:6px; border-radius:12px; box-shadow:0 5px 20px #34453626; background:var(--paper); }
+#xLettersV1Panel .x-letter-tool { flex:1 1 0; min-width:0; max-width:114px; min-height:52px; display:grid; justify-items:center; align-content:center; gap:2px; border-radius:12px; color:var(--ink); font-size:12px; white-space:nowrap; }
+#xLettersV1Panel .x-letter-tool:first-child { color:var(--moss); font-weight:600; }
+#xLettersV1Panel .x-letter-sheet-backdrop { position:absolute; z-index:210; inset:0; background:#1d30258a; }
+#xLettersV1Panel .x-letter-sheet { position:absolute; z-index:211; right:0; bottom:0; left:0; width:min(100%,720px); max-height:min(85%,720px); overflow-y:auto; overscroll-behavior:contain; margin:auto; padding:0 20px calc(24px + env(safe-area-inset-bottom)); border-radius:24px 24px 0 0; background:#f8f9f2; box-shadow:0 -12px 28px #1e2f2030; }
+#xLettersV1Panel .x-letter-sheet.is-centered { top:50%; right:auto; bottom:auto; left:50%; width:min(calc(100% - 28px),480px); max-height:calc(100% - 32px); padding:10px 20px 22px; border-radius:18px; box-shadow:0 12px 32px #1e2f2038; transform:translate(-50%,-50%); }
+#xLettersV1Panel .x-letter-sheet.is-centered .x-letter-sheet-top { height:32px; }
+#xLettersV1Panel .x-letter-favorites-panel h2 { margin:0 0 8px; font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:20px; font-weight:500; }
+#xLettersV1Panel .x-letter-send-surface { position:absolute; z-index:5; inset:0; display:flex; flex-direction:column; width:min(100%,720px); height:100%; min-height:0; margin:0 auto; padding:0 16px; overflow:hidden; color:var(--ink); background:var(--ground); }
+#xLettersV1Panel .x-letter-send-head { display:flex; align-items:center; flex:none; min-height:52px; gap:8px; }
+#xLettersV1Panel .x-letter-send-head h2 { min-width:0; margin:0; font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:19px; font-weight:400; white-space:nowrap; }
+#xLettersV1Panel .x-letter-send-time { display:flex; align-items:center; justify-content:flex-end; min-width:0; margin-left:auto; }
+#xLettersV1Panel .x-letter-send-time-toggle { display:flex; align-items:center; justify-content:flex-end; gap:4px; min-width:44px; max-width:132px; padding:0 2px; color:var(--muted); font-size:11px; font-weight:400; line-height:1.35; text-align:right; }
+#xLettersV1Panel .x-letter-send-time-toggle [data-send-delivery-label] { min-width:0; }
+#xLettersV1Panel .x-letter-send-time-toggle svg { width:16px; height:16px; }
+#xLettersV1Panel .x-letter-send-time-fixed { color:var(--muted); font-size:11px; white-space:nowrap; }
+#xLettersV1Panel .x-letter-envelope-space { position:relative; display:grid; place-items:center; flex:1 1 auto; min-height:130px; padding:40px 0 12px; overflow:visible; }
+#xLettersV1Panel .x-letter-send-gesture-hint { position:absolute; top:8px; right:0; left:0; display:flex; align-items:center; justify-content:center; gap:6px; margin:0; color:var(--muted); font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:12px; font-weight:400; line-height:1.5; pointer-events:none; }
+#xLettersV1Panel .x-letter-send-gesture-hint svg { width:22px; height:22px; color:var(--moss); }
+#xLettersV1Panel .x-letter-send-surface[data-send-phase="leaving"] :is(.x-letter-send-details,.x-letter-send-actions,.x-letter-send-time) { opacity:.5; pointer-events:none; }
+#xLettersV1Panel .x-letter-send-surface[data-send-phase="leaving"] .x-letter-send-gesture-hint,
+#xLettersV1Panel .x-letter-send-surface[data-send-phase="waiting"] :is(.x-letter-send-gesture-hint,.x-letter-envelope-hint,.x-letter-send-details,.x-letter-send-actions,.x-letter-send-time) { visibility:hidden; pointer-events:none; }
+#xLettersV1Panel .x-letter-send-waiting[data-send-waiting] { position:absolute; z-index:3; inset:52px 0 0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:24px; padding:24px 16px calc(24px + env(safe-area-inset-bottom)); color:var(--moss); background:var(--ground); }
+#xLettersV1Panel .x-letter-meet-loader { position:relative; width:150px; height:150px; flex:none; pointer-events:none; }
+#xLettersV1Panel .x-letter-meet-ring { position:absolute; inset:20px; border-radius:50%; border:1px solid rgba(108,96,84,.13); }
+#xLettersV1Panel :is(.x-letter-meet-square,.x-letter-meet-circle) { position:absolute; width:20px; height:20px; left:65px; top:65px; }
+#xLettersV1Panel .x-letter-meet-square { border-radius:5px; background:#928475; transform:translateX(-48px); animation:xLetterMeetSquare 2.5s cubic-bezier(.65,0,.35,1) infinite paused; }
+#xLettersV1Panel .x-letter-meet-circle { border-radius:50%; background:#f8f9f6; box-shadow:0 2px 8px rgba(75,85,77,.08); transform:translateX(48px); animation:xLetterMeetCircle 2.5s cubic-bezier(.65,0,.35,1) infinite paused; }
+#xLettersV1Panel .x-letter-meet-core { position:absolute; width:5px; height:5px; left:72.5px; top:72.5px; border-radius:50%; background:#8e7e6f; box-shadow:0 0 12px rgba(109,124,111,.35); opacity:0; animation:xLetterMeetCore 2.5s ease infinite paused; }
+#xLettersV1Panel .x-letter-send-surface:not([hidden])[data-send-phase="waiting"] .x-letter-send-waiting:not([hidden]) :is(.x-letter-meet-square,.x-letter-meet-circle,.x-letter-meet-core) { animation-play-state:running; }
+@keyframes xLetterMeetSquare {
+  0% { transform:translateX(-48px) rotate(0deg); }
+  42%,58% { transform:translateX(0) rotate(45deg); }
+  100% { transform:translateX(-48px) rotate(90deg); }
+}
+@keyframes xLetterMeetCircle {
+  0%,100% { transform:translateX(48px); }
+  42%,58% { transform:translateX(0); }
+}
+@keyframes xLetterMeetCore {
+  0%,32%,70%,100% { opacity:0; transform:scale(.3); }
+  46% { opacity:.85; transform:scale(2.4); }
+  55% { opacity:.45; transform:scale(1.5); }
+}
+#xLettersV1Panel .x-letter-send-waiting-label { color:var(--ink); font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:18px; font-weight:400; letter-spacing:.08em; line-height:1.5; }
+#xLettersV1Panel .x-letter-envelope { --envelope-paper:#f6f1e4; --envelope-flap:#e9e4d7; position:relative; width:min(100%,440px); max-height:100%; aspect-ratio:1.55; min-height:110px; border-radius:4px; overflow:hidden; color:#29352c; box-shadow:0 8px 24px #34453625; touch-action:none; }
+#xLettersV1Panel .x-letter-envelope[data-envelope-motion] { will-change:transform; }
+#xLettersV1Panel .x-letter-envelope[data-envelope-color="moss"] { --envelope-paper:#c6d0bb; --envelope-flap:#b8c4ac; }
+#xLettersV1Panel .x-letter-envelope[data-envelope-color="apricot"] { --envelope-paper:#ead7c4; --envelope-flap:#dfcbb5; }
+#xLettersV1Panel .x-letter-envelope[data-envelope-color="rose"] { --envelope-paper:#dfced0; --envelope-flap:#d2bfc1; }
+#xLettersV1Panel .x-letter-envelope-base { position:absolute; inset:0; background:var(--envelope-paper); pointer-events:none; transition:background-color 150ms ease-out; }
+#xLettersV1Panel .x-letter-envelope-base::before { content:""; position:absolute; inset:0 0 auto; height:48%; background:var(--envelope-flap); clip-path:polygon(0 0,100% 0,50% 100%); }
+#xLettersV1Panel .x-letter-envelope-base::after { content:""; position:absolute; right:16px; bottom:7px; width:52px; height:65px; background:url("./botanical-sprig.svg") center/contain no-repeat; opacity:.3; }
+#xLettersV1Panel .x-letter-envelope-address { position:absolute; left:20px; right:20px; top:66%; font-family:"Noto Serif SC","Songti SC","SimSun",serif; }
+#xLettersV1Panel .x-letter-envelope-address p { margin:0 0 5px; font-size:clamp(15px,4vw,18px); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+#xLettersV1Panel .x-letter-envelope-address small { font-size:12px; }
+#xLettersV1Panel .x-letter-envelope-stamps { position:absolute; left:50%; top:48%; transform:translate(-50%,-50%); width:40px; height:40px; pointer-events:none; }
+#xLettersV1Panel .x-letter-send-seal-image { position:relative; display:grid; place-items:center; width:40px; height:40px; flex:none; color:var(--moss); font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:9px; }
+#xLettersV1Panel .x-letter-send-seal-image img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+#xLettersV1Panel .x-letter-send-seal-image .x-letter-seal-botanical { inset:7px; width:26px; height:26px; opacity:.75; }
+#xLettersV1Panel .x-letter-send-seal-image > span { position:relative; }
+#xLettersV1Panel .x-letter-envelope-hint { flex:none; margin:0 0 8px; color:var(--muted); text-align:center; font-size:11px; line-height:1.4; }
+#xLettersV1Panel .x-letter-envelope:focus-visible { outline:2px solid var(--moss); outline-offset:3px; }
+#xLettersV1Panel .x-letter-send-details { flex:0 1 auto; min-height:0; padding:0 0 4px; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:none; }
+#xLettersV1Panel .x-letter-send-details::-webkit-scrollbar { display:none; }
+#xLettersV1Panel .x-letter-send-choice-line { display:flex; align-items:center; gap:8px; min-width:0; margin:0; }
+#xLettersV1Panel .x-letter-send-choice-label { flex:none; width:50px; color:var(--muted); font-size:11px; }
+#xLettersV1Panel .x-letter-send-seals { display:flex; justify-content:center; width:100%; min-width:0; }
+#xLettersV1Panel .x-letter-seal-slot { width:min(320px,100%); max-width:100%; min-width:0; margin-inline:auto; }
+#xLettersV1Panel .x-letter-seal-carousel { display:flex; align-items:center; width:100%; min-width:0; overflow-x:auto; overflow-y:hidden; padding-inline:calc((100% - 88px)/2); overscroll-behavior-x:contain; scroll-padding-inline:calc((100% - 88px)/2); scroll-snap-type:x mandatory; touch-action:pan-x pan-y; scrollbar-width:none; -webkit-mask-image:linear-gradient(to right,transparent,#281d15 24px,#281d15 calc(100% - 24px),transparent); mask-image:linear-gradient(to right,transparent,#281d15 24px,#281d15 calc(100% - 24px),transparent); }
+#xLettersV1Panel .x-letter-seal-carousel::-webkit-scrollbar { display:none; width:0; height:0; }
+#xLettersV1Panel .x-letter-seal-choice { position:relative; display:flex; flex:0 0 88px; flex-direction:column; align-items:center; justify-content:center; gap:3px; width:88px; height:88px; min-height:88px; padding:4px; color:var(--muted); background:transparent; font-size:10px; scroll-snap-align:center; }
+#xLettersV1Panel .x-letter-seal-choice::after { position:absolute; right:34px; bottom:5px; left:34px; height:1px; background:transparent; content:""; }
+#xLettersV1Panel .x-letter-seal-choice[aria-pressed="true"] { color:var(--ink); background:transparent; }
+#xLettersV1Panel .x-letter-seal-choice[aria-pressed="true"]::after { background:var(--moss); }
+#xLettersV1Panel .x-letter-seal-choice .x-letter-send-seal-image { width:40px; height:40px; }
+#xLettersV1Panel .x-letter-send-timing { display:flex; align-items:center; gap:8px; min-width:0; margin:0; color:var(--muted); font-size:12px; }
+#xLettersV1Panel .x-letter-send-timing button { position:relative; min-width:44px; min-height:44px; padding:0 6px; color:var(--muted); background:transparent; font-size:12px; font-weight:400; white-space:nowrap; }
+#xLettersV1Panel .x-letter-send-timing button[aria-pressed="true"] { color:var(--ink); background:transparent; font-weight:500; }
+#xLettersV1Panel .x-letter-send-timing button[aria-pressed="true"]::after { position:absolute; right:8px; bottom:3px; left:8px; height:1px; background:var(--moss); content:""; }
+#xLettersV1Panel .x-letter-send-cost { grid-column:2; grid-row:1; justify-self:end; max-width:100%; margin:0; color:var(--ink); text-align:right; font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:12.5px; font-weight:400; letter-spacing:.02em; line-height:1.4; overflow-wrap:anywhere; }
+#xLettersV1Panel .x-letter-send-status { margin:5px 0 0; color:var(--muted); text-align:center; font-size:12px; overflow-wrap:anywhere; }
+#xLettersV1Panel .x-letter-send-status:empty { display:none; }
+#xLettersV1Panel .x-letter-send-actions { display:grid; flex:none; grid-template-columns:minmax(0,1fr) minmax(0,1fr); grid-template-rows:auto auto; align-items:center; column-gap:10px; row-gap:2px; padding:5px 0 calc(8px + env(safe-area-inset-bottom)); }
+#xLettersV1Panel .x-letter-send-actions .x-letter-send-cost { grid-column:2; grid-row:1; }
+#xLettersV1Panel .x-letter-send-actions .x-letter-send-cancel { grid-column:1; grid-row:2; }
+#xLettersV1Panel .x-letter-send-actions .x-letter-send-confirm { grid-column:2; grid-row:2; border:0; border-radius:0; color:var(--ink); background:transparent; font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:14px; font-weight:500; }
+#xLettersV1Panel .x-letter-send-actions button { min-width:0; min-height:44px; padding:0 10px; border:1px solid transparent; border-radius:8px; color:var(--muted); background:transparent; font-size:13px; }
+#xLettersV1Panel .x-letter-send-actions .x-letter-send-confirm:disabled { opacity:.62; }
+#xLettersV1Panel .x-letter-reply-status { display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-end; gap:8px; margin-top:10px; color:var(--muted); font-family:"Noto Sans SC","Microsoft YaHei",sans-serif; font-size:12px; }
+#xLettersV1Panel .x-letter-reply-status small { flex-basis:100%; text-align:right; }
+#xLettersV1Panel .x-letter-reply-action { min-height:36px; padding:0 10px; border:1px solid #cbd6c7; border-radius:9px; color:var(--moss); background:transparent; font-size:12px; }
+#xLettersV1Panel .x-letter-favorites-panel > .x-letter-list { max-height:46vh; }
+#xLettersV1Panel .x-letter-favorites-panel .x-letter-list small { flex:none; color:var(--muted); font-size:11px; }
+#xLettersV1Panel .x-letter-favorites-error, #xLettersV1Panel .x-letter-favorites-status { color:var(--muted); font-size:13px; line-height:1.6; }
+#xLettersV1Panel .x-letter-favorites-error { color:#8a4a36; }
+#xLettersV1Panel .x-letter-favorites-load { min-height:44px; margin-top:8px; color:var(--moss); }
+#xLettersV1Panel .x-letter-sheet-top { position:relative; height:48px; display:flex; justify-content:center; align-items:start; }
+#xLettersV1Panel .x-letter-sheet-grip { width:38px; height:4px; margin-top:11px; border-radius:4px; background:#bccabc; }
+#xLettersV1Panel .x-letter-sheet-top button { position:absolute; right:-8px; top:2px; width:44px; height:44px; display:grid; place-items:center; }
+#xLettersV1Panel .x-letter-sheet h2 { margin:0 0 5px; font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:21px; font-weight:500; }
+#xLettersV1Panel .x-letter-sheet-sub { margin:0 0 16px; color:var(--muted); font-size:13px; }
+#xLettersV1Panel .x-letter-sheet.is-tools { top:0; bottom:0; left:auto; right:0; width:92%; max-width:390px; height:100%; max-height:none; margin:0; padding:calc(16px + env(safe-area-inset-top)) 20px calc(24px + env(safe-area-inset-bottom)); border-radius:0; scrollbar-width:thin; scrollbar-color:#9cab9c transparent; box-shadow:-12px 0 32px #1e2f2029; animation:x-letter-tools-enter .2s cubic-bezier(.16,1,.3,1); }
+#xLettersV1Panel .x-letter-tools-head { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:16px; }
+#xLettersV1Panel .x-letter-tools-head h2 { min-width:0; margin:0; font-size:19px; line-height:1.5; }
+#xLettersV1Panel .x-letter-tools-head > button { flex:none; }
+#xLettersV1Panel .x-letter-tools-book { width:156px; max-width:65%; margin:0 auto 24px; }
+#xLettersV1Panel .x-letter-tools-book .x-letter-cover { width:100%; aspect-ratio:1055/1491; padding:0; border:0; box-shadow:3px 4px 0 #e4e1d5,5px 6px 0 var(--book-cover-color,#c8d4c1),7px 10px 14px #34453624; }
+#xLettersV1Panel .x-letter-tools-book p { margin:16px 0 0; text-align:center; color:var(--muted); font-size:12px; }
+#xLettersV1Panel .x-letter-tools-book .x-letter-cover-date { position:absolute; z-index:2; left:50%; bottom:8%; width:max-content; max-width:90%; transform:translateX(-50%); padding:3px 5px; background:#fff9ed; color:#536257; font-size:10px; white-space:nowrap; }
+#xLettersV1Panel .x-letter-tools-book .x-letter-cover-date > span { position:static; padding:0; font:inherit; background:transparent; color:inherit; }
+#xLettersV1Panel [data-letter-tools-sidebar] > button { justify-content:flex-start; min-height:44px; }
+#xLettersV1Panel [data-letter-tools-sidebar] > .x-letter-switch-row { justify-content:space-between; margin-top:24px; }
+#xLettersV1Panel .x-letter-tools-notice { margin:12px 0 0; color:var(--muted); font-size:12px; line-height:1.6; overflow-wrap:anywhere; }
+@keyframes x-letter-tools-enter { from { transform:translateX(18px); opacity:.8; } to { transform:translateX(0); opacity:1; } }
+@media (prefers-reduced-motion:reduce) { #xLettersV1Panel .x-letter-sheet.is-tools { animation:none; } }
+#xLettersV1Panel .x-letter-sheet-label { margin:22px 0 10px; color:var(--muted); font-size:13px; }
+#xLettersV1Panel .x-letter-sheet section > button, #xLettersV1Panel .x-letter-quarter-list button, #xLettersV1Panel .x-letter-list button, #xLettersV1Panel .x-letter-draft-list button, #xLettersV1Panel .x-letter-legacy-list button { width:100%; display:flex; align-items:center; justify-content:space-between; gap:8px; padding:10px 12px; border:1px solid #d5ded3; border-radius:12px; background:#fffefa; text-align:left; }
+#xLettersV1Panel .x-letter-sheet section > button + button { margin-top:8px; }
+#xLettersV1Panel .x-letter-sheet button[aria-current="true"], #xLettersV1Panel .x-letter-list button[aria-current="page"], #xLettersV1Panel .x-letter-choice-row button[aria-pressed="true"] { border-color:var(--moss); background:#e8eee4; }
+#xLettersV1Panel .x-letter-cover { position:relative; min-height:112px; display:flex; flex-direction:column; justify-content:center; gap:4px; overflow:hidden; padding:16px 20px; border:1px solid #b7c6ad; border-radius:5px; background:var(--book-cover-color,#c8d4c1); font-family:"Noto Serif SC","Songti SC","SimSun",serif; }
+#xLettersV1Panel .x-letter-cover::after { content:""; position:absolute; width:108px; height:112px; right:5px; bottom:-14px; background:url("./botanical-sprig.svg") center/contain no-repeat; opacity:.72; }
+#xLettersV1Panel .x-letter-cover strong { font-size:23px; font-weight:500; }
+#xLettersV1Panel .x-letter-choice-row { display:flex; gap:8px; }
+#xLettersV1Panel .x-letter-choice-row button { min-width:0; flex:1; min-height:64px; display:grid; justify-items:center; align-content:center; gap:6px; padding:8px; border:1px solid #d1dbce; border-radius:12px; background:#fffefa; font-size:12px; }
+#xLettersV1Panel .x-letter-cover-mini, #xLettersV1Panel .x-letter-paper-mini { width:56px; height:76px; display:block; border:1px solid #d1d4c5; border-radius:2px; background:#fbf9f2 url("./botanical-sprig.svg") right bottom/40px auto no-repeat; box-shadow:0 2px 5px #25352616; }
+#xLettersV1Panel .x-letter-paper-mini[data-template="paper-default-1"] { background-image:none; }
+#xLettersV1Panel .x-letter-cover-mini[data-cover] { background-color:var(--book-cover-color,#c8d4c1); }
+#xLettersV1Panel .x-letter-paper-mini[data-template="paper-default-2"] { background:#f6f5ed url("./paper-moon-thumb.webp") center/contain no-repeat; }
+#xLettersV1Panel .x-letter-paper-mini[data-template="paper-default-3"] { background:#f8f4ed url("./paper-rose-thumb.webp") center/contain no-repeat; }
+#xLettersV1Panel .x-letter-quarter-list { display:grid; gap:8px; }
+#xLettersV1Panel .x-letter-quarter-list small { color:var(--muted); }
+#xLettersV1Panel .x-letter-list, #xLettersV1Panel .x-letter-draft-list, #xLettersV1Panel .x-letter-legacy-list { display:grid; gap:6px; max-height:240px; overflow-y:auto; padding:0; margin:12px 0; list-style:none; }
+#xLettersV1Panel .x-letter-list button, #xLettersV1Panel .x-letter-draft-list button, #xLettersV1Panel .x-letter-legacy-list button { min-height:44px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+#xLettersV1Panel .x-letter-cost-hint, #xLettersV1Panel .x-letter-hidden-relation { color:var(--muted); font-size:12px; }
+#xLettersV1Panel .x-letter-legacy-warning { padding:10px 12px; border:1px solid #d8c5a2; border-radius:10px; color:var(--ink); background:#f7eddc; font-size:12px; line-height:1.6; }
+#xLettersV1Panel .x-letter-sheet .x-letter-field { margin:12px 0; }
+#xLettersV1Panel .x-letter-sheet.is-books { inset:0; width:100%; max-width:none; height:100%; max-height:none; display:flex; flex-direction:column; overflow:hidden; padding:0; margin:0; border-radius:0; box-shadow:none; }
+#xLettersV1Panel .x-letter-books-head { flex:none; display:grid; grid-template-columns:44px minmax(0,1fr) auto; gap:8px; align-items:center; min-height:64px; padding:env(safe-area-inset-top) 16px 0; }
+#xLettersV1Panel .x-letter-books-head h2 { margin:0; font-size:21px; }
+#xLettersV1Panel .x-letter-books-head button { width:44px; height:44px; display:grid; place-items:center; border-radius:12px; }
+#xLettersV1Panel .x-letter-books-views { display:flex; gap:8px; }
+#xLettersV1Panel .x-letter-books-views button[aria-pressed="true"] { color:var(--moss); background:#e8eee4; }
+#xLettersV1Panel .x-letter-books-content { flex:1; min-height:0; display:flex; flex-direction:column; }
+#xLettersV1Panel .x-letter-books-body { flex:1; min-height:0; width:100%; overflow-y:auto; overflow-x:hidden; overscroll-behavior:contain; padding:16px 16px calc(24px + env(safe-area-inset-bottom)); scrollbar-width:none; }
+#xLettersV1Panel .x-letter-books-body::-webkit-scrollbar { display:none; }
+#xLettersV1Panel .x-letter-books-body.is-single { display:flex; flex-direction:column; align-items:center; }
+#xLettersV1Panel .x-letter-book-switch { display:grid; grid-template-columns:44px minmax(0,1fr) 44px; gap:4px; align-items:center; flex:1 0 auto; width:100%; max-width:500px; margin:auto; }
+#xLettersV1Panel .x-letter-book-switch > button { width:44px; height:44px; display:grid; place-items:center; border-radius:12px; }
+#xLettersV1Panel .x-letter-book-single { min-width:0; touch-action:pan-y pinch-zoom; }
+#xLettersV1Panel .x-letter-book-card { min-width:0; padding:4px; text-align:center; }
+#xLettersV1Panel .x-letter-book-object { position:relative; }
+#xLettersV1Panel .x-letter-book-single .x-letter-book-card { width:100%; max-width:220px; margin:auto; }
+#xLettersV1Panel .x-letter-books-body .x-letter-cover { --x-letter-spine-width:9%; width:100%; min-height:0; aspect-ratio:2 / 3; align-items:center; padding:24px 18px 24px calc(18px + var(--x-letter-spine-width)); border-radius:5px 9px 9px 5px; color:var(--cover-ink); box-shadow:inset 5px 0 0 #61785b26,inset -3px -3px 0 #f1efe0,0 8px 14px #263c2520; }
+#xLettersV1Panel .x-letter-books-body .x-letter-cover::before { content:""; position:absolute; top:0; bottom:0; left:0; width:var(--x-letter-spine-width); background:linear-gradient(90deg,#556d5940 0%,#556d5922 70%,#556d5948 100%); box-shadow:1px 0 3px #34453624; pointer-events:none; }
+#xLettersV1Panel .x-letter-books-body .x-letter-cover strong { position:relative; z-index:1; font-size:24px; }
+#xLettersV1Panel .x-letter-books-body .x-letter-cover > span { position:relative; z-index:1; font-size:18px; }
+#xLettersV1Panel .x-letter-books-body .x-letter-cover::after { width:74%; height:62%; right:0; bottom:6%; }
+#xLettersV1Panel .x-letter-book-more { position:absolute; top:6px; right:6px; width:44px; height:44px; display:grid; place-items:center; border-radius:12px; color:#344b38; background:#f8f9f2dd; }
+#xLettersV1Panel .x-letter-book-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px 16px; max-width:1040px; margin:auto; }
+#xLettersV1Panel .x-letter-book-grid .x-letter-cover { width:100%; max-width:140px; margin-inline:auto; padding:18px 12px 18px calc(12px + var(--x-letter-spine-width)); }
+#xLettersV1Panel .x-letter-book-grid .x-letter-book-object { width:100%; max-width:140px; margin-inline:auto; }
+#xLettersV1Panel .x-letter-book-grid .x-letter-cover strong { font-size:20px; }
+#xLettersV1Panel .x-letter-book-grid .x-letter-cover > span { font-size:15px; }
+/* Keep the paper edge free of a persistent selection frame.
+   The shared :focus-visible rule remains available for keyboard navigation. */
+#xLettersV1Panel .x-letter-book-card.is-locked .x-letter-cover { border-style:dashed; border-color:#929f8c; opacity:.75; }
+#xLettersV1Panel .x-letter-book-meta { margin:16px 0 8px; color:var(--muted); font-size:12px; line-height:1.6; overflow-wrap:anywhere; }
+#xLettersV1Panel [data-book-cover-settings] { width:100%; max-width:500px; margin:0 auto; }
+#xLettersV1Panel .x-letter-books-load { flex:none; display:block; min-height:44px; margin:20px auto 0; padding:0 16px; color:var(--moss); font-size:13px; }
+#xLettersV1Panel .x-letter-books-status { flex:none; margin:0 0 12px; color:var(--muted); font-size:12px; line-height:1.6; text-align:center; }
+@media (min-width:700px) {
+  #xLettersV1Panel .x-letter-book-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:32px 24px; }
+  #xLettersV1Panel .x-letter-books-head { padding-right:24px; padding-left:24px; }
+  #xLettersV1Panel .x-letter-books-body { padding-right:24px; padding-left:24px; }
+  #xLettersV1Panel .x-letter-book-single .x-letter-book-card { max-width:260px; }
+  #xLettersV1Panel .x-letter-book-grid .x-letter-cover { max-width:160px; }
+  #xLettersV1Panel .x-letter-book-grid .x-letter-book-object { max-width:160px; }
+}
+@media (min-width:1024px) {
+  #xLettersV1Panel .x-letter-book-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+  #xLettersV1Panel .x-letter-book-grid .x-letter-cover { max-width:180px; }
+  #xLettersV1Panel .x-letter-book-grid .x-letter-book-object { max-width:180px; }
+}
+@media (min-width:700px) and (max-width:1023px) {
+  #xLettersV1Panel .x-letter-shell, #xLettersV1Panel .x-letter-sheet { max-width:620px; }
+}
+@media (max-width:359px) {
+  #xLettersV1Panel .x-letter-shell { padding-right:12px; padding-left:12px; }
+  #xLettersV1Panel .x-letter-paper { padding-right:18px; padding-left:18px; }
+  #xLettersV1Panel .x-letter-tool { font-size:11px; }
+}
+@media (max-width:390px) {
+  #xLettersV1Panel .x-letter-send-surface { padding-right:12px; padding-left:12px; }
+  #xLettersV1Panel .x-letter-send-actions { column-gap:8px; }
+  #xLettersV1Panel .x-letter-send-actions button { padding-right:6px; padding-left:6px; }
+}
+@media (max-height:540px) {
+  #xLettersV1Panel .x-letter-send-head { min-height:44px; }
+  #xLettersV1Panel .x-letter-envelope-space { min-height:96px; padding:28px 0 4px; }
+  #xLettersV1Panel .x-letter-send-gesture-hint { top:2px; gap:4px; font-size:11px; }
+  #xLettersV1Panel .x-letter-send-gesture-hint svg { width:18px; height:18px; }
+  #xLettersV1Panel .x-letter-send-waiting[data-send-waiting] { top:44px; gap:20px; padding-top:16px; padding-bottom:calc(16px + env(safe-area-inset-bottom)); }
+  #xLettersV1Panel .x-letter-envelope { min-height:88px; }
+  #xLettersV1Panel .x-letter-envelope-hint { margin-bottom:4px; }
+  #xLettersV1Panel .x-letter-send-details { padding-bottom:0; }
+  #xLettersV1Panel .x-letter-send-actions { padding-top:2px; }
+}
+/* 信笺不再跟随手机系统的深色模式：深色下信纸发灰发暗、带底图的信纸上深色字会看不清。
+   信纸是独立主题，所有设备统一用浅色纸面，和电脑端一致。 */
+@media (prefers-reduced-motion:reduce) {
+  #xLettersV1Panel .x-letter-turn-shade { display:none; }
+  #xLettersV1Panel .is-turning-away.is-user-turn .x-letter-turn-shade { display:block; }
+  #xLettersV1Panel *, #xLettersV1Panel *::before, #xLettersV1Panel *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; transition-duration:.01ms !important; }
+  #xLettersV1Panel :is(.x-letter-meet-square,.x-letter-meet-circle,.x-letter-meet-core) { animation:none !important; }
+  #xLettersV1Panel .x-letter-meet-square { transform:translateX(-18px) rotate(45deg); }
+  #xLettersV1Panel .x-letter-meet-circle { transform:translateX(18px); }
+}
+
+/* 手机窄屏：纯色信纸不需要给底图留那么宽的边，正文区域放宽，日期和状态尽量排在一行 */
+@media (max-width:699px) {
+  #xLettersV1Panel .x-letter-paper-head small { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+}
+/* 整张信纸都可以横向滑动翻篇，竖向仍然是正文滚动 */
+#xLettersV1Panel .x-letter-paper[data-reading="true"] { touch-action:pan-y pinch-zoom; }
+#xLettersV1Panel :is(.x-letter-reader,.x-letter-head) { touch-action:pan-y pinch-zoom; }
+
+/* 更多操作里的“主动来信”开关 */
+#xLettersV1Panel .x-letter-switch-row .x-letter-switch-text { display:flex; flex-direction:column; gap:3px; min-width:0; }
+#xLettersV1Panel .x-letter-switch-row .x-letter-switch-text b { font-weight:600; }
+#xLettersV1Panel .x-letter-switch-row .x-letter-switch-text small { color:var(--muted); font-size:12px; line-height:1.45; }
+#xLettersV1Panel .x-letter-switch { flex:none; position:relative; width:42px; height:24px; border-radius:999px; background:#cfd6cc; transition:background .2s; }
+#xLettersV1Panel .x-letter-switch::after { content:""; position:absolute; top:3px; left:3px; width:18px; height:18px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(40,29,21,.25); transition:transform .2s; }
+#xLettersV1Panel .x-letter-switch-row[aria-checked="true"] .x-letter-switch { background:var(--moss); }
+#xLettersV1Panel .x-letter-switch-row[aria-checked="true"] .x-letter-switch::after { transform:translateX(18px); }
+#xLettersV1Panel .x-letter-sheet section > button.x-letter-danger { border-color:#d9a7a0; color:#a23a2e; background:#fdf3f1; }
+
+/* ===== 图片款样式：蓝色来信信纸 / LETTER BOOK 封面 / 蓝色邮戳 ===== */
+/* The blue collage keeps its artwork and shares the expanded writing area. */
+#xLettersV1Panel .x-letter-paper[data-template="paper-default-4"] { background:#e2dedb; border-color:#d6d0ca; --ink:#38271a; --muted:#75553b; --moss:#a96731; }
+#xLettersV1Panel .x-letter-paper[data-template="paper-default-4"] .x-letter-paper-art { object-fit:fill; }
+/* Keep the date in the quiet top edge of the collage without adding a white panel. */
+#xLettersV1Panel .x-letter-paper[data-template="paper-default-4"] .x-letter-paper-head { transform:translateY(-100%); grid-template-columns:minmax(0,max-content) auto; justify-content:start; align-items:center; gap:4px; }
+#xLettersV1Panel .x-letter-paper[data-template="paper-default-4"] .x-letter-paper-head > :is(small,.x-letter-document-status) { background:transparent; padding-inline:2px; }
+#xLettersV1Panel .x-letter-paper[data-template="paper-default-4"] .x-letter-document-status { min-height:24px; }
+#xLettersV1Panel .x-letter-paper[data-template="paper-default-4"] .x-letter-paper-scroll { padding-block:4px; background:transparent; -webkit-mask-image:linear-gradient(to bottom,transparent,#281d15 4px,#281d15 calc(100% - 4px),transparent); mask-image:linear-gradient(to bottom,transparent,#281d15 4px,#281d15 calc(100% - 4px),transparent); }
+#xLettersV1Panel .x-letter-paper[data-template="paper-default-4"] .x-letter-block-text { margin-bottom:8px; }
+#xLettersV1Panel .x-letter-paper[data-template="paper-default-4"] .x-letter-paper-footer:empty { display:none; }
+#xLettersV1Panel .x-letter-paper[data-template="paper-default-4"] .x-letter-paper-footer .x-letter-sent-seal { width:32px; height:32px; }
+#xLettersV1Panel .x-letter-paper-mini[data-template="paper-default-4"] { background:#e2dedb url("./stationery/paper-letter-blue-v2-thumb.webp") center/100% 100% no-repeat; }
+#xLettersV1Panel .x-letter-paper[data-template="paper-cream"] .x-letter-paper-art { object-fit:cover; }
+#xLettersV1Panel .x-letter-paper-mini[data-template="paper-cream"] { background-size:cover; }
+/* The saved LETTER BOOK slot now uses the supplied navy collage from the catalog. */
+#xLettersV1Panel [data-cover="cover-default-3"] { --book-cover-color:#263e50; }
+/* 邮章：透明底图片，不要圆框和“已寄出”文字。 */
+#xLettersV1Panel .x-letter-send-seal-image .x-letter-seal-picture { inset:-4px; width:calc(100% + 8px); height:calc(100% + 8px); }
+#xLettersV1Panel .x-letter-sent-seal[data-seal-style="good-letters"] { border:0; border-radius:0; color:transparent; font-size:0; background:url("./seal-good-letters.webp") center/contain no-repeat; }
+#xLettersV1Panel .x-letter-paper-footer .x-letter-sent-seal[data-seal-style="good-letters"] { background-size:contain; width:clamp(40px,13cqh,76px); height:clamp(40px,13cqh,76px); }
+
+/* ===== 蓝色来信信封（图片款）+ 信封上的图片邮章 + 书册右上角的小画板 ===== */
+#xLettersV1Panel .x-letter-envelope[data-envelope-color="letter-blue"] { aspect-ratio:1200 / 668; overflow:visible; border-radius:0; box-shadow:none; background:url("./envelope-letter-blue.webp") center/contain no-repeat; filter:drop-shadow(0 8px 16px #4d331d33); color:#38271a; }
+#xLettersV1Panel .x-letter-envelope[data-envelope-color="letter-blue"] .x-letter-envelope-base { display:none; }
+#xLettersV1Panel .x-letter-envelope[data-envelope-color="letter-blue"] .x-letter-envelope-address { left:42%; right:34%; top:74%; }
+#xLettersV1Panel .x-letter-envelope[data-envelope-color="letter-blue"] .x-letter-envelope-address p { font-size:clamp(11px,3vw,14px); margin-bottom:2px; }
+#xLettersV1Panel .x-letter-envelope[data-envelope-color="letter-blue"] .x-letter-envelope-address small { font-size:10px; }
+#xLettersV1Panel .x-letter-envelope[data-envelope-color="letter-blue"] .x-letter-envelope-stamps { top:58.4%; }
+#xLettersV1Panel .x-letter-envelope-seal[data-seal-style="good-letters"] { transform:scale(1.9); }
+
+/* Supplied stationery additions: the binding, body scroller and send lifecycle are unchanged. */
+#xLettersV1Panel .x-letter-paper-mini[data-stationery-paper] {
+  background-color:#f7f5ed;
+  background-image:var(--stationery-image);
+  background-size:var(--stationery-size);
+  background-position:var(--stationery-position);
+  background-repeat:no-repeat;
+}
+#xLettersV1Panel .x-letter-paper-mini[data-template="paper-default-4"][data-stationery-paper] { background-size:100% 100%; }
+#xLettersV1Panel .x-letter-paper-mini[data-template="paper-cream"][data-stationery-paper] { background-size:cover; background-position:center; }
+#xLettersV1Panel :is(.x-letter-cover,.x-letter-cover-mini)[data-stationery-cover] { position:relative; background:var(--book-cover-color); }
+#xLettersV1Panel .x-letter-cover[data-stationery-cover] { justify-content:flex-end; }
+#xLettersV1Panel .x-letter-cover[data-stationery-cover]::after,
+#xLettersV1Panel .x-letter-cover[data-stationery-cover] strong { display:none; }
+#xLettersV1Panel .x-letter-cover[data-stationery-cover] > span { align-self:center; margin-top:auto; padding:2px 8px; color:#34463d; background:#fffefaeb; font-size:12px; }
+#xLettersV1Panel .x-letter-books-body .x-letter-cover[data-stationery-cover]::before { background:linear-gradient(90deg,#281d1514,transparent 70%,#281d1508); }
+#xLettersV1Panel .x-letter-cover-art { position:absolute; inset:0; display:block; container-type:size; pointer-events:none; }
+#xLettersV1Panel .x-letter-resource-crop { container-type:size; }
+#xLettersV1Panel .x-letter-send-seal-image > .x-letter-resource-crop { position:absolute; display:block; }
+#xLettersV1Panel .x-letter-resource-viewport { position:absolute; left:50%; top:50%; width:min(100cqw,calc(100cqh * var(--resource-ratio))); aspect-ratio:var(--resource-ratio); display:block; overflow:hidden; transform:translate(-50%,-50%); pointer-events:none; }
+#xLettersV1Panel .x-letter-resource-viewport > img { position:absolute; max-width:none; object-fit:fill; pointer-events:none; }
+#xLettersV1Panel .x-letter-sent-seal[data-stationery-seal] { border:0; border-radius:0; color:transparent; font-size:0; background:none; }
+#xLettersV1Panel .x-letter-sent-seal[data-stationery-seal] > .x-letter-seal-picture { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+#xLettersV1Panel .x-letter-paper-footer .x-letter-sent-seal[data-stationery-seal] { width:clamp(40px,13cqh,76px); height:clamp(40px,13cqh,76px); }
+#xLettersV1Panel .x-letter-envelope-space:has(> [data-stationery-envelope]) { container-type:size; }
+#xLettersV1Panel .x-letter-envelope[data-stationery-envelope] { width:min(100%,440px,calc((100cqh - 40px) * var(--envelope-ratio))); aspect-ratio:var(--envelope-ratio); min-height:0; overflow:hidden; border-radius:0; box-shadow:none; }
+#xLettersV1Panel .x-letter-envelope[data-stationery-envelope] .x-letter-envelope-base { display:block; background:#f7f5ed var(--stationery-image) var(--stationery-position)/var(--stationery-size) no-repeat; }
+#xLettersV1Panel .x-letter-envelope[data-stationery-envelope] .x-letter-envelope-base::before,
+#xLettersV1Panel .x-letter-envelope[data-stationery-envelope] .x-letter-envelope-base::after { display:none; }
+#xLettersV1Panel .x-letter-envelope[data-stationery-envelope] .x-letter-envelope-address { left:var(--address-left); right:var(--address-right); top:var(--address-top); color:#34463d; }
+#xLettersV1Panel .x-letter-envelope[data-stationery-envelope] .x-letter-envelope-address p { margin:0 0 2px; font-size:clamp(11px,2.8vw,14px); }
+#xLettersV1Panel .x-letter-envelope[data-stationery-envelope] .x-letter-envelope-address small { font-size:10px; }
+#xLettersV1Panel .x-letter-envelope[data-stationery-envelope] .x-letter-envelope-stamps { left:var(--stamp-left); top:var(--stamp-top); }
+#xLettersV1Panel .x-letter-cover-popup-row > button { flex:none; max-width:112px; }
+#xLettersV1Panel .x-letter-choice-row { overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x proximity; scrollbar-width:none; padding-bottom:4px; }
+#xLettersV1Panel .x-letter-choice-row::-webkit-scrollbar { display:none; }
+#xLettersV1Panel .x-letter-choice-row > button { flex:0 0 88px; min-width:80px; max-width:112px; scroll-snap-align:start; }
+#xLettersV1Panel .x-letter-choice-row > button > span:last-child,
+#xLettersV1Panel .x-letter-cover-popup-row > button > span:last-child { white-space:normal; overflow-wrap:anywhere; line-height:1.5; }
+#xLettersV1Panel .x-letter-book-more { top:-9px; right:-9px; width:30px; height:30px; border-radius:50%; background:#fffefa; border:1px solid #cfd6cc; box-shadow:0 2px 6px #34453626; z-index:2; }
+#xLettersV1Panel .x-letter-book-more svg { width:16px; height:16px; }
+
+/* 右上角“寄出”改成和“保存”一样的轻量样式 */
+#xLettersV1Panel .x-letter-send-top:not(.is-retry) { min-width:48px; padding:0 7px; border:1px solid #cbd6c7; border-radius:10px; color:var(--moss); background:transparent; font-size:13px; }
+
+/* Locked art stays browsable; the veil and label do not change picker geometry. */
+#xLettersV1Panel [data-letter-picker] > button[data-stationery-locked="true"] { opacity:1; cursor:not-allowed; }
+#xLettersV1Panel [data-letter-picker] > button[data-stationery-locked="true"] > :is(.x-letter-cover-mini,.x-letter-paper-mini,.x-letter-send-seal-image) { filter:grayscale(.85); opacity:.45; }
+#xLettersV1Panel [data-letter-picker] > button > .x-letter-unlock-label:last-child { position:absolute; left:0; right:0; bottom:8px; z-index:2; padding:3px 0; color:#46564c; background:#f4f5eef2; text-align:center; font:clamp(8px,2.5cqw,11px)/1.3 "Noto Serif SC","Songti SC","SimSun",serif; white-space:nowrap; overflow-wrap:normal; pointer-events:none; }
+#xLettersV1Panel .x-letter-seal-choice .x-letter-unlock-label { bottom:2px; font-size:10px; }
+#xLettersV1Panel .x-letter-claim-book { min-height:40px; margin:0 auto 8px; padding:0 16px; border:1px solid #cbd6c7; border-radius:10px; background:transparent; color:var(--moss); font-size:13px; }
+#xLettersV1Panel .x-letter-envelope[data-stationery-locked="true"] .x-letter-envelope-base { filter:grayscale(.85); opacity:.45; }
+#xLettersV1Panel .x-letter-envelope-unlock-label { position:absolute; inset:0; z-index:5; display:grid; place-content:center; background:#eef0e6a6; color:#46564c; font-size:16px; pointer-events:none; }
+#xLettersV1Panel .x-letter-envelope-unlock-label[hidden] { display:none; }
+
+/* 进入信笺时的加载动画 */
+#xLettersV1Panel .x-letter-opening { height:100%; min-height:160px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; color:var(--muted); font-size:13px; }
+#xLettersV1Panel .x-letter-opening p { margin:0; }
+#xLettersV1Panel .x-letter-opening-dots { display:flex; gap:7px; }
+#xLettersV1Panel .x-letter-opening-dots i { width:7px; height:7px; border-radius:50%; background:var(--moss); opacity:.25; animation:xLetterOpening 1.1s ease-in-out infinite; }
+#xLettersV1Panel .x-letter-opening-dots i:nth-child(2) { animation-delay:.18s; }
+#xLettersV1Panel .x-letter-opening-dots i:nth-child(3) { animation-delay:.36s; }
+@keyframes xLetterOpening { 0%,100% { opacity:.25; transform:translateY(0); } 40% { opacity:1; transform:translateY(-4px); } }
+
+/* ===== 信笺集：更轻的换书皮按钮、合并后的展示切换按钮、从底部弹出的选书皮小窗 ===== */
+#xLettersV1Panel .x-letter-book-more { top:4px; right:4px; width:28px; height:28px; border:0; border-radius:50%; background:transparent; box-shadow:none; color:#ffffffd9; opacity:.86; filter:drop-shadow(0 1px 2px #281d155c); }
+#xLettersV1Panel .x-letter-book-more svg { width:17px; height:17px; stroke-width:1.5; }
+#xLettersV1Panel .x-letter-books-views button { color:var(--moss); background:transparent; }
+#xLettersV1Panel .x-letter-cover-popup { position:absolute; z-index:3; left:0; right:0; bottom:0; padding:12px 16px calc(14px + env(safe-area-inset-bottom)); border-radius:18px 18px 0 0; background:#fffefaf5; box-shadow:0 -8px 28px #34453626; -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); animation:xLetterCoverPopup .22s ease-out; }
+#xLettersV1Panel .x-letter-cover-popup[hidden] { display:none; }
+#xLettersV1Panel .x-letter-cover-popup-head { display:flex; align-items:center; gap:8px; margin-bottom:10px; font-size:14px; }
+#xLettersV1Panel .x-letter-cover-popup-head span { flex:1; color:var(--muted); font-size:12px; }
+#xLettersV1Panel .x-letter-cover-popup-head button { width:32px; height:32px; display:grid; place-items:center; border-radius:50%; }
+#xLettersV1Panel .x-letter-cover-popup-row { display:flex; gap:10px; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x proximity; padding-bottom:4px; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+#xLettersV1Panel .x-letter-cover-popup-row::-webkit-scrollbar { display:none; }
+#xLettersV1Panel .x-letter-cover-popup-row button { flex:none; width:88px; display:flex; flex-direction:column; align-items:center; gap:6px; padding:8px 6px; border:1px solid #d5ded3; border-radius:12px; background:#fffefa; font-size:12px; scroll-snap-align:start; }
+#xLettersV1Panel .x-letter-cover-popup-row button[aria-pressed="true"] { border-color:var(--moss); background:#e8eee4; }
+#xLettersV1Panel .x-letter-cover-popup-row .x-letter-cover-mini { width:64px; height:88px; }
+#xLettersV1Panel .x-letter-sheet.is-books:has(.x-letter-cover-popup:not([hidden])) .x-letter-books-body { padding-bottom:calc(190px + env(safe-area-inset-bottom)); }
+@keyframes xLetterCoverPopup { from { transform:translateY(100%); } to { transform:none; } }
+
+/* ===== 寄信仪式：先预选邮章（半透明）→ 点信封盖章（动效）→ 把信划出去 ===== */
+/* 提示移到信封正上方，箭头在文字上面。 */
+#xLettersV1Panel .x-letter-envelope-space { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding-top:12px; }
+#xLettersV1Panel .x-letter-envelope-space > .x-letter-envelope { flex:0 1 auto; }
+#xLettersV1Panel .x-letter-send-gesture-hint { position:static; flex:none; flex-direction:column; gap:2px; }
+#xLettersV1Panel .x-letter-send-surface[data-seal-stamped="false"] .x-letter-send-gesture-hint :is(svg,.is-after-stamp),
+#xLettersV1Panel .x-letter-send-surface[data-seal-stamped="true"] .x-letter-send-gesture-hint .is-before-stamp { display:none; }
+/* 没盖章时信封上的章是淡淡的预览；上面有一个可以点的盖章位。 */
+#xLettersV1Panel .x-letter-envelope-stamps { pointer-events:none; }
+#xLettersV1Panel .x-letter-send-surface[data-seal-stamped="false"] .x-letter-envelope-seal { opacity:.34; filter:saturate(.7); }
+#xLettersV1Panel .x-letter-stamp-target { position:absolute; left:50%; top:50%; width:76px; height:76px; margin:-38px 0 0 -38px; border:1.5px dashed currentColor; border-radius:50%; background:transparent; color:var(--moss); pointer-events:auto; animation:xLetterStampPulse 1.5s ease-in-out infinite; }
+#xLettersV1Panel .x-letter-stamp-target[hidden] { display:none; }
+#xLettersV1Panel .x-letter-stamp-target span { position:absolute; left:50%; top:calc(100% + 4px); transform:translateX(-50%); padding:1px 8px; border-radius:999px; background:#fffefae6; color:#3d5240; font-size:11px; white-space:nowrap; }
+#xLettersV1Panel .x-letter-envelope-seal.is-stamping { animation:xLetterStampDown .42s cubic-bezier(.2,.9,.3,1.2) both; }
+#xLettersV1Panel .x-letter-envelope-seal[data-seal-style="good-letters"].is-stamping { animation-name:xLetterStampDownLarge; }
+#xLettersV1Panel .x-letter-envelope-base.is-stamping { animation:xLetterPaperImpact .28s ease-out .16s; }
+/* Individual translate preserves the coast artwork's existing rotation and
+   never competes with the outer envelope's drag/send transform. */
+@keyframes xLetterPaperImpact {
+  0%,100% { translate:0 0; }
+  22% { translate:0 1.5px; }
+  46% { translate:-.8px -.7px; }
+  70% { translate:.6px .4px; }
+}
+/* 盖章之后下面的邮章不能再换。 */
+#xLettersV1Panel .x-letter-send-surface[data-seal-stamped="true"] .x-letter-seal-carousel { pointer-events:none; overflow:hidden; opacity:.45; }
+@keyframes xLetterStampPulse { 0%,100% { transform:scale(1); opacity:.55; } 50% { transform:scale(1.08); opacity:1; } }
+@keyframes xLetterStampDown { 0% { transform:scale(2.3) rotate(-14deg); opacity:0; } 55% { transform:scale(.9) rotate(-5deg); opacity:1; } 75% { transform:scale(1.05) rotate(-7deg); } 100% { transform:scale(1) rotate(-6deg); opacity:1; } }
+@keyframes xLetterStampDownLarge { 0% { transform:scale(3.6) rotate(-14deg); opacity:0; } 55% { transform:scale(1.75) rotate(-5deg); opacity:1; } 75% { transform:scale(1.98) rotate(-7deg); } 100% { transform:scale(1.9) rotate(-6deg); opacity:1; } }
+@media (prefers-reduced-motion: reduce) { #xLettersV1Panel .x-letter-stamp-target, #xLettersV1Panel .x-letter-envelope-seal.is-stamping, #xLettersV1Panel .x-letter-envelope-base.is-stamping { animation:none; } }
+
+/* 进入信笺时：当前季度的书皮先落下来，再显示加载中的小点。 */
+#xLettersV1Panel .x-letter-opening { gap:14px; }
+#xLettersV1Panel .x-letter-opening-book { position:relative; flex:none; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; width:min(48%,180px); min-height:0; aspect-ratio:2 / 3; padding:16px 12px 16px 22px; box-sizing:border-box; overflow:hidden; border-radius:5px 9px 9px 5px; box-shadow:0 10px 26px #34453633; animation:xLetterOpeningBook .5s cubic-bezier(.2,.8,.3,1.15) both; }
+#xLettersV1Panel .x-letter-opening-book::before { content:""; position:absolute; top:0; bottom:0; left:0; width:9%; background:linear-gradient(90deg,#281d1524,#281d150d 70%,#281d1526); pointer-events:none; }
+#xLettersV1Panel .x-letter-opening-book strong { font-size:18px; }
+#xLettersV1Panel .x-letter-opening-book[data-cover="cover-default-3"] strong { display:none; }
+@keyframes xLetterOpeningBook { 0% { transform:translateY(-46px) rotate(-3deg); opacity:0; } 70% { transform:translateY(4px) rotate(.6deg); opacity:1; } 100% { transform:none; opacity:1; } }
+@media (prefers-reduced-motion: reduce) { #xLettersV1Panel .x-letter-opening-book { animation:none; } }
+
+/* 进入信笺的加载：书皮下面用和寄信时一样的“方块遇见圆”动画。 */
+#xLettersV1Panel .x-letter-opening { gap:6px; }
+#xLettersV1Panel .x-letter-opening .x-letter-meet-loader { margin:-18px 0 -22px; }
+#xLettersV1Panel .x-letter-opening :is(.x-letter-meet-square,.x-letter-meet-circle,.x-letter-meet-core) { animation-play-state:running; }
+
+/* 加载只展示完整封面和下方文案，不在空白信纸里叠一层封面。 */
+#xLettersV1Panel .x-letter-opening-frame { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; padding:16px; }
+#xLettersV1Panel .x-letter-opening-frame > .x-letter-opening-cover { position:relative; flex:none; width:min(100%,calc((100cqh - 76px) * 2 / 3),420px); aspect-ratio:2 / 3; min-height:0; align-items:center; justify-content:center; gap:8px; padding:0; border:0; border-radius:5px 12px 12px 5px; background-size:100% 100%; box-shadow:0 12px 26px #34453626; animation:xLetterOpeningCover .45s ease-out both; }
+#xLettersV1Panel .x-letter-opening-cover::before { display:none; }
+#xLettersV1Panel .x-letter-opening-cover > span { font-size:15px; }
+#xLettersV1Panel .x-letter-opening-cover strong { font-size:26px; }
+#xLettersV1Panel .x-letter-opening-cover[data-cover="cover-default-3"] { justify-content:flex-end; }
+#xLettersV1Panel .x-letter-opening-cover[data-cover="cover-default-3"] > span { margin:0; }
+#xLettersV1Panel .x-letter-opening-status { flex:none; display:flex; align-items:center; gap:10px; color:#3d5240; font-size:14px; line-height:24px; white-space:nowrap; }
+#xLettersV1Panel .x-letter-opening-status p { margin:0; }
+#xLettersV1Panel .x-letter-opening-status .x-letter-opening-dots i { width:5px; height:5px; }
+@keyframes xLetterOpeningCover { from { opacity:0; transform:translateY(-14px); } to { opacity:1; transform:none; } }
+@media (prefers-reduced-motion: reduce) { #xLettersV1Panel .x-letter-opening-cover { animation:none; } }
+
+/* Artwork-only choices: the image is the surface, not a white named card. */
+#xLettersV1Panel .x-letter-choice-row[data-letter-picker] > button,
+#xLettersV1Panel .x-letter-cover-popup-row[data-letter-picker] > button {
+  position:relative; flex:0 0 100px; width:100px; min-width:100px; max-width:100px;
+  min-height:138px; padding:8px 6px 14px; border:0; border-radius:0; background:transparent;
+}
+#xLettersV1Panel .x-letter-choice-row[data-letter-picker] > button[aria-pressed="true"],
+#xLettersV1Panel .x-letter-cover-popup-row[data-letter-picker] > button[aria-pressed="true"] { background:transparent; }
+#xLettersV1Panel [data-letter-picker]:not([data-letter-picker="seal"]) > button::after {
+  content:""; position:absolute; bottom:3px; left:36px; right:36px; height:1px; background:transparent;
+}
+#xLettersV1Panel [data-letter-picker]:not([data-letter-picker="seal"]) > button[aria-pressed="true"]::after { background:var(--moss); }
+#xLettersV1Panel [data-letter-picker] :is(.x-letter-paper-mini,.x-letter-cover-mini) { width:80px; height:114px; border:0; border-radius:1px; }
+#xLettersV1Panel .x-letter-seal-choice .x-letter-send-seal-image { width:64px; height:72px; font-size:11px; }
+#xLettersV1Panel .x-letter-envelope-stamps,
+#xLettersV1Panel .x-letter-envelope-seal { width:60px; height:60px; font-size:11px; }
+#xLettersV1Panel .x-letter-envelope[data-stationery-envelope] .x-letter-stamp-target span { top:auto; bottom:calc(100% + 4px); }
+#xLettersV1Panel .x-letter-send-seal-image .x-letter-seal-botanical { inset:18%; width:64%; height:64%; }
+/* The source collage has this envelope turned on its side. Rotate only its art;
+   recipient text and the interactive stamp stay upright and independent. */
+#xLettersV1Panel .x-letter-envelope[data-envelope-color="blue-coast"] .x-letter-envelope-base {
+  inset:auto; left:50%; top:50%; width:calc(100% / var(--envelope-ratio)); height:calc(100% * var(--envelope-ratio));
+  transform:translate(-50%,-50%) rotate(-90deg);
+}
+/* The pear original is wider than the common page. Fill without stretching;
+   text and postage may overlap its decorative fruit and flowers. */
+#xLettersV1Panel .x-letter-paper[data-template="paper-pear"] .x-letter-paper-art { object-fit:cover; }
+#xLettersV1Panel .x-letter-paper[data-template="paper-pear"] .x-letter-paper-footer .x-letter-sent-seal { width:44px; height:44px; }
+
+/* Monthly book shelf: date ink belongs to each cover; the transparent picker
+   keeps a reserved strip below the scroll area. */
+#xLettersV1Panel .x-letter-books-head { min-height:clamp(64px,7.2cqh,86px); }
+#xLettersV1Panel .x-letter-books-head h2 { font-size:clamp(21px,4.4cqw,34px); }
+#xLettersV1Panel .x-letter-books-head svg { width:clamp(21px,3.2cqw,25px); height:clamp(21px,3.2cqw,25px); }
+#xLettersV1Panel .x-letter-books-content:has([data-book-cover-settings]) { min-height:0; overflow:hidden; }
+#xLettersV1Panel .x-letter-books-content:has([data-book-cover-settings]) .x-letter-books-body { flex:1 1 0; min-height:0; padding:0 0 4px; }
+#xLettersV1Panel .x-letter-books-body.is-single:has([data-book-single]) { justify-content:flex-start; }
+#xLettersV1Panel .x-letter-books-body.is-single .x-letter-book-switch { flex:1 0 auto; min-height:0; max-width:none; margin:0; padding-inline:4cqw; }
+#xLettersV1Panel .x-letter-books-body.is-single .x-letter-book-single { display:grid; place-items:center; height:auto; min-height:0; }
+#xLettersV1Panel .x-letter-books-body.is-single .x-letter-book-single .x-letter-book-card {
+  display:flex; flex-direction:column; width:max(80px,min(42.4cqw,27.7cqh,330px)); max-width:none; height:auto; max-height:none; aspect-ratio:auto; margin:auto; padding:0;
+}
+#xLettersV1Panel .x-letter-books-body.is-single .x-letter-book-object { flex:0 0 auto; width:100%; height:auto; min-height:0; aspect-ratio:330 / 488; }
+#xLettersV1Panel .x-letter-books-body.is-single .x-letter-book-object { container-type:inline-size; }
+#xLettersV1Panel .x-letter-books-body.is-single .x-letter-cover { position:relative; display:block; width:100%; height:100%; min-height:0; aspect-ratio:auto; padding:0; overflow:hidden; }
+#xLettersV1Panel .x-letter-books-body.is-single .x-letter-book-meta { flex:none; max-width:100%; margin:clamp(16px,2cqh,24px) 0 8px; font-size:clamp(12px,2.3cqw,18px); line-height:1.35; }
+#xLettersV1Panel .x-letter-books-body .x-letter-cover > .x-letter-cover-date {
+  position:absolute; z-index:2; display:flex; align-items:baseline; gap:.24em; width:max-content; max-width:calc(100% - 34px); padding:0; border:0; border-radius:0; color:#34483a; background:transparent; box-shadow:none;
+  font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:clamp(10px,3.2vw,14px); font-weight:400; letter-spacing:.12em; line-height:1.45; white-space:nowrap; text-shadow:0 1px 0 #ffffffb8;
+}
+#xLettersV1Panel .x-letter-books-body .x-letter-cover > .x-letter-cover-date > span { position:static; z-index:auto; margin:0; padding:0; border:0; border-radius:0; color:inherit; background:transparent; font:inherit; }
+#xLettersV1Panel .x-letter-books-body .x-letter-cover > .x-letter-cover-date > .x-letter-cover-date-year { font-size:.9em; letter-spacing:.08em; }
+#xLettersV1Panel .x-letter-books-body .x-letter-cover > .x-letter-cover-date > .x-letter-cover-date-season { font-size:1.05em; }
+#xLettersV1Panel .x-letter-books-body .x-letter-cover > .x-letter-cover-date > .x-letter-cover-date-month { font-size:.95em; letter-spacing:.06em; }
+#xLettersV1Panel .x-letter-books-body .x-letter-cover > .x-letter-cover-date[data-archive="true"] { letter-spacing:.22em; }
+/* Dates sit in quiet areas of each supplied illustration, with small shifts in voice. */
+#xLettersV1Panel .x-letter-cover:is([data-cover="cover-default-1"],[data-cover="cover-default-2"]) .x-letter-cover-date { left:22%; bottom:12%; color:#294332; }
+#xLettersV1Panel .x-letter-cover[data-cover="cover-default-3"] .x-letter-cover-date { left:50%; bottom:6%; transform:translateX(-50%); color:#a96731; font-family:"Noto Sans SC","Microsoft YaHei",sans-serif; font-size:clamp(9px,2.5vw,11px); letter-spacing:.08em; text-shadow:0 1px 0 #ffffffd9; }
+#xLettersV1Panel .x-letter-cover[data-cover="cover-default-3"] .x-letter-cover-date > span { color:inherit; background:transparent; }
+#xLettersV1Panel .x-letter-cover[data-cover="cover-green-hand"] .x-letter-cover-date { top:12%; left:50%; transform:translateX(-50%); color:#344d39; letter-spacing:.18em; }
+#xLettersV1Panel .x-letter-cover[data-cover="cover-blue-cat"] .x-letter-cover-date { top:10%; left:50%; transform:translateX(-50%); color:#3d5662; font-size:clamp(10px,2.8vw,13px); letter-spacing:.1em; }
+#xLettersV1Panel .x-letter-cover[data-cover="cover-blue-coast"] .x-letter-cover-date { top:12%; right:9%; color:#284b63; font-size:clamp(10px,2.7vw,13px); letter-spacing:.1em; }
+#xLettersV1Panel .x-letter-cover[data-cover="cover-minimal"] .x-letter-cover-date { left:50%; bottom:22%; transform:translateX(-50%); color:#424a43; font-size:clamp(10px,2.8vw,13px); letter-spacing:.2em; }
+#xLettersV1Panel .x-letter-books-body .x-letter-book-grid .x-letter-cover > .x-letter-cover-date { font-size:clamp(8px,1.45vw,11px); }
+#xLettersV1Panel .x-letter-book-grid .x-letter-cover:is([data-cover="cover-default-1"],[data-cover="cover-default-2"]) .x-letter-cover-date { left:22%; bottom:10%; }
+#xLettersV1Panel .x-letter-book-grid .x-letter-cover[data-cover="cover-default-3"] .x-letter-cover-date { bottom:5%; font-size:9px; }
+#xLettersV1Panel .x-letter-book-grid .x-letter-cover[data-cover="cover-green-hand"] .x-letter-cover-date { top:10%; }
+#xLettersV1Panel .x-letter-book-grid .x-letter-cover[data-cover="cover-blue-cat"] .x-letter-cover-date { top:8%; }
+#xLettersV1Panel .x-letter-book-grid .x-letter-cover[data-cover="cover-blue-coast"] .x-letter-cover-date { top:9%; right:7%; }
+#xLettersV1Panel .x-letter-book-grid .x-letter-cover[data-cover="cover-minimal"] .x-letter-cover-date { bottom:18%; }
+#xLettersV1Panel [data-book-cover-settings] {
+  position:relative; z-index:2; display:flex; flex:none; flex-direction:column; gap:4px; width:96.4cqw; height:max(94px,28.6cqh); max-width:none; min-height:0; align-self:center; margin:0; padding:3cqh 3.1cqw max(8px,env(safe-area-inset-bottom));
+  overflow:hidden; border-top:1px solid #e6e3d9; border-radius:26px 26px 0 0; background:#fffefa; box-shadow:0 -4px 14px #34453612;
+}
+#xLettersV1Panel .x-letter-cover-strip-head { flex:none; display:flex; align-items:baseline; gap:1cqw; min-width:0; min-height:24px; line-height:1.4; }
+#xLettersV1Panel .x-letter-cover-strip-head strong { color:#34483a; font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:clamp(15px,2.6cqw,20px); font-weight:500; letter-spacing:.04em; }
+#xLettersV1Panel .x-letter-cover-strip-head small { overflow:hidden; color:var(--muted); font-size:clamp(12px,2.3cqw,18px); text-overflow:ellipsis; white-space:nowrap; }
+#xLettersV1Panel .x-letter-cover-strip-locked { flex:1; display:flex; align-items:center; margin:0; color:var(--muted); font-size:12px; line-height:1.5; }
+#xLettersV1Panel .x-letter-choice-row[data-letter-picker="book-cover"] {
+  flex:1 1 auto; display:flex; align-items:center; gap:5.8cqw; width:100%; min-height:0; margin:0; padding:0 2px; overflow-x:auto; overflow-y:hidden; overscroll-behavior-x:contain; scrollbar-width:none; -webkit-overflow-scrolling:touch;
+}
+#xLettersV1Panel .x-letter-choice-row[data-letter-picker="book-cover"]::-webkit-scrollbar { display:none; width:0; height:0; }
+#xLettersV1Panel .x-letter-choice-row[data-letter-picker="book-cover"] > button {
+  flex:0 0 max(44px,15.4cqw); width:max(44px,15.4cqw); min-width:max(44px,15.4cqw); max-width:max(44px,15.4cqw); min-height:44px; height:auto; padding:2px 0; border:0; border-radius:0; background:transparent; scroll-snap-align:start;
+}
+#xLettersV1Panel .x-letter-choice-row[data-letter-picker="book-cover"] > button[aria-pressed="true"] { background:transparent; }
+#xLettersV1Panel .x-letter-choice-row[data-letter-picker="book-cover"] > button::after { left:20px; right:20px; bottom:1px; height:1px; background:transparent; }
+#xLettersV1Panel .x-letter-choice-row[data-letter-picker="book-cover"] > button[aria-pressed="true"]::after { background:var(--moss); }
+#xLettersV1Panel [data-letter-picker="book-cover"] .x-letter-cover-mini { display:block; width:max(44px,15.4cqw); height:auto; aspect-ratio:5/7; border:0; border-radius:1px; box-shadow:none; background-size:contain; }
+#xLettersV1Panel [data-letter-picker="book-cover"] .x-letter-cover-mini[data-cover="cover-default-3"] { background-size:cover; }
+@container (min-width:700px) {
+  #xLettersV1Panel .x-letter-books-body.is-single .x-letter-book-switch { padding-top:1.2cqh; }
+}
+@container (max-width:110px) {
+  #xLettersV1Panel .x-letter-books-body .x-letter-book-object .x-letter-cover > .x-letter-cover-date { max-width:calc(100% - 8px); gap:.04em; letter-spacing:0; font-size:8px; text-shadow:0 1px 0 #ffffffdc; }
+}
+@container (max-width:84px) {
+  #xLettersV1Panel .x-letter-books-body .x-letter-book-object .x-letter-cover > .x-letter-cover-date { font-size:7px; }
+}
+@media (min-width:700px) {
+  #xLettersV1Panel .x-letter-books-body .x-letter-book-grid .x-letter-cover > .x-letter-cover-date { font-size:11px; }
+}
+#xLettersV1Panel .x-letter-books-body.is-single .x-letter-books-status { position:relative; flex:none; width:100%; margin:4px 0; }
+
+/* Both historical default IDs display the supplied gingham. Extend its viewport
+   vertically to the existing frame; date ink stays between spine and elastic. */
+#xLettersV1Panel .x-letter-book-object:has(> :is([data-cover="cover-default-1"],[data-cover="cover-default-2"])) { container-type:inline-size; }
+#xLettersV1Panel .x-letter-cover:is([data-cover="cover-default-1"],[data-cover="cover-default-2"]) { background:#d5dcc3; border-color:#839078; }
+#xLettersV1Panel .x-letter-books-body .x-letter-cover:is([data-cover="cover-default-1"],[data-cover="cover-default-2"])::before { display:none; }
+#xLettersV1Panel .x-letter-books-body .x-letter-cover:is([data-cover="cover-default-1"],[data-cover="cover-default-2"]) > .x-letter-cover-date {
+  max-width:55%; padding:.15em .45em; background:#f9f8ed; color:#294332;
+  font-size:clamp(8px,5cqw,12px); gap:.1em; letter-spacing:.06em; text-shadow:none;
+}
+#xLettersV1Panel [data-letter-picker="book-cover"] .x-letter-cover-mini[data-cover="cover-default-1"] { background:transparent; }
+#xLettersV1Panel :is(.x-letter-cover,.x-letter-cover-mini):is([data-cover="cover-default-1"],[data-cover="cover-default-2"]) .x-letter-resource-viewport {
+  inset:0; width:100%; height:100%; aspect-ratio:auto; transform:none;
+}
+
+/* Two shallow paper faces project down/right behind the unchanged front cover.
+   Fixed cosmetic depth: never driven by counts or baked into the artwork. */
+#xLettersV1Panel .x-letter-books-body .x-letter-book-object { isolation:isolate; container-type:inline-size; }
+#xLettersV1Panel .x-letter-books-body .x-letter-book-object > .x-letter-cover { z-index:1; }
+#xLettersV1Panel :is(.x-letter-book-side,.x-letter-book-bottom) {
+  --book-bottom-depth:clamp(6px,2.6cqw,8px);
+  position:absolute; z-index:0; pointer-events:none; display:block;
+}
+#xLettersV1Panel .x-letter-book-side {
+  top:3px; bottom:calc(-1 * var(--book-bottom-depth));
+  right:calc(-1 * var(--book-bottom-depth)); width:calc(var(--book-bottom-depth) + 5px);
+  border-radius:0 6px 5px 0;
+  clip-path:polygon(0 0,100% var(--book-bottom-depth),100% 100%,0 calc(100% - var(--book-bottom-depth)));
+  background:repeating-linear-gradient(90deg,#d5cfbd 0 1px,#efeadd 1px 2.5px);
+}
+#xLettersV1Panel .x-letter-book-side::after {
+  content:""; position:absolute; top:0; right:0; bottom:0; width:2px;
+  background:var(--book-cover-color); pointer-events:none;
+}
+#xLettersV1Panel .x-letter-book-bottom {
+  left:3%; right:calc(-1 * var(--book-bottom-depth)); bottom:calc(-1 * var(--book-bottom-depth));
+  height:calc(var(--book-bottom-depth) + 3px); border-radius:0 0 5px 3px;
+  clip-path:polygon(0 0,calc(100% - var(--book-bottom-depth)) 0,100% 100%,var(--book-bottom-depth) 100%);
+  background:repeating-linear-gradient(to bottom,#d8d0bd 0 1px,#f4efe2 1px 2.5px);
+}
+#xLettersV1Panel .x-letter-book-bottom::before {
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(90deg,#564b3c22,transparent 14%,transparent 85%,#564b3c12);
+}
+#xLettersV1Panel .x-letter-book-bottom::after {
+  content:""; position:absolute; left:0; right:0; bottom:0; height:2px;
+  border-radius:0 0 4px 3px; background:var(--book-cover-color); pointer-events:none;
+}
+#xLettersV1Panel .x-letter-books-body .x-letter-book-object {
+  filter:drop-shadow(3px 6px 5px #263c2524);
+}
+#xLettersV1Panel .x-letter-book-card.is-locked :is(.x-letter-book-side,.x-letter-book-bottom) { opacity:.75; }
+
+/* Already-bound supplied images need neither another painted spine nor white letterbox bands. */
+#xLettersV1Panel :is(.x-letter-cover,.x-letter-cover-mini)[data-cover-binding="linen"] .x-letter-resource-viewport {
+  inset:0; width:100%; height:100%; aspect-ratio:auto; transform:none;
+}
+#xLettersV1Panel .x-letter-books-body .x-letter-cover[data-cover-binding="linen"]::before { display:none; }
+#xLettersV1Panel .x-letter-books-body .x-letter-cover[data-cover-binding="linen"] > .x-letter-cover-date {
+  left:50%; bottom:7%; transform:translateX(-50%); max-width:58%; padding:.2em .5em;
+  font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:clamp(8px,4.5cqw,12px);
+  background:#faf4e7; color:var(--linen-date-ink); gap:.08em; letter-spacing:.06em; text-shadow:none;
+}
+#xLettersV1Panel [data-cover="cover-linen-teal"] { --linen-date-ink:#25494c; }
+#xLettersV1Panel [data-cover="cover-linen-mauve"] { --linen-date-ink:#65454e; }
+#xLettersV1Panel [data-cover="cover-linen-gold"] { --linen-date-ink:#714a17; }
+#xLettersV1Panel [data-cover="cover-linen-rose"] { --linen-date-ink:#71332d; }
+#xLettersV1Panel [data-cover="cover-linen-navy"] { --linen-date-ink:#273c4b; }
+#xLettersV1Panel :is([data-cover="cover-linen-navy"],[data-cover="cover-linen-gold"]) .x-letter-resource-viewport > img {
+  transform:scaleY(1.035); transform-origin:center;
+}
+#xLettersV1Panel [data-cover="cover-linen-blue"] { --linen-date-ink:#3c576b; }
+#xLettersV1Panel [data-cover="cover-default-3"][data-cover-binding="linen"] { --linen-date-ink:#263e50; }
+/* 收信状态独立更新，不重建正在输入的正文。 */
+.x-letter-incoming-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;color:#675c50;font-size:12px;line-height:1.5;flex-shrink:0}
+.x-letter-incoming-row>span{flex:1 1 150px;min-width:0;overflow-wrap:anywhere}
+.x-letter-incoming-row>div{display:flex;flex-wrap:wrap;gap:6px}
+.x-letter-incoming-row button{border:1px solid #c5bbaa;border-radius:16px;padding:6px 12px;background:#faf6ec;color:inherit;font:inherit;cursor:pointer}
+.x-letter-incoming-row button:disabled{opacity:.5;cursor:default}
+
+/* 统一解锁：首个未解锁素材可点（下个月解锁 · 10 X能量提前解锁），其余“待解锁”。 */
+#xLettersV1Panel [data-letter-picker] > button[data-stationery-locked="next"] { cursor:pointer; }
+#xLettersV1Panel [data-letter-picker] > button[data-stationery-locked="next"] > :is(.x-letter-cover-mini,.x-letter-paper-mini,.x-letter-send-seal-image) { filter:grayscale(.6); opacity:.6; }
+#xLettersV1Panel .x-letter-unlock-label[data-lock="next"] { color:#8a6a2c; }
+#xLettersV1Panel .x-letter-envelope-unlock-label[data-lock="next"] { cursor:pointer; pointer-events:auto; text-decoration:underline; text-underline-offset:3px; }
+#xLettersV1Panel .x-letter-unlock-dialog { position:absolute; inset:0; z-index:240; display:grid; place-items:center; padding:24px; background:#29352c59; }
+#xLettersV1Panel .x-letter-unlock-card { box-sizing:border-box; width:min(100%,300px); padding:22px 20px 16px; border-radius:16px; background:var(--paper); color:var(--ink); box-shadow:0 16px 40px #29352c40; text-align:center; }
+#xLettersV1Panel .x-letter-unlock-card p { margin:0 0 18px; font-size:16px; font-weight:600; }
+#xLettersV1Panel .x-letter-unlock-actions { display:flex; gap:10px; }
+#xLettersV1Panel .x-letter-unlock-actions button { flex:1; min-height:42px; border:1px solid #d3d8cf; border-radius:12px; background:#fff; color:var(--ink); font-size:15px; }
+#xLettersV1Panel .x-letter-unlock-actions [data-unlock-confirm] { border-color:var(--moss); background:var(--moss); color:#fff; }
+#xLettersV1Panel .x-letter-unlock-actions button:disabled { opacity:.6; }
+
+/* 收到 TA 的信：整屏信封页，与寄信页同一套版式；「收信」后信封抽离、露出信纸。 */
+#xLettersV1Panel .x-letter-receive-surface { z-index:6; }
+#xLettersV1Panel .x-letter-receive-hint { pointer-events:none; }
+#xLettersV1Panel .x-letter-receive-surface .x-letter-envelope { touch-action:manipulation; animation:x-letter-envelope-arrive 420ms cubic-bezier(.2,.8,.3,1) both; }
+#xLettersV1Panel .x-letter-receive-actions { display:flex; flex:none; justify-content:center; padding:12px 0 calc(16px + env(safe-area-inset-bottom)); }
+#xLettersV1Panel .x-letter-receive-actions .x-letter-receive-confirm { min-width:148px; min-height:46px; padding:0 28px; border:1px solid var(--moss); border-radius:23px; color:#fff; background:var(--moss); font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:16px; font-weight:500; letter-spacing:.2em; }
+#xLettersV1Panel .x-letter-receive-actions .x-letter-receive-confirm:disabled { opacity:.7; }
+#xLettersV1Panel .x-letter-receive-surface.is-opening { animation:x-letter-receive-out 650ms ease-in both; pointer-events:none; }
+#xLettersV1Panel .x-letter-receive-surface.is-opening .x-letter-envelope { animation:x-letter-envelope-open 520ms cubic-bezier(.45,0,.3,1) both; }
+@keyframes x-letter-envelope-arrive { from { opacity:0; transform:translateY(18px) rotate(-2deg); } to { opacity:1; transform:none; } }
+@keyframes x-letter-envelope-open { 0% { transform:none; opacity:1; } 35% { transform:scale(1.03) rotate(1deg); opacity:1; } 100% { transform:translateY(-60px) scale(.9); opacity:0; } }
+@keyframes x-letter-receive-out { 0%,55% { opacity:1; } 100% { opacity:0; } }
+@media (prefers-reduced-motion: reduce) { #xLettersV1Panel .x-letter-receive-surface, #xLettersV1Panel .x-letter-receive-surface .x-letter-envelope { animation:none !important; } }
+
+/* 格纹书皮：月份标签放到封面正中下方，不再被左侧书脊遮住。 */
+#xLettersV1Panel .x-letter-cover:is([data-cover="cover-default-1"],[data-cover="cover-default-2"]) .x-letter-cover-date,
+#xLettersV1Panel .x-letter-books-body .x-letter-cover:is([data-cover="cover-default-1"],[data-cover="cover-default-2"]) > .x-letter-cover-date,
+#xLettersV1Panel .x-letter-books-body .x-letter-book-grid .x-letter-cover:is([data-cover="cover-default-1"],[data-cover="cover-default-2"]) > .x-letter-cover-date { left:50%; right:auto; transform:translateX(-50%); max-width:calc(100% - 16px); }
+
+/* 首次进入的归档说明：整页呈现，左上角可返回。 */
+#xLettersV1Panel .x-letter-archive-page { position:relative; display:flex; flex-direction:column; width:100%; height:100%; overflow:auto; box-sizing:border-box; padding:0 22px; background:var(--ground); color:var(--ink); }
+#xLettersV1Panel .x-letter-archive-head { flex:none; display:flex; align-items:center; min-height:56px; padding-top:env(safe-area-inset-top); }
+#xLettersV1Panel .x-letter-archive-back { display:grid; place-items:center; width:44px; height:44px; margin-left:-10px; border:0; background:transparent; color:var(--ink); }
+#xLettersV1Panel .x-letter-archive-back svg { width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+#xLettersV1Panel .x-letter-archive-body { flex:1 0 auto; width:min(100%,460px); margin:0 auto; padding:12px 0 24px; }
+#xLettersV1Panel .x-letter-archive-icon { display:grid; place-items:center; width:52px; height:52px; border-radius:14px; background:var(--paper); color:var(--moss); box-shadow:0 2px 10px #29352c14; }
+#xLettersV1Panel .x-letter-archive-icon svg { width:28px; height:28px; }
+#xLettersV1Panel .x-letter-archive-kicker { margin:22px 0 0; color:var(--gold); font-size:11px; letter-spacing:.2em; }
+#xLettersV1Panel .x-letter-archive-body h1 { margin:6px 0 22px; font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:24px; font-weight:600; letter-spacing:.04em; }
+#xLettersV1Panel .x-letter-archive-list { margin:0; padding:0; list-style:none; counter-reset:archive; border-top:1px solid #d3d8cf; }
+#xLettersV1Panel .x-letter-archive-list li { counter-increment:archive; display:grid; grid-template-columns:30px 1fr; column-gap:10px; row-gap:4px; padding:16px 0; border-bottom:1px solid #d3d8cf; }
+#xLettersV1Panel .x-letter-archive-list li::before { content:counter(archive,decimal-leading-zero); grid-row:1 / span 2; color:var(--moss); font-family:"Noto Serif SC","Songti SC","SimSun",serif; font-size:15px; line-height:1.5; }
+#xLettersV1Panel .x-letter-archive-list strong { font-size:15px; font-weight:600; line-height:1.5; }
+#xLettersV1Panel .x-letter-archive-list span { color:var(--muted); font-size:14px; line-height:1.7; }
+#xLettersV1Panel .x-letter-archive-qq { color:var(--ink); font-weight:600; letter-spacing:.04em; user-select:all; -webkit-user-select:all; }
+#xLettersV1Panel .x-letter-archive-foot { flex:none; width:min(100%,460px); margin:0 auto; padding:8px 0 calc(20px + env(safe-area-inset-bottom)); }
+#xLettersV1Panel .x-letter-archive-ack { width:100%; min-height:48px; border:0; border-radius:24px; background:var(--moss); color:#fff; font-size:16px; letter-spacing:.2em; }
+
+/* X103：三点菜单里的删除入口使用危险操作色（仅文字，不改菜单结构）。 */
+#xLettersV1Panel [data-letter-tools-sidebar] > button.x-letter-danger-text { color:#b3261e; }
+#xLettersV1Panel [data-letter-tools-sidebar] > button.x-letter-danger-text:disabled { color:#b3261e; opacity:.45; }
+/* X103：信末朗读按钮不再固定绿色，跟随当前信纸的文字颜色，半透明，适配各款信纸。 */
+#xLettersV1Panel .x-letter-player { color:inherit; }
+#xLettersV1Panel .x-letter-player [data-voice-status] { opacity:.72; }
+#xLettersV1Panel .x-letter-player-toggle { color:inherit; background:rgba(255,255,255,.32); border:1px solid rgba(120,110,100,.28); box-shadow:none; -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px); }
+@supports (background:color-mix(in srgb, red 10%, transparent)) {
+  #xLettersV1Panel .x-letter-player-toggle { background:color-mix(in srgb, currentColor 7%, transparent); border-color:color-mix(in srgb, currentColor 28%, transparent); }
+}
+#xLettersV1Panel .x-letter-player-toggle:disabled { opacity:.45; }
+/* X103：草稿「保存」与「寄出」并排，同款样式。 */
+#xLettersV1Panel [data-letter-send-slot] { gap:6px; }
+/* X103：拍立得下方的图片配文（可写一句话，空着就不显示）。 */
+#xLettersV1Panel .x-letter-image figcaption { margin-top:6px; color:inherit; opacity:.8; font-size:13px; line-height:1.5; }
+#xLettersV1Panel .x-letter-image-caption { width:100%; min-height:28px; padding:2px 4px; border:0; border-bottom:1px dashed rgba(120,110,100,.35); background:transparent; color:inherit; font:inherit; text-align:center; outline-offset:2px; }
+#xLettersV1Panel .x-letter-image-caption::placeholder { color:inherit; opacity:.45; }

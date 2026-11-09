@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#fff9ef" />
+    <title>TA 拼音拼字演示 · 三档随机 | SHE.X</title>
+    <link rel="stylesheet" href="./x-world/chat/pinyin-typing.css?v=20261110-gen-1" />
+  </head>
+  <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="shex-bear-brown" viewBox="0 0 120 120">
+          <circle cx="27" cy="28" r="15" fill="#b97a4b" />
+          <circle cx="93" cy="28" r="15" fill="#b97a4b" />
+          <circle cx="27" cy="28" r="7.5" fill="#e8b98c" />
+          <circle cx="93" cy="28" r="7.5" fill="#e8b98c" />
+          <circle cx="60" cy="64" r="43" fill="#c98a4b" />
+          <ellipse cx="60" cy="78" rx="23" ry="16" fill="#f6e3c6" />
+          <circle cx="44" cy="58" r="4.6" fill="#3f2c1e" />
+          <circle cx="76" cy="58" r="4.6" fill="#3f2c1e" />
+          <circle cx="45.6" cy="56" r="1.5" fill="#fff" opacity=".9" />
+          <circle cx="77.6" cy="56" r="1.5" fill="#fff" opacity=".9" />
+          <ellipse cx="60" cy="70" rx="5.2" ry="3.9" fill="#3f2c1e" />
+          <path d="M60 74 q-5 6 -11 2 M60 74 q5 6 11 2" fill="none" stroke="#3f2c1e" stroke-width="2.4" stroke-linecap="round" />
+          <ellipse cx="33" cy="74" rx="6" ry="4" fill="#f2a6a0" opacity=".62" />
+          <ellipse cx="87" cy="74" rx="6" ry="4" fill="#f2a6a0" opacity=".62" />
+        </symbol>
+        <symbol id="shex-bear-cream" viewBox="0 0 120 120">
+          <circle cx="27" cy="28" r="15" fill="#e8d2ae" />
+          <circle cx="93" cy="28" r="15" fill="#e8d2ae" />
+          <circle cx="27" cy="28" r="7.5" fill="#f9eeda" />
+          <circle cx="93" cy="28" r="7.5" fill="#f9eeda" />
+          <circle cx="60" cy="64" r="43" fill="#f4e4c9" />
+          <ellipse cx="60" cy="78" rx="23" ry="16" fill="#fffaf0" />
+          <circle cx="44" cy="58" r="4.6" fill="#4b3726" />
+          <circle cx="76" cy="58" r="4.6" fill="#4b3726" />
+          <circle cx="45.6" cy="56" r="1.5" fill="#fff" opacity=".9" />
+          <circle cx="77.6" cy="56" r="1.5" fill="#fff" opacity=".9" />
+          <ellipse cx="60" cy="70" rx="5.2" ry="3.9" fill="#4b3726" />
+          <path d="M60 74 q-5 6 -11 2 M60 74 q5 6 11 2" fill="none" stroke="#4b3726" stroke-width="2.4" stroke-linecap="round" />
+          <ellipse cx="33" cy="74" rx="6" ry="4" fill="#f2b3a6" opacity=".7" />
+          <ellipse cx="87" cy="74" rx="6" ry="4" fill="#f2b3a6" opacity=".7" />
+        </symbol>
+      </defs>
+    </svg>
+
+    <svg class="demo-bear demo-bear--1" viewBox="0 0 120 120"><use href="#shex-bear-brown" /></svg>
+    <svg class="demo-bear demo-bear--2" viewBox="0 0 120 120"><use href="#shex-bear-cream" /></svg>
+    <svg class="demo-bear demo-bear--3" viewBox="0 0 120 120"><use href="#shex-bear-cream" /></svg>
+    <svg class="demo-bear demo-bear--4" viewBox="0 0 120 120"><use href="#shex-bear-brown" /></svg>
+
+    <div class="demo-shell">
+      <header class="demo-topbar">
+        <a class="demo-logo" href="./index.html#x-world">SHE.X</a>
+        <span class="demo-topbar-divider" aria-hidden="true"></span>
+        <p class="demo-topbar-title">TA 拼音拼字 · 三档随机演示</p>
+        <a class="demo-back" href="./index.html#x-world">返回 X 世界</a>
+      </header>
+
+      <main class="demo-layout">
+        <section class="demo-phone" aria-label="X传讯拼音打字演示">
+          <header class="demo-chat-head">
+            <span class="demo-avatar">
+              <svg aria-hidden="true"><use href="#shex-bear-brown" /></svg>
+            </span>
+            <div>
+              <h1>TA</h1>
+              <p class="demo-chat-status" id="demoChatStatus">正在输入…</p>
+            </div>
+            <span class="demo-chat-head-tag">X Message</span>
+          </header>
+
+          <div class="demo-log" id="demoLog" aria-live="polite">
+            <span class="demo-day">今天 · 拼音键盘演示</span>
+          </div>
+
+          <div class="demo-typer">
+            <div class="demo-typer-head">
+              <span class="demo-typer-label"><span class="demo-typer-dot" aria-hidden="true"></span>TA 的键盘</span>
+              <p class="demo-typer-hint" id="demoTyperHint">准备开始…</p>
+            </div>
+
+            <div class="demo-pinyin-row">
+              <span class="demo-pinyin-label">拼音</span>
+              <span class="demo-pinyin" id="demoPinyin"></span>
+              <span class="demo-pinyin-caret is-hidden" id="demoPinyinCaret" aria-hidden="true"></span>
+            </div>
+
+            <div class="demo-candidates" id="demoCandidates" aria-label="候选字"></div>
+
+            <div class="demo-compose-row">
+              <div class="demo-compose" id="demoCompose" aria-live="polite"></div>
+              <button class="demo-send" id="demoSend" type="button" aria-label="发送" tabindex="-1">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13" /><path d="M22 2 15 22l-4-9-9-4 20-7Z" /></svg>
+              </button>
+            </div>
+
+            <div class="demo-keyboard" id="demoKeyboard" aria-hidden="true"></div>
+          </div>
+        </section>
+
+        <aside class="demo-side">
+          <h2 class="demo-title">TA 随机取拼音<br />再<em>选字上屏</em></h2>
+          <p class="demo-sub">
+            每次随机取一个拼音，再从候选字里随机选一个字；几个字连起来就直接发送。只保证拼音和字形正确，句子不一定通顺——但每个字都是现场选的。
+          </p>
+
+          <div class="demo-steps" aria-label="打字流程">
+            <div class="demo-step">
+              <span class="demo-step-num">01</span>
+              <strong>随机取拼音</strong>
+              <p>从 397 个常用音节里随机取一个。</p>
+            </div>
+            <div class="demo-step">
+              <span class="demo-step-num">02</span>
+              <strong>随机选字</strong>
+              <p>在候选字里随机挑一个字，敲拼音定位。</p>
+            </div>
+            <div class="demo-step">
+              <span class="demo-step-num">03</span>
+              <strong>上屏发送</strong>
+              <p>几个字连起来后按下发送，继续下一个。</p>
+            </div>
+          </div>
+
+          <div class="demo-panel">
+            <h3 class="demo-panel-title">演示控制</h3>
+            <div class="demo-modes demo-chips" id="demoModes" role="group" aria-label="生成模式">
+              <button class="demo-chip" type="button" data-mode="random" aria-pressed="false">乱码版</button>
+              <button class="demo-chip" type="button" data-mode="words" aria-pressed="true">拼词版</button>
+              <button class="demo-chip" type="button" data-mode="fluent" aria-pressed="false">通顺版</button>
+            </div>
+            <div class="demo-control-row">
+              <button class="demo-btn" id="demoRandom" type="button">换一句（随机）</button>
+              <button class="demo-btn demo-btn--ghost" id="demoReplay" type="button">重播这句</button>
+              <button class="demo-btn demo-btn--ghost" id="demoPause" type="button" aria-pressed="false">暂停</button>
+              <label class="demo-speed">
+                速度
+                <input id="demoSpeed" type="range" min="0.6" max="2.6" step="0.2" value="1" aria-label="打字速度" />
+              </label>
+            </div>
+
+            <div class="demo-custom">
+              <input id="demoCustomInput" type="text" placeholder="写一句想让 TA 打出来的话" maxlength="60" />
+              <button class="demo-btn" id="demoCustomSend" type="button">演示</button>
+            </div>
+
+            <p class="demo-note">
+              乱码版：随机取拼音随机选字；拼词版：随机挑常用词拼贴；通顺版：按常用搭配接字。三档都是离线现场生成，切换后会立刻换一句开始打字。
+            </p>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <script src="./x-world/chat/pinyin-dictionary.js"></script>
+    <script src="./x-world/chat/pinyin-char-map.js"></script>
+    <script src="./x-world/chat/word-bank.js?v=20261110-gen-7"></script>
+    <script src="./x-world/chat/pinyin-typing.js?v=20261110-gen-4"></script>
+  </body>
+</html>

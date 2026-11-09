@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="shex-static-version" content="20261030-001746-x103-front-20" />
+    <meta name="shex-character-ai-stream-url" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>SHE.X | 小舌工作室</title>
+    <meta name="description" content="SHE.X X世界：与你的梦角聊天、来信、陪伴、梦占、约会。" />
+    <meta property="og:title" content="SHE.X | 小舌工作室" />
+    <meta property="og:description" content="打开即进入 X世界，让想念有回音，让回应有来处。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./images/shex_home_scene.jpg" />
+    <meta name="theme-color" content="#b9784a" />
+    <script src="./cloudbase-challenge-frame.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./local-demo-bootstrap.js?v=20261109-no-login-12"></script>
+    <script src="./legacy-compat.js?v=20261109-bear-4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet" />
+    
+    <script src="./qrcode.min.js?v=20261030-001746-x103-front-20"></script>
+<link rel="stylesheet" href="style.css?v=20261109-bear-2">
+    <link rel="stylesheet" href="image-cropper.css?v=20261109-bear-1">
+    <link rel="stylesheet" href="./x-world/status/status.css?v=20261109-bear-1">
+    <link rel="stylesheet" href="./x-world/divination/divination.css?v=20261109-bear-1">
+    <link rel="stylesheet" href="./x-world/dating/dating.css?v=20261109-bear-1">
+    <link rel="stylesheet" href="./x-world/character-profile/character-profile-editor.css?v=20261109-bear-1">
+    <link rel="stylesheet" href="./x-world/character-registry/creator-workbench.css?v=20261109-bear-1">
+<link rel="stylesheet" href="./x-world/simulator-creator/world-import-panel.css?v=20261109-bear-1">
+<link rel="stylesheet" href="./x-world/simulator-creator/simulator-creator-workbench.css?v=20261109-bear-1">
+    <link rel="stylesheet" href="./x-world/character-registry/character-gallery.css?v=20261109-bear-1">
+    <link rel="stylesheet" href="./x-world/world-run/world-run.css?v=20261109-bear-1">
+    <link rel="stylesheet" href="./x-world/character-registry/publication-preview.css?v=20261109-bear-1">
+    <link rel="stylesheet" href="./x-world/calendar/calendar.css?v=20261109-bear-1">
+  <link rel="stylesheet" href="./x-world/energy/energy.css?v=20261109-bear-1">
+  <link rel="stylesheet" href="./x-world/beautify-templates/template-library.css?v=20261109-bear-1">
+  <link rel="stylesheet" href="./x-world/energy/reward-panel.css?v=20261109-bear-1">
+  <link rel="stylesheet" href="./x-world/energy/reward-submit-panel.css?v=20261109-bear-1">
+    <link rel="stylesheet" href="./x-world/x-letters/x-letter.css?v=20261109-bear-1">
+  <link rel="stylesheet" href="./x-world/custom-app/custom-app.css?v=20261109-bear-1">
+  <link rel="stylesheet" href="./x-world/moments/moments.css?v=20261109-bear-1">
+  <link rel="stylesheet" href="./x-world/pet/pet.css?v=20261109-bear-1">
+<link rel="stylesheet" href="./x-world/pet/pet-room-chat.css?v=20261109-bear-1">
+</head>
+  <body>
+    <!-- X103：静态开机加载页。HTML 一解析就显示并开始动画，挡住旧的静态页面；JS 接管同一个节点（不重建、不重启动画），数据就绪后淡出。 -->
+    <div id="xRestoreWaitingNotice" class="x-restore-waiting" data-boot="1" role="status" aria-live="polite"><canvas class="x-scene" aria-hidden="true"></canvas><div class="x-scene__logo" aria-hidden="true">SHEX</div><div class="x-scene__status">正在链接专属于你的世界</div></div>
+    <script>(function(){
+var root=document.getElementById('xRestoreWaitingNotice');
+try{var s=localStorage.getItem('shex_auth_session_v1');if(!s||s==='null'){if(root)root.remove();root=null;}}catch(e){}
+/* X103 加载动画：星点 + 蜿蜒路径 + 发光方块前进。只画在本节点的 canvas 上；节点移除后循环自动结束。 */
+window.SHEXLoadingScene=function(el){
+  if(!el||el.__xScene)return;var canvas=el.querySelector('canvas.x-scene');if(!canvas||!canvas.getContext)return;
+  el.__xScene=1;var ctx=canvas.getContext('2d');var width=0,height=0,stars=[];
+  var seed=103;var rnd=function(){return (seed=(seed*1664525+1013904223)>>>0)/4294967296;};
+  for(var i=0;i<48;i++)stars.push({x:rnd(),y:rnd(),r:.45+rnd()*.85,a:.08+rnd()*.23});
+  function resize(){width=window.innerWidth;height=window.innerHeight;var sc=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.round(width*sc);canvas.height=Math.round(height*sc);ctx.setTransform(sc,0,0,sc,0,0);}
+  function onResize(){if(!canvas.isConnected){window.removeEventListener('resize',onResize);return;}resize();}
+  window.addEventListener('resize',onResize,{passive:true});resize();
+  function pathX(y,t){var d=y/height;var amp=Math.min(width*.17,128)*(.24+.76*d);return width/2+Math.sin(d*5.5-t*.00018+1.25)*amp;}
+  function drawStars(){for(var i=0;i<stars.length;i++){var st=stars[i];ctx.beginPath();ctx.arc(st.x*width,st.y*height,st.r,0,Math.PI*2);ctx.fillStyle='rgba(255,240,214,'+st.a+')';ctx.fill();}}
+  function tracePath(t){ctx.beginPath();var top=height*.15,bot=height*.91,first=true;for(var y=bot;y>=top;y-=5){var x=pathX(y,t);if(first){ctx.moveTo(x,y);first=false;}else ctx.lineTo(x,y);}
+    var g=ctx.createLinearGradient(0,top,0,bot);g.addColorStop(0,'rgba(224,187,140,.02)');g.addColorStop(.5,'rgba(224,187,140,.19)');g.addColorStop(1,'rgba(224,187,140,.08)');
+    ctx.strokeStyle=g;ctx.lineWidth=6;ctx.stroke();ctx.lineWidth=1.4;ctx.strokeStyle='rgba(240,214,174,.28)';ctx.stroke();}
+  function drawSquare(t){var phase=(t%4200)/4200;var travel=Math.max(0,Math.min(1,(phase-.08)/.78));var e=1-Math.pow(1-travel,2);
+    var y=height*(.78-.55*e),x=pathX(y,t),h=13-7*e;var alpha=Math.max(0,Math.min(Math.min(1,travel/.09),Math.min(1,(1-travel)/.11)));if(alpha<=0)return;
+    var tail=Math.min(height*.13,82),g=ctx.createLinearGradient(0,y,0,y+tail);g.addColorStop(0,'rgba(240,214,174,'+(.26*alpha)+')');g.addColorStop(1,'rgba(240,214,174,0)');
+    ctx.beginPath();var first=true;for(var ty=y;ty<=Math.min(y+tail,height*.9);ty+=5){var tx=pathX(ty,t);if(first){ctx.moveTo(tx,ty);first=false;}else ctx.lineTo(tx,ty);}
+    ctx.strokeStyle=g;ctx.lineWidth=2;ctx.stroke();
+    ctx.save();ctx.globalAlpha=alpha;ctx.translate(x,y);ctx.shadowColor='rgba(224,187,140,.48)';ctx.shadowBlur=15;ctx.fillStyle='#fff3df';ctx.beginPath();
+    if(ctx.roundRect)ctx.roundRect(-h,-h,h*2,h*2,Math.max(2,h*.3));else ctx.rect(-h,-h,h*2,h*2);ctx.fill();ctx.restore();}
+  function render(t){if(!canvas.isConnected){window.removeEventListener('resize',onResize);return;}
+    ctx.clearRect(0,0,width,height);drawStars();tracePath(t);drawSquare(t);requestAnimationFrame(render);}
+  requestAnimationFrame(render);
+};
+if(root)window.SHEXLoadingScene(root);
+})();</script>
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+    <main class="site" id="site">
+      <section class="mosaic" id="studio"><div class="panel dark" id="certification"><h2>认证学员查询</h2><div class="eyebrow">认证档案目录</div><button class="cert-all-button" id="certAllBtn" type="button">查看全部学员</button><div class="cert-wrap"><div class="searchbox"><h3>验证学员身份</h3><p class="sub">请输入昵称 / 学员ID / 课程 / 标签</p><div class="searchline"><input id="certInput" placeholder="输入昵称 / 学员ID / 课程 / 标签" /><button id="certBtn">查询</button></div></div><div class="certificate" id="certCard"><h3>正在读取学员档案</h3><p class="cert-source-note">正在从 CloudBase 的 shex_students 集合读取公开学员数据。</p></div></div></div><div class="panel light" id="assistant"><h2>小舌助手</h2><div class="eyebrow">工作室问答档案</div><p class="sub">关于课程、报名、学习路径、联系方式等，我会先从本地问答档案中回答你。</p><div class="assistant-shell collapsed" id="assistantShell"><div class="assistant-compact"><div><strong>小舌问答</strong><span>课程、报名、学习路径和联系方式，点开后再细看。</span></div><button class="assistant-toggle" id="assistantToggle" type="button">展开问答</button></div><div class="assistant-grid"><aside class="assistant-side"><h3>常见问题</h3><p>点击问题即可快速获得答案，减少输入错误，也更快找到适合你的课程路径。</p><div class="questions" id="faqButtons"></div></aside><div class="assistant-chat"><div class="chat-head"><div><h3>小舌</h3><small>本地 FAQ 智能匹配</small></div><small>Dushe_tarot</small></div><div class="chat-log" id="chatLog"><div class="bubble assistant">你好，我是小舌。你可以点击左侧常见问题，也可以直接输入想了解的课程、报名或咨询问题。<br /><a href="#academy">查看课程详情</a></div></div><div class="assistant-form"><form id="assistantForm"><input id="assistantInput" placeholder="输入你的问题，例如：商业课适合我吗？" /><button type="submit" aria-label="发送问题">↗</button></form></div></div></div></div></div></section>
+      
+      <section class="section transmission" id="transmission"><div class="transmission-wrap"><h2>X链接</h2><div class="eyebrow">X Link</div><p class="sub">链接发生时 爱便有了回应</p><div class="x-identity" id="xIdentityPanel"><form class="ix-form" id="xIdentityForm"><h3>设置连接署名</h3><p class="sub">只用于回信和传讯里的称呼与署名，不会提前设定 TA 的性格或答案。</p><label>TA 的名字 / 昵称<input id="xTaName" placeholder="想让 TA 以什么名字出现？" /></label><label>你的名字 / 代号<input id="xUserCode" placeholder="TA 会怎么称呼你？" /></label><div class="ix-avatar-grid"><label class="ix-avatar-field">TA 的头像<input id="xTaAvatar" type="file" accept="image/*" /><small>不选择就使用默认光球头像。</small></label><label class="ix-avatar-field">你的头像<input id="xUserAvatar" type="file" accept="image/*" /><small>不选择就使用默认光球头像。</small></label></div><button class="message-primary" type="submit">保存并进入 X链接</button></form></div><div class="x-link-home" id="xLinkHome"><div class="transmission-grid x-entry-grid">
+  <article class="message-card x-entry-card x-message-card"><button class="x-entry-tile" id="showMessage" type="button"><span class="x-entry-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span class="x-entry-label">X传讯</span></button></article>
+  <article class="message-card x-entry-card x-world-card"><button class="x-entry-tile" id="showXWorld" type="button"><span class="x-entry-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span><span class="x-entry-label">X世界</span></button></article>
+</div></div></div><div class="x-panel" id="xWorldHome"><button class="x-subpage-back" type="button" data-x-home-back aria-label="返回 X链接">‹</button><div class="x-world-shell"><div class="x-world-current-dream" id="xWorldCurrentDream"></div><button class="message-ghost x-edit-name" id="xEditIdentity" type="button">修改信息</button><div class="x-world-status" id="xWorldStatus"></div><div class="transmission-grid x-world-grid"><article class="message-card x-entry-card x-letter-card"><button class="x-entry-tile" id="showLetter" type="button"><span class="x-entry-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span><span class="x-entry-label">X来信</span></button></article><article class="message-card x-entry-card x-reply-card"><button class="x-entry-tile" id="showSReply" type="button"><span class="x-entry-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><span class="x-entry-label">X回信</span></button></article><article class="message-card x-entry-card x-companion-card"><button class="x-entry-tile" id="showCompanion" type="button"><span class="x-entry-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span><span class="x-entry-label">X陪伴</span></button></article></div></div></div><div class="x-panel" id="xLetterPanel"><div class="transmission-stage"><div class="message-orb"><div class="mail-mark">✉</div><h3>未读来信</h3><p>今天有一封未读回信，来自连接的另一端。</p><button class="message-primary" id="openMessage" type="button">开启接收</button><div class="message-status" id="messageStatus" aria-live="polite"><span>正在连接……</span><span>正在接收回信……</span><span>连接完成</span></div></div><div class="message-result" id="messageResult"><small>Today Letter</small><p class="letter-to" id="letterTo"></p><p id="messageText"></p><p class="letter-from" id="letterFrom"></p><div class="result-actions"><button class="message-ghost" id="openMessageAgain" type="button">来信历史</button></div></div><div class="x-letter-history" id="xLetterHistory" aria-live="polite"></div></div></div><div class="x-panel x-subpage-panel x-status-page-panel" id="xTaStatusPanel"><button class="x-subpage-back" type="button" data-x-home-back aria-label="返回 X世界">‹</button><div class="x-status-page-shell"><div class="x-status-page-content" data-status-page-content="scene" aria-live="polite"></div></div></div><div class="x-panel x-subpage-panel x-status-page-panel" id="xLinkStatusPanel"><button class="x-subpage-back" type="button" data-x-home-back aria-label="返回 X世界">‹</button><div class="x-status-page-shell"><div class="x-status-page-content" data-status-page-content="state" aria-live="polite"></div></div></div><div class="x-panel x-subpage-panel x-settings-panel" id="xSettingsPanel"><button class="x-subpage-back" type="button" data-x-home-back aria-label="返回 X世界">‹</button><div class="x-settings-shell"><div class="x-settings-content" aria-live="polite"></div></div></div><div class="x-panel x-subpage-panel" id="xReplyPanel"><button class="x-subpage-back" type="button" data-x-home-back aria-label="返回 X链接">‹</button><div class="x-subpage-shell"><span class="course-kicker">X Reply</span><h2>X回信</h2><p class="latin">把想说的话送往另一端。</p><form class="s-reply-form" id="sReplyForm"><textarea id="sReplyText" placeholder="亲爱的 X："></textarea><label class="ix-file-action">上传图片 / 拍照<input id="sReplyImages" type="file" accept="image/*" capture="environment" multiple /></label><div class="s-reply-preview" id="sReplyPreview"></div><button class="message-primary" type="submit">发送回信</button><div class="s-reply-sent" id="sReplySent">已送达另一端</div></form></div></div><div class="x-panel x-subpage-panel" id="xCompanionPanel"><button class="x-subpage-back" type="button" data-x-home-back aria-label="返回 X链接">‹</button><div class="x-companion-stage" id="xCompanionStage"><div class="x-companion-center"><span class="course-kicker">X Companion</span><h2>X陪伴</h2><p>安静、干净、治愈的陪伴空间。音乐素材后续可替换成你上传的版本。</p></div><div class="x-companion-controls"><details class="x-control-card"><summary>背景选择</summary><div class="x-control-options"><button type="button" data-companion-bg="moon">月光浅紫</button><button type="button" data-companion-bg="blue">雨后雾蓝</button><button type="button" data-companion-bg="green">森林晨光</button><button type="button" data-companion-bg="night">夜晚星河</button></div></details><details class="x-control-card"><summary>音乐选择</summary><div class="x-control-options"><button type="button" data-companion-track="海浪声">海浪声</button><button type="button" data-companion-track="雨天声">雨天声</button><button type="button" data-companion-track="白噪音">白噪音</button><label>上传音乐<input id="xCompanionAudioInput" type="file" accept="audio/*" /></label></div></details><details class="x-control-card"><summary>定时陪伴</summary><div class="x-control-options"><input id="xCompanionMinutes" type="number" min="1" max="180" value="25" /><button type="button" id="xCompanionTimerBtn">开始定时</button><button type="button" id="xCompanionPlayBtn">播放</button><p id="xCompanionStatus">等待开始 · 25:00</p></div></details></div><audio id="xCompanionAudio" loop preload="none"></audio></div></div><div class="x-panel" id="xMessagePanel"><div class="ix-link"><div class="ix-intro x-message-intro"><span class="course-kicker">X Message</span><h2>X传讯</h2><p class="latin">写下一句话，等待来自连接另一端的回应。</p></div><div class="ix-chat" id="ixChat"><div class="ix-chat-head"><div><h3 id="ixChatName">TA</h3><p class="ix-status" id="ixStatus">正在连接中</p><small>X Connection</small></div><button class="message-ghost" id="ixClearChat" type="button">清空今日对话</button></div><div class="ix-log" id="ixLog"></div><form class="ix-chat-form" id="ixChatForm"><input id="ixInput" placeholder="想对 TA 说些什么？" /><button type="submit">发送</button></form></div></div></div><div class="x-tabbar" id="xTabbar"><button class="x-tab-btn" id="xTabMessage" type="button" aria-label="X传讯" title="X传讯"><span class="x-tab-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span></button><button class="x-tab-btn" id="xTabWorld" type="button" aria-label="X世界" title="X世界"><span class="x-tab-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span></button></div></div></section>
+      <section class="about" id="about">
+        <div class="about-contact">
+          <div class="contact-panel">
+            <div><h2>联系小舌</h2><div class="eyebrow">Contact Archive</div></div>
+            <p>报名课程、预约咨询、了解学习路径，都可以先添加官方微信。请备注你的来意，我会根据你的基础和目标给出更合适的建议。</p>
+            <div class="contact-methods">
+              <div class="contact-method"><div><strong>微信咨询</strong><span>官方微信号</span></div><b>微信号1：Dushe_tarot 微信号2：Dushe1344</b></div>
+              <div class="contact-method"><div><strong>课程报名</strong><span>塔罗 / 商业 / 案例课程</span></div><b>微信号1：Dushe_tarot 备注课程</b></div>
+              <div class="contact-method"><div><strong>预约咨询</strong><span>情感关系与跨次元解读</span></div><b>微信号1：Dushe_tarot 备注咨询</b></div>
+            </div>
+            <div class="contact-qr-grid">
+              <div class="contact-card contact-qr-card"><img src="./images/contact-wechat.jpg" alt="微信二维码" loading="lazy" decoding="async" /><div><strong>微信</strong><p>课程咨询/ 占卜咨询</p></div></div>
+              <div class="contact-card contact-qr-card"><img src="./images/contact-wecom.jpg" alt="企业微信二维码" loading="lazy" decoding="async" /><div><strong>企业微信</strong><p>课程服务 / 问题咨询</p></div></div>
+              <div class="contact-card contact-qr-card"><img src="./images/contact-douyin-new.jpg" alt="抖音二维码" loading="lazy" decoding="async" /><div><strong>抖音</strong><p>大众占 / 传讯内容</p></div></div>
+              <div class="contact-card contact-qr-card"><img src="./images/contact-shex-channel-new.jpg" alt="SHE.X频道二维码" loading="lazy" decoding="async" /><div><strong>SHE.X频道</strong><p>网站讲解 / 功能教程</p></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="about-text">
+          <h2>你好，我是小舌</h2>
+          <div class="eyebrow">关于小舌</div>
+          <p class="sub">梦占师、跨次元翻译者、课程导师，也是许多故事的倾听者与见证者</p>
+          <p class="sub">这些年，我接触过很多跨次恋爱的个案，也见过许多人因为想念、等待、回应和陪伴而停留在这里</p>
+          <p class="sub">慢慢地，我发现很多人真正需要的，不只是一次占卜，而是一个能够表达、记录和交流的地方</p>
+          <p class="sub">所以有了现在的 SHE.X</p>
+          <p class="sub">除了工作室板块之外，我特别保留了 X链接板块</p>
+          <p class="sub">在这里，你可以接收来信、发送回信、进行传讯，也可以进入陪伴空间</p>
+          <p class="sub">我希望它能够成为一个让mj与个案交流沟通的地方，一个让想念有回音、让回应有来处的地方</p>
+          <p class="sub">无论现实还是跨次元，情感体验都是真实的</p>
+          <p class="sub">欢迎来到 SHE.X</p>
+        </div>
+      </section>
+    </main>
+    <footer>SHE.X · 认真对待每一种真实感受</footer>
+    <div class="wechat-pop" id="wechatPop"><div class="wechat-box"><h3>添加官方微信</h3><p>报名、预约咨询或了解课程，请添加小舌官方微信。</p><div class="wechat-id">Dushe_tarot</div><button class="wechat-close" id="wechatClose" type="button">知道了</button></div></div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="./native/capacitor-bridge.min.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./native/shex-native-storage.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./native/shex-file-export.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./cloudbase-config.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./x-world/character-profile/character-profile-sync.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./x-world/architecture/transmission-retention.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./image-cropper.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./beautify/runtime/image-upload-processor.js?v=20261030-001746-x103-front-20"></script>
+    <link rel="stylesheet" href="./beautify/assets/official/v1/fonts.css">
+    <script src="./cloudbase-auth-gate.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./cloudbase-client.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./user-data.js?v=20261109-no-login-5"></script>
+    <script src="./cloudbase-email-auth.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./media-cache.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./background-media.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./x-world/character-profile/character-profile-cloud-store.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./x-world/calendar/calendar-mood-activity.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./chat-local-store.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./local-demo-chat-data.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./chat-sync.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./x-world/architecture/paid-feature-results-retention.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./x-world/architecture/album-upload-queue.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./x-world/status/status-core.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/status/his-status.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/status/link-status.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/divination/divination.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/dating-photo/dp-choice-options.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/dating/dating.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/dating-photo/dp-loader.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/calendar/calendar-local-cache.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/calendar/calendar-pending-ops.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/calendar/calendar.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/calendar/calendar-api.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/beautify-templates/template-library.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/energy/energy.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/energy/reward-panel.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/energy/reward-submit-panel.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/empty-dream-state-core.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/reply-delivery-core.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/card-reply-context.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/card-groups.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/chat/system-question-cards.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/chat/message-quotes.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/chat/card-personalization.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-ai/model-catalog.generated.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-ai/segment-stream-client.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-ai/segment-stream-renderer.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-ai/stream-scroll-controller.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-ai/character-ai.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-ai/admin-manager.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-ai/member-memory.js?v=20261109-bear-4" defer></script>
+    <script src="./x-world/character-ai/memory-client.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-profile/character-profile-schema.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-import/character-card-import.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-profile/character-profile-options.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-profile/character-profile-lifecycle.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-profile/character-opening-contract.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-profile/character-profile-migration.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-profile/character-profile-data.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-profile/character-profile-editor.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-registry/public-field-semantics.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-registry/character-registry-api.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-registry/character-instance-bridge.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-registry/character-gallery-taxonomy.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-registry/character-category-store.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-registry/character-tag-store.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/simulator-creator/simulator-creator-state.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/simulator-creator/world-creator-cloud-client.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/simulator-creator/world-import-local-client.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/simulator-creator/world-import-panel.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/simulator-creator/world-input-budget.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/simulator-creator/simulator-creator-workbench.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-registry/creator-work-list.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-registry/creator-workbench.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/world-run/world-run-cloud-client.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/world-run/world-run-view.js?v=20261030-001746-x103-front-20" defer></script>
+    <!-- X103：变量契约模块必须先于 world-run-xmessage-context 加载，后者在 factory 阶段读取 global。 -->
+    <script src="./x-world/world-run/world-run-variables.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/world-run/world-run-xmessage-context.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/world-run/world-run-progress-strip.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-registry/character-gallery-access.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./x-world/character-registry/character-gallery.js?v=20261030-001746-x103-front-20" defer></script>
+    <script>
+      // 聊天气泡与背景运行时对所有已登录用户开放；编辑工作台仍只给管理员。
+      // 加载静态脚本本身不会访问云端，真正读写只发生在刷新/当前 scope 缓存缺失/用户保存时。
+      (function loadBeautifyRuntime() {
+        var version = '?v=20261030-001746-x103-front-20';
+        var beautifyVersion = '?v=20261030-001746-x103-front-20';
+        var loadedSources = Object.create(null);
+        var loadedStyles = Object.create(null);
+        var startedAny = false;
+        var adminApplied = false;
+        var loading = false;
+        var pendingRestart = false;
+
+        function identity() {
+          var cfg = window.SHEX_CLOUDBASE_CONFIG && window.SHEX_CLOUDBASE_CONFIG.beautifyB1Gray;
+          var current = window.SHEXAuth && window.SHEXAuth.current && window.SHEXAuth.current();
+          var userId = String(current && current.userId || '');
+          var localAdminPreview = /^(?:localhost|127\.0\.0\.1)$/i.test(window.location.hostname)
+            && new URLSearchParams(window.location.search).get('demoChat') === '1'
+            && new URLSearchParams(window.location.search).get('demoUser') !== '1';
+          // 本机管理员演示可能被正式同步链判为临时登录失效；仅在 localhost demoChat 下继续加载本地美化 Runtime。
+          if (!userId && localAdminPreview && Array.isArray(cfg && cfg.adminAllowlist)) userId = String(cfg.adminAllowlist[0] || '');
+          if (!cfg || !userId) return;
+          var isAdmin = Array.isArray(cfg.adminAllowlist) && cfg.adminAllowlist.includes(userId);
+          return { userId: userId, isAdmin: isAdmin };
+        }
+
+        function addStyle(href) {
+          if (loadedStyles[href]) return;
+          loadedStyles[href] = true;
+          var node = document.createElement('link');
+          node.rel = 'stylesheet';
+          node.href = href + beautifyVersion;
+          document.head.appendChild(node);
+        }
+
+        function sourceList(isAdmin) {
+          var sources = [
+            './beautify/runtime/failure-evidence.js',
+            './beautify/contracts/beautify-naming-contract.js',
+            './beautify/contracts/scope-identity-contract.js',
+            './beautify/contracts/layer-identity-contract.js',
+            './beautify/contracts/sparse-override-contract.js',
+            './beautify/contracts/version-identity-contract.js',
+            './beautify/contracts/font-asset-contract.js',
+            './beautify/contracts/font-url-policy.js',
+            './beautify/contracts/beauty-part-registry.js',
+            './beautify/contracts/component-interaction-contract.js',
+            './beautify/contracts/random-choice-contract.js',
+            './beautify/contracts/semantic-hash.js',
+            './beautify/contracts/appearance-package-contract.js',
+            './beautify/contracts/appearance-version-reference.js',
+            './beautify/contracts/regex-safety-contract.js',
+            './beautify/safety/url-policy.js',
+            './beautify/safety/token-safety.js',
+            './beautify/safety/css-sanitizer.js',
+            './beautify/safety/html-sanitizer.js',
+            './beautify/import/legacy-script-compatibility.js',
+            './beautify/import/legacy-beautify-importer.js',
+            './beautify/safety/shadow-host.js',
+            './beautify/schema/theme-schema.js',
+            './beautify/contracts/public-theme-api.js',
+            './beautify/safety/host-part-css.js',
+            './beautify/schema/component-schema.js',
+            './beautify/core/theme-tokens.js',
+            './beautify/core/theme-merge.js',
+            './beautify/core/theme-scope.js',
+            './beautify/runtime/binding-registry.js',
+            './beautify/runtime/binding-context.js',
+            './beautify/runtime/binding-resolver.js',
+            './beautify/runtime/time-ticker.js',
+            './beautify/runtime/data-binding.js',
+            './beautify/runtime/image-slots.js',
+            './beautify/runtime/character-avatar-binding.js',
+            './beautify/runtime/preset-media-runtime.js',
+            './beautify/runtime/creator-asset-policy.js',
+            './beautify/runtime/font-runtime.js',
+            './beautify/runtime/motion-registry.js',
+            './beautify/runtime/motion-runtime.js',
+            './beautify/runtime/css-performance-runtime.js',
+            './beautify/runtime/official-actions.js',
+            './beautify/runtime/action-guard.js',
+            './beautify/runtime/component-interaction-runtime.js',
+            './beautify/runtime/random-choice-runtime.js',
+            './beautify/core/official-chat-themes.js',
+            './beautify/runtime/host-part-runtime.js',
+            './beautify/core/appearance-inheritance.js',
+            './beautify/runtime/display-rule-engine.js',
+            './beautify/renderer/fallback.js',
+            './beautify/renderer/host-variant.js',
+            './beautify/renderer/component-renderer.js',
+            './beautify/components/official-templates.js',
+            './beautify/components/official-presets.js',
+            './beautify/components/free-component-qa-sample.js',
+            './beautify/hosts/host-chat.js',
+            './beautify/api/beautify-api.js',
+            './beautify/api/creator-asset-api.js',
+            './beautify/api/font-asset-api.js',
+            './beautify/runtime/beautify-cache-core.js',
+            './beautify/runtime/chat-appearance-legacy-recovery.js',
+            './beautify/runtime/chat-open-performance.js',
+            './beautify/runtime/chat-appearance-hot-cache.js',
+            './beautify/runtime/chat-appearance-restore-coordinator.js',
+            './beautify/runtime/restore-coordinator.js',
+            './beautify/runtime/appearance-runtime.js',
+            './beautify/admin-storage-runtime.js',
+            './beautify/admin-gray-runtime.js',
+            './beautify/editor/token-ui.js',
+            './beautify/editor/workbench-draft-store.js',
+            './beautify/editor/workbench-effect-map.js',
+            './beautify/editor/theme-import-adapter.js',
+            './beautify/editor/chat-preview-mirror.js',
+            './beautify/editor/font-workbench.js',
+            './beautify/editor/random-choice-editor.js',
+            './beautify/editor/image-source-picker.js',
+            ...(/^(?:localhost|127\.0\.0\.1)$/i.test(window.location.hostname) && new URLSearchParams(window.location.search).get('candidateThemes') === '1' ? ['./beautify/editor/official-theme-candidates.js'] : []),
+            './beautify/editor/chat-workbench.js',
+            './beautify/editor/rule-tester.js'
+          ];;
+          sources = sources.concat([
+              './beautify/contracts/stage-part-registry.js',
+              './beautify/contracts/stage-placement-registry.js',
+              './beautify/contracts/stage-visibility-contract.js',
+              './beautify/hosts/stage-runtime-context.js',
+              './beautify/hosts/stage-dom-contract-binder.js',
+              './beautify/hosts/host-stage.js',
+              './beautify/editor/host-profile-registry.js',
+              './beautify/runtime/stage-theme-policy.js',
+              './beautify/runtime/stage-app-layout-policy.js',
+              './beautify/runtime/stage-trial-runtime.js',
+              './beautify/runtime/stage-appearance-codec.js',
+              './beautify/runtime/stage-persistence.js',
+              './beautify/runtime/stage-confirmed-runtime.js',
+              './beautify/editor/stage-preview-adapter.js',
+              './beautify/editor/stage-workbench-bridge.js',
+              './beautify/official/official-stage-templates-v2.js',
+              './beautify/official/contract.js',
+              './beautify/official/icons.js',
+              './beautify/official/entry-skin.js',
+              './beautify/official/model.js',
+              './beautify/official/workbench.js',
+              './beautify/editor/creator-work-beautify.js'
+            ]);
+          if (!isAdmin) sources = sources.filter(function (source) {
+            return !source.endsWith('/admin-storage-runtime.js')
+              && !source.endsWith('/admin-gray-runtime.js');
+          });
+          return sources;
+        }
+
+        function start() {
+          // 正在加载时先记下来：这一批加载完再补齐（身份可能在加载过程中才落地）。
+          if (loading) { pendingRestart = true; return; }
+          var id = identity();
+          if (!id) return;
+          // 已经按同一身份加载过：不重复加载。管理员身份是在后面才确定的，则只补齐缺失模块。
+          if (startedAny && (!id.isAdmin || adminApplied)) return;
+          startedAny = true;
+          if (id.isAdmin) adminApplied = true;
+          window.SHEX_STAGE_ADVANCED_BEAUTIFY_ENABLED = true;
+          addStyle('./beautify/beautify-scope.css');
+          addStyle('./beautify/editor/chat-workbench.css');
+          if (/^(?:localhost|127\.0\.0\.1)$/i.test(window.location.hostname) && new URLSearchParams(window.location.search).get('candidateThemes') === '1') addStyle('./beautify/editor/official-theme-candidates.css');
+          addStyle('./beautify/runtime/stage-runtime.css');
+          addStyle('./beautify/editor/stage-workbench.css');
+          var sources = sourceList(id.isAdmin).filter(function (source) { return !loadedSources[source]; });
+          if (!sources.length) {
+            document.dispatchEvent(new CustomEvent('shex:beautify-modules-ready'));
+            return;
+          }
+          loading = true;
+          window.SHEX_BEAUTIFY_MODULES_LOADING = true;
+          // X103：一次性插入全部脚本（async=false）：浏览器并行下载、仍按插入顺序执行，
+          // 取代“上一个 onload 才请求下一个”的串行链（实测 91 个脚本本地也要 0.9～1.2 秒）。
+          // 任一依赖失败则不派发 modules-ready，保持旧路径，不做降级猜测（与原语义一致）。
+          var pending = sources.length, failed = false;
+          function settle() {
+            pending -= 1;
+            if (pending > 0) return;
+            loading = false;
+            window.SHEX_BEAUTIFY_MODULES_LOADING = false;
+            if (!failed) document.dispatchEvent(new CustomEvent('shex:beautify-modules-ready'));
+            if (pendingRestart) { pendingRestart = false; start(); }
+          }
+          sources.forEach(function (source) {
+            loadedSources[source] = true;
+            var script = document.createElement('script');
+            script.async = false;
+            script.src = source + beautifyVersion;
+            script.onload = settle;
+            script.onerror = function () { failed = true; window.SHEX_BEAUTIFY_MODULES_FAILED = true; settle(); };
+            document.head.appendChild(script);
+          });
+        }
+
+        try { start(); } catch (_) { /* 模块门禁失败时静默保留旧路径。 */ }
+        // X103 冷启动：身份可能在页面解析之后才确定（恢复会话 / 登录完成）。
+        // 身份变化时只补齐尚未加载的模块，不重复加载、不写任何状态。
+        document.addEventListener('shex:auth-change', function () { try { start(); } catch (_) {} });
+        document.addEventListener('shex:user-data-restored', function () { try { start(); } catch (_) {} });
+      })();
+    </script>
+<div class="x-panel x-subpage-panel" id="xLettersV1Panel" aria-label="X信笺页面"><button class="x-subpage-back" type="button" data-x-home-back aria-label="返回 X世界">‹</button><div id="xLettersV1Mount"></div></div>
+<section class="x-panel" id="xPetPanel" aria-label="X小宠，室内像素房间">
+  <div class="pet-home">
+    <header class="pet-head">
+      <button class="pet-back" type="button" data-x-home-back aria-label="返回 X世界"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m14 6-6 6 6 6" /></svg></button>
+      <h1 class="pet-title">X小宠</h1>
+      <div class="pet-place-wrap">
+        <button class="pet-place" type="button" data-pet-place aria-haspopup="menu" aria-expanded="false" aria-controls="xPetPlaceMenu" aria-label="当前在家，点击切换场景" disabled>
+          <svg class="pet-place-icon pet-place-icon-home" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m2 7 6-5 6 5v7H9v-4H7v4H2z" /></svg>
+          <svg class="pet-place-icon pet-place-icon-outdoor" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 14V9M4.5 9h7L8 2z" /><path d="M2 14h12" /></svg>
+          <span data-pet-place-name>家</span>
+        </button>
+        <div class="pet-place-menu" id="xPetPlaceMenu" data-pet-place-menu role="menu" aria-label="选择场景" hidden>
+          <button type="button" role="menuitemradio" aria-checked="true" data-pet-scene="home"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m2 7 6-5 6 5v7H9v-4H7v4H2z" /></svg>家</button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-pet-scene="outdoor"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 14V9M4.5 9h7L8 2z" /><path d="M2 14h12" /></svg><span data-pet-scene-label="outdoor">户外</span></button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-pet-scene="beach"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 12c1.5-1.4 3-1.4 4 0s2.5 1.4 4 0 2.5-1.4 4 0" /><circle cx="11" cy="5" r="2.2" /></svg><span data-pet-scene-label="beach">海边</span></button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-pet-scene="market"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 6 3.5 2h9L14 6M3 6v8h10V6M2 6h12M6.5 14v-4h3v4" /></svg><span data-pet-scene-label="market">市集</span></button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-pet-scene="spring"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="6" r="1.5" /><path d="M8 2.5v1M8 8.5v5.5M4.8 6h-1M12.2 6h-1M5.5 12c1 0 2 .5 2.5 2M10.5 11c-1 0-2 .8-2.5 2" /></svg><span data-pet-scene-label="spring">春</span></button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-pet-scene="summer"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="8" r="3" /><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1" /></svg><span data-pet-scene-label="summer">夏</span></button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-pet-scene="autumn"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 13c0-6 3-9 10-10 0 6-3 10-8 10zM3 13l6-6" /></svg><span data-pet-scene-label="autumn">秋</span></button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-pet-scene="winter"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 2v12M2.8 5l10.4 6M13.2 5 2.8 11" /></svg><span data-pet-scene-label="winter">冬</span></button>
+        </div>
+      </div>
+    </header>
+    <div class="pet-room">
+      <div class="pet-room-composer">
+        <button class="pet-chat-send pet-music-toggle" data-pet-music-toggle type="button" aria-label="打开音乐播放器" aria-expanded="false" aria-controls="xPetMusicPanel"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 14.5V4.5l8-1.5v10"/><ellipse cx="5.5" cy="14.5" rx="2" ry="1.6"/><ellipse cx="13.5" cy="13" rx="2" ry="1.6"/></svg></button>
+        <div class="pet-music-panel" id="xPetMusicPanel" data-pet-music-panel role="group" aria-label="音乐播放器" hidden>
+          <button type="button" data-pet-music-act="toggle" aria-label="播放"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+          <button type="button" class="pet-music-copy" data-pet-music-act="playlist" aria-label="打开歌单"><span data-pet-music-title>暂未选择音乐</span><i class="pet-music-track"><b data-pet-music-bar></b></i></button>
+          <button type="button" data-pet-music-act="previous" aria-label="上一首"></button>
+          <button type="button" data-pet-music-act="next" aria-label="下一首"></button>
+          <button type="button" class="pet-music-mode" data-pet-music-act="mode" aria-label="播放方式">连续</button>
+        </div>
+        <form class="pet-chat-form" id="xPetChatForm" data-pet-chat-form aria-label="和当前 TA 说话" hidden>
+          <label class="pet-accessible" for="xPetChatInput">和 TA 说点什么</label>
+          <input class="pet-chat-input" id="xPetChatInput" data-pet-chat-input type="text" maxlength="1200" autocomplete="off" placeholder="和 TA 说点什么……">
+        </form>
+        <button class="pet-chat-send pet-chat-toggle" data-pet-chat-toggle type="button" aria-label="打开对话输入框" aria-expanded="false" aria-controls="xPetChatForm"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m3 3 14 7-14 7 3-7-3-7ZM6 10h11"/></svg></button>
+      </div>
+      <canvas data-pet-canvas width="192" height="320" role="img" aria-label="阳光照进温暖的小房间。奶油色像素小狗小宠安静地待在地毯上，偶尔眨眼、轻轻摆尾和动动耳朵。窗边有书桌，周围有小床、绿植、玩具和食水盆。">你的浏览器暂不支持像素画布。</canvas>
+      <button class="pet-species-toggle pet-visits-toggle" type="button" data-pet-visits-toggle aria-label="家的记录" aria-controls="xPetJournalSheet"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4" y="3.5" width="12" height="14" rx="1"/><path d="M7.5 2.5v2.5M12.5 2.5v2.5M7 9h6M7 12h6M7 15h3.5"/></svg></button>
+      <div class="pet-letters-sheet pet-journal-sheet" id="xPetJournalSheet" data-pet-journal-sheet role="dialog" aria-label="家的记录" hidden></div>
+      <button class="pet-species-toggle pet-letters-toggle" type="button" data-pet-letters-toggle aria-label="小宠信件" aria-controls="xPetLettersSheet"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.5" y="4.5" width="15" height="11" rx="1"/><path d="m3 5.5 7 5.5 7-5.5"/></svg><i class="pet-letters-dot" data-pet-letters-dot hidden></i></button>
+      <div class="pet-letters-sheet" id="xPetLettersSheet" data-pet-letters-sheet role="dialog" aria-label="小宠信件" hidden></div>
+      <button class="pet-species-toggle" type="button" data-pet-species-toggle aria-label="领养或切换小宠" aria-expanded="false" aria-controls="xPetSpeciesSheet"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><ellipse cx="10" cy="13.4" rx="4.2" ry="3.4"/><ellipse cx="4.6" cy="9" rx="1.7" ry="2.1"/><ellipse cx="8" cy="5.4" rx="1.7" ry="2.2"/><ellipse cx="12" cy="5.4" rx="1.7" ry="2.2"/><ellipse cx="15.4" cy="9" rx="1.7" ry="2.1"/></svg></button>
+      <div class="pet-species-sheet" id="xPetSpeciesSheet" data-pet-species-sheet role="dialog" aria-label="领养或切换小宠" hidden>
+        <div class="pet-species-head"><strong>你们的小宠</strong><span>左右滑动挑一挑</span><button type="button" data-pet-species-close aria-label="收起">×</button></div>
+        <div class="pet-species-track" data-pet-species-track></div>
+      </div>
+      <div class="pet-conversation" data-pet-conversation aria-label="共同养宠对话">
+        <div class="pet-speaker" data-pet-speaker="dream" hidden>
+          <div class="pet-person">
+            <span class="pet-avatar" data-pet-person-avatar="dream"></span>
+            <span data-pet-person-name="dream">TA</span>
+          </div>
+          <div class="pet-dialogue" data-pet-dialogue="dream" tabindex="0" hidden><p data-pet-chat-message="dream"></p></div>
+        </div>
+        <div class="pet-speaker pet-speaker-me" data-pet-speaker="me" hidden>
+          <div class="pet-person">
+            <span class="pet-avatar" data-pet-person-avatar="me"></span>
+            <span data-pet-person-name="me">我</span>
+          </div>
+          <div class="pet-dialogue" data-pet-dialogue="me" tabindex="0" hidden><p data-pet-chat-message="me"></p></div>
+        </div>
+        <p class="pet-chat-pending" data-pet-chat-pending role="status" hidden></p>
+      </div>
+      <button class="pet-hotspot pet-hit-dog" type="button" data-pet-target="pet" aria-label="点击小宠，轻轻摸摸它"></button>
+      <button class="pet-hotspot pet-hit-food" type="button" data-pet-target="feed" aria-label="点击食盆，给小宠喂饭"></button>
+      <button class="pet-hotspot pet-hit-toy" type="button" data-pet-target="play" aria-label="点击玩具，和小宠陪玩"></button>
+      <button class="pet-hotspot pet-hit-bed" type="button" data-pet-target="sleep" aria-label="点击小床，让小宠睡觉"></button>
+      <section class="pet-adoption" data-pet-adopt aria-labelledby="xPetAdoptTitle" hidden>
+        <h2 id="xPetAdoptTitle" data-pet-adopt-title>一起领养一个小家伙吧</h2>
+        <div class="pet-adoption-family" data-pet-adopt-family aria-label="等待起名字的小宠">
+          <img class="pet-adoption-dog" data-pet-adopt-image src="./x-world/pet/assets/xiaonuo-v3-collar/pet_dog_idle.png" alt="等待领养的奶油色小狗">
+        </div>
+        <p data-pet-adopt-description>这是你们共同养的第一只小宠。</p>
+        <form data-pet-name-form autocomplete="off">
+          <label for="xPetNameInput">宠物名字 <span>1～12 个字符</span></label>
+          <input id="xPetNameInput" data-pet-name-input type="text" placeholder="给它取个名字……" aria-describedby="xPetNameError" autocomplete="off">
+          <p class="pet-name-error" id="xPetNameError" data-pet-name-error role="status" aria-live="polite"></p>
+          <div class="pet-name-actions"><button type="button" data-pet-name-cancel hidden>取消</button><button type="submit" data-pet-name-submit>领养</button></div>
+        </form>
+        <p class="pet-legacy-note" data-pet-legacy-notice hidden>之前的小宠记录已原样保留。本轮从独立领养开始，不会自动分配给任何 TA。</p>
+      </section>
+      <section class="pet-empty" data-pet-empty>
+        <p data-pet-empty-text>先选择一个想一起养小宠的 TA</p>
+        <button type="button" data-x-home-back>返回 X世界选择 TA</button>
+      </section>
+      <div class="pet-feedback" data-pet-feedback role="status" aria-live="polite" aria-atomic="true" hidden>
+        <strong data-pet-feedback-message></strong><span data-pet-feedback-detail></span>
+      </div>
+      <section class="pet-sheet" id="xPetDetails" data-pet-details aria-label="小宠的状态" hidden>
+        <div class="pet-sheet-head"><h2 data-pet-details-title>小宠的日常</h2><button class="pet-close" data-pet-close type="button" aria-label="收起状态">收起</button></div>
+        <div class="pet-growth"><strong>Lv.<span data-pet-stat="level">1</span></strong><span>EXP <span data-pet-stat="exp">0 / 60</span></span></div>
+        <dl class="pet-stat-list">
+          <div><dt>饱食</dt><dd><b data-pet-stat="satiety">65</b><span data-pet-description="satiety"></span></dd></div>
+          <div><dt>心情</dt><dd><b data-pet-stat="mood">70</b><span data-pet-description="mood"></span></dd></div>
+          <div><dt>亲密</dt><dd><b data-pet-stat="intimacy">10</b><span data-pet-description="intimacy"></span></dd></div>
+          <div><dt>精力</dt><dd><b data-pet-stat="energy">80</b><span data-pet-description="energy"></span></dd></div>
+        </dl>
+        <button class="pet-rename" type="button" data-pet-rename>修改名字</button>
+        <p class="pet-save" data-pet-save-status role="status">正在读取</p>
+      </section>
+    </div>
+    <div class="pet-foot" data-pet-foot hidden>
+      <button class="pet-info" type="button" data-pet-info aria-expanded="false" aria-controls="xPetDetails"><strong data-pet-name>小宠</strong><span data-pet-level>Lv.1</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M8 13 2.5 7.6C-1 3.6 4.8.5 8 4c3.2-3.5 9-.4 5.5 3.6z" /></svg><span data-pet-intimacy>10</span><span class="pet-accessible">查看状态</span></button>
+      <span data-pet-status>在自己的小世界里，慢慢发呆</span>
+      <button class="pet-step pet-step-prev" type="button" data-pet-step="-1" aria-label="上一个场景"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3 5 8l5 5" /></svg></button>
+      <button class="pet-step pet-step-next" type="button" data-pet-step="1" aria-label="下一个场景"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5" /></svg></button>
+      <span class="pet-hint" data-pet-hint aria-live="polite">点点小宠、食盆、玩具或小床</span>
+    </div>
+    <div class="pet-chat-dock" data-pet-chat-dock hidden>
+      <div class="pet-chat-error" role="status"><span data-pet-chat-error></span><button class="pet-chat-next" data-pet-chat-retry type="button" hidden>重试</button></div>
+    </div>
+    <p class="pet-accessible">点击房间物件照顾小宠，点名字查看状态。本地保存进度；支持系统减少动态效果设置。</p>
+  </div>
+</section>
+<script src="./x-world/x-letters/x-letter-stationery.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/x-letters/x-letter-api.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/x-letters/x-letter-incoming-status.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/x-letters/x-letter-core.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/x-letters/x-letter-upload-queue.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/x-letters/x-letter-player.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/x-letters/x-letter-view.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/x-letters/x-letter-reply-flow.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/x-letters/x-letter-controller.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/custom-app/custom-app.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/play/beta-access.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/moments/moments.js?v=20261109-bear-4" defer></script>
+<script src="./x-world/session-capabilities.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/world-home-layout.js?v=20261030-001746-x103-front-20" defer></script>
+<link rel="stylesheet" href="./x-world/play/play.css?v=20261109-bear-1">
+<script src="./x-world/play/play-request.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/play/play-canvas.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/play/choice-client.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/play/choice-flow.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/play/choice-entry.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/play/choice-share.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/play/testing-access.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/play/play.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/pet/pet-state.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/pet/pet-actions.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/pet/pet-care.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/pet/pet-commands.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/pet/pet-owned-storage.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/pet/pet-sprite-assets.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/pet/pet-sprite.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/pet/pet-scene.js?v=20261109-bear-4" defer></script>
+<script src="./x-world/chat/light-chat.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/pet/pet-chat.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/pet/pet-music.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/pet/pet-room-chat.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/pet/pet-journal-store.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/pet/pet-cloud.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/pet/pet-journal.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/pet/pet-sound.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/pet/pet-app.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/pet/pet-letters.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./call-overlay-view.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/chat/letter-card.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/chat/game-invites.js?v=20261030-001746-x103-front-20" defer></script>
+<link rel="stylesheet" href="./x-world/chat/dating-cards.css?v=20261109-bear-1">
+<link rel="stylesheet" href="./bear-theme.css?v=20261109-bear-5">
+<link rel="stylesheet" href="./x-world/chat/pinyin-chat.css?v=20261110-chat-2">
+<script src="./x-world/dating-photo/dp-media-summary.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/chat/dating-cards.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/chat/dating-card-media.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./x-world/chat/link-cards.js?v=20261030-001746-x103-front-20" defer></script>
+<script src="./script.js?v=20261109-bear-8" defer></script>
+<script src="./x-world/chat/pinyin-chat-bridge.js?v=20261110-chat-2" defer></script>
+<script src="./x-world/chat/pinyin-sentence-generator.js?v=20261110-gen-1" defer></script>
+    <script src="./voice-policy.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./voice-link-state.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./chat-voice-presentation.js?v=20261030-001746-x103-front-20" defer></script>
+    <script src="./voice.js?v=20261030-001746-x103-front-20" defer></script>
+</body>
+</html>

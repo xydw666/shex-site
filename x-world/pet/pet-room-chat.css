@@ -1,0 +1,138 @@
+/* Shared single-chat presentation; the approved room and care controls remain intact. */
+#xPetPanel .pet-room,#xPetPanel .pet-head {width:min(100%,calc((var(--pet-locked-height,100svh) - 144px) * 0.6));}
+#xPetPanel .pet-room {container-type:inline-size;}
+#xPetPanel .pet-back {position:relative;left:12px;}
+#xPetPanel .pet-room-composer {
+  position:absolute;left:0;right:0;bottom:calc(100% - 3.125%);height:38px;z-index:6;
+  display:flex;align-items:center;justify-content:flex-end;gap:6px;pointer-events:none;
+}
+#xPetPanel .pet-room-composer > * {pointer-events:auto;}
+#xPetPanel[data-pet-composer-open="true"] .pet-title,
+#xPetPanel[data-pet-composer-open="true"] .pet-place {visibility:hidden;}
+#xPetPanel .pet-conversation {
+  position:absolute;inset:4.5% 7% auto;z-index:3;
+  display:grid;grid-template-columns:minmax(0,1fr);
+  line-height:1.45;pointer-events:none;
+}
+#xPetPanel .pet-speaker {grid-area:1 / 1;justify-self:start;width:max-content;max-width:96%;min-width:0;}
+#xPetPanel .pet-speaker[hidden] {display:none!important;}
+#xPetPanel .pet-speaker-me {justify-self:end;margin-left:auto;}
+#xPetPanel .pet-person {
+  display:flex;align-items:center;gap:6px;max-width:100%;min-height:36px;
+  padding:0;margin:0;border:0;border-radius:0;background:transparent;
+  box-shadow:none;color:#6a5346;font:600 12px/1.4 system-ui,"Microsoft YaHei",sans-serif;
+  pointer-events:none;transform:none;
+}
+#xPetPanel .pet-person::before,#xPetPanel .pet-person::after,
+#xPetPanel .pet-chat-next::before,#xPetPanel .pet-chat-next::after,
+#xPetPanel .pet-chat-send::before,#xPetPanel .pet-chat-send::after {content:none;}
+#xPetPanel .pet-person:hover {background:transparent;box-shadow:none;transform:none;color:#513b2e;}
+#xPetPanel .pet-speaker-me .pet-person {margin-left:auto;flex-direction:row-reverse;}
+#xPetPanel .pet-avatar {
+  width:30px;height:30px;flex:none;display:block;background:#fbefd7;
+  border:2px solid #aa805e;box-shadow:2px 2px 0 #c7a37c;
+  border-radius:2px;image-rendering:pixelated;
+}
+#xPetPanel span.pet-avatar {position:relative;overflow:hidden;}
+#xPetPanel .pet-avatar > svg {display:block;width:100%;height:100%;}
+#xPetPanel .pet-person > [data-pet-person-name] {overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:90px;}
+#xPetPanel[data-pet-adopted="false"] .pet-dialogue,
+#xPetPanel[data-pet-adopted="false"] .pet-room-composer {display:none;}
+#xPetPanel .pet-dialogue {
+  position:relative;margin-top:8px;padding:7px 8px;
+  width:fit-content;max-width:100%;min-width:2ch;box-sizing:border-box;
+  max-height:66.6667cqw;overflow-y:auto;overflow-x:clip;
+  overscroll-behavior:contain;pointer-events:auto;
+  border:2px solid #b18c6b;background:#fbefd7f2;color:#6a5346;
+  box-shadow:2px 2px 0 #c7a37c80;border-radius:2px;
+}
+#xPetPanel .pet-dialogue::before {
+  content:"";position:absolute;top:-6px;left:10px;width:6px;height:6px;
+  border-top:2px solid #b18c6b;border-left:2px solid #b18c6b;background:#fbefd7;
+}
+#xPetPanel .pet-speaker-me .pet-dialogue::before {left:auto;right:10px;}
+#xPetPanel .pet-speaker-me .pet-dialogue {margin-left:auto;}
+#xPetPanel .pet-dialogue:focus-visible {outline:2px solid #6a5346;outline-offset:2px;}
+#xPetPanel .pet-dialogue p {
+  margin:0;font:12px/1.5 system-ui,"Microsoft YaHei",sans-serif;
+  display:block;height:auto;white-space:pre-wrap;overflow-wrap:anywhere;
+}
+#xPetPanel .pet-chat-pending {grid-area:2 / 1;width:fit-content;max-width:96%;margin:5px 0 0 auto;color:#765d49;font:11px/1.4 system-ui,"Microsoft YaHei",sans-serif;}
+#xPetPanel .pet-chat-pending[hidden] {display:none!important;}
+#xPetPanel .pet-room:has([data-pet-details]:not([hidden])) .pet-conversation {visibility:hidden;}
+#xPetPanel .pet-chat-dock {
+  width:min(88%,380px);flex:none;margin:0 0 4px;line-height:1.4;
+}
+#xPetPanel .pet-chat-caption {display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px;font-size:10px;color:#6a5346;}
+#xPetPanel .pet-chat-error {display:flex;gap:8px;align-items:center;color:#765d49;font-size:11px;overflow-wrap:anywhere;}
+#xPetPanel .pet-chat-next {
+  margin:0;padding:2px 0;border:0;border-radius:0;background:transparent;
+  box-shadow:none;color:#6a5346;font:inherit;text-decoration:underline;
+  text-underline-offset:3px;cursor:pointer;transform:none;
+}
+#xPetPanel .pet-chat-next:hover {color:#513b2e;background:transparent;box-shadow:none;transform:none;}
+#xPetPanel .pet-chat-form {
+  position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:calc(100% - 104px);
+  display:flex;min-width:0;align-items:center;min-height:38px;padding:0 8px;
+  border:1px solid #aa805e;background:#f5e4c9;border-radius:2px;
+}
+#xPetPanel .pet-chat-input {
+  width:100%;min-width:0;height:36px;margin:0;padding:0;border:0;border-radius:0;
+  background:transparent;color:#6a5346;box-shadow:none;font:16px/1.4 system-ui,"Microsoft YaHei",sans-serif;
+  caret-color:#6a5346;outline:none;
+}
+#xPetPanel .pet-chat-input::placeholder {color:#765d49;opacity:1;}
+#xPetPanel .pet-chat-form:focus-within {outline:2px solid #6a5346;outline-offset:2px;}
+#xPetPanel .pet-chat-send {
+  width:36px;height:36px;min-width:36px;margin:0;padding:8px;
+  border:0;border-radius:0;box-shadow:none;background:transparent;color:#6a5346;
+  cursor:pointer;transform:none;
+}
+#xPetPanel .pet-chat-send svg {display:block;width:18px;height:18px;}
+#xPetPanel .pet-chat-toggle {position:absolute;right:2.6%;bottom:1px;display:flex;align-items:flex-end;justify-content:center;padding:0 8px 2px;}
+#xPetPanel .pet-chat-toggle:hover,#xPetPanel .pet-chat-toggle:focus,#xPetPanel .pet-chat-toggle:active {background:transparent;box-shadow:none;transform:none;}
+#xPetPanel .pet-person:focus-visible,#xPetPanel .pet-chat-next:focus-visible,#xPetPanel .pet-chat-send:focus-visible {outline:2px solid #6a5346;outline-offset:3px;}
+/* 小飞机按钮不显示任何外框：点按、发送后焦点回到它时都保持干净。 */
+#xPetPanel .pet-chat-toggle,#xPetPanel .pet-chat-toggle:focus,#xPetPanel .pet-chat-toggle:focus-visible,#xPetPanel .pet-chat-toggle:active {outline:none;border-color:transparent;-webkit-tap-highlight-color:transparent;}
+@media(max-width:350px){
+  #xPetPanel .pet-person {font-size:11px;gap:5px;}
+  #xPetPanel .pet-dialogue {padding:6px;}
+  #xPetPanel .pet-dialogue p {font-size:11px;line-height:1.5;}
+}
+@media(max-height:560px){
+  #xPetPanel:not(.pet-keyboard-lock) .pet-room,#xPetPanel:not(.pet-keyboard-lock) .pet-head {width:min(100%,calc((var(--pet-locked-height,100svh) - 138px) * 0.6));}
+  #xPetPanel:not(.pet-keyboard-lock) .pet-head {margin-bottom:16px;}
+  #xPetPanel:not(.pet-keyboard-lock) .pet-avatar {width:24px;height:24px;}
+  #xPetPanel:not(.pet-keyboard-lock) .pet-person {font-size:10px;min-height:28px;}
+  #xPetPanel:not(.pet-keyboard-lock) .pet-dialogue {padding:4px;}
+  #xPetPanel:not(.pet-keyboard-lock) .pet-dialogue p {font-size:10px;line-height:1.4;}
+}
+
+/* 左上角的小音符和顶部中间的播放条：位置、纸面底色和小飞机的输入框完全对称。 */
+#xPetPanel .pet-music-toggle {position:absolute;left:2.6%;bottom:1px;display:flex;align-items:flex-end;justify-content:center;padding:0 8px 2px;}
+#xPetPanel .pet-music-toggle,#xPetPanel .pet-music-toggle:hover,#xPetPanel .pet-music-toggle:focus,#xPetPanel .pet-music-toggle:focus-visible,#xPetPanel .pet-music-toggle:active {background:transparent;box-shadow:none;transform:none;outline:none;border-color:transparent;-webkit-tap-highlight-color:transparent;}
+#xPetPanel[data-pet-music-playing="true"] .pet-music-toggle svg {animation:pet-music-bob 1.2s steps(2,end) infinite;}
+@keyframes pet-music-bob {50% {transform:translateY(-2px);}}
+@media (prefers-reduced-motion:reduce){#xPetPanel[data-pet-music-playing="true"] .pet-music-toggle svg {animation:none;}}
+#xPetPanel[data-pet-music-open="true"] .pet-title,#xPetPanel[data-pet-music-open="true"] .pet-place {visibility:hidden;}
+#xPetPanel .pet-music-panel {
+  position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:calc(100% - 104px);
+  display:flex;align-items:center;gap:2px;min-width:0;min-height:38px;padding:0 4px;box-sizing:border-box;
+  border:1px solid #aa805e;background:#f5e4c9;border-radius:2px;color:#6a5346;line-height:1.4;
+}
+#xPetPanel .pet-music-panel[hidden] {display:none!important;}
+#xPetPanel .pet-music-panel button {
+  flex:none;display:grid;place-items:center;width:28px;height:32px;min-width:0;margin:0;padding:0;border:0;border-radius:2px;
+  background:transparent;box-shadow:none;color:inherit;font:inherit;cursor:pointer;transform:none;outline:none;-webkit-tap-highlight-color:transparent;
+}
+#xPetPanel .pet-music-panel button::before,#xPetPanel .pet-music-panel button::after,#xPetPanel .pet-music-toggle::before,#xPetPanel .pet-music-toggle::after {content:none;}
+#xPetPanel .pet-music-panel button:hover,#xPetPanel .pet-music-panel button:active {background:#ecd6b4;box-shadow:none;transform:none;}
+#xPetPanel .pet-music-panel button:focus-visible {outline:2px solid #6a5346;outline-offset:-2px;}
+#xPetPanel .pet-music-panel svg {display:block;width:18px;height:18px;}
+#xPetPanel .pet-music-panel .pet-music-copy {flex:1 1 auto;display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:3px;width:auto;padding:0 4px;text-align:left;}
+#xPetPanel .pet-music-copy > span {overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:12px;font-weight:600;}
+#xPetPanel .pet-music-track {display:block;height:2px;background:#d9bd97;}
+#xPetPanel .pet-music-track > b {display:block;width:0;height:100%;background:#8a6a52;}
+#xPetPanel .pet-music-panel .pet-music-mode {width:auto;height:22px;padding:0 5px;border:1px solid #aa805e;font-size:11px;}
+/* 输入时锁定面板高度：键盘从底部盖上来，小屋不随可视高度变小而整体上移。 */
+body[data-x-page="pet"] #xPetPanel.x-clean-active.pet-keyboard-lock{height:var(--pet-locked-height)!important;min-height:var(--pet-locked-height)!important;max-height:none!important;bottom:auto!important;}

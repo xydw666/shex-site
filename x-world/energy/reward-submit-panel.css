@@ -1,0 +1,561 @@
+/**
+ * SHE.X 内容奖励提交面板样式（reward-submit-panel.js 专用）。
+ *
+ * 纪律：
+ * - 只使用 x-energy-submit- 前缀的新类名，绝不声明 energy.css / reward-panel.css 里已有的选择器
+ *   （例如 .x-energy-reward-card / .x-energy-invite-* 一概不碰），避免和主控接线冲突。
+ * - 不使用任何优先级强制声明标记。
+ * - 不使用 content 伪元素注入文案：金额与次数一律只能由 JS 从 rewardCatalog 渲染，
+ *   样式层不允许成为第二个数字来源。
+ * - 不做重型模块标题，靠留白与既有功能区分隔。
+ * - 颜色全部走 energy 既有 CSS 变量，深浅色主题自动跟随；fallback 值给浅色主题的
+ *   合理取值（不是白色半透明），不再假设深色底。
+ * - 暗夜模式偏纯黑/深灰/中性灰，紫色只用在按钮与强调点缀（--energy-accent /
+ *   --x-energy-accent-soft），不做玻璃拟态、不发光、不大面积渐变紫。
+ */
+
+.x-energy-submit-block {
+  display: block;
+  margin-top: 16px;
+}
+
+.x-energy-submit-block[hidden] {
+  display: none;
+}
+
+.x-energy-submit-card {
+  display: block;
+  margin-top: 10px;
+  padding: 14px;
+  border: 1px solid var(--energy-line, #efe8e1);
+  border-radius: 14px;
+  background: var(--energy-card, #ffffff);
+  color: var(--energy-text, inherit);
+}
+
+.x-energy-submit-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.x-energy-submit-intro {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.x-energy-submit-heading {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.x-energy-submit-highlight {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.x-energy-submit-highlight strong {
+  color: var(--energy-accent, inherit);
+  white-space: nowrap;
+}
+
+.x-energy-submit-summary {
+  margin: 0;
+  color: var(--energy-muted, #7b6e60);
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.x-energy-submit-summary strong {
+  color: var(--energy-text, inherit);
+  white-space: nowrap;
+}
+
+.x-energy-submit-creator-home {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 8px 14px;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+
+.x-energy-submit-creator-home-copy {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.x-energy-submit-creator-home-copy strong {
+  margin-top: 0;
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.x-energy-submit-creator-home-amounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 0;
+  color: var(--energy-accent, #daac81);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.x-energy-submit-creator-home-amounts span {
+  white-space: nowrap;
+}
+
+.x-energy-submit-creator-home-summary {
+  margin: 0;
+  color: var(--energy-muted, #7b6e60);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.x-energy-submit-creator-home > button {
+  align-self: center;
+  grid-column: 2;
+  grid-row: 1;
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 14px;
+  color: var(--x-energy-on-accent, #fff);
+  background: var(--energy-accent, #daac81);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.x-energy-submit-creator-home > button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.x-energy-submit-creator-home-selector {
+  grid-column: 1 / -1;
+  min-width: 0;
+  margin-top: 7px;
+}
+
+.x-energy-submit-tab {
+  flex: 1 1 auto;
+  padding: 7px 12px;
+  border: 1px solid var(--energy-line, #efe8e1);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.x-energy-submit-tab:hover {
+  border-color: var(--energy-accent, #daac81);
+}
+
+.x-energy-submit-tab[data-active="true"] {
+  border-color: transparent;
+  background: var(--energy-accent, #daac81);
+  color: var(--x-energy-on-accent, #ffffff);
+  font-weight: 600;
+}
+
+.x-energy-submit-form-wrap {
+  display: block;
+  margin-top: 10px;
+}
+
+.x-energy-submit-form-wrap[hidden] {
+  display: none;
+}
+
+.x-energy-submit-creator {
+  display: grid;
+  gap: 9px;
+}
+
+.x-energy-submit-creator-rules {
+  margin: 0;
+  color: var(--energy-muted, #7b6e60);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.x-energy-submit-creator-work {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 11px;
+  border: 1px solid var(--energy-line, #efe8e1);
+  border-radius: 12px;
+  background: var(--energy-card, #fff);
+}
+
+.x-energy-submit-creator-work-copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.x-energy-submit-creator-work-copy strong,
+.x-energy-submit-creator-work-copy span {
+  overflow-wrap: anywhere;
+}
+
+.x-energy-submit-creator-work-copy strong {
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.x-energy-submit-creator-work-copy span {
+  color: var(--energy-muted, #7b6e60);
+  font-size: 11px;
+}
+
+.x-energy-submit-creator-amount {
+  color: var(--energy-accent, #daac81);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.x-energy-submit-creator-choice {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  color: var(--energy-text, inherit);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.x-energy-submit-creator-choice input {
+  accent-color: var(--energy-accent, #daac81);
+}
+
+.x-energy-submit-creator-choice:has(input:disabled) {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+.x-energy-submit-record-work {
+  margin: 5px 0 0;
+  color: var(--energy-muted, #7b6e60);
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.x-energy-submit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.x-energy-submit-rules {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.x-energy-submit-rule {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--energy-muted, #8a7b6c);
+}
+
+.x-energy-submit-amount {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.x-energy-submit-tier-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.x-energy-submit-tier {
+  padding: 3px 9px;
+  border: 1px solid var(--energy-line, #efe8e1);
+  border-radius: 999px;
+  /* 主控收口：档位胶囊改用中性次级底色。五个胶囊连排时，紫色软底会在暗夜模式下形成一片
+     发紫的区块，与「大面积背景不要紫、卡片不要发紫」冲突；紫色只留给按钮与强调文字。 */
+  background: var(--energy-card-soft, #f7f3f0);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.x-energy-submit-tier-note {
+  margin: 2px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--energy-muted, #8a7b6c);
+}
+
+.x-energy-submit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.x-energy-submit-label {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--energy-muted, #8a7b6c);
+}
+
+.x-energy-submit-input,
+.x-energy-submit-select {
+  width: 100%;
+  min-width: 0;
+  padding: 7px 10px;
+  border: 1px solid var(--energy-line, #efe8e1);
+  border-radius: 10px;
+  background: var(--x-energy-input, #f7f3f0);
+  color: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.x-energy-submit-input:disabled,
+.x-energy-submit-select:disabled {
+  opacity: 0.55;
+}
+
+/*
+ * 自定义上传触发区：原生 <input type="file"> 保留在 DOM 里（上传逻辑与事件绑定不变），
+ * 用绝对定位 + opacity:0 盖在自定义外观按钮上；键盘 Tab / Enter 依然落在原生 input 上，
+ * disabled 时原生 input 本身不可交互，触发区只是同步降低透明度提示状态。
+ */
+.x-energy-submit-file-trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  padding: 7px 10px;
+  border: 1px solid var(--energy-line, #efe8e1);
+  border-radius: 10px;
+  background: var(--x-energy-input, #f7f3f0);
+  color: var(--energy-muted, #8a7b6c);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.x-energy-submit-file-trigger[data-disabled="true"] {
+  opacity: 0.55;
+}
+
+.x-energy-submit-file-trigger-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.x-energy-submit-file-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.x-energy-submit-file-input:disabled {
+  cursor: not-allowed;
+}
+
+.x-energy-submit-file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.x-energy-submit-file-list[hidden] {
+  display: none;
+}
+
+.x-energy-submit-file {
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 1.6;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--energy-muted, #8a7b6c);
+}
+
+.x-energy-submit-action {
+  align-self: flex-start;
+  padding: 7px 18px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--energy-accent, #daac81);
+  color: var(--x-energy-on-accent, #ffffff);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.x-energy-submit-action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.x-energy-submit-status {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--energy-muted, #8a7b6c);
+}
+
+.x-energy-submit-status[hidden] {
+  display: none;
+}
+
+.x-energy-submit-status[data-tone="error"] {
+  color: #d2453f;
+}
+
+.x-energy-submit-section-label {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.x-energy-submit-empty {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--energy-muted, #8a7b6c);
+}
+
+.x-energy-submit-record-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.x-energy-submit-record {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid var(--energy-line, #efe8e1);
+  border-radius: 12px;
+  background: var(--energy-card-soft, #f7f3f0);
+}
+
+.x-energy-submit-record[data-status="rejected"] {
+  border-color: #d2453f;
+}
+
+.x-energy-submit-record-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.x-energy-submit-record-type {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.x-energy-submit-record-status {
+  flex: 0 0 auto;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: nowrap;
+  color: var(--energy-muted, #8a7b6c);
+}
+
+.x-energy-submit-record-status[data-energy-submit-record-status="rejected"] {
+  color: #d2453f;
+}
+
+.x-energy-submit-record-status[data-energy-submit-record-status="granted"] {
+  color: var(--energy-accent, #daac81);
+}
+
+.x-energy-submit-record-meta,
+.x-energy-submit-record-link {
+  overflow: hidden;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--energy-muted, #8a7b6c);
+}
+
+.x-energy-submit-record-amount {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.x-energy-submit-record-note {
+  margin: 4px 0 0;
+  padding: 8px 10px;
+  border-left: 3px solid #d2453f;
+  border-radius: 8px;
+  background: var(--energy-card, #ffffff);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.x-energy-submit-retry {
+  align-self: flex-start;
+  margin-top: 4px;
+  padding: 5px 14px;
+  border: 1px solid var(--energy-line, #efe8e1);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 12px;
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+.x-energy-submit-retry:hover {
+  border-color: var(--energy-accent, #daac81);
+}
+
+@media (max-width: 480px) {
+  .x-energy-submit-tab {
+    flex-basis: 100%;
+  }
+
+  .x-energy-submit-record-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+}

@@ -1,0 +1,37 @@
+.shex-creator-save-bottom{display:flex;justify-content:flex-end;gap:10px;padding:4px}
+.shex-public-preview{display:grid;gap:18px}
+.shex-public-status{display:flex;align-items:center;gap:8px;width:max-content;max-width:100%;padding:7px 12px;border-radius:999px;font-size:13px}
+.shex-public-status.is-ready{border:1px solid rgba(76,142,103,.26);background:rgba(236,248,240,.82);color:#3f7655}
+.shex-public-status.is-ready i{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#5c9870;color:#fff;font-style:normal;font-size:11px}
+.shex-public-status.is-ready .shex-review-status{margin:0;padding:0;background:transparent;color:inherit;font-size:11px}
+.shex-public-status.is-blocked{display:grid;width:auto;border:1px solid rgba(180,70,91,.22);background:rgba(255,240,243,.8);color:#93485b}
+.shex-public-status.is-blocked ul{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.shex-public-status.is-blocked button{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;border:0;background:transparent;color:inherit;text-align:left}
+.shex-public-preview-actions{display:flex;justify-content:flex-end}
+.shex-public-preview-actions button{min-height:42px;border:0;border-radius:14px;padding:0 20px;background:#ac8052;color:#fff;font:inherit}
+.shex-public-preview-head,.shex-private-exclusions{padding:20px;border:1px solid rgba(170,127,82,.18);border-radius:22px;background:rgba(255,255,255,.76)}
+.shex-public-preview-head small{letter-spacing:.16em;color:#ba956c}
+.shex-public-preview-head h3{margin:6px 0;font-size:28px}
+.shex-public-preview-head p,.shex-private-exclusions{color:#957450}
+.shex-public-confirmation{margin:0;padding:14px 16px;border-radius:15px;background:#f8f4ef;color:#8b4558}
+.shex-public-readiness{padding:18px 20px;border-radius:18px;border:1px solid rgba(170,127,82,.18);background:rgba(255,255,255,.76)}
+.shex-public-readiness.ready{border-color:rgba(76,142,103,.32);background:rgba(236,248,240,.86)}
+.shex-public-readiness.blocked{border-color:rgba(180,70,91,.28);background:rgba(255,240,243,.88)}
+.shex-public-readiness h4,.shex-public-readiness p{margin:0 0 8px}
+.shex-public-readiness ul{margin:6px 0;padding-left:20px}
+.shex-public-readiness small{display:block;margin-top:10px;color:#987751}
+.shex-public-warnings{margin-top:12px;padding-top:12px;border-top:1px solid rgba(170,127,82,.12)}
+.shex-public-readiness button{margin-top:12px}
+.shex-review-status{padding:10px 12px;border-radius:12px;background:rgba(170,127,82,.08)}
+.shex-review-queue{display:grid;gap:16px}
+.shex-review-card{display:grid;gap:12px;padding:20px;border:1px solid rgba(170,127,82,.18);border-radius:22px;background:rgba(255,255,255,.78)}
+.shex-review-card header,.shex-review-actions{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.shex-review-card label{display:grid;gap:7px}.shex-review-card textarea{min-height:88px}
+.shex-public-preview-fields{display:grid;gap:0;margin:0;padding:4px 20px;border:1px solid rgba(170,127,82,.18);border-radius:22px;background:rgba(255,255,255,.76)}
+.shex-public-preview-field{display:grid;grid-template-columns:minmax(120px,28%) 1fr;gap:16px;padding:14px 0;border-bottom:1px solid rgba(170,127,82,.12)}
+.shex-public-preview-field:last-child{border-bottom:0}
+.shex-public-preview-field dt{color:#ac8052}
+.shex-public-preview-field dd{margin:0;white-space:pre-wrap;color:#433220}
+.shex-private-exclusions h4{margin:0 0 8px;color:#7c5d3c}
+.shex-private-exclusions ul{margin:0;padding-left:20px}
+@media(max-width:640px){.shex-creator-save-bottom{display:grid}.shex-public-preview-field{grid-template-columns:1fr;gap:5px}}

@@ -1,0 +1,1468 @@
+body[data-x-page="divination"] #xDivinationPanel {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  right: 0;
+  bottom: auto;
+  left: 0;
+  height: 100vh;
+  height: var(--shex-divination-vh, 100vh);
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overscroll-behavior: contain;
+}
+
+body[data-x-page="divination"] #xDivinationPanel::-webkit-scrollbar {
+  display: none;
+}
+
+body[data-x-page="divination"] #xDivinationPanel > .x-subpage-back.shex-divination-back {
+  position: fixed;
+  left: 16px;
+  left: max(16px, env(safe-area-inset-left, 0px) + 16px);
+  top: 14px;
+  top: max(14px, env(safe-area-inset-top, 0px) + 14px);
+  z-index: 30;
+  width: 28px;
+  height: 32px;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--ink);
+  background: transparent;
+  box-shadow: none;
+  font-size: 30px;
+}
+
+body[data-x-page="divination"] #xDivinationPanel > .x-subpage-back.shex-divination-back.is-history-back {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+body[data-x-page="divination"] #xDivinationPanel > .x-subpage-back.shex-divination-back.is-dark-step-back {
+  color: #fff;
+  text-shadow: 0 1px 5px rgba(58,40,23,0.65);
+}
+
+body[data-x-page="divination"] #xDivinationPanel > .x-subpage-back.shex-divination-back.is-history-back:hover,
+body[data-x-page="divination"] #xDivinationPanel > .x-subpage-back.shex-divination-back.is-history-back:focus-visible {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+body[data-x-page="divination"] #xDivinationPanel .x-status-page-shell,
+body[data-x-page="divination"] #xDivinationPanel .x-status-page-content {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.shex-divination-beta-gate {
+  display: grid;
+  min-height: 100%;
+  padding: 24px;
+  background: radial-gradient(circle at 50% 22%, rgba(255, 255, 255, 0.82), transparent 30%), linear-gradient(145deg, #f9f4ee 0%, #f6f0e9 56%, #ede0d2 100%);
+  place-items: center;
+}
+
+.shex-divination-beta-sheet {
+  display: grid;
+  width: min(100%, 360px);
+  gap: 14px;
+  border: 1px solid rgba(183,142,101,0.22);
+  border-radius: 20px;
+  padding: 26px 22px 22px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.58);
+  box-shadow: 0 18px 46px rgba(119,87,55,0.14);
+}
+
+.shex-divination-beta-sheet p,
+.shex-divination-beta-sheet h1 {
+  margin: 0;
+}
+
+.shex-divination-beta-kicker {
+  color: var(--violet);
+  font-family: Georgia, serif;
+  font-size: 14px;
+  letter-spacing: 0.18em;
+}
+
+.shex-divination-beta-sheet h1 {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.shex-divination-beta-sheet > p:not(.shex-divination-beta-kicker):not(.shex-divination-beta-error) {
+  color: rgba(65,47,31,0.62);
+  font-size: 14px;
+}
+
+.shex-divination-beta-field {
+  display: grid;
+  gap: 8px;
+  color: rgba(65,47,31,0.7);
+  font-size: 13px;
+}
+
+.shex-divination-beta-field input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(183,142,101,0.2);
+  border-radius: 12px;
+  padding: 12px 13px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.8);
+  font: inherit;
+  outline: 0;
+}
+
+.shex-divination-beta-field input:focus {
+  border-color: rgba(156,116,73,0.6);
+}
+
+.shex-divination-beta-error {
+  min-height: 1.4em;
+  color: #b54e63;
+  font-size: 13px;
+}
+
+.shex-divination-beta-sheet button {
+  border: 0;
+  border-radius: 999px;
+  padding: 13px 20px;
+  color: #fff;
+  background: linear-gradient(135deg, #c9a37d, #9c7449);
+  box-shadow: 0 12px 26px rgba(148,108,67,0.24);
+  font: inherit;
+}
+
+.shex-divination-flow {
+  position: relative;
+  isolation: isolate;
+  height: 100%;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overscroll-behavior: contain;
+  color: var(--ink);
+}
+
+.shex-divination-flow::-webkit-scrollbar {
+  display: none;
+}
+
+.shex-divination-flow::before,
+.shex-divination-flow::after {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.shex-divination-flow::before {
+  opacity: 1;
+  background: radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.8), transparent 28%), linear-gradient(145deg, #f9f4ee 0%, #f6f0e9 56%, #ede0d2 100%);
+  transition: opacity 1.1s ease;
+}
+
+.shex-divination-flow::after {
+  opacity: 0;
+  background: radial-gradient(circle at 50% 42%, #67492e 0%, #3f2d1d 55%, #392819 100%);
+  transition: opacity 1.1s ease;
+}
+
+.shex-divination-flow.to-meditate,
+.shex-divination-flow.to-select,
+.shex-divination-flow.to-reveal,
+.shex-divination-flow.to-history {
+  color: #faf3ed;
+}
+
+.shex-divination-flow.to-meditate::before,
+.shex-divination-flow.to-select::before,
+.shex-divination-flow.to-reveal::before,
+.shex-divination-flow.to-history::before {
+  opacity: 0;
+}
+
+.shex-divination-flow.to-meditate::after,
+.shex-divination-flow.to-select::after,
+.shex-divination-flow.to-reveal::after,
+.shex-divination-flow.to-history::after {
+  opacity: 1;
+}
+
+.shex-divination-question-layer,
+.shex-divination-meditate-layer,
+.shex-divination-select-layer,
+.shex-divination-reveal-layer,
+.shex-divination-history-layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  inset: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.shex-divination-question-layer::-webkit-scrollbar,
+.shex-divination-meditate-layer::-webkit-scrollbar,
+.shex-divination-select-layer::-webkit-scrollbar,
+.shex-divination-reveal-layer::-webkit-scrollbar,
+.shex-divination-history-layer::-webkit-scrollbar {
+  display: none;
+}
+
+.shex-divination-question-layer {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 50px 22px 34px;
+  padding: 50px clamp(22px, 6vw, 62px) 34px;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.shex-divination-question-ornaments {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background-color: #f8f4ef;
+  background-image:
+    url("./assets/divination-bg-composite-preview_5-overlay-strong.png?v=20261030-001746-x103-front-20"),
+    radial-gradient(circle at 50% 23%, rgba(255, 251, 239, 0.24), rgba(246,236,225,0.12) 28%, rgba(249,244,238,0) 48%),
+    linear-gradient(180deg, #f8f4ef 0%, #f8f4ef 24%, #f8f4ef 52%, #f1e7dd 92%, #f1e7dd 100%);
+  background-position: center top, center top, center top;
+  background-size: 500px 820px, 100% 100%, 100% 100%;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  opacity: 1;
+  pointer-events: none;
+}
+
+.shex-divination-question-heading,
+.shex-divination-cards,
+.shex-divination-continue,
+.shex-divination-history-entry {
+  position: relative;
+  z-index: 1;
+}
+
+.shex-divination-zodiac {
+  position: absolute;
+  display: none;
+  width: 96px;
+  width: clamp(76px, 19vw, 118px);
+  height: auto;
+  overflow: visible;
+  opacity: 0.22;
+  transform-origin: center;
+}
+
+.shex-divination-zodiac polyline,
+.shex-divination-zodiac path {
+  fill: none;
+  stroke: rgba(173,130,85,0.34);
+  stroke-width: 1.45;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.shex-divination-zodiac circle {
+  fill: rgba(183,144,103,0.58);
+  stroke: none;
+  filter: drop-shadow(0 0 5px rgba(211,180,149,0.2));
+}
+
+.shex-divination-zodiac-taurus {
+  top: 21%;
+  left: 7%;
+  transform: rotate(-8deg);
+}
+
+.shex-divination-zodiac-aquarius {
+  top: 30%;
+  right: 6%;
+  opacity: 0.2;
+  transform: rotate(8deg);
+}
+
+.shex-divination-zodiac-pisces {
+  right: 11%;
+  bottom: 12%;
+  opacity: 0.17;
+  transform: rotate(-6deg);
+}
+
+.shex-divination-zodiac-aries {
+  left: 9%;
+  bottom: 15%;
+  opacity: 0.16;
+  transform: rotate(5deg);
+}
+
+.shex-divination-zodiac-small-one {
+  top: 17%;
+  right: 28%;
+  width: 60px;
+  width: clamp(48px, 12vw, 72px);
+  opacity: 0.16;
+  transform: rotate(-10deg);
+}
+
+.shex-divination-zodiac-small-two {
+  left: 26%;
+  bottom: 9%;
+  width: 48px;
+  width: clamp(38px, 10vw, 56px);
+  opacity: 0.14;
+  transform: rotate(8deg);
+}
+
+.shex-divination-question-heading {
+  text-align: center;
+}
+
+.shex-divination-audio-toggle {
+  position: absolute;
+  z-index: 20;
+  top: 18px;
+  top: max(18px, env(safe-area-inset-top, 0px) + 14px);
+  right: 24px;
+  right: clamp(18px, 5vw, 54px);
+  display: grid;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  color: rgba(144,106,67,0.82);
+  background: transparent;
+  box-shadow: none;
+  place-items: center;
+}
+
+.shex-divination-audio-toggle svg {
+  width: 21px;
+  height: 21px;
+}
+
+.shex-divination-audio-toggle .shex-divination-audio-slash {
+  color: rgba(171,126,79,0.86);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.shex-divination-audio-toggle.is-muted .shex-divination-audio-wave {
+  opacity: 0.2;
+}
+
+.shex-divination-audio-toggle.is-muted .shex-divination-audio-slash {
+  opacity: 1;
+}
+
+.shex-divination-flow.to-meditate .shex-divination-audio-toggle,
+.shex-divination-flow.to-select .shex-divination-audio-toggle,
+.shex-divination-flow.to-reveal .shex-divination-audio-toggle,
+.shex-divination-flow.to-history .shex-divination-audio-toggle {
+  color: rgba(250,244,237,0.86);
+  background: transparent;
+  box-shadow: none;
+}
+
+.shex-divination-flow.to-meditate .shex-divination-audio-toggle .shex-divination-audio-slash,
+.shex-divination-flow.to-select .shex-divination-audio-toggle .shex-divination-audio-slash,
+.shex-divination-flow.to-reveal .shex-divination-audio-toggle .shex-divination-audio-slash,
+.shex-divination-flow.to-history .shex-divination-audio-toggle .shex-divination-audio-slash {
+  color: rgba(236,219,202,0.92);
+}
+
+.shex-divination-question-heading p,
+.shex-divination-card-heading h2,
+.shex-divination-meditate-copy p,
+.shex-divination-enter-note,
+.shex-divination-select-header p {
+  margin: 0;
+}
+
+.shex-divination-question-heading p {
+  color: var(--violet);
+  font-family: Georgia, serif;
+  font-size: 17px;
+  letter-spacing: 0.2em;
+}
+
+.shex-divination-orb-motion {
+  position: absolute;
+  z-index: 3;
+  top: 158px;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  transform: translateX(-50%) scale(1);
+  transition: top 1.15s cubic-bezier(0.22, 0.78, 0.2, 1), transform 1.15s cubic-bezier(0.22, 0.78, 0.2, 1);
+  pointer-events: none;
+}
+
+.shex-divination-orb {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 32%, #fff8ea 0%, #f7ede4 42%, #d3b08e 100%);
+  box-shadow: 0 0 46px 16px rgba(222,190,158,0.55);
+  animation: shex-divination-orb-breathe 3.6s ease-in-out infinite;
+}
+
+.shex-divination-cards {
+  display: grid;
+  gap: 14px;
+  width: 86%;
+  max-width: 520px;
+  width: min(86%, 520px);
+  margin: 242px auto 0;
+}
+
+.shex-divination-input-card {
+  position: relative;
+  border: 0;
+  border-radius: 0;
+  padding: 0 2px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.shex-divination-card-heading {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.shex-divination-card-heading h2 {
+  width: 100%;
+  font-family: "Kaiti SC", "STKaiti", "KaiTi", "Songti SC", serif;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-align: left;
+}
+
+.shex-divination-card-heading h2::before {
+  content: none;
+}
+
+.shex-divination-input-card[data-divination-field="question"] .shex-divination-card-heading h2::before {
+  content: none;
+}
+
+.shex-divination-input-card[data-divination-field="background"] .shex-divination-card-heading h2::before {
+  content: none;
+}
+
+.shex-divination-help {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+  padding: 3px 0;
+  color: rgba(157,118,77,0.8);
+  background: transparent;
+  font-size: 12px;
+}
+
+.shex-divination-input-card label {
+  display: block;
+  border-top: 1px dashed rgba(183,142,101,0.25);
+  margin-top: 9px;
+  padding-top: 8px;
+}
+
+.shex-divination-input-card textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  border: 0;
+  outline: 0;
+  padding: 0;
+  resize: vertical;
+  scrollbar-width: none;
+  color: var(--ink);
+  background: transparent;
+  font: inherit;
+  line-height: 1.55;
+}
+
+.shex-divination-input-card textarea::placeholder {
+  color: rgba(179,138,95,0.42);
+  opacity: 1;
+  font-family: "Kaiti SC", "STKaiti", "KaiTi", "Songti SC", serif;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.shex-divination-input-card textarea::-webkit-input-placeholder {
+  color: rgba(179,138,95,0.42);
+  font-family: "Kaiti SC", "STKaiti", "KaiTi", "Songti SC", serif;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.shex-divination-input-card textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.shex-divination-input-card textarea[data-divination-background] {
+  min-height: 116px;
+}
+
+.shex-divination-continue {
+  width: 86%;
+  max-width: 520px;
+  width: min(86%, 520px);
+  margin: auto auto 0;
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 22px;
+  color: #fff;
+  background: linear-gradient(135deg, #c9a37d, #9c7449);
+  box-shadow: 0 12px 26px rgba(148,108,67,0.26);
+  font: inherit;
+  font-size: 16px;
+}
+
+.shex-divination-history-entry {
+  position: absolute;
+  right: 28px;
+  right: clamp(22px, 6vw, 62px);
+  bottom: 84px;
+  border: 0;
+  padding: 8px 3px;
+  color: rgba(144,106,66,0.82);
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+.shex-divination-continue[aria-disabled="true"],
+.shex-divination-continue:disabled,
+.shex-divination-confirm:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+  box-shadow: none;
+}
+
+.shex-divination-meditate-layer {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 0 30px 160px;
+  padding: 0 30px 23vh;
+  padding: 0 30px 23svh;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.shex-divination-meditate-copy,
+.shex-divination-enter,
+.shex-divination-enter-note {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.62s ease 0.7s, transform 0.62s ease 0.7s;
+}
+
+.shex-divination-meditate-copy {
+  display: grid;
+  gap: 9px;
+  margin: 0 0 4px;
+  color: rgba(250,243,237,0.9);
+  font-size: 17px;
+  letter-spacing: 0.12em;
+  line-height: 1.8;
+}
+
+.shex-divination-enter,
+.shex-divination-confirm {
+  border: 1px solid rgba(247,237,228,0.5);
+  border-radius: 999px;
+  padding: 12px 28px;
+  color: #faf4ed;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 28px rgba(62,40,19,0.2);
+  font: inherit;
+}
+
+.shex-divination-enter-note {
+  color: rgba(250,243,237,0.62);
+  font-size: 13px;
+}
+
+.shex-divination-select-layer {
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.shex-divination-reveal-layer {
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100%;
+  overflow-y: auto;
+  padding: 96px 20px 28px;
+  padding: 13vh 20px 28px;
+  padding: 13svh 20px 28px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+
+.shex-divination-history-layer {
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  overflow-y: auto;
+  padding: 72px 20px 32px;
+  padding: max(72px, env(safe-area-inset-top, 0px) + 52px) clamp(20px, 6vw, 62px) 32px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.shex-divination-history-heading {
+  width: 100%;
+  max-width: 620px;
+  width: min(100%, 620px);
+  margin: 0 auto 26px;
+  text-align: center;
+}
+
+.shex-divination-history-heading h1,
+.shex-divination-history-heading p,
+.shex-divination-history-detail h2,
+.shex-divination-history-detail p,
+.shex-divination-history-card p,
+.shex-divination-history-state p {
+  margin: 0;
+}
+
+.shex-divination-history-heading h1 {
+  color: rgba(250,244,237,0.96);
+  font-size: 28px;
+  font-size: clamp(24px, 5vw, 31px);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.shex-divination-history-heading p {
+  margin-top: 10px;
+  color: rgba(247,237,228,0.68);
+  font-size: 13px;
+}
+
+.shex-divination-history-content {
+  width: 100%;
+  max-width: 620px;
+  width: min(100%, 620px);
+  margin: 0 auto;
+}
+
+.shex-divination-history-list {
+  display: grid;
+  gap: 12px;
+}
+
+.shex-divination-history-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 7px 14px;
+  width: 100%;
+  border: 1px solid rgba(247,237,228,0.22);
+  border-radius: 16px;
+  padding: 15px 16px;
+  color: rgba(250,244,237,0.94);
+  background: rgba(255, 255, 255, 0.075);
+  box-shadow: 0 12px 28px rgba(62,40,19,0.14);
+  text-align: left;
+  font: inherit;
+}
+
+.shex-divination-history-item time {
+  color: rgba(247,237,228,0.65);
+  font-size: 12px;
+}
+
+.shex-divination-history-item span {
+  grid-column: 1;
+  overflow: hidden;
+  font-size: 15px;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shex-divination-history-item b {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  color: rgba(250,244,237,0.72);
+  font-size: 26px;
+  font-weight: 300;
+}
+
+.shex-divination-history-state {
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  padding: 42px 20px;
+  color: rgba(250,243,237,0.76);
+  text-align: center;
+}
+
+.shex-divination-history-state.is-loading {
+  letter-spacing: 0.08em;
+}
+
+.shex-divination-history-state.is-error {
+  color: #ffe0e5;
+}
+
+.shex-divination-history-state button {
+  border: 1px solid rgba(247,237,228,0.5);
+  border-radius: 999px;
+  padding: 10px 18px;
+  color: rgba(250,244,237,0.94);
+  background: rgba(255, 255, 255, 0.06);
+  font: inherit;
+}
+
+.shex-divination-history-detail {
+  display: grid;
+  gap: 18px;
+}
+
+.shex-divination-history-detail > section,
+.shex-divination-history-result {
+  border: 1px solid rgba(247,237,228,0.22);
+  border-radius: 18px;
+  padding: 17px;
+  background: rgba(255, 255, 255, 0.065);
+}
+
+.shex-divination-history-time {
+  color: rgba(247,237,228,0.64);
+  font-size: 13px;
+  text-align: center;
+}
+
+.shex-divination-history-detail h2 {
+  color: rgba(250,244,237,0.94);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.shex-divination-history-detail section > p,
+.shex-divination-history-result p {
+  margin-top: 10px;
+  color: rgba(250,243,237,0.85);
+  font-size: 14px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.shex-divination-history-result p + p {
+  margin-top: 16px;
+}
+
+.shex-divination-history-cards {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  gap: clamp(10px, 4vw, 24px);
+  margin-top: 16px;
+}
+
+.shex-divination-history-card {
+  width: 84px;
+  width: min(25vw, 84px);
+  min-width: 64px;
+  text-align: center;
+}
+
+.shex-divination-history-card + .shex-divination-history-card {
+  margin-left: 16px;
+}
+
+.shex-divination-history-card-image {
+  width: 100%;
+  height: 140px;
+  aspect-ratio: 1086 / 1810;
+  overflow: hidden;
+  border: 1px solid rgba(250,243,237,0.42);
+  border-radius: 7px;
+  background: linear-gradient(155deg, #9c734a 0%, #715234 55%, #483420 100%);
+}
+
+.shex-divination-history-card-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.shex-divination-history-card-image img.is-reversed {
+  transform: rotate(180deg);
+}
+
+.shex-divination-history-card-image span {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  color: rgba(250,243,237,0.74);
+  font-size: 12px;
+  place-items: center;
+}
+
+.shex-divination-history-card p {
+  margin-top: 9px;
+  color: rgba(250,243,237,0.9);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.shex-divination-reveal-heading {
+  text-align: center;
+}
+
+.shex-divination-reveal-heading h1,
+.shex-divination-reveal-heading p,
+.shex-divination-interpret-confirm h2,
+.shex-divination-interpret-confirm p,
+.shex-divination-interpretation-result p {
+  margin: 0;
+}
+
+.shex-divination-reveal-heading h1 {
+  color: rgba(250,244,237,0.96);
+  font-size: 28px;
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+.shex-divination-reveal-heading p {
+  margin-top: 10px;
+  color: rgba(247,237,228,0.7);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+.shex-divination-reveal-cards {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  gap: clamp(10px, 3vw, 24px);
+  width: 100%;
+  margin: 64px 0 0;
+  margin: clamp(54px, 10vh, 86px) 0 0;
+  margin: clamp(54px, 10svh, 86px) 0 0;
+  perspective: 1000px;
+}
+
+.shex-divination-reveal-card {
+  width: 92px;
+  width: min(27vw, 92px);
+  min-width: 72px;
+  text-align: center;
+}
+
+.shex-divination-reveal-card + .shex-divination-reveal-card {
+  margin-left: 14px;
+}
+
+.shex-divination-reveal-card-inner {
+  position: relative;
+  width: 100%;
+  height: 153px;
+  aspect-ratio: 1086 / 1810;
+  transform-style: preserve-3d;
+  transition: transform 0.72s cubic-bezier(0.22, 0.75, 0.2, 1);
+}
+
+.shex-divination-reveal-card.is-flipped .shex-divination-reveal-card-inner {
+  transform: rotateY(180deg);
+}
+
+.shex-divination-reveal-card-face {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  inset: 0;
+  overflow: hidden;
+  border: 1px solid rgba(250,243,237,0.55);
+  border-radius: 10px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.shex-divination-reveal-card-back {
+  display: grid;
+  background: linear-gradient(155deg, #9c734a 0%, #715234 55%, #483420 100%);
+  box-shadow: inset 0 0 0 4px rgba(250,243,237,0.12), 0 12px 26px rgba(63,40,19,0.34);
+  place-items: center;
+  visibility: visible;
+}
+
+/* Some mobile 3D compositors can keep the card-back child layers visible after rotation. */
+.shex-divination-reveal-card.is-flipped .shex-divination-reveal-card-back {
+  visibility: hidden;
+  transition: visibility 0s linear 0.72s;
+}
+
+.shex-divination-reveal-card-back::before {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  bottom: 8px;
+  left: 8px;
+  inset: 8px;
+  border: 1px solid rgba(250,243,237,0.2);
+  border-radius: 5px;
+  content: "";
+}
+
+.shex-divination-reveal-card-front {
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  transform: rotateY(180deg);
+}
+
+.shex-divination-reveal-card-front img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: auto;
+}
+
+.shex-divination-reveal-card-front img.is-reversed {
+  transform: rotate(180deg);
+}
+
+.shex-divination-reveal-card > p {
+  min-height: 42px;
+  margin: 12px -10px 0;
+  color: rgba(250,244,237,0.9);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.shex-divination-interpret-confirm {
+  width: 100%;
+  max-width: 620px;
+  width: min(620px, 100%);
+  margin: auto 0 0;
+  border: 1px solid rgba(247,237,228,0.25);
+  border-radius: 20px;
+  padding: 18px;
+  color: #faf4ed;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 -8px 30px rgba(63,40,19,0.16);
+  transform: translateY(130%);
+  transition: transform 0.55s cubic-bezier(0.22, 0.75, 0.2, 1);
+}
+
+.shex-divination-interpret-confirm h2 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.shex-divination-interpret-confirm > p {
+  margin-top: 8px;
+  color: rgba(250,243,237,0.7);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.shex-divination-interpret-confirm > div {
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 10px;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.shex-divination-interpret-confirm > div > button + button {
+  margin-left: 10px;
+}
+
+.shex-divination-home,
+.shex-divination-result-home,
+.shex-divination-interpret {
+  border-radius: 999px;
+  padding: 10px 16px;
+  font: inherit;
+  font-size: 14px;
+}
+
+.shex-divination-home,
+.shex-divination-result-home {
+  border: 1px solid rgba(247,237,228,0.5);
+  color: rgba(250,244,237,0.9);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.shex-divination-interpret {
+  border: 0;
+  color: #fff;
+  background: linear-gradient(135deg, #d3b18e, #9c7449);
+  box-shadow: 0 10px 22px rgba(62,40,19,0.24);
+}
+
+.shex-divination-interpretation-state {
+  width: 100%;
+  max-width: 620px;
+  width: min(620px, 100%);
+  margin-top: 28px;
+}
+
+.shex-divination-interpretation-state.is-loading {
+  display: grid;
+  justify-items: center;
+  row-gap: 14px;
+  gap: 14px;
+  margin: 40px auto;
+  color: rgba(250,244,237,0.9);
+  letter-spacing: 0.1em;
+}
+
+.shex-divination-loading-text {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.shex-divination-loading-text.is-switching {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.shex-divination-interpretation-state.is-revealing {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  margin: 28px auto 0;
+}
+
+.shex-divination-interpret-loading-orb {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 32%, #fff8ea 0%, #f7ede4 42%, #d3b08e 100%);
+  box-shadow: 0 0 42px 14px rgba(222,190,158,0.55);
+  animation: shex-divination-orb-breathe 3.6s ease-in-out infinite;
+}
+
+.shex-divination-interpret-loading-orb.is-dispersing {
+  animation: shex-divination-orb-disperse 0.96s ease-out forwards;
+}
+
+.shex-divination-interpretation-state.is-error {
+  margin: 22px auto 0;
+  color: #ffe0e5;
+  font-size: 14px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.shex-divination-interpretation-state.is-success {
+  margin: 28px auto 0;
+}
+
+.shex-divination-recovery-note {
+  margin: 0 auto 12px;
+  color: rgba(250,243,237,0.82);
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.shex-divination-interpretation-result {
+  border: 1px solid rgba(247,237,228,0.24);
+  border-radius: 20px;
+  padding: 22px;
+  color: rgba(250,243,237,0.92);
+  background: rgba(255, 255, 255, 0.07);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.shex-divination-interpretation-result.is-entering {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: shex-divination-result-emerge 0.92s ease-out 0.16s forwards;
+}
+
+.shex-divination-interpretation-result p + p {
+  margin-top: 18px;
+}
+
+.shex-divination-result-home {
+  display: block;
+  min-width: 132px;
+  margin: 22px auto 0;
+}
+
+.shex-divination-select-header {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  flex: 0 0 auto;
+  justify-items: center;
+  row-gap: 9px;
+  gap: 9px;
+  padding: 286px 16px 12px;
+  padding: clamp(262px, 36vh, 330px) 16px 12px;
+  padding: clamp(262px, 36svh, 330px) 16px 12px;
+  text-align: center;
+}
+
+.shex-divination-select-progress {
+  color: rgba(250,244,237,0.96);
+  font-size: 17px;
+  letter-spacing: 0.08em;
+}
+
+.shex-divination-select-hint {
+  color: rgba(250,243,237,0.7);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+
+.shex-divination-confirm {
+  min-width: 104px;
+  margin-top: 5px;
+}
+
+.shex-divination-deck-viewport {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+}
+
+.shex-divination-deck-viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.shex-divination-deck-rotor {
+  position: absolute;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.shex-divination-card {
+  position: absolute;
+  width: 46px;
+  height: 82px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.shex-divination-card-lift {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.24s ease, filter 0.24s ease;
+}
+
+.shex-divination-card-back {
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(250,243,237,0.55);
+  border-radius: 7px;
+  background: linear-gradient(155deg, #9c734a 0%, #715234 55%, #483420 100%);
+  box-shadow: inset 0 0 0 3px rgba(250,243,237,0.12), 0 6px 14px rgba(61,40,20,0.25);
+  place-items: center;
+}
+
+.shex-divination-card-back::before {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  bottom: 5px;
+  left: 5px;
+  inset: 5px;
+  border: 1px solid rgba(250,243,237,0.2);
+  border-radius: 4px;
+  content: "";
+}
+
+.shex-divination-card-radiance {
+  position: absolute;
+  width: 49px;
+  height: 49px;
+  opacity: 0.22;
+  background: repeating-conic-gradient(from 0deg, rgba(250,243,237,0.8) 0deg 1deg, transparent 1deg 14deg);
+  -webkit-mask: radial-gradient(circle, transparent 0 13px, #281d15 14px 23px, transparent 24px);
+  mask: radial-gradient(circle, transparent 0 13px, #281d15 14px 23px, transparent 24px);
+}
+
+.shex-divination-card-moon {
+  position: relative;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #faf3ed;
+  box-shadow: 0 0 11px rgba(250,243,237,0.6);
+}
+
+.shex-divination-card-moon::after {
+  position: absolute;
+  top: -2px;
+  left: 7px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  content: "";
+  background: #715234;
+}
+
+.shex-divination-card.is-selected {
+  z-index: 2000 !important;
+}
+
+.shex-divination-card.is-selected .shex-divination-card-lift {
+  transform: translateY(-18px) scale(1.1);
+  filter: drop-shadow(0 0 13px rgba(248,240,231,0.85));
+}
+
+.shex-divination-card.is-selected .shex-divination-card-back {
+  border-color: rgba(255, 247, 226, 0.96);
+  box-shadow: inset 0 0 0 3px rgba(250,243,237,0.2), 0 0 18px rgba(245,233,221,0.78);
+}
+
+.shex-divination-flow.to-meditate .shex-divination-question-layer,
+.shex-divination-flow.to-select .shex-divination-question-layer,
+.shex-divination-flow.to-reveal .shex-divination-question-layer,
+.shex-divination-flow.to-history .shex-divination-question-layer {
+  opacity: 0;
+  transform: translateY(-46px);
+  pointer-events: none;
+}
+
+.shex-divination-flow.to-meditate .shex-divination-orb-motion {
+  top: 31%;
+  width: 150px;
+  height: 150px;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.shex-divination-flow.to-select .shex-divination-orb-motion {
+  top: 164px;
+  top: clamp(128px, calc(17vh + 36px), 194px);
+  top: clamp(128px, calc(17svh + 36px), 194px);
+  width: 120px;
+  height: 120px;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.shex-divination-flow.to-reveal .shex-divination-orb-motion {
+  opacity: 0;
+}
+
+.shex-divination-flow.to-history .shex-divination-orb-motion {
+  opacity: 0;
+}
+
+.shex-divination-flow.to-meditate .shex-divination-meditate-layer {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.shex-divination-flow.to-meditate .shex-divination-meditate-copy,
+.shex-divination-flow.to-meditate .shex-divination-enter,
+.shex-divination-flow.to-meditate .shex-divination-enter-note {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.shex-divination-flow.to-select .shex-divination-meditate-layer {
+  opacity: 0;
+  transform: translateY(-18px);
+  pointer-events: none;
+}
+
+.shex-divination-flow.to-select .shex-divination-select-layer {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.shex-divination-flow.to-reveal .shex-divination-select-layer {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.shex-divination-flow.to-reveal .shex-divination-reveal-layer {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.shex-divination-flow.to-history .shex-divination-history-layer {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.shex-divination-flow.to-reveal.is-reveal-complete .shex-divination-interpret-confirm {
+  transform: translateY(0);
+}
+
+.shex-divination-flow.to-reveal.is-interpreting .shex-divination-interpret-confirm {
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+.shex-divination-flow.to-reveal.has-interpretation .shex-divination-interpret-confirm {
+  display: none;
+}
+
+@keyframes shex-divination-orb-breathe {
+  0%,
+  100% { transform: scale(1); }
+  50% { transform: scale(1.075); }
+}
+
+@keyframes shex-divination-orb-disperse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+  55% {
+    opacity: 0.72;
+    transform: scale(1.42);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.88);
+    filter: blur(16px);
+  }
+}
+
+@keyframes shex-divination-result-emerge {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .shex-divination-question-layer { padding: 48px 18px 24px; }
+  .shex-divination-orb-motion { top: 140px; }
+  .shex-divination-cards {
+    gap: 14px;
+    margin-top: 228px;
+  }
+  .shex-divination-input-card { padding: 0 2px; }
+  .shex-divination-zodiac { width: 82px; }
+  .shex-divination-zodiac { width: clamp(66px, 24vw, 96px); }
+  .shex-divination-zodiac-taurus {
+    top: 20%;
+    left: -6px;
+  }
+  .shex-divination-zodiac-aquarius {
+    top: 32%;
+    right: -8px;
+  }
+  .shex-divination-zodiac-pisces { right: 3%; }
+  .shex-divination-zodiac-aries { left: -8px; }
+  .shex-divination-zodiac-small-one {
+    top: 18%;
+    right: 32%;
+  }
+  .shex-divination-zodiac-small-two {
+    left: 32%;
+    bottom: 8%;
+  }
+  .shex-divination-meditate-copy { font-size: 16px; }
+  .shex-divination-select-header {
+    padding-top: 282px;
+    padding-top: clamp(254px, 34vh, 314px);
+    padding-top: clamp(254px, 34svh, 314px);
+  }
+  .shex-divination-history-entry { right: 18px; }
+}
+
+@supports (aspect-ratio: 1 / 1) {
+  .shex-divination-history-card-image,
+  .shex-divination-reveal-card-inner {
+    height: auto;
+  }
+}
+
+@supports (gap: 1px) {
+  .shex-divination-history-card + .shex-divination-history-card,
+  .shex-divination-reveal-card + .shex-divination-reveal-card,
+  .shex-divination-interpret-confirm > div > button + button {
+    margin-left: 0;
+  }
+}

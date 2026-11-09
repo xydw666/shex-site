@@ -1,0 +1,2493 @@
+body[data-x-page="dating"] {
+  background: #f7eceb !important;
+}
+
+body[data-x-page="dating"] #site,
+body[data-x-page="dating"] #transmission,
+body[data-x-page="dating"] .transmission-wrap {
+  background: #f7eceb !important;
+  background-image: none !important;
+}
+
+body[data-x-page="dating"] #transmission::before,
+body[data-x-page="dating"] #transmission::after {
+  display: none !important;
+}
+
+body[data-x-page="dating"] #xDatingPanel.x-clean-active {
+  --dating-rose: #c9899a;
+  --dating-rose-deep: #a24f63;
+  --dating-rose-soft: #f3dee1;
+  --dating-cream: #fbf5f2;
+  --dating-cream2: #f5e8e4;
+  --dating-canvas: #f7eceb;
+  --dating-ink: #3c2c30;
+  --dating-sub: #9c8489;
+  --dating-line: rgba(162,79,99,.16);
+  --dating-back-safe-top: max(54px, env(safe-area-inset-top, 0px) + 52px);
+  --dating-bottom-safe: max(96px, env(safe-area-inset-bottom, 0px) + 88px);
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: auto !important;
+  left: 0 !important;
+  width: 100vw !important;
+  box-sizing: border-box;
+  min-height: 100vh;
+  min-height: calc(var(--app-vh, 1vh) * 100);
+  min-height: var(--shex-dating-vh, 100vh);
+  height: 100vh !important;
+  height: calc(var(--app-vh, 1vh) * 100) !important;
+  height: var(--shex-dating-vh, 100vh) !important;
+  margin-top: 0;
+  padding: 0 clamp(22px, 7vw, 40px) 0 !important;
+  overflow: hidden;
+  background: var(--dating-canvas);
+}
+
+body[data-x-page="dating"] #xDatingPanel > .x-subpage-back.shex-dating-back {
+  position: fixed;
+  left: max(16px, env(safe-area-inset-left, 0px) + 16px);
+  top: max(14px, env(safe-area-inset-top, 0px) + 14px);
+  z-index: 30;
+  width: 28px;
+  height: 32px;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--dating-ink);
+  background: transparent;
+  box-shadow: none;
+  font-size: 30px;
+}
+
+.shex-dating-audio-toggle {
+  position: absolute;
+  z-index: 20;
+  top: 18px;
+  top: max(18px, env(safe-area-inset-top, 0px) + 14px);
+  right: 24px;
+  right: clamp(18px, 5vw, 54px);
+  display: grid;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  color: var(--dating-rose-deep);
+  background: transparent;
+  box-shadow: none;
+  place-items: center;
+}
+
+.shex-dating-audio-toggle svg {
+  width: 21px;
+  height: 21px;
+}
+
+.shex-dating-audio-toggle .shex-dating-audio-slash {
+  color: var(--dating-rose-deep);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.shex-dating-audio-toggle.is-muted .shex-dating-audio-wave {
+  opacity: 0.2;
+}
+
+.shex-dating-audio-toggle.is-muted .shex-dating-audio-slash {
+  opacity: 1;
+}
+
+body[data-x-page="dating"] #xDatingPanel .x-status-page-shell,
+body[data-x-page="dating"] #xDatingPanel .x-status-page-content {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+body[data-x-page="dating"] #xDatingPanel .x-status-page-shell {
+  position: relative;
+  min-height: calc(100dvh - var(--dating-back-safe-top));
+  padding: var(--dating-back-safe-top) 0 0;
+  background: var(--dating-canvas);
+}
+
+body[data-x-page="dating"] #xDatingPanel .x-status-page-shell::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--dating-back-safe-top);
+  height: 30px;
+  background: linear-gradient(to bottom, var(--dating-canvas) 0%, rgba(247, 236, 235, 0) 100%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+body[data-x-page="dating"] #xDatingPanel .x-status-page-content {
+  min-height: inherit;
+  background: var(--dating-canvas);
+}
+
+.shex-dating-gate {
+  display: grid;
+  min-height: calc(100dvh - 110px);
+  padding: 28px 0 54px;
+  place-items: center;
+}
+
+.shex-dating-gate-sheet {
+  display: grid;
+  gap: 16px;
+  width: min(100%, 420px);
+  border: 1px solid rgba(255,255,255,.76);
+  border-radius: 28px;
+  padding: 32px 26px 26px;
+  color: #53402d;
+  background: linear-gradient(155deg, rgba(255,255,255,.78), rgba(var(--x-world-accent-rgb), .14));
+  box-shadow: 0 20px 54px rgba(112,83,52,.14), inset 0 1px 0 rgba(255,255,255,.78);
+  text-align: center;
+}
+
+.shex-dating-gate-kicker,
+.shex-dating-gate-sheet h1,
+.shex-dating-gate-sheet p {
+  margin: 0;
+}
+
+.shex-dating-gate-kicker {
+  color: rgba(var(--x-world-accent-rgb), .74);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.shex-dating-gate-sheet h1 {
+  font-size: clamp(27px, 6vw, 38px);
+  font-weight: 600;
+  letter-spacing: .08em;
+}
+
+.shex-dating-gate-sheet > p {
+  color: rgba(85,63,41,.58);
+  font-size: 14px;
+}
+
+.shex-dating-gate-field {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+  color: rgba(85,63,41,.68);
+  font-size: 13px;
+  text-align: left;
+}
+
+.shex-dating-gate-field input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(var(--x-world-accent-rgb), .2);
+  border-radius: 16px;
+  outline: 0;
+  padding: 13px 14px;
+  color: #53402d;
+  background: rgba(255,255,255,.68);
+  font: inherit;
+  text-align: center;
+  letter-spacing: .08em;
+}
+
+.shex-dating-gate-field input:focus {
+  border-color: rgba(var(--x-world-accent-rgb), .46);
+  box-shadow: 0 0 0 4px rgba(var(--x-world-accent-rgb), .12);
+}
+
+.shex-dating-gate-error {
+  min-height: 18px;
+  color: rgba(154,72,102,.9);
+  font-size: 13px;
+}
+
+.shex-dating-gate-sheet button {
+  min-height: 44px;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(var(--x-world-accent-rgb), .92), rgba(157,115,71,.9));
+  box-shadow: 0 12px 26px rgba(112,83,52,.18);
+  font: inherit;
+  cursor: pointer;
+}
+
+.shex-dating-home {
+  --dating-rose: #c9899a;
+  --dating-rose-deep: #a24f63;
+  --dating-rose-soft: #f3dee1;
+  --dating-cream: #fbf5f2;
+  --dating-cream2: #f5e8e4;
+  --dating-canvas: #f7eceb;
+  --dating-ink: #3c2c30;
+  --dating-sub: #9c8489;
+  --dating-line: rgba(162,79,99,.16);
+  --dating-glass: rgba(255,255,255,.5);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+  height: calc(var(--shex-dating-vh, 100vh) - var(--dating-back-safe-top));
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y pinch-zoom;
+  overscroll-behavior-y: contain;
+  padding-bottom: max(24px, env(safe-area-inset-bottom, 0px) + 16px);
+  background: var(--dating-canvas);
+  color: var(--dating-ink);
+}
+
+.shex-dating-home > * {
+  flex-shrink: 0;
+}
+
+.shex-dating-header {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.shex-dating-kicker {
+  margin: 0 0 3px;
+  color: var(--dating-rose-deep);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+.shex-dating-header h1 {
+  margin: 0;
+  color: var(--dating-ink);
+  font-family: inherit;
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: .05em;
+}
+
+.shex-dating-header > p:last-child {
+  margin: 4px 0 0;
+  color: var(--dating-sub);
+  font-size: 13px;
+}
+
+.shex-dating-home-main {
+  display: grid;
+  gap: 12px;
+}
+
+.shex-dating-home > .shex-dating-home-main:first-of-type {
+  margin-top: -20px;
+}
+
+.shex-dating-home > .shex-dating-home-main:nth-of-type(2) {
+  margin-top: 8px;
+}
+
+.shex-dating-home-pair {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.shex-dating-home-person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.shex-dating-home-person strong {
+  max-width: 82px;
+  overflow: hidden;
+  color: var(--dating-ink);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shex-dating-home-face {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  box-shadow: inset 0 -5px 12px rgba(168,79,99,.2), 0 10px 20px rgba(168,79,99,.16);
+}
+
+.shex-dating-home-face.is-dream {
+  background: linear-gradient(160deg, #f7ecec, #c48b96 120%);
+}
+
+.shex-dating-home-face.is-user {
+  background: linear-gradient(160deg, #fbe4e6, var(--dating-rose) 120%);
+}
+
+.shex-dating-home-face svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.shex-dating-avatar-pick {
+  display: block;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  overflow: visible;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.shex-dating-avatar-pick:focus-visible {
+  outline: 2px solid rgba(162,79,99,.45);
+  outline-offset: 3px;
+}
+
+.shex-dating-avatar-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
+
+.shex-dating-avatar-pick.x-cloud-image-retry-host .x-cloud-image-retry {
+  z-index: 2;
+  border-radius: inherit;
+  overflow: hidden;
+  background: rgba(251,245,242,.92);
+  color: var(--dating-rose-deep);
+  text-align: center;
+}
+
+.shex-dating-avatar-pick.x-cloud-image-retry-host .x-cloud-image-retry strong {
+  font-size: 10px;
+  letter-spacing: 0;
+}
+
+.shex-dating-avatar-pick.x-cloud-image-retry-host .x-cloud-image-retry small {
+  font-size: 9px;
+  color: var(--dating-sub);
+}
+
+.shex-dating-mini-face.x-cloud-image-retry-host .x-cloud-image-retry small,
+.shex-dating-match-face.x-cloud-image-retry-host .x-cloud-image-retry small {
+  display: none;
+}
+
+.shex-dating-home-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 90px;
+}
+
+.shex-dating-home-link div {
+  flex: 1;
+  height: 0;
+  border-top: 1.6px dashed var(--dating-rose);
+  opacity: .55;
+}
+
+.shex-dating-home-link span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--dating-rose-soft);
+  box-shadow: 0 3px 8px rgba(168,79,99,.2);
+}
+
+.shex-dating-stats-card {
+  border: 1px solid var(--dating-line);
+  border-radius: 18px;
+  padding: 2px 18px;
+  background: var(--dating-cream2);
+}
+
+.shex-dating-stats-card div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid var(--dating-line);
+  padding: 12px 0;
+}
+
+.shex-dating-stats-card div:last-child {
+  border-bottom: 0;
+}
+
+.shex-dating-stats-card span {
+  color: var(--dating-sub);
+  font-size: 11.5px;
+}
+
+.shex-dating-stats-card strong {
+  color: var(--dating-rose-deep);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.shex-dating-stats-card div:first-child strong {
+  font-size: 15px;
+}
+
+.shex-dating-energy-notice {
+  margin: 0;
+  color: var(--dating-sub);
+  font-size: 11.5px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.shex-dating-energy-notice {
+  margin-top: 4px;
+}
+
+.shex-dating-invite {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3px 14px;
+  padding: 20px;
+  overflow: hidden;
+  border: 1px solid var(--dating-line);
+  border-radius: 24px;
+  background: var(--dating-cream2);
+}
+
+.shex-dating-invite-watermark {
+  position: absolute;
+  right: -30px;
+  bottom: -30px;
+  opacity: .16;
+  pointer-events: none;
+}
+
+.shex-dating-invite-info {
+  position: absolute;
+  z-index: 3;
+  top: 13px;
+  right: 13px;
+  display: grid;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  padding: 0;
+  color: var(--dating-rose-deep);
+  background: transparent;
+  cursor: pointer;
+  place-items: center;
+}
+
+.shex-dating-invite-info-popover {
+  position: absolute;
+  z-index: 4;
+  top: 46px;
+  right: 13px;
+  width: min(230px, calc(100% - 26px));
+  box-sizing: border-box;
+  border: 1px solid var(--dating-line);
+  border-radius: 14px;
+  padding: 11px 13px;
+  color: var(--dating-sub);
+  background: rgba(255,250,247,.97);
+  box-shadow: 0 12px 30px rgba(92,55,65,.16);
+  font-size: 11.5px;
+  line-height: 1.7;
+}
+
+.shex-dating-invite-info-popover[hidden] {
+  display: none;
+}
+
+.shex-dating-invite-info-popover p {
+  margin: 0;
+}
+
+.shex-dating-invite-icon {
+  position: relative;
+  z-index: 1;
+  grid-row: span 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--dating-rose-deep);
+  background: var(--dating-rose-soft);
+}
+
+.shex-dating-invite-copy {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  padding-right: 28px;
+}
+
+.shex-dating-invite-copy p,
+.shex-dating-invite-copy h2,
+.shex-dating-invite-copy span {
+  margin: 0;
+}
+
+.shex-dating-invite-copy p {
+  color: var(--dating-rose-deep);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.shex-dating-invite-copy h2 {
+  margin-top: 3px;
+  color: var(--dating-ink);
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.shex-dating-invite-copy span {
+  display: block;
+  margin-top: 5px;
+  color: var(--dating-sub);
+  font-size: 13px;
+}
+
+.shex-dating-invite-actions {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.shex-dating-invite-actions:has(button:only-child) {
+  grid-template-columns: 1fr;
+}
+
+.shex-dating-invite-actions[hidden] {
+  display: none;
+}
+
+.shex-dating-invite-actions button {
+  min-height: 44px;
+  border: 1px solid var(--dating-line);
+  border-radius: 14px;
+  color: var(--dating-sub);
+  background: transparent;
+  font: inherit;
+  font-size: 13.5px;
+  cursor: pointer;
+}
+
+.shex-dating-invite-actions button.is-primary {
+  border: 0;
+  color: #fff;
+  background: var(--dating-rose-deep);
+  font-weight: 600;
+}
+
+.shex-dating-invite.is-accepted {
+  background: linear-gradient(150deg, rgba(255,255,255,.78), rgba(243,222,225,.78));
+}
+
+.shex-dating-invite.is-declined {
+  filter: saturate(.72);
+}
+
+.shex-dating-entries {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.shex-dating-entries button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+  height: 76px;
+  min-height: 76px;
+  border: 0;
+  border-radius: 12px;
+  padding: 8px 2px;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.shex-dating-entries button:focus-visible {
+  outline: 2px solid var(--dating-rose-deep);
+  outline-offset: -2px;
+}
+
+.shex-dating-entries button:active {
+  background: var(--dating-rose-soft);
+}
+
+.shex-dating-entries button > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--dating-rose-deep);
+  background: var(--dating-cream2);
+}
+
+.shex-dating-entries strong {
+  overflow: hidden;
+  color: var(--dating-ink);
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.x-dating-skeleton {
+  display: grid;
+  place-items: center;
+  min-height: 45vh;
+  text-align: center;
+}
+
+.shex-dating-flow {
+  --dating-rose: #c9899a;
+  --dating-rose-deep: #a24f63;
+  --dating-rose-soft: #f3dee1;
+  --dating-cream: #fbf5f2;
+  --dating-cream2: #f5e8e4;
+  --dating-canvas: #f7eceb;
+  --dating-ink: #3c2c30;
+  --dating-sub: #9c8489;
+  --dating-line: rgba(162,79,99,.16);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  height: calc(100vh - var(--dating-back-safe-top));
+  height: calc(var(--app-vh, 1vh) * 100 - var(--dating-back-safe-top));
+  height: calc(var(--shex-dating-vh, 100vh) - var(--dating-back-safe-top));
+  max-height: calc(100vh - var(--dating-back-safe-top));
+  max-height: calc(var(--app-vh, 1vh) * 100 - var(--dating-back-safe-top));
+  max-height: calc(var(--shex-dating-vh, 100vh) - var(--dating-back-safe-top));
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-padding-bottom: var(--dating-bottom-safe);
+  background: var(--dating-canvas);
+  color: var(--dating-ink);
+}
+
+.shex-dating-flow::-webkit-scrollbar {
+  display: none;
+}
+
+.shex-dating-progress {
+  margin: 0 0 18px;
+  color: var(--dating-sub);
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-align: center;
+}
+
+.shex-dating-mini-pair {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 220px;
+  margin: 6px auto 0;
+}
+
+.shex-dating-mini-face {
+  position: relative;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+
+.shex-dating-mini-face.is-dream {
+  background: linear-gradient(160deg, #f7ecec, #c48b96 120%);
+}
+
+.shex-dating-mini-face.is-user {
+  background: linear-gradient(160deg, #fbe4e6, var(--dating-rose) 120%);
+}
+
+.shex-dating-mini-face svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.shex-dating-mini-link {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.shex-dating-mini-link div {
+  flex: 1;
+  height: 0;
+  border-top: 1.4px dashed var(--dating-rose);
+  opacity: .5;
+}
+
+.shex-dating-mini-link span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--dating-rose-soft);
+  box-shadow: 0 2px 6px rgba(168,79,99,.18);
+}
+
+.shex-dating-step-sync {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin: -6px 0 0;
+  color: var(--dating-sub);
+  font-size: 12px;
+  letter-spacing: .04em;
+}
+
+.shex-dating-step-sync i {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--dating-rose);
+  box-shadow: 0 0 0 0 rgba(201,137,154,.28);
+  animation: shex-dating-sync-breathe 1.45s ease-in-out infinite;
+}
+
+.shex-dating-step-screen,
+.shex-dating-confirm-screen,
+.shex-dating-reveal-screen,
+.shex-dating-final-screen,
+.shex-dating-article-screen {
+  gap: 12px;
+  padding: 20px 0 var(--dating-bottom-safe);
+}
+
+.shex-dating-step-card {
+  display: grid;
+  gap: 13px;
+  margin-top: 0;
+}
+
+.shex-dating-confirm-screen {
+  gap: 12px;
+  padding-top: 12px;
+}
+
+.shex-dating-step-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin: 2px auto 0;
+  border-radius: 50%;
+  color: var(--dating-rose-deep);
+  background: rgba(243,222,225,.9);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.74), 0 10px 22px rgba(162,79,99,.12);
+}
+
+.shex-dating-step-icon svg {
+  width: 21px;
+  height: 21px;
+}
+
+.shex-dating-step-label {
+  margin: 0;
+  color: var(--dating-rose-deep);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-align: center;
+}
+
+.shex-dating-step-q {
+  margin: 0;
+  color: var(--dating-ink);
+  font-family: inherit;
+  font-size: clamp(15px, 4.1vw, 16.5px);
+  font-weight: 700;
+  line-height: 1.42;
+  letter-spacing: .04em;
+  text-align: center;
+}
+
+.shex-dating-result-title {
+  margin: 0;
+  color: var(--dating-ink);
+  font-family: inherit;
+  font-size: clamp(25px, 6vw, 38px);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: .04em;
+  text-align: center;
+}
+
+.shex-dating-step-q span {
+  display: inline;
+}
+
+.shex-dating-step-box {
+  display: grid;
+  gap: 11px;
+  border: 1px solid rgba(255,255,255,.76);
+  border-radius: 18px;
+  padding: 18px;
+  background: rgba(255,255,255,.56);
+  box-shadow: 0 12px 28px rgba(162,79,99,.1), inset 0 1px 0 rgba(255,255,255,.72);
+  backdrop-filter: blur(12px);
+}
+
+.shex-dating-step-box > span,
+.shex-dating-confirm-row span,
+.shex-dating-compare-card article span,
+.shex-dating-timeline article span,
+.shex-dating-result-notes span {
+  color: var(--dating-rose-deep);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.shex-dating-step-box textarea {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 150px;
+  border: 0;
+  outline: 0;
+  padding: 0;
+  resize: vertical;
+  color: var(--dating-ink);
+  background: transparent;
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.shex-dating-step-box textarea::placeholder {
+  color: rgba(156,132,137,.72);
+}
+
+@media (max-height: 760px) {
+  .shex-dating-step-screen,
+  .shex-dating-confirm-screen {
+    gap: 12px;
+    padding-top: 12px;
+  }
+
+  .shex-dating-step-card {
+    gap: 10px;
+  }
+
+  .shex-dating-step-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .shex-dating-step-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .shex-dating-step-box {
+    gap: 8px;
+    padding: 14px;
+  }
+
+  .shex-dating-step-box textarea {
+    min-height: 108px;
+    line-height: 1.62;
+  }
+
+  .shex-dating-narration-picker {
+    padding: 12px;
+  }
+}
+
+.shex-dating-suggest-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--dating-sub);
+  font-size: 13px;
+}
+
+.shex-dating-suggest-row button {
+  border: 0;
+  padding: 4px 0;
+  color: var(--dating-rose-deep);
+  background: transparent;
+  font: inherit;
+}
+
+.shex-dating-flow-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.shex-dating-narration-picker {
+  display: grid;
+  gap: 10px;
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(255,255,255,.46);
+  box-shadow: 0 10px 24px rgba(162,79,99,.08);
+}
+
+.shex-dating-narration-picker p {
+  margin: 0;
+  color: var(--dating-ink);
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.shex-dating-narration-picker div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.shex-dating-narration-picker button {
+  border: 1px solid var(--dating-line);
+  border-radius: 999px;
+  padding: 9px 8px;
+  color: var(--dating-sub);
+  background: rgba(255,255,255,.5);
+  font: inherit;
+  font-size: 12px;
+}
+
+.shex-dating-narration-picker button.is-active {
+  border-color: transparent;
+  color: #fff;
+  background: var(--dating-rose-deep);
+  box-shadow: 0 10px 20px rgba(162,79,99,.18);
+}
+
+.shex-dating-primary-cta,
+.shex-dating-ghost-cta {
+  min-height: 46px;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.shex-dating-primary-cta {
+  border: 0;
+  color: #fff;
+  background: linear-gradient(135deg, var(--dating-rose), var(--dating-rose-deep));
+  box-shadow: 0 12px 28px rgba(162,79,99,.2);
+}
+
+.shex-dating-primary-cta:disabled,
+.shex-dating-ghost-cta:disabled {
+  cursor: not-allowed;
+  opacity: .62;
+}
+
+.shex-dating-ghost-cta {
+  border: 1px solid var(--dating-line);
+  color: var(--dating-rose-deep);
+  background: rgba(255,255,255,.42);
+}
+
+.shex-dating-wide-cta {
+  box-sizing: border-box;
+  width: min(100%, 520px);
+  max-width: 100%;
+  margin: 4px auto 0;
+}
+
+.shex-dating-result-actions {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.shex-dating-result-actions button {
+  min-width: 0;
+  white-space: normal;
+}
+
+.shex-dating-book-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.shex-dating-book-tabs button {
+  min-height: 44px;
+  border: 1px solid var(--dating-line);
+  border-radius: 12px;
+  padding: 10px;
+  color: var(--dating-ink);
+  background: var(--dating-cream2);
+  font: inherit;
+  cursor: pointer;
+}
+
+.shex-dating-book-tabs button[aria-pressed="true"] {
+  color: var(--dating-cream);
+  background: var(--dating-rose-deep);
+}
+
+.shex-dating-story-photos {
+  display: grid;
+  gap: 12px;
+  padding-block: 18px;
+  border-block: 1px solid var(--dating-line);
+}
+
+.shex-dating-story-photos h2 {
+  margin: 0;
+  color: var(--dating-ink);
+  font-size: 18px;
+}
+
+.shex-dating-photo-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.shex-dating-photo-thumbs p {
+  margin: 0;
+  color: var(--dating-sub);
+}
+
+.shex-dating-photo-thumbs img {
+  width: 76px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.shex-dating-book-tabs button:focus-visible,
+[data-dating-photo-mode]:focus-visible {
+  outline: 2px solid var(--dating-rose-deep);
+  outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .shex-dating-result-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .shex-dating-result-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+.shex-dating-reveal-screen .shex-dating-wide-cta {
+  position: sticky;
+  bottom: max(24px, env(safe-area-inset-bottom, 0px) + 24px);
+  z-index: 2;
+  margin-top: 10px;
+}
+
+.shex-dating-suggest-pop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: end center;
+  padding: 24px;
+  background: rgba(60,44,48,.16);
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+
+.shex-dating-suggest-pop.is-open {
+  opacity: 1;
+}
+
+.shex-dating-suggest-pop-card {
+  position: relative;
+  width: min(100%, 420px);
+  border: 1px solid rgba(255,255,255,.76);
+  border-radius: 24px;
+  padding: 22px 18px 18px;
+  background: rgba(251,245,242,.96);
+  box-shadow: 0 24px 60px rgba(60,44,48,.16);
+}
+
+.shex-dating-suggest-pop-card p {
+  margin: 0 0 14px;
+  color: var(--dating-ink);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.shex-dating-suggest-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: 0;
+  color: var(--dating-sub);
+  background: transparent;
+  font: inherit;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.shex-dating-suggest-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+}
+
+.shex-dating-suggest-options button {
+  border: 0;
+  border-radius: 999px;
+  padding: 9px 13px;
+  color: #fff;
+  background: var(--dating-rose-deep);
+  box-shadow: 0 10px 20px rgba(162,79,99,.16);
+  font: inherit;
+  font-size: 12.5px;
+}
+
+.shex-dating-confirm-list {
+  gap: 14px;
+}
+
+.shex-dating-confirm-row {
+  display: grid;
+  gap: 5px;
+  border-bottom: 1px solid var(--dating-line);
+  padding-bottom: 12px;
+}
+
+.shex-dating-confirm-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.shex-dating-confirm-row p,
+.shex-dating-compare-card article p,
+.shex-dating-timeline article p,
+.shex-dating-result-notes p,
+.shex-dating-article p {
+  margin: 0;
+  color: rgba(60,44,48,.76);
+  font-size: 14px;
+  line-height: 1.72;
+}
+
+.shex-dating-compare-cols {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 14px;
+  min-width: 0;
+}
+
+.shex-dating-compare-card {
+  display: grid;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  gap: 12px;
+  border: 1px solid rgba(255,255,255,.76);
+  border-radius: 18px;
+  padding: 14px 13px;
+  background: rgba(255,255,255,.54);
+  box-shadow: 0 12px 28px rgba(162,79,99,.1), inset 0 1px 0 rgba(255,255,255,.72);
+}
+
+.shex-dating-compare-card h2 {
+  margin: 0;
+  color: var(--dating-ink);
+  font-family: inherit;
+  font-size: 16px;
+  text-align: center;
+}
+
+.shex-dating-compare-card article {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+
+.shex-dating-reveal-screen .shex-dating-step-q {
+  font-size: clamp(21px, 5vw, 28px);
+}
+
+.shex-dating-reveal-screen .shex-dating-mini-pair {
+  margin-top: 8px;
+}
+
+.shex-dating-reveal-screen .shex-dating-progress {
+  margin-bottom: 10px;
+}
+
+.shex-dating-reveal-screen .shex-dating-compare-card article span {
+  font-size: 11px;
+}
+
+.shex-dating-reveal-screen .shex-dating-compare-card article p {
+  font-size: 12.5px;
+  line-height: 1.58;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.shex-dating-reveal-decor {
+  align-self: center;
+  margin-bottom: 2px;
+  opacity: .4;
+}
+
+.shex-dating-reveal-decor.is-mirror {
+  transform: scaleX(-1);
+}
+
+.shex-dating-reveal-divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1px;
+  min-height: 100%;
+  background: transparent;
+}
+
+.shex-dating-reveal-divider > div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  border-left: 1.4px dashed var(--dating-rose);
+  opacity: .4;
+}
+
+.shex-dating-reveal-divider svg {
+  position: relative;
+  box-sizing: content-box;
+  background: var(--dating-cream);
+  padding: 3px 0;
+}
+
+.shex-dating-transition-overlay {
+  position: fixed;
+  z-index: 80;
+  inset: 0;
+  display: grid;
+  color: #fff;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 46%, rgba(255,255,255,.16), rgba(247,236,235,.08) 36%, rgba(162,79,99,.08) 100%);
+  place-items: center;
+}
+
+.shex-dating-transition-overlay::before,
+.shex-dating-transition-overlay::after {
+  content: "";
+  position: absolute;
+  right: -28%;
+  bottom: -26%;
+  left: -28%;
+  pointer-events: none;
+}
+
+.shex-dating-transition-overlay::before {
+  height: 138%;
+  background:
+    radial-gradient(ellipse at 14% 5%, rgba(255,255,255,.56), transparent 26%),
+    radial-gradient(ellipse at 38% 0%, rgba(255,231,236,.48), transparent 30%),
+    radial-gradient(ellipse at 72% 7%, rgba(255,255,255,.34), transparent 28%),
+    radial-gradient(ellipse at 28% 26%, rgba(217,155,170,.58), transparent 42%),
+    radial-gradient(ellipse at 76% 30%, rgba(162,79,99,.48), transparent 46%),
+    linear-gradient(180deg, rgba(201,137,154,0) 0%, rgba(201,137,154,.34) 14%, rgba(201,137,154,.84) 36%, rgba(162,79,99,.94) 78%);
+  border-radius: 52% 48% 0 0 / 12% 10% 0 0;
+  filter: blur(24px);
+  opacity: .94;
+  transform-origin: 50% 100%;
+  animation: shex-dating-liquid-rise 20s cubic-bezier(.22,.72,.26,1) forwards;
+}
+
+.shex-dating-transition-overlay::after {
+  height: 58%;
+  background:
+    radial-gradient(ellipse at 15% 82%, rgba(255,255,255,.46), transparent 34%),
+    radial-gradient(ellipse at 44% 76%, rgba(255,225,232,.42), transparent 38%),
+    radial-gradient(ellipse at 78% 86%, rgba(255,255,255,.32), transparent 32%),
+    linear-gradient(180deg, rgba(201,137,154,0), rgba(201,137,154,.18) 48%, rgba(201,137,154,.52));
+  filter: blur(30px);
+  opacity: .76;
+  transform-origin: 50% 100%;
+  animation: shex-dating-liquid-mist 20s cubic-bezier(.22,.72,.26,1) forwards;
+}
+
+.shex-dating-transition-content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  box-sizing: border-box;
+  width: min(100%, 360px);
+  padding: 0 34px;
+  text-align: center;
+}
+
+.shex-dating-transition-heart {
+  display: inline-grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  color: rgba(255,255,255,.94);
+  filter: drop-shadow(0 14px 24px rgba(74,25,38,.24));
+  animation: shex-dating-heart-pulse .72s ease-in-out infinite;
+}
+
+.shex-dating-transition-heart .shex-dating-step-icon {
+  background: none;
+  box-shadow: none;
+}
+
+.shex-dating-transition-heart svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: rgba(255,255,255,.18);
+  stroke-width: 1.55;
+}
+
+.shex-dating-transition-overlay p {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  font-size: 14px;
+  line-height: 1.7;
+  letter-spacing: .08em;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity .32s ease, transform .32s ease;
+}
+
+.shex-dating-transition-overlay p.is-showing {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.shex-dating-toast {
+  position: fixed;
+  z-index: 70;
+  left: 50%;
+  bottom: max(26px, env(safe-area-inset-bottom, 0px) + 18px);
+  max-width: min(86vw, 360px);
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: 999px;
+  padding: 10px 16px;
+  color: #fff;
+  background: rgba(162,79,99,.86);
+  box-shadow: 0 12px 28px rgba(162,79,99,.22);
+  font-size: 13px;
+  opacity: 0;
+  transform: translate(-50%, 10px);
+  transition: opacity .22s ease, transform .22s ease;
+}
+
+.shex-dating-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.shex-dating-match-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin: 8px auto 0;
+}
+
+.shex-dating-match-face {
+  position: relative;
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  box-shadow: 0 10px 24px rgba(162,79,99,.13);
+}
+
+.shex-dating-match-face.is-dream {
+  background: linear-gradient(160deg, #f7ecec, #c48b96 120%);
+}
+
+.shex-dating-match-face.is-user {
+  background: linear-gradient(160deg, #fbe4e6, var(--dating-rose) 120%);
+}
+
+.shex-dating-match-face svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.shex-dating-match-ring {
+  position: relative;
+  flex-shrink: 0;
+  width: 68px;
+  height: 68px;
+}
+
+.shex-dating-match-ring > svg {
+  transform: rotate(-90deg);
+}
+
+.shex-dating-match-ring [data-dating-match-ring] {
+  transition: stroke-dashoffset .1s linear;
+}
+
+.shex-dating-match-ring > div {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.shex-dating-match-ring span {
+  color: var(--dating-rose-deep);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.shex-dating-match-ring small {
+  margin-top: 3px;
+  color: var(--dating-sub);
+  font-size: 8px;
+  letter-spacing: .05em;
+}
+
+.shex-dating-chemistry {
+  display: grid;
+  gap: 13px;
+  border: 1px solid rgba(255,255,255,.76);
+  border-radius: 18px;
+  padding: 15px 16px;
+  background: rgba(255,255,255,.5);
+  box-shadow: 0 12px 28px rgba(162,79,99,.08), inset 0 1px 0 rgba(255,255,255,.72);
+}
+
+.shex-dating-chemistry span {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--dating-rose-deep);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.shex-dating-chemistry p {
+  margin: 0;
+}
+
+.shex-dating-chemistry em {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  margin: 0 7px 7px 0;
+  border: 1px solid var(--dating-line);
+  border-radius: 999px;
+  padding: 0 12px;
+  color: var(--dating-rose-deep);
+  background: rgba(243,222,225,.56);
+  font-size: 12px;
+  font-style: normal;
+}
+
+.shex-dating-mind-lines {
+  display: grid;
+  gap: 7px;
+}
+
+.shex-dating-mind-lines p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(60,44,48,.72);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.shex-dating-mind-lines i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--dating-rose-deep);
+}
+
+.shex-dating-mind-lines i.is-user {
+  background: var(--dating-rose);
+}
+
+.shex-dating-timeline,
+.shex-dating-result-notes {
+  gap: 14px;
+}
+
+.shex-dating-result-notes div {
+  display: grid;
+  gap: 5px;
+  border-bottom: 1px solid var(--dating-line);
+  padding-bottom: 12px;
+}
+
+.shex-dating-result-notes div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.shex-dating-timeline {
+  background: rgba(255,255,255,.4);
+}
+
+.shex-dating-timeline article {
+  display: flex;
+  gap: 12px;
+  border: 1px solid var(--dating-line);
+  border-radius: 16px;
+  padding: 13px 14px;
+  background: rgba(255,255,255,.34);
+}
+
+.shex-dating-timeline article > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--dating-rose-deep);
+  background: var(--dating-rose-soft);
+}
+
+.shex-dating-timeline svg {
+  width: 19px;
+  height: 19px;
+}
+
+.shex-dating-timeline article > section {
+  min-width: 0;
+}
+
+.shex-dating-result-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.shex-dating-article {
+  gap: 16px;
+}
+
+.shex-dating-article .shex-dating-result-title {
+  margin-bottom: 2px;
+}
+
+.shex-dating-subpage {
+  gap: 12px;
+  padding: 18px 0 var(--dating-bottom-safe);
+}
+
+.shex-dating-subhead {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+}
+
+.shex-dating-subhead h1 {
+  margin: 0;
+  color: var(--dating-ink);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.shex-dating-subnote {
+  margin: 0;
+  color: var(--dating-sub);
+  font-size: 11px;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.shex-dating-profile-tabs {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  padding: 4px;
+  border: 1px solid var(--dating-line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .42);
+}
+
+.shex-dating-profile-tabs button {
+  flex: 1;
+  border: 0;
+  border-radius: 999px;
+  padding: 9px 0;
+  color: var(--dating-sub);
+  background: transparent;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.shex-dating-profile-tabs button.is-active {
+  color: #fff;
+  background: var(--dating-rose-deep);
+  box-shadow: 0 8px 18px rgba(162, 79, 99, .16);
+}
+
+.shex-dating-record-list,
+.shex-dating-anniversary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.shex-dating-record {
+  display: flex;
+  gap: 12px;
+  border: 1px solid var(--dating-line);
+  border-radius: 18px;
+  padding: 14px;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.shex-dating-record.is-latest {
+  background: var(--dating-cream2);
+}
+
+.shex-dating-record > span:first-child {
+  flex-shrink: 0;
+  width: 46px;
+  text-align: center;
+}
+
+.shex-dating-record strong {
+  display: block;
+  color: var(--dating-rose-deep);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.shex-dating-record small {
+  display: block;
+  margin-top: 2px;
+  color: var(--dating-sub);
+  font-size: 9px;
+}
+
+.shex-dating-record b {
+  display: block;
+  color: var(--dating-ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.shex-dating-record em {
+  display: block;
+  margin-top: 4px;
+  color: var(--dating-sub);
+  font-size: 11px;
+  font-style: normal;
+  line-height: 1.5;
+}
+
+.shex-dating-info-card {
+  border: 1px solid var(--dating-line);
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+
+.shex-dating-profile-conflict {
+  border-color: rgba(178, 91, 108, 0.42);
+  background: rgba(178, 91, 108, 0.08);
+  box-shadow: 0 8px 24px rgba(116, 59, 72, 0.08);
+}
+
+.shex-dating-profile-conflict h2 {
+  color: #a44559;
+  font-size: 12px;
+}
+
+.shex-dating-profile-conflict .shex-dating-info-help {
+  margin: 0;
+  color: var(--dating-ink);
+  line-height: 1.7;
+}
+
+.shex-dating-info-card h2 {
+  margin: 0 0 10px;
+  color: var(--dating-rose-deep);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.shex-dating-info-card > div {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--dating-line);
+  padding: 7px 0;
+  font-size: 12.5px;
+}
+
+.shex-dating-info-card > div:last-child {
+  border-bottom: 0;
+}
+
+.shex-dating-info-card > div span {
+  color: var(--dating-sub);
+}
+
+.shex-dating-info-card > div strong {
+  color: var(--dating-ink);
+  font-weight: 500;
+}
+
+.shex-dating-inline-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--dating-line);
+  padding: 7px 0;
+  gap: 12px;
+  font-size: 12.5px;
+}
+
+.shex-dating-inline-field span {
+  color: var(--dating-sub);
+}
+
+.shex-dating-inline-field input,
+.shex-dating-inline-field select {
+  min-width: 0;
+  width: min(42%, 148px);
+  border: 1px solid var(--dating-line);
+  border-radius: 12px;
+  outline: 0;
+  padding: 8px 10px;
+  color: var(--dating-ink);
+  background: var(--dating-cream2);
+  font: inherit;
+  font-size: 12px;
+  text-align: right;
+}
+
+.shex-dating-info-help {
+  margin: -2px 0 8px;
+  color: var(--dating-sub);
+  font-size: 10.5px;
+  line-height: 1.5;
+}
+
+.shex-dating-info-card textarea {
+  box-sizing: border-box;
+  width: 100%;
+  height: 110px;
+  border: 0;
+  border-radius: 12px;
+  outline: 0;
+  padding: 10px 12px;
+  resize: none;
+  color: var(--dating-ink);
+  background: var(--dating-cream2);
+  font: inherit;
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+
+.shex-dating-info-card textarea.shex-dating-persona-textarea {
+  height: 88px;
+}
+
+.shex-dating-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0;
+}
+
+.shex-dating-tag-list span,
+.shex-dating-tag-list button {
+  border: 1px solid var(--dating-line);
+  border-radius: 999px;
+  padding: 6px 12px;
+  color: var(--dating-sub);
+  background: transparent;
+  font: inherit;
+  font-size: 11.5px;
+  cursor: pointer;
+}
+
+.shex-dating-tag-list span.is-active,
+.shex-dating-tag-list button.is-active {
+  border-color: var(--dating-rose-deep);
+  color: #fff;
+  background: var(--dating-rose-deep);
+}
+
+.shex-dating-anniversary-tip {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 2px;
+  border-radius: 16px;
+  padding: 12px 14px;
+  background: var(--dating-cream2);
+}
+
+.shex-dating-anniversary-tip span {
+  color: var(--dating-sub);
+  font-size: 11px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.shex-dating-together-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid rgba(162,79,99,.14);
+  border-radius: 20px;
+  padding: 15px 16px;
+  background: rgba(255,255,255,.42);
+  box-shadow: 0 12px 26px rgba(162,79,99,.08);
+}
+
+.shex-dating-together-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.shex-dating-together-head i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: var(--dating-rose-deep);
+  background: var(--dating-rose-soft);
+  font-style: normal;
+  font-size: 16px;
+}
+
+.shex-dating-together-head strong {
+  display: block;
+  color: var(--dating-ink);
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.shex-dating-together-head span,
+.shex-dating-together-card p {
+  display: block;
+  margin: 3px 0 0;
+  color: var(--dating-sub);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.shex-dating-together-date {
+  display: grid;
+  grid-template-columns: auto minmax(0, 150px);
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--dating-ink);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.shex-dating-together-date input {
+  width: 150px;
+  box-sizing: border-box;
+  border: 1px solid var(--dating-line);
+  border-radius: 999px;
+  padding: 9px 11px;
+  color: var(--dating-ink);
+  background: var(--dating-cream2);
+  font: inherit;
+  font-size: 11.5px;
+  outline: 0;
+}
+
+.shex-dating-together-card button {
+  align-self: flex-start;
+  border: 0;
+  border-radius: 999px;
+  padding: 9px 16px;
+  color: #fff;
+  background: var(--dating-rose-deep);
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.shex-dating-together-card button:disabled {
+  opacity: .58;
+  cursor: not-allowed;
+}
+
+.shex-dating-anniversary-list {
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.shex-dating-anniversary-list article {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--dating-line);
+  border-radius: 16px;
+  padding: 13px 15px;
+}
+
+.shex-dating-anniversary-list article > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.shex-dating-anniversary-list i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  color: var(--dating-rose-deep);
+  background: var(--dating-rose-soft);
+  font-style: normal;
+}
+
+.shex-dating-anniversary-list strong {
+  display: block;
+  color: var(--dating-ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.shex-dating-anniversary-list span {
+  display: block;
+  margin-top: 2px;
+  color: var(--dating-sub);
+  font-size: 11px;
+}
+
+.shex-dating-anniversary-list em {
+  display: block;
+  margin-top: 4px;
+  color: var(--dating-sub);
+  font-size: 10.5px;
+  font-style: normal;
+  line-height: 1.45;
+}
+
+.shex-dating-anniversary-delete {
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 999px;
+  padding: 6px 9px;
+  color: var(--dating-rose-deep);
+  background: rgba(162,79,99,.08);
+  font: inherit;
+  font-size: 10.5px;
+  cursor: pointer;
+}
+
+.shex-dating-empty-card {
+  border: 1px dashed var(--dating-line);
+  border-radius: 18px;
+  padding: 18px 16px;
+  color: var(--dating-sub);
+  background: rgba(255,255,255,.28);
+  font-size: 12px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.shex-dating-add-anniversary {
+  width: 100%;
+  margin-top: 0;
+  border: 1.5px dashed var(--dating-rose);
+  border-radius: 999px;
+  padding: 13px 0;
+  color: var(--dating-rose-deep);
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.shex-dating-form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 6px;
+}
+
+.shex-dating-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.shex-dating-form-field > span {
+  color: var(--dating-ink);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.shex-dating-form-field input,
+.shex-dating-form-field textarea {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid var(--dating-line);
+  border-radius: 14px;
+  outline: 0;
+  padding: 12px 14px;
+  color: var(--dating-ink);
+  background: var(--dating-cream2);
+  font: inherit;
+  font-size: 12.5px;
+}
+
+.shex-dating-form-field textarea {
+  min-height: 64px;
+  resize: none;
+  line-height: 1.6;
+}
+
+.shex-dating-type-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.shex-dating-type-tags button {
+  border: 1px solid var(--dating-line);
+  border-radius: 999px;
+  padding: 7px 14px;
+  color: var(--dating-sub);
+  background: transparent;
+  font: inherit;
+  font-size: 11.5px;
+  cursor: pointer;
+}
+
+.shex-dating-type-tags button.is-active {
+  border-color: var(--dating-rose-deep);
+  color: #fff;
+  background: var(--dating-rose-deep);
+}
+
+.shex-dating-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--dating-line);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.shex-dating-toggle-row span {
+  color: var(--dating-ink);
+  font-size: 12.5px;
+}
+
+.shex-dating-toggle-row i {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--dating-rose-deep);
+  font-style: normal;
+}
+
+.shex-dating-toggle-row b {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+@keyframes shex-dating-heart-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+
+@keyframes shex-dating-sync-breathe {
+  0%, 100% {
+    opacity: .45;
+    transform: scale(.86);
+    box-shadow: 0 0 0 0 rgba(201,137,154,.18);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+    box-shadow: 0 0 0 8px rgba(201,137,154,0);
+  }
+}
+
+@keyframes shex-dating-overlay-fade {
+  0% { opacity: 0; }
+  18%, 78% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes shex-dating-liquid-rise {
+  0% {
+    border-radius: 52% 48% 0 0 / 14% 10% 0 0;
+    transform: translateY(96%) scaleX(1.1);
+  }
+  38% {
+    border-radius: 61% 39% 0 0 / 9% 15% 0 0;
+    transform: translateY(62%) scaleX(1.06);
+  }
+  76% {
+    border-radius: 42% 58% 0 0 / 16% 9% 0 0;
+    transform: translateY(18%) scaleX(1.03);
+  }
+  100% {
+    border-radius: 52% 48% 0 0 / 11% 10% 0 0;
+    transform: translateY(-4%) scaleX(1.02);
+  }
+}
+
+@keyframes shex-dating-liquid-mist {
+  0% {
+    opacity: .28;
+    transform: translate3d(-4%, 96%, 0) scaleX(1.16);
+  }
+  40% {
+    opacity: .68;
+    transform: translate3d(2%, 58%, 0) scaleX(1.08);
+  }
+  78% {
+    opacity: .76;
+    transform: translate3d(-1%, 16%, 0) scaleX(1.1);
+  }
+  100% {
+    opacity: .62;
+    transform: translate3d(1%, -3%, 0) scaleX(1.08);
+  }
+}
+
+@media (max-width: 560px) {
+  body[data-x-page="dating"] #xDatingPanel.x-clean-active {
+    padding-inline: clamp(20px, 6vw, 30px) !important;
+  }
+
+  .shex-dating-couple {
+    grid-template-columns: auto minmax(80px, 120px) auto;
+    gap: 8px;
+  }
+
+  .shex-dating-heartline {
+    max-width: 120px;
+    height: 36px;
+  }
+
+  .shex-dating-group-couple {
+    margin-bottom: 40px;
+  }
+
+  .shex-dating-header {
+    margin-bottom: 30px;
+  }
+
+  .shex-dating-entries {
+    gap: 8px;
+  }
+
+  .shex-dating-flow {
+    height: calc(100vh - var(--dating-back-safe-top));
+    height: calc(var(--app-vh, 1vh) * 100 - var(--dating-back-safe-top));
+    height: calc(var(--shex-dating-vh, 100vh) - var(--dating-back-safe-top));
+    max-height: calc(100vh - var(--dating-back-safe-top));
+    max-height: calc(var(--app-vh, 1vh) * 100 - var(--dating-back-safe-top));
+    max-height: calc(var(--shex-dating-vh, 100vh) - var(--dating-back-safe-top));
+    min-height: 0;
+  }
+
+  .shex-dating-step-screen,
+  .shex-dating-confirm-screen,
+  .shex-dating-reveal-screen,
+  .shex-dating-final-screen,
+  .shex-dating-article-screen {
+    padding-top: 20px;
+  }
+
+  .shex-dating-result-notes {
+    grid-template-columns: 1fr;
+  }
+
+  .shex-dating-reveal-screen {
+    gap: 9px;
+  }
+
+  .shex-dating-compare-cols {
+    flex-direction: row;
+    gap: 5px;
+  }
+
+  .shex-dating-reveal-screen .shex-dating-compare-card {
+    padding: 4px 8px;
+    gap: 6px;
+    border-radius: 15px;
+  }
+
+  .shex-dating-reveal-screen .shex-dating-compare-card h2 {
+    font-size: 14px;
+  }
+
+  .shex-dating-reveal-screen .shex-dating-compare-card article span {
+    font-size: 10.5px;
+  }
+
+  .shex-dating-reveal-screen .shex-dating-compare-card article p {
+    font-size: 12px;
+    line-height: 1.38;
+  }
+
+  .shex-dating-reveal-divider {
+    width: 1px;
+    min-height: auto;
+  }
+
+  .shex-dating-reveal-divider > div {
+    top: 0;
+    right: auto;
+    bottom: 0;
+    left: 50%;
+    border-top: 0;
+    border-left: 1.4px dashed var(--dating-rose);
+  }
+
+  .shex-dating-reveal-divider svg {
+    padding: 3px 0;
+  }
+
+  .shex-dating-flow-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .shex-dating-step-box textarea {
+    min-height: 130px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shex-dating-entries button:hover {
+    transform: none;
+  }
+}
+
+/* 夜间模式沿用正式约会流程，只覆盖可安全复刻的暗玫瑰视觉层。 */
+body.x-dark-mode[data-x-page="dating"],
+body.x-dark-mode[data-x-page="dating"] #site,
+body.x-dark-mode[data-x-page="dating"] #transmission,
+body.x-dark-mode[data-x-page="dating"] .transmission-wrap {
+  background: #372b1b !important;
+  background-image: none !important;
+}
+
+body.x-dark-mode[data-x-page="dating"] #xDatingPanel.x-clean-active,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-home,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-flow {
+  --dating-rose: #d98fa2;
+  --dating-rose-deep: #e39ab0;
+  --dating-rose-soft: #423420;
+  --dating-cream: #372b1b;
+  --dating-cream2: #372b1b;
+  --dating-canvas: #372b1b;
+  --dating-ink: #f1e4e7;
+  --dating-sub: #b79aa0;
+  --dating-line: rgba(255, 255, 255, 0.12);
+  --dating-glass: rgba(255, 255, 255, 0.055);
+  color-scheme: dark;
+}
+
+body.x-dark-mode[data-x-page="dating"] #xDatingPanel .x-status-page-shell::after {
+  background: linear-gradient(to bottom, var(--dating-canvas) 0%, rgba(55,43,27,0) 100%);
+}
+
+body.x-dark-mode[data-x-page="dating"] .shex-dating-gate-sheet {
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--dating-ink);
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.08), rgba(217, 143, 162, 0.08));
+  box-shadow: 0 20px 54px rgba(40,29,21,0.34), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+body.x-dark-mode[data-x-page="dating"] .shex-dating-gate-field input {
+  border-color: var(--dating-line);
+  color: var(--dating-ink);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+body.x-dark-mode[data-x-page="dating"] .shex-dating-home-face.is-dream,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-mini-face.is-dream,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-match-face.is-dream {
+  background: linear-gradient(160deg, #49343c, #9d6374 120%);
+}
+
+body.x-dark-mode[data-x-page="dating"] .shex-dating-home-face.is-user,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-mini-face.is-user,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-match-face.is-user {
+  background: linear-gradient(160deg, #52333e, var(--dating-rose) 120%);
+}
+
+body.x-dark-mode[data-x-page="dating"] .shex-dating-invite-info-popover,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-suggest-pop-card {
+  border-color: var(--dating-line);
+  color: var(--dating-ink);
+  background: rgba(55,43,27,0.97);
+  box-shadow: 0 18px 42px rgba(40,29,21,0.36);
+}
+
+body.x-dark-mode[data-x-page="dating"] .shex-dating-invite.is-accepted {
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.075), rgba(217, 143, 162, 0.1));
+}
+
+body.x-dark-mode[data-x-page="dating"] .shex-dating-step-box,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-narration-picker,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-compare-card,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-chemistry,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-together-card {
+  border-color: var(--dating-line);
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: 0 14px 32px rgba(40,29,21,0.24), inset 0 1px 0 rgba(255, 255, 255, 0.045);
+}
+
+body.x-dark-mode[data-x-page="dating"] .shex-dating-narration-picker button,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-ghost-cta,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-timeline,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-timeline article,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-empty-card {
+  border-color: var(--dating-line);
+  color: var(--dating-sub);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+body.x-dark-mode[data-x-page="dating"] .shex-dating-narration-picker button.is-active {
+  color: #fff;
+  background: var(--dating-rose-deep);
+}
+
+body.x-dark-mode[data-x-page="dating"] .shex-dating-article p,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-mind-lines p {
+  color: rgba(248, 241, 243, 0.92);
+}
+
+body.x-dark-mode[data-x-page="dating"] .shex-dating-final-screen .shex-dating-progress,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-final-screen .shex-dating-timeline article p,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-final-screen .shex-dating-result-notes p,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-final-screen .shex-dating-mind-lines p,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-article-screen .shex-dating-progress,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-article-screen .shex-dating-article p {
+  color: rgba(248, 241, 243, 0.94) !important;
+}
+
+body.x-dark-mode[data-x-page="dating"] .shex-dating-final-screen .shex-dating-timeline article span,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-final-screen .shex-dating-result-notes span {
+  color: rgba(252, 246, 248, 0.97) !important;
+}
+
+body.x-dark-mode[data-x-page="dating"] .shex-dating-suggest-pop {
+  background: rgba(55,43,27,0.56);
+}
+
+body.x-dark-mode[data-x-page="dating"] .shex-dating-flow input,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-flow textarea,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-home input,
+body.x-dark-mode[data-x-page="dating"] .shex-dating-home textarea {
+  color-scheme: dark;
+}

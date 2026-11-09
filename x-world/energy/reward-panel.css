@@ -1,0 +1,225 @@
+/**
+ * SHE.X 邀请奖励面板样式（reward-panel.js 专用）。
+ *
+ * 纪律：
+ * - 只使用 x-energy- 前缀的新类名（x-energy-invite-*），与既有设计语言保持一致。
+ * - 不声明 .x-energy-reward-card 等 energy 主样式已有的选择器，避免和主控接线冲突；
+ *   卡片外观由既有 .x-energy-reward-card 提供，本文件只补充邀请区自己的排版。
+ * - 不使用优先级强制声明（强制覆盖标记一律禁止）。
+ * - 不做重型模块标题，靠留白与既有功能区分隔。
+ * - 颜色一律走 .x-energy-panel 提供的 --energy-* / --x-energy-* 令牌，
+ *   不写死白色半透明玻璃拟态值；每个 var() 都带一个浅色主题下可读的兜底值，
+ *   暗色主题下的实际取值由令牌本身决定（中性黑灰，紫色只用于强调）。
+ */
+
+.x-energy-invite-block {
+  display: block;
+  margin-top: 14px;
+}
+
+.x-energy-invite-block[hidden] {
+  display: none;
+}
+
+.x-energy-invite-card {
+  align-items: stretch;
+}
+
+.x-energy-invite-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+
+.x-energy-invite-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.x-energy-invite-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.x-energy-invite-row-label {
+  color: var(--energy-muted, #9f7954);
+}
+
+.x-energy-invite-row-value {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.x-energy-invite-share {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.x-energy-invite-copy-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+
+.x-energy-invite-copy-label {
+  color: var(--energy-muted, #9f7954);
+  white-space: nowrap;
+}
+
+.x-energy-invite-code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  padding: 3px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--energy-line, #f1e9e2);
+  background: var(--energy-card-soft, #f9f3ee);
+  color: var(--energy-text, #38291a);
+}
+
+.x-energy-invite-link {
+  flex: 1 1 180px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--energy-text, #38291a);
+}
+
+.x-energy-invite-copy {
+  flex: 0 0 auto;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--energy-line, #f1e9e2);
+  background: transparent;
+  color: inherit;
+  font-size: 12px;
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+.x-energy-invite-copy:hover {
+  border-color: var(--energy-accent, #d29e6b);
+}
+
+.x-energy-invite-copy:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.x-energy-invite-note {
+  margin: 2px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--energy-muted, #9f7954);
+}
+
+.x-energy-invite-placeholder {
+  margin: 0;
+  font-size: 13px;
+  color: var(--energy-muted, #9f7954);
+}
+
+.x-energy-invite-makeup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid var(--energy-line, #f1e9e2);
+}
+
+.x-energy-invite-makeup-label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.x-energy-invite-makeup-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.x-energy-invite-makeup-input {
+  flex: 1 1 160px;
+  min-width: 0;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--energy-line, #f1e9e2);
+  background: var(--x-energy-input, #ffffff);
+  color: var(--energy-text, #38291a);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.x-energy-invite-makeup-input:disabled {
+  opacity: 0.55;
+}
+
+.x-energy-invite-makeup-submit {
+  flex: 0 0 auto;
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: var(--energy-accent, #d29e6b);
+  color: var(--x-energy-on-accent, #ffffff);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.x-energy-invite-makeup-submit:hover {
+  filter: brightness(0.94);
+}
+
+.x-energy-invite-makeup-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.x-energy-invite-makeup-hint {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--energy-muted, #9f7954);
+}
+
+.x-energy-invite-status {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--energy-muted, #9f7954);
+}
+
+.x-energy-invite-status[hidden] {
+  display: none;
+}
+
+.x-energy-invite-status[data-tone="error"] {
+  color: #d2453f;
+}
+
+@media (max-width: 480px) {
+  .x-energy-invite-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .x-energy-invite-link {
+    flex-basis: 100%;
+  }
+}

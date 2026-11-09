@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="shex-static-version" content="20261030-001746-x103-front-20" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#fff9ef" />
+    <title>登录与注册 | SHE.X</title>
+    <script src="./cloudbase-challenge-frame.js?v=20261030-001746-x103-front-20"></script>
+    <script>
+      // 免登录模式：未显式要求登录时，直接进入 X 世界。
+      // auth.html?login=1 仍保留完整登录 / 注册页，供管理员或需要云端账号时使用。
+      (function () {
+        try {
+          var params = new URLSearchParams(location.search);
+          if (params.get("login") === "1" || params.get("__captcha") === "on") return;
+          location.replace("./index.html#x-world");
+        } catch (_) {}
+      })();
+    </script>
+    <script src="./legacy-compat.js?v=20261030-001746-x103-front-20"></script>
+    <link rel="stylesheet" href="./auth-landing.css?v=20261109-bear-3" />
+    <script>
+      window.SHEX_CLOUDBASE_CONFIG = window.SHEX_CLOUDBASE_CONFIG || {
+        envId: "dushe1344-d0gkkazhi84de696a",
+        region: "ap-shanghai",
+        sdkUrl: "https://static.cloudbase.net/cloudbase-js-sdk/2.9.0/cloudbase.full.js",
+        functions: { auth: "shexAuth" },
+        collections: {
+          users: "shex_users",
+          userData: "shex_user_data",
+          students: "shex_students",
+          feedback: "shex_feedback"
+        }
+      };
+    </script>
+    <script src="./cloudbase-config.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./x-world/character-profile/character-profile-sync.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./x-world/architecture/transmission-retention.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./cloudbase-auth-gate.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./cloudbase-client.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./user-data.js?v=20261030-001746-x103-front-20"></script>
+    <script src="./cloudbase-email-auth.js?v=20261030-001746-x103-front-20"></script>
+  </head>
+  <body class="auth-page auth-landing-page">
+    <!-- 小熊图标库 -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="shex-bear-brown" viewBox="0 0 120 120">
+          <circle cx="27" cy="28" r="15" fill="#b97a4b" />
+          <circle cx="93" cy="28" r="15" fill="#b97a4b" />
+          <circle cx="27" cy="28" r="7.5" fill="#e8b98c" />
+          <circle cx="93" cy="28" r="7.5" fill="#e8b98c" />
+          <circle cx="60" cy="64" r="43" fill="#c98a4b" />
+          <ellipse cx="60" cy="78" rx="23" ry="16" fill="#f6e3c6" />
+          <circle cx="44" cy="58" r="4.6" fill="#3f2c1e" />
+          <circle cx="76" cy="58" r="4.6" fill="#3f2c1e" />
+          <circle cx="45.6" cy="56" r="1.5" fill="#fff" opacity=".9" />
+          <circle cx="77.6" cy="56" r="1.5" fill="#fff" opacity=".9" />
+          <ellipse cx="60" cy="70" rx="5.2" ry="3.9" fill="#3f2c1e" />
+          <path d="M60 74 q-5 6 -11 2 M60 74 q5 6 11 2" fill="none" stroke="#3f2c1e" stroke-width="2.4" stroke-linecap="round" />
+          <ellipse cx="33" cy="74" rx="6" ry="4" fill="#f2a6a0" opacity=".62" />
+          <ellipse cx="87" cy="74" rx="6" ry="4" fill="#f2a6a0" opacity=".62" />
+        </symbol>
+        <symbol id="shex-bear-cream" viewBox="0 0 120 120">
+          <circle cx="27" cy="28" r="15" fill="#e8d2ae" />
+          <circle cx="93" cy="28" r="15" fill="#e8d2ae" />
+          <circle cx="27" cy="28" r="7.5" fill="#f9eeda" />
+          <circle cx="93" cy="28" r="7.5" fill="#f9eeda" />
+          <circle cx="60" cy="64" r="43" fill="#f4e4c9" />
+          <ellipse cx="60" cy="78" rx="23" ry="16" fill="#fffaf0" />
+          <circle cx="44" cy="58" r="4.6" fill="#4b3726" />
+          <circle cx="76" cy="58" r="4.6" fill="#4b3726" />
+          <circle cx="45.6" cy="56" r="1.5" fill="#fff" opacity=".9" />
+          <circle cx="77.6" cy="56" r="1.5" fill="#fff" opacity=".9" />
+          <ellipse cx="60" cy="70" rx="5.2" ry="3.9" fill="#4b3726" />
+          <path d="M60 74 q-5 6 -11 2 M60 74 q5 6 11 2" fill="none" stroke="#4b3726" stroke-width="2.4" stroke-linecap="round" />
+          <ellipse cx="33" cy="74" rx="6" ry="4" fill="#f2b3a6" opacity=".7" />
+          <ellipse cx="87" cy="74" rx="6" ry="4" fill="#f2b3a6" opacity=".7" />
+        </symbol>
+        <symbol id="shex-chick" viewBox="0 0 120 120">
+          <circle cx="60" cy="64" r="43" fill="#f7d34e" />
+          <path d="M60 21 q5 -12 13 -15 q-2 11 -6 17" fill="#f7d34e" />
+          <circle cx="44" cy="58" r="4.4" fill="#4b3726" />
+          <circle cx="76" cy="58" r="4.4" fill="#4b3726" />
+          <circle cx="45.6" cy="56" r="1.4" fill="#fff" opacity=".9" />
+          <circle cx="77.6" cy="56" r="1.4" fill="#fff" opacity=".9" />
+          <path d="M55 70 q5 7 10 0 q-2 9 -5 9 q-3 0 -5 -9Z" fill="#e8a33d" />
+          <ellipse cx="32" cy="74" rx="6" ry="4" fill="#f2a6a0" opacity=".7" />
+          <ellipse cx="88" cy="74" rx="6" ry="4" fill="#f2a6a0" opacity=".7" />
+        </symbol>
+      </defs>
+    </svg>
+
+    <div class="auth-bg" aria-hidden="true">
+      <svg class="auth-bear auth-bear--a" viewBox="0 0 120 120"><use href="#shex-bear-brown" /></svg>
+      <svg class="auth-bear auth-bear--b" viewBox="0 0 120 120"><use href="#shex-bear-cream" /></svg>
+      <svg class="auth-bear auth-bear--c" viewBox="0 0 120 120"><use href="#shex-chick" /></svg>
+      <svg class="auth-bear auth-bear--d" viewBox="0 0 120 120"><use href="#shex-bear-cream" /></svg>
+    </div>
+
+    <main class="auth-shell">
+      <header class="auth-topbar">
+        <a class="auth-logo" href="./index.html#x-world" aria-label="进入 SHE.X">SHE.X</a>
+        <p class="auth-topbar-sub">小舌工作室 · For Long-Distance Love</p>
+        <a class="auth-source-download" href="./downloads/shex-local-open-source-20260709.zip" download="SHE.X-本地开源项目.zip">
+          <span class="auth-source-download-label">初版本地端开源项目</span>
+          <span class="auth-source-download-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-4-4 4 4 4-4M4 16v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4" /></svg>
+          </span>
+        </a>
+      </header>
+
+      <div class="auth-layout">
+        <section class="auth-landing-hero" aria-label="SHE.X">
+          <p class="auth-landing-kicker">For Long-Distance Love</p>
+          <h2 class="auth-landing-title">你和 TA 的<br />专属<em>世界</em></h2>
+          <p class="auth-landing-tagline">把想念、回应和日常，都放进一个只有你们知道的地方。<br />无论现实还是跨次元，每一种真实感受都值得被认真对待。</p>
+
+          <ul class="auth-feature-list" aria-label="核心功能">
+            <li><span class="auth-feature-dot" aria-hidden="true"></span>X传讯</li>
+            <li><span class="auth-feature-dot" aria-hidden="true"></span>X来信</li>
+            <li><span class="auth-feature-dot" aria-hidden="true"></span>X陪伴</li>
+            <li><span class="auth-feature-dot" aria-hidden="true"></span>X小宠</li>
+          </ul>
+
+          <div class="auth-hero-actions" aria-label="下载与帮助">
+            <a class="auth-hero-action auth-download-app" href="./downloads/SHE.X.apk?v=1.3" download="SHE.X.apk" title="下载 SHE.X Android 安装包">
+              下载 APP
+            </a>
+            <button class="auth-hero-action auth-contact-admin" id="authContactAdmin" type="button" aria-haspopup="dialog" aria-controls="authAdminContactModal">
+              联系管理员
+            </button>
+          </div>
+        </section>
+
+        <section class="auth-card" aria-labelledby="authPageTitle">
+          <div class="auth-card-heading">
+            <p class="auth-kicker">User Archive</p>
+            <h1 id="authPageTitle">登录</h1>
+          </div>
+
+          <div class="auth-provider-tabs" role="tablist" aria-label="登录方式">
+            <button class="active" type="button" data-auth-provider="email">邮箱验证码</button>
+            <button type="button" data-auth-provider="password">账号密码</button>
+          </div>
+
+          <form class="auth-form" id="authForm">
+            <div id="emailAuthFields" class="auth-email-fields">
+              <label>
+                邮箱
+                <input id="authEmail" name="email" type="email" autocomplete="email" placeholder="name@example.com" required />
+              </label>
+              <label>
+                6位邮箱验证码
+                <span class="auth-email-code-field">
+                  <input id="authEmailCode" name="emailCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="请输入验证码" required />
+                  <button id="sendEmailCode" type="button">获取验证码</button>
+                </span>
+              </label>
+            </div>
+            <label id="usernameField" hidden>
+              用户名
+              <input id="authUsername" name="username" autocomplete="username" disabled />
+            </label>
+            <label id="passwordField" hidden>
+              密码
+              <span class="auth-password-field">
+                <input id="authPassword" name="password" type="password" autocomplete="current-password" disabled />
+                <button id="togglePassword" type="button" aria-pressed="false">显示</button>
+              </span>
+              <span class="auth-password-hint">请牢记密码——它是找到彼此故事的钥匙，遗忘将无法找回。</span>
+            </label>
+            <button id="authSubmit" type="submit">登录</button>
+            <div class="auth-page-switch">
+              <span id="authRegisterPrompt">还没有账号？</span>
+              <button id="authGoRegister" type="button">免费注册</button>
+              <button id="authGoLogin" type="button" hidden>返回登录</button>
+            </div>
+          </form>
+
+          <form class="auth-form" id="changePasswordForm" style="display:none;">
+            <p class="auth-password-reset-note">你的密码已被管理员重置，请设置一个新密码后继续使用。</p>
+            <label>
+              当前的临时密码
+              <input id="currentPasswordInput" type="password" autocomplete="current-password" required />
+            </label>
+            <label>
+              新密码（至少 6 位）
+              <input id="newPasswordInput" type="password" autocomplete="new-password" required minlength="6" />
+            </label>
+            <button id="changePasswordSubmit" type="submit">设置新密码并继续</button>
+          </form>
+
+          <div class="auth-state">
+            <span>当前 ID</span>
+            <strong id="currentUserId">登录后生成</strong>
+          </div>
+          <p class="auth-status" id="authStatus" aria-live="polite"></p>
+          <div class="auth-actions">
+            <button id="logoutButton" type="button">当前未登录</button>
+            <a class="auth-home" href="./index.html#x-world">返回 X 世界</a>
+          </div>
+        </section>
+      </div>
+
+      <p class="auth-footer">SHE.X · 认真对待每一种真实感受　<a class="auth-footer-link" href="./keyboard-demo.html">看看 TA 怎么用拼音打字</a></p>
+    </main>
+
+    <div class="auth-admin-modal" id="authAdminContactModal" role="dialog" aria-modal="true" aria-labelledby="authAdminContactTitle" hidden>
+      <button class="auth-admin-modal-backdrop" type="button" data-auth-admin-close aria-label="关闭联系管理员弹窗"></button>
+      <section class="auth-admin-modal-card">
+        <button class="auth-admin-modal-close" type="button" data-auth-admin-close aria-label="关闭">×</button>
+        <p class="auth-admin-modal-kicker">Need Help?</p>
+        <h2 id="authAdminContactTitle">联系管理员</h2>
+        <img class="auth-admin-modal-qr" src="./images/admin-qr.jpg" alt="管理员QQ二维码" loading="lazy" decoding="async" />
+        <strong class="auth-admin-modal-qq">管理员QQ：<span id="authAdminQQ">2140980147</span></strong>
+        <p class="auth-admin-modal-tip">登录、注册或下载遇到问题，可以扫码添加管理员，联系时请简单说明遇到的问题。</p>
+        <button class="auth-admin-copy" id="authCopyAdminQQ" type="button">复制管理员QQ</button>
+        <p class="auth-admin-copy-status" id="authAdminCopyStatus" aria-live="polite"></p>
+      </section>
+    </div>
+    <script src="./auth.js?v=20261109-no-login-1" defer></script>
+  </body>
+</html>

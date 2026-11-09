@@ -1,0 +1,48 @@
+/* SHE.X 自定义 APP：整页浮层，盖在 X世界上面；里面的 APP 运行在隔离 iframe 中。 */
+.x-capp-overlay { position:fixed; inset:0; z-index:10050; display:flex; flex-direction:column; background:#f4f5f2; color:#1f2a24; font-size:14px; padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+.x-capp-overlay button { font:inherit; color:inherit; cursor:pointer; }
+.x-capp-head { flex:none; display:flex; align-items:center; gap:8px; min-height:48px; padding:0 12px; border-bottom:1px solid #dfe3dc; background:#fbfbf8; }
+.x-capp-head h2 { flex:1; min-width:0; margin:0; font-size:16px; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.x-capp-head [data-capp="back"] { width:36px; height:36px; border:0; background:transparent; font-size:24px; line-height:1; }
+.x-capp-head-actions { display:flex; gap:6px; }
+.x-capp-head-actions button, .x-capp-body button { min-height:32px; padding:0 10px; border:1px solid #cbd6c7; border-radius:10px; background:transparent; color:#4d6650; font-size:13px; }
+.x-capp-head-actions .is-primary { border-color:#4d6650; }
+.x-capp-body .is-danger { border-color:#d9a7a0; color:#a23a2e; }
+.x-capp-badge { flex:none; padding:3px 9px; border-radius:999px; background:#e8eee4; color:#4d6650; font-size:11px; }
+.x-capp-notice { flex:none; margin:0; padding:8px 16px; background:#eef2ea; color:#3d5240; font-size:13px; }
+.x-capp-body { flex:1; min-height:0; overflow:auto; padding:14px 16px 24px; display:flex; flex-direction:column; gap:12px; }
+.x-capp-tip { margin:0; color:#66736a; font-size:13px; line-height:1.6; }
+.x-capp-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(76px,1fr)); gap:16px 10px; }
+.x-capp-tile { position:relative; }
+.x-capp-tile > button:first-child { width:100%; min-height:0; padding:0; border:0; display:flex; flex-direction:column; align-items:center; gap:6px; font-size:12px; color:#1f2a24; }
+.x-capp-icon { width:56px; height:56px; display:grid; place-items:center; border-radius:16px; background:#fff; border:1px solid #dfe3dc; font-size:26px; }
+.x-capp-icon.is-new { border-style:dashed; color:#928475; background:transparent; }
+.x-capp-body .x-capp-edit { position:absolute; top:-6px; right:4px; width:24px; min-height:24px; height:24px; padding:0; border-radius:50%; background:#fff; font-size:12px; }
+.x-capp-row { display:flex; gap:10px; align-items:flex-end; }
+.x-capp-row.is-between { justify-content:space-between; align-items:center; }
+.x-capp-row label { display:flex; flex-direction:column; gap:4px; font-size:12px; color:#66736a; }
+.x-capp-row label.is-grow { flex:1; min-width:0; }
+.x-capp-row input { height:36px; padding:0 10px; border:1px solid #cbd6c7; border-radius:10px; background:#fff; font:inherit; color:#1f2a24; min-width:0; }
+.x-capp-row input[data-capp-field="icon"] { width:52px; text-align:center; font-size:18px; }
+.x-capp-label { font-size:12px; color:#66736a; }
+.x-capp-code { flex:none; width:100%; height:38vh; min-height:180px; box-sizing:border-box; padding:10px; border:1px solid #cbd6c7; border-radius:10px; background:#fff; color:#1f2a24; font:12px/1.5 ui-monospace,Menlo,Consolas,monospace; resize:vertical; }
+.x-capp-size { margin:-6px 0 0; text-align:right; font-size:12px; color:#928475; }
+.x-capp-size.is-over { color:#a23a2e; }
+.x-capp-assets { display:flex; flex-wrap:wrap; gap:10px; }
+.x-capp-assets figure { position:relative; margin:0; width:72px; font-size:11px; text-align:center; color:#66736a; }
+.x-capp-assets img { width:72px; height:72px; object-fit:cover; border-radius:10px; border:1px solid #dfe3dc; display:block; }
+.x-capp-assets figure button { position:absolute; top:-6px; right:-6px; width:22px; min-height:22px; height:22px; padding:0; border-radius:50%; background:#fff; }
+.x-capp-handbook { margin:0; padding:12px; border:1px solid #dfe3dc; border-radius:10px; background:#fff; white-space:pre-wrap; word-break:break-word; font:12px/1.6 ui-monospace,Menlo,Consolas,monospace; user-select:text; }
+.x-capp-stage { flex:1; min-height:0; background:#fff; }
+.x-capp-frame { display:block; width:100%; height:100%; border:0; }
+.x-capp-tile-glyph { font-size:26px; line-height:1; }
+.x-capp-assets .x-capp-asset-name { width:72px; box-sizing:border-box; margin-top:4px; padding:2px 4px; border:1px solid #cbd6c7; border-radius:6px; background:#fff; font:inherit; font-size:11px; text-align:center; color:#1f2a24; }
+
+/* 打开 APP 时：顶部不再有底色条，APP 自己的页面铺满整个窗口；只在上面浮着返回键和“只读”小标识。 */
+.x-capp-overlay.is-run { padding:0; background:#fff; }
+.x-capp-overlay.is-run .x-capp-stage { background:transparent; }
+.x-capp-head.is-run { position:absolute; z-index:2; top:calc(env(safe-area-inset-top) + 8px); left:10px; right:10px; min-height:0; padding:0; border:0; background:transparent; justify-content:space-between; pointer-events:none; }
+.x-capp-head.is-run h2 { display:none; }
+.x-capp-head.is-run [data-capp="back"], .x-capp-head.is-run .x-capp-badge { pointer-events:auto; color:#fff; background:rgba(55,39,26,.34); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
+.x-capp-head.is-run [data-capp="back"] { width:32px; height:32px; border-radius:50%; font-size:20px; }
+.x-capp-head.is-run .x-capp-badge { padding:4px 10px; font-size:11px; }

@@ -1,0 +1,409 @@
+/* X小宠: the room is the page. All visual rules stay scoped to this module. */
+/* Hide native tracks throughout the pet UI; keep each surface's scrolling behavior. */
+#xPetPanel, #xPetPanel * {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+#xPetPanel::-webkit-scrollbar, #xPetPanel *::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+body[data-x-page="pet"] #xPetPanel.x-clean-active {
+  --pet-ink: #6a5346;
+  --pet-paper: #fbefd7;
+  background: #dcc19d;
+  color: var(--pet-ink);
+  display: grid !important;
+  place-items: center;
+  animation: none;
+}
+#xPetPanel .pet-home {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 440px);
+  height: 100%;
+  max-height: 960px;
+  overflow: hidden;
+  background: #e1c3a0;
+  font-family: system-ui, "Microsoft YaHei", sans-serif;
+  isolation: isolate;
+}
+#xPetPanel .pet-room {
+  position: relative;
+  width: min(100%, calc((var(--pet-locked-height,100svh) - 120px) * 0.6));
+  flex: none;
+  line-height: 0;
+}
+#xPetPanel [data-pet-canvas] {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 192 / 320;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+#xPetPanel .pet-head {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  margin: 0 0 10px;
+  height: 44px;
+  flex: none;
+}
+
+/* Preserve the approved source pixels outside the room's 192px bitmap. */
+#xPetPanel .pet-art-layer {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  line-height: 0;
+}
+#xPetPanel [data-pet-art] {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  filter: none;
+  animation: none;
+  image-rendering: auto;
+}
+#xPetPanel .pet-title {
+  margin: 0;
+  color: var(--pet-ink);
+  font-size: 16px;
+  font-weight: 650;
+  font-family: inherit;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+}
+#xPetPanel .pet-place {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+#xPetPanel .pet-place svg {width: 14px; height: 14px;}
+/* 场景切换：右上角的场景名是一个安静的按钮，点开是同一套纸面风格的小菜单。 */
+#xPetPanel .pet-place-wrap {position: relative; flex: none;}
+#xPetPanel button.pet-place {
+  margin: 0; padding: 6px 2px 6px 8px; min-height: 32px; border: 0; border-radius: 0; background: transparent;
+  box-shadow: none; color: var(--pet-ink); font-family: inherit; line-height: 1.4; cursor: pointer;
+  outline: none; -webkit-tap-highlight-color: transparent; transform: none;
+}
+#xPetPanel button.pet-place:hover, #xPetPanel button.pet-place:active {background: transparent; box-shadow: none; transform: none;}
+#xPetPanel button.pet-place:focus-visible > span {text-decoration: underline; text-underline-offset: 3px;}
+#xPetPanel button.pet-place:disabled {cursor: default; opacity: 1;}
+#xPetPanel .pet-place-icon-outdoor, #xPetPanel:not([data-pet-scene="home"]) .pet-place-icon-home {display: none;}
+#xPetPanel:not([data-pet-scene="home"]) .pet-place-icon-outdoor {display: block;}
+#xPetPanel .pet-place-menu {
+  position: absolute; top: calc(100% + 2px); right: 0; z-index: 6; display: grid; min-width: 96px; padding: 3px;
+  border: 2px solid #8e715b; background: var(--pet-paper); box-shadow: 3px 3px 0 rgba(106, 83, 70, 0.22);
+}
+#xPetPanel .pet-place-menu button {
+  display: flex; align-items: center; gap: 8px; width: 100%; margin: 0; padding: 6px 10px; min-height: 32px;
+  border: 0; border-radius: 0; background: transparent; box-shadow: none; color: var(--pet-ink);
+  font: inherit; font-size: 13px; text-align: left; cursor: pointer; transform: none; -webkit-tap-highlight-color: transparent;
+}
+#xPetPanel .pet-place-menu button svg {width: 14px; height: 14px; flex: none;}
+#xPetPanel .pet-place-menu button:hover, #xPetPanel .pet-place-menu button:focus-visible {background: #f0dfc0; outline: none;}
+#xPetPanel .pet-place-menu button[data-pet-current="true"] {background: #ecd8b6; font-weight: 650;}
+#xPetPanel .pet-place-menu button[data-pet-locked="true"] {color: #9a8573; white-space: nowrap;}
+/* 场景菜单展开时先收起右侧的小飞机，避免两者叠在一起；菜单收起后再出现。 */
+#xPetPanel[data-pet-place-open="true"] .pet-chat-toggle {visibility: hidden;}
+#xPetPanel .pet-back {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 0 0 -12px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--pet-ink);
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+  transform: none;
+}
+#xPetPanel .pet-back::before, #xPetPanel .pet-back::after {content: none;}
+#xPetPanel .pet-back svg {width: 20px; height: 20px;}
+#xPetPanel .pet-back:hover {background: #e9d0b0; transform: none; box-shadow: none;}
+#xPetPanel .pet-back:focus-visible {outline: 2px solid #6a5346; outline-offset: -4px;}
+#xPetPanel .pet-foot {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 9px;
+  row-gap: 3px;
+  justify-content: center;
+  height: 57px;
+  margin: 5px 0 0;
+  color: var(--pet-ink);
+  font-size: 12px;
+  line-height: 1.4;
+  flex: none;
+}
+#xPetPanel .pet-foot strong {font-size: 13px; font-weight: 650;}
+#xPetPanel .pet-foot span {opacity: 0.9;}
+#xPetPanel .pet-hint {flex-basis: 100%; text-align: center; font-size: 10px;}
+#xPetPanel .pet-info {
+  display: inline-flex; align-items: center; gap: 5px; padding: 2px 3px; margin: 0;
+  border: 0; border-bottom: 1px dotted #9a7a63; border-radius: 0; box-shadow: none;
+  background: transparent; color: var(--pet-ink); font: inherit; cursor: pointer;
+}
+#xPetPanel .pet-info svg {width: 12px; height: 12px;}
+#xPetPanel .pet-info:hover {background: #e9d0b0; transform: none; box-shadow: none;}
+#xPetPanel .pet-hotspot {
+  position: absolute; z-index: 1; display: block; min-width: 0; min-height: 0; padding: 0;
+  border: 0; border-radius: 0; background: transparent; box-shadow: none; cursor: pointer;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent; transform: none;
+}
+#xPetPanel .pet-hotspot:hover, #xPetPanel .pet-hotspot:active {background: transparent; box-shadow: none; transform: none;}
+#xPetPanel .pet-hotspot:disabled {pointer-events: none; opacity: 1;}
+#xPetPanel .pet-hotspot::before, #xPetPanel .pet-hotspot::after, #xPetPanel .pet-info::before,
+#xPetPanel .pet-info::after, #xPetPanel .pet-close::before, #xPetPanel .pet-close::after {content: none;}
+#xPetPanel .pet-hit-dog {left: 36%; top: 58%; width: 28%; height: 16%; z-index: 2;}
+#xPetPanel .pet-hit-food {left: 9%; top: 83%; width: 14%; height: 9%;}
+#xPetPanel .pet-hit-toy {left: 39%; top: 86%; width: 16%; height: 10%;}
+#xPetPanel .pet-hit-bed {left: 72%; top: 53%; width: 22%; height: 15%;}
+#xPetPanel .pet-hotspot:focus-visible {outline: 2px dashed #6a5346; outline-offset: 2px;}
+#xPetPanel .pet-info:focus-visible, #xPetPanel .pet-close:focus-visible {outline: 2px solid #6a5346; outline-offset: 2px;}
+#xPetPanel .pet-feedback {
+  position: absolute; left: 12%; right: 12%; top: 40%; z-index: 4;
+  padding: 10px 9px; background: #fbefd7; border: 2px solid #aa805e; color: #6a5346;
+  text-align: center; font-size: 12px; line-height: 1.5; pointer-events: none;
+}
+#xPetPanel .pet-feedback strong {display: block; font-weight: 650;}
+#xPetPanel .pet-feedback span {display: block; margin-top: 2px; font-size: 10px;}
+#xPetPanel .pet-sheet {
+  position: absolute; top: 3%; left: 8%; right: 8%; z-index: 5;
+  max-height: 49%; overflow-y: auto; overscroll-behavior: contain; padding: 12px 14px 9px;
+  border: 2px solid #aa805e; background: #fbefd7; color: #6a5346; line-height: 1.45;
+}
+#xPetPanel .pet-sheet-head {display: flex; align-items: center; justify-content: space-between; gap: 12px;}
+#xPetPanel .pet-sheet h2 {margin: 0; font: 650 14px/1.5 system-ui, "Microsoft YaHei", sans-serif;}
+#xPetPanel .pet-close {padding: 4px 0 4px 10px; border: 0; border-radius: 0; background: transparent; color: #6a5346; box-shadow: none; font-family: inherit; font-size: 12px; line-height: 1.5; cursor: pointer;}
+#xPetPanel .pet-close:hover {transform: none; color: #513b2e; box-shadow: none;}
+#xPetPanel .pet-growth {display: flex; gap: 12px; align-items: center; margin: 9px 0 11px; font-size: 12px; font-variant-numeric: tabular-nums;}
+#xPetPanel .pet-stat-list {display: grid; grid-template-columns: 1fr 1fr; gap: 9px 16px; margin: 0;}
+#xPetPanel .pet-stat-list dt {font-size: 11px;}
+#xPetPanel .pet-stat-list dd {margin: 0; display: flex; flex-wrap: wrap; gap: 2px 7px; align-items: baseline;}
+#xPetPanel .pet-stat-list b {font-size: 16px; font-variant-numeric: tabular-nums; font-weight: 650;}
+#xPetPanel .pet-stat-list dd span {width: 100%; font-size: 10px;}
+#xPetPanel .pet-save {margin: 11px 0 0; font-size: 10px; text-align: right;}
+#xPetPanel [data-save-state="unavailable"] {color: #884a32;}
+#xPetPanel [hidden] {display: none !important;}
+#xPetPanel .pet-adoption, #xPetPanel .pet-empty {
+  position:absolute;left:9%;right:9%;top:32%;z-index:7;
+  padding:16px 14px;border:2px solid #aa805e;background:#fbefd7;color:#6a5346;
+  max-height:62%;overflow-y:auto;font-size:12px;line-height:1.5;
+}
+#xPetPanel .pet-adoption h2 {margin:0;text-align:center;font:650 15px/1.5 system-ui,"Microsoft YaHei",sans-serif;}
+#xPetPanel .pet-adoption-family {display:flex;align-items:center;justify-content:center;gap:8px;margin:8px 0 0;}
+#xPetPanel .pet-adoption-dog {width:104px;height:104px;object-fit:contain;image-rendering:pixelated;}
+#xPetPanel .pet-adoption p {margin:4px 0 10px;}
+#xPetPanel .pet-adoption label {display:block;margin:8px 0 4px;font-weight:600;}
+#xPetPanel .pet-adoption label span {font-size:10px;font-weight:400;margin-left:6px;}
+#xPetPanel [data-pet-name-input] {width:100%;min-width:0;box-sizing:border-box;margin:0;padding:8px;border:1px solid #aa805e;border-radius:2px;background:#f5e4c9;color:#6a5346;font:16px/1.4 system-ui,"Microsoft YaHei",sans-serif;box-shadow:none;}
+#xPetPanel [data-pet-name-input]::placeholder {color:#765d49;opacity:1;}
+#xPetPanel .pet-name-actions {display:flex;justify-content:flex-end;gap:12px;}
+#xPetPanel .pet-name-actions button,#xPetPanel .pet-empty button {margin:0;padding:7px 14px;border:1px solid #aa805e;border-radius:2px;background:#e9d0b0;color:#6a5346;font:600 12px/1.4 system-ui,"Microsoft YaHei",sans-serif;box-shadow:none;cursor:pointer;transform:none;}
+#xPetPanel .pet-name-actions button::before,#xPetPanel .pet-name-actions button::after,#xPetPanel .pet-empty button::before,#xPetPanel .pet-empty button::after {content:none;}
+#xPetPanel .pet-adoption .pet-name-error {color:#884a32;font-size:11px;min-height:16px;margin:5px 0;}
+#xPetPanel .pet-adoption .pet-legacy-note {font-size:10px;margin:12px 0 0;}
+#xPetPanel .pet-empty {text-align:center;top:43%;}
+#xPetPanel .pet-empty p {margin:0 0 12px;}
+#xPetPanel .pet-rename {padding:5px 0;margin:9px 0 0;border:0;border-radius:0;background:transparent;color:#6a5346;box-shadow:none;text-decoration:underline;text-underline-offset:3px;font:12px/1.4 system-ui,"Microsoft YaHei",sans-serif;cursor:pointer;}
+#xPetPanel .pet-rename::before,#xPetPanel .pet-rename::after {content:none;}
+#xPetPanel [data-pet-name-input]:focus-visible,#xPetPanel .pet-name-actions button:focus-visible,#xPetPanel .pet-rename:focus-visible,#xPetPanel .pet-empty button:focus-visible {outline:2px solid #6a5346;outline-offset:2px;}
+@media(max-height:560px){
+  #xPetPanel:not(.pet-keyboard-lock) .pet-adoption {top:24%;padding:8px;max-height:72%;}
+  #xPetPanel:not(.pet-keyboard-lock) .pet-adoption-dog {width:52px;height:52px;}
+  #xPetPanel:not(.pet-keyboard-lock) .pet-adoption h2 {font-size:12px;}
+  #xPetPanel:not(.pet-keyboard-lock) .pet-adoption-family {margin:2px 0;}
+  #xPetPanel:not(.pet-keyboard-lock) .pet-adoption p {font-size:10px;margin:3px 0;}
+}
+#xPetPanel ::selection {color: #fff3d9; background: #8e715b;}
+#xPetPanel .pet-accessible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+@media (max-height: 560px) {
+  #xPetPanel:not(.pet-keyboard-lock) .pet-head {height: 36px; margin-bottom: 2px;}
+  #xPetPanel:not(.pet-keyboard-lock) .pet-room {width: min(100%, calc((var(--pet-locked-height,100svh) - 98px) * 0.6));}
+  #xPetPanel:not(.pet-keyboard-lock) .pet-foot {height: 52px; margin-top: 2px;}
+}
+
+/* 底部左右箭头：切换到上一个 / 下一个场景。 */
+#xPetPanel .pet-foot {position: relative; padding: 0 34px;}
+#xPetPanel .pet-step {
+  position: absolute; top: 50%; width: 30px; height: 34px; margin-top: -17px; padding: 0; border: 0; border-radius: 10px;
+  display: grid; place-items: center; background: transparent; color: var(--pet-ink); box-shadow: none; transform: none;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent; cursor: pointer;
+}
+#xPetPanel .pet-step-prev {left: 2px;}
+#xPetPanel .pet-step-next {right: 2px;}
+#xPetPanel .pet-step svg {width: 18px; height: 18px;}
+#xPetPanel .pet-step::before, #xPetPanel .pet-step::after {content: none;}
+#xPetPanel .pet-step:hover, #xPetPanel .pet-step:active {background: #e9d0b0; transform: none; box-shadow: none;}
+#xPetPanel .pet-step:focus {outline: none;}
+#xPetPanel .pet-step:focus-visible {outline: 2px solid #6a5346; outline-offset: -2px;}
+/* 画面上左右滑动换场景：横向手势交给页面自己处理，纵向仍可滚动。 */
+#xPetPanel .pet-room {touch-action: pan-y;}
+
+/* 右下角“换一只小宠”：小爪子按钮 + 从下往上的小抽屉，抽屉里左右滑动挑选。 */
+#xPetPanel .pet-species-toggle {
+  position: absolute; right: 5.5%; bottom: 6.5%; z-index: 5; width: 30px; height: 30px; margin: 0; padding: 6px;
+  display: grid; place-items: center; border: 1px solid #aa805e; border-radius: 2px; background: #f5e4c9;
+  box-shadow: 2px 2px 0 #c7a37c; color: var(--pet-ink); cursor: pointer; transform: none; line-height: 0;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+}
+#xPetPanel .pet-species-toggle svg {width: 16px; height: 16px;}
+#xPetPanel .pet-species-toggle::before, #xPetPanel .pet-species-toggle::after,
+#xPetPanel .pet-species-sheet button::before, #xPetPanel .pet-species-sheet button::after {content: none;}
+#xPetPanel .pet-species-toggle:hover, #xPetPanel .pet-species-toggle:active {background: #ecd6b4; transform: none; box-shadow: 1px 1px 0 #c7a37c;}
+#xPetPanel .pet-species-toggle:focus {outline: none;}
+#xPetPanel .pet-species-toggle:focus-visible {outline: 2px solid #6a5346; outline-offset: 2px;}
+#xPetPanel[data-pet-adopted="false"] .pet-species-toggle, #xPetPanel[data-pet-species-open="true"] .pet-species-toggle {display: none;}
+#xPetPanel .pet-species-sheet {
+  position: absolute; left: 3.8%; right: 3.8%; bottom: 5.6%; z-index: 7; box-sizing: border-box;
+  padding: 8px 0 10px; border: 1px solid #aa805e; border-bottom: 0; border-radius: 2px 2px 0 0;
+  background: #f5e4c9; box-shadow: 0 -2px 0 #c7a37c; color: var(--pet-ink); line-height: 1.4;
+  animation: pet-species-up 0.22s steps(4, end);
+}
+#xPetPanel .pet-species-sheet[hidden] {display: none !important;}
+@keyframes pet-species-up {from {transform: translateY(40%); opacity: 0;}}
+@media (prefers-reduced-motion: reduce) {#xPetPanel .pet-species-sheet {animation: none;}}
+#xPetPanel .pet-species-head {display: flex; align-items: baseline; gap: 8px; padding: 0 8px 6px 12px;}
+#xPetPanel .pet-species-head strong {font-size: 13px; font-weight: 650;}
+#xPetPanel .pet-species-head span {flex: 1; font-size: 10px; opacity: 0.8;}
+#xPetPanel .pet-species-head button {
+  width: 28px; height: 24px; margin: 0; padding: 0; border: 0; border-radius: 2px; background: transparent; box-shadow: none;
+  color: inherit; font: 18px/1 system-ui, sans-serif; cursor: pointer; transform: none;
+}
+#xPetPanel .pet-species-head button:hover {background: #ecd6b4; transform: none; box-shadow: none;}
+#xPetPanel .pet-species-track {
+  display: flex; gap: 8px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+  padding: 2px 12px 4px; scroll-padding: 0 12px; touch-action: pan-x; scrollbar-width: none;
+}
+#xPetPanel .pet-species-track::-webkit-scrollbar {display: none;}
+#xPetPanel .pet-species-card {
+  flex: 0 0 30%; min-width: 84px; scroll-snap-align: start; display: flex; flex-direction: column; align-items: center; gap: 1px;
+  margin: 0; padding: 4px 2px 6px; border: 1px solid #d3b48d; border-radius: 2px; background: #fbefd7; box-shadow: none;
+  color: inherit; font: inherit; cursor: pointer; transform: none; -webkit-tap-highlight-color: transparent;
+}
+#xPetPanel .pet-species-card:hover {background: #fdf5e6; transform: none; box-shadow: none;}
+#xPetPanel .pet-species-card:focus {outline: none;}
+#xPetPanel .pet-species-card:focus-visible {outline: 2px solid #6a5346; outline-offset: -2px;}
+#xPetPanel .pet-species-card img {width: 100%; aspect-ratio: 1; object-fit: contain; image-rendering: pixelated; pointer-events: none;}
+#xPetPanel .pet-species-card strong {font-size: 12px; font-weight: 650;}
+#xPetPanel .pet-species-card small {font-size: 10px; opacity: 0.85;}
+#xPetPanel .pet-species-card[data-pet-current="true"] {border-color: #6a5346; box-shadow: inset 0 0 0 1px #6a5346; background: #fff6e4;}
+#xPetPanel .pet-species-card[data-pet-current="true"] img {animation: pet-species-idle 1.6s steps(2, end) infinite;}
+@keyframes pet-species-idle {50% {transform: translateY(-2px);}}
+@media (prefers-reduced-motion: reduce) {#xPetPanel .pet-species-card[data-pet-current="true"] img {animation: none;}}
+#xPetPanel .pet-species-card[data-pet-locked="true"] img {filter: grayscale(0.85) brightness(1.05); opacity: 0.55;}
+#xPetPanel .pet-species-card[data-pet-locked="true"] strong {opacity: 0.7;}
+/* 起名时键盘弹起：起名小弹窗整体上移，让名字输入框露在键盘上方。 */
+#xPetPanel.pet-keyboard-lock .pet-adoption {top:3%;}
+#xPetPanel.pet-keyboard-lock .pet-adoption-dog {width:64px;height:64px;}
+/* X小宠访问码：沿用日历的像素访问码卡片，盖在小宠面板上。 */
+
+/* X小宠信件：信件按钮在“换小宠”按钮正上方，同款像素小按钮；信件页沿用小抽屉的米色卡片风格。 */
+#xPetPanel .pet-letters-toggle {bottom: calc(6.5% + 38px);}
+#xPetPanel .pet-letters-toggle .pet-letters-dot {position: absolute; top: -3px; right: -3px;}
+#xPetPanel .pet-letters-dot {display: inline-block; width: 7px; height: 7px; margin-left: 3px; border-radius: 50%; background: #d9534f; box-shadow: 0 0 0 1px #f5e4c9; vertical-align: top;}
+#xPetPanel .pet-letters-dot[hidden] {display: none;}
+#xPetPanel .pet-letters-sheet {
+  position: absolute; inset: 4% 3.8% 5.6%; z-index: 8; box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden;
+  padding: 8px 10px 10px; border: 1px solid #aa805e; border-radius: 2px; background: #f5e4c9; box-shadow: 2px 2px 0 #c7a37c;
+  color: var(--pet-ink); font-size: 12px; line-height: 1.6; animation: pet-species-up 0.22s steps(4, end);
+}
+#xPetPanel .pet-letters-sheet[hidden] {display: none !important;}
+#xPetPanel .pet-letters-sheet button {margin: 0; border-radius: 2px; box-shadow: none; transform: none; font: inherit; color: inherit; cursor: pointer;}
+#xPetPanel .pet-letters-sheet button::before, #xPetPanel .pet-letters-sheet button::after {content: none;}
+#xPetPanel .pet-letters-head {display: flex; align-items: center; gap: 6px; padding-bottom: 6px; border-bottom: 1px dashed #d3b48d;}
+#xPetPanel .pet-letters-head strong {font-size: 13px; font-weight: 650;}
+#xPetPanel .pet-letters-head > button:first-child {width: 26px; height: 24px; padding: 0; border: 0; background: transparent; font-size: 17px;}
+#xPetPanel .pet-letters-mode {flex: 1; min-width: 0; font-size: 10px; opacity: .78; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+#xPetPanel .pet-letters-top, #xPetPanel .pet-letters-row button {padding: 2px 8px; border: 1px solid #aa805e; background: #fbefd7;}
+#xPetPanel .pet-letters-top:hover, #xPetPanel .pet-letters-row button:hover {background: #ecd6b4;}
+#xPetPanel .pet-letters-tabs {display: flex; gap: 4px; padding: 6px 0;}
+#xPetPanel .pet-letters-tabs button {flex: 1; padding: 2px 0; border: 1px solid #d3b48d; background: transparent;}
+#xPetPanel .pet-letters-tabs button[aria-selected="true"] {background: #fbefd7; border-color: #aa805e; font-weight: 650;}
+#xPetPanel .pet-letters-list {flex: 1; min-height: 0; overflow-y: auto; display: grid; align-content: start; gap: 6px; padding-right: 2px;}
+#xPetPanel .pet-letters-card {display: grid; grid-template-columns: 1fr auto; gap: 0 6px; padding: 5px 8px; border: 1px solid #d3b48d; background: #fbefd7; text-align: left;}
+#xPetPanel .pet-letters-card small {opacity: .7;}
+#xPetPanel .pet-letters-card span {grid-column: 1 / -1; opacity: .82; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+#xPetPanel .pet-letters-offer, #xPetPanel .pet-letters-write, #xPetPanel .pet-letters-read {flex: 1; min-height: 0; overflow-y: auto; padding-top: 10px;}
+#xPetPanel .pet-letters-offer {text-align: center;}
+#xPetPanel .pet-letters-who {margin: 0; font-size: 14px; font-weight: 650;}
+#xPetPanel .pet-letters-sub, #xPetPanel .pet-letters-hint {margin: 2px 0 10px; font-size: 11px; opacity: .72;}
+#xPetPanel .pet-letters-row {display: flex; justify-content: center; gap: 10px; margin: 10px 0;}
+#xPetPanel .pet-letters-write textarea {box-sizing: border-box; width: 100%; min-height: 120px; margin-top: 8px; padding: 8px; border: 1px solid #d3b48d; border-radius: 2px; background: #fdf5e6; color: inherit; font: inherit; resize: vertical;}
+#xPetPanel .pet-letters-read p:not(.pet-letters-who):not(.pet-letters-sub) {margin: 0 0 8px; padding: 8px 10px; background: #fdf5e6; border: 1px solid #ead5b4; white-space: pre-wrap;}
+#xPetPanel .pet-letters-empty {margin: 24px 0; text-align: center; opacity: .7;}
+#xPetPanel .pet-letters-notice {margin: 4px 0 0; min-height: 1.4em; font-size: 11px; opacity: .85;}
+#xPetPanel[data-pet-adopted="false"] .pet-letters-toggle {display: none;}
+#xPetPanel[data-pet-species-open="true"] .pet-letters-toggle {display: none;}
+#xPetPanel .pet-letters-tabs button {display: flex; align-items: center; justify-content: center; gap: 2px; min-height: 30px;}
+#xPetPanel .pet-letters-face {width: 20px; height: 20px; flex: none; display: block; overflow: hidden; border: 1px solid #aa805e; border-radius: 2px; background: #fbefd7; image-rendering: pixelated;}
+#xPetPanel .pet-letters-face > svg {display: block; width: 100%; height: 100%;}
+#xPetPanel .pet-letters-paw {width: 12px; height: 12px; display: block; color: var(--pet-ink);}
+#xPetPanel .pet-letters-paw > svg {display: block; width: 100%; height: 100%;}
+#xPetPanel .pet-letters-tabs button[aria-selected="false"] {opacity: .62;}
+#xPetPanel .pet-letters-field {display: flex; align-items: center; gap: 8px; margin: 8px 0;}
+#xPetPanel .pet-letters-field input {flex: 1; min-width: 0; padding: 4px 6px; border: 1px solid #d3b48d; border-radius: 2px; background: #fdf5e6; color: inherit; font: inherit;}
+/* 一封信是一整张信纸，段落之间留空，不再每段一个框。 */
+#xPetPanel .pet-letters-read p:not(.pet-letters-who):not(.pet-letters-sub) {margin: 0; padding: 0; background: none; border: 0;}
+#xPetPanel .pet-letters-paper {padding: 10px 12px; background: #fdf5e6; border: 1px solid #ead5b4;}
+#xPetPanel .pet-letters-paper p + p {margin-top: 10px !important;}
+/* 记录、信件、换小宠始终竖排在场景框内右下角。 */
+/* 未解锁场景预览：整幅画面盖一层灰色半透明，隐约看得清，不能互动。 */
+#xPetPanel[data-pet-scene-preview="true"] .pet-room::after {content: ''; position: absolute; inset: 0; z-index: 4; background: rgba(100,89,78,0.42); pointer-events: none;}
+/* 未解锁小宠：下一个待解锁 = 灰色半透明；其余 = 纯黑剪影，不露毛色和细节。 */
+#xPetPanel .pet-species-card[data-pet-preview="next"] img {filter: grayscale(1) brightness(0.95); opacity: 0.5;}
+#xPetPanel .pet-species-card[data-pet-preview="silhouette"] img {filter: brightness(0) saturate(0); opacity: 1;}
+/* 爸爸来过：信件按钮上方再一个同款小按钮；回家卡片和记录页沿用信件页样式。 */
+#xPetPanel .pet-visits-toggle {bottom: calc(6.5% + 76px);}
+#xPetPanel[data-pet-adopted="false"] .pet-visits-toggle, #xPetPanel[data-pet-species-open="true"] .pet-visits-toggle {display: none;}
+#xPetPanel .pet-journal-sheet {z-index: 9;}
+#xPetPanel .pet-journal-sheet[data-pet-growth-popup="true"] {inset:auto;top:50%;left:50%;transform:translate(-50%,-50%);width:min(320px,calc(100% - 24px));max-height:calc(100% - 24px);padding:12px 14px;animation:none;}
+#xPetPanel .pet-journal-sheet[data-pet-growth-popup="true"] .pet-letters-offer {flex:0 1 auto;}
+#xPetPanel .pet-growth-experience {margin:12px 0;font-size:22px;font-weight:700;color:inherit;}
+#xPetPanel .pet-growth-level {margin:6px 0;font-weight:600;}
+#xPetPanel .pet-journal-list {margin-bottom: 6px;}
+#xPetPanel .pet-journal-list p {margin: 0 0 4px; line-height: 1.7;}
+#xPetPanel .pet-journal-list p b {font-weight: 650; margin-right: 6px;}
+#xPetPanel .pet-letters-book {width: 16px; height: 16px; display: block;}
+#xPetPanel .pet-letters-book > svg {display: block; width: 100%; height: 100%;}
+/* 门牌：挂在房间顶上的小木牌，写着家的名字和在一起的第 N 天。 */
+#xPetPanel .pet-home-plate {position: absolute; top: 1.2%; left: 50%; z-index: 5; transform: translateX(-50%); display: grid; justify-items: center; gap: 0;
+  max-width: 70%; margin: 0; padding: 3px 10px 4px; border: 1px solid #8e715b; border-radius: 2px; background: #f5e4c9; box-shadow: 2px 2px 0 #c7a37c;
+  color: var(--pet-ink); font: 11px/1.35 system-ui, "Microsoft YaHei", sans-serif; cursor: pointer; white-space: nowrap;}
+#xPetPanel .pet-home-plate::before, #xPetPanel .pet-home-plate::after {content: none;}
+#xPetPanel .pet-home-plate:hover {background: #ecd6b4; transform: translateX(-50%);}
+#xPetPanel .pet-home-plate b {font-weight: 650; overflow: hidden; text-overflow: ellipsis; max-width: 100%;}
+#xPetPanel .pet-home-plate small {font-size: 9.5px; opacity: .78;}
+#xPetPanel .pet-home-plate[hidden] {display: none;}
+/* 家的记录：隐藏滚动条但可滑动；日记正文只在主动展开后显示。 */
+#xPetPanel .pet-journal-sheet .pet-letters-list {scrollbar-width: none;}
+#xPetPanel .pet-journal-sheet .pet-letters-list::-webkit-scrollbar {display: none;}
+#xPetPanel .pet-diary:not(.is-open) .pet-diary-body {display: none;}
+#xPetPanel .pet-diary-more {margin-top: 6px !important; min-height: 32px; padding: 5px 10px; border: 1px solid #aa805e; background: #fbefd7; font-size: 12px;}
+#xPetPanel .pet-diary-more:hover {background: #ecd6b4;}
+#xPetPanel .pet-diary-more:focus-visible {outline: 2px solid #6a5346; outline-offset: 2px;}
+#xPetPanel .pet-diary-more:disabled {opacity: .6; cursor: wait;}

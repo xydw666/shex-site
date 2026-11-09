@@ -1,0 +1,81 @@
+/* X世界“他的状态 / 链接状态”独立模块样式。
+   现阶段保持原有选择器和视觉参数，避免模块搬迁改变页面表现。 */
+
+.x-status-page-content {
+  width: min(760px, 100%);
+  margin: 0 auto;
+}
+
+.x-status-page-content > .x-letter-status-card {
+  margin-top: 0;
+}
+
+#xWorldHome .x-world-heart-meter,
+#xWorldHome .x-world-pulse-meter {
+  width: min(124px, 100%);
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  color: rgba(var(--x-world-accent-rgb), .76);
+  filter: drop-shadow(0 4px 8px rgba(var(--x-world-accent-rgb), .15));
+}
+
+#xWorldHome .x-world-heart-meter {
+  gap: 5px;
+}
+
+#xWorldHome .x-world-heart-dot {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+}
+
+#xWorldHome .x-world-heart-dot svg,
+#xWorldHome .x-world-pulse-meter svg {
+  width: 100%;
+  height: 100%;
+}
+
+#xWorldHome .x-world-heart-dot path {
+  fill: transparent;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: fill .2s ease, opacity .2s ease;
+}
+
+#xWorldHome .x-world-heart-dot.is-filled path {
+  fill: currentColor;
+  stroke-width: 1.35;
+}
+
+#xWorldHome .x-world-heart-dot:not(.is-filled) {
+  opacity: .56;
+}
+
+body.x-dark-mode #xWorldHome .x-world-heart-meter,
+body.x-dark-mode #xWorldHome .x-world-pulse-meter {
+  color: rgba(var(--x-world-accent-rgb), .78);
+  filter: drop-shadow(0 4px 8px rgba(40,29,21,.2));
+}
+
+@media (max-width: 760px) {
+  #xWorldHome .x-world-heart-meter,
+  #xWorldHome .x-world-pulse-meter {
+    width: min(104px, 100%);
+    height: 19px;
+  }
+
+  #xWorldHome .x-world-heart-meter {
+    gap: 4px;
+  }
+
+  #xWorldHome .x-world-heart-dot {
+    width: 16px;
+    height: 16px;
+    flex-basis: 16px;
+  }
+}

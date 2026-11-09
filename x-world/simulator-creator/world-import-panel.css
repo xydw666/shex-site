@@ -1,0 +1,214 @@
+.shex-world-import-panel {
+  max-width: 720px;
+  margin: 16px auto;
+  padding: 20px;
+  border: 1px solid #ebdfd5;
+  border-radius: 16px;
+  background: #fff;
+  color: #38281a;
+}
+.shex-world-import-head { display: flex; justify-content: flex-start; gap: 12px; align-items: center; }
+.shex-world-import-head h2 { margin: 4px 0; }
+.shex-world-import-head p { margin: 0 0 16px; color: #8b6648; }
+.shex-world-import-head button { flex: 0 0 44px; width: 44px; min-height: 44px; border: 1px solid #ebdfd5; border-radius: 50%; background: #fff; font-size: 28px; }
+.shex-world-import-overview { margin: 16px 0; }
+.shex-world-import-overview h3 { margin: 0 0 6px; }
+.shex-world-import-overview p { margin: 0; color: #8b6648; line-height: 1.55; }
+.shex-world-import-file, .shex-world-import-text { display: block; margin: 12px 0; font-weight: 600; }
+.shex-world-import-text textarea { display: block; width: 100%; box-sizing: border-box; margin-top: 6px; font: 13px/1.5 monospace; }
+.shex-world-import-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0; }
+.shex-world-import-actions button { min-height: 44px; padding: 8px 16px; }
+.shex-world-import-status { min-height: 24px; color: #8a2d2d; }
+.shex-world-import-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; }
+.shex-world-import-summary div { padding: 8px; border-radius: 8px; background: #f8f3ef; }
+.shex-world-import-summary dt { color: #8b6648; font-size: 12px; }
+.shex-world-import-summary dd { margin: 3px 0 0; font-weight: 700; }
+.shex-world-import-blocks { overflow-wrap: anywhere; }
+.shex-world-import-issues { color: #8a2d2d; }
+.shex-world-import-receipt { padding: 12px; border-radius: 8px; background: #edf8ef; color: #245c32; }
+.shex-world-import-source { margin: 14px 0; padding: 12px 14px 16px; border: 1px solid #ebdfd5; border-radius: 12px; background: #f8f3ef; }
+.shex-world-import-result { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 8px; }
+.shex-world-import-result span { padding: 7px 10px; border-radius: 999px; background: #f8f4ef; color: #7a5d3e; font-size: 13px; font-weight: 650; }
+.shex-world-import-compat { margin: 8px 0 14px; color: #8d6d4b; }
+.shex-world-import-compat summary { cursor: pointer; font-size: 13px; }
+.shex-world-import-compat ul { margin: 8px 0 0; padding-left: 20px; font-size: 13px; }
+.shex-world-import-media-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.shex-world-import-media{display:grid;gap:5px;margin:0}.shex-world-import-media>span,.shex-world-import-media>img{display:grid;place-items:center;width:100%;min-height:110px;object-fit:cover;border-radius:14px;background:linear-gradient(145deg,#f5ede5,#f9f4ef);color:#ae8a63}.shex-world-import-media.is-landscape>span,.shex-world-import-media.is-landscape>img{aspect-ratio:16/9}.shex-world-import-media.is-portrait>span,.shex-world-import-media.is-portrait>img{aspect-ratio:9/16;max-height:220px}.shex-world-import-media figcaption{color:#96734e;font-size:12px;text-align:center}@media(max-width:520px){.shex-world-import-media-grid{grid-template-columns:1fr}.shex-world-import-media.is-portrait>span,.shex-world-import-media.is-portrait>img{max-height:280px}}
+
+/* X103 世界导入：保留原导入状态机，只把文件选择与结果反馈产品化。 */
+.shex-world-import-panel,
+.shex-world-import-panel * { box-sizing: border-box; min-width: 0; }
+.shex-world-import-panel {
+  --world-import-accent: #b18658;
+  --world-import-ink: #5b442c;
+  width: min(680px, 100%);
+  margin: 6px auto 96px;
+  padding: clamp(16px, 4vw, 24px);
+  border-color: rgba(177,134,88,.18);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(249,244,238,.96));
+  box-shadow: 0 18px 54px rgba(89,66,41,.09);
+  color: var(--world-import-ink);
+}
+.shex-world-import-head { align-items: flex-start; gap: 14px; }
+.shex-world-import-head > div { min-width: 0; }
+.shex-world-import-head h2 { margin: 1px 0 5px; font-size: clamp(23px, 5vw, 32px); line-height: 1.2; overflow-wrap: anywhere; }
+.shex-world-import-head p { margin: 0; color: #a37e55; line-height: 1.55; }
+.shex-world-import-head button { flex-basis: 42px; width: 42px; min-height: 42px; border-color: rgba(177,134,88,.2); color: #775a3a; cursor: pointer; }
+.shex-world-import-source {
+  display: grid;
+  gap: 14px;
+  margin: 22px 0 0;
+  padding: clamp(14px, 4vw, 20px);
+  border-color: rgba(177,134,88,.17);
+  border-radius: 18px;
+  background: rgba(248,244,239,.74);
+}
+.shex-world-import-file-control { position: absolute; width: 1px; height: 1px; }
+.shex-world-import-native-file {
+  display: none !important;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  opacity: 0 !important;
+}
+.shex-world-import-file-card {
+  display: grid;
+  grid-template-columns: 42px minmax(0,1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid rgba(177,134,88,.16);
+  border-radius: 16px;
+  background: rgba(255,255,255,.9);
+}
+.shex-world-import-file-icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px; background: #f5ede5; color: var(--world-import-accent); font-size: 24px; }
+.shex-world-import-source-copy { display: grid; gap: 4px; overflow-wrap: anywhere; }
+.shex-world-import-source-copy strong { font-size: 15px; }
+.shex-world-import-source-copy span { color: #ac8860; font-size: 12px; }
+.shex-world-import-choose {
+  display: grid;
+  place-items: center;
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid rgba(177,134,88,.23);
+  border-radius: 12px;
+  background: #fff;
+  color: #8b6843;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+.shex-world-import-choose:focus-visible { outline: 3px solid rgba(177,134,88,.28); outline-offset: 2px; }
+.shex-world-import-actions { margin: 0; }
+.shex-world-import-actions button { flex: 1 1 180px; border: 1px solid rgba(177,134,88,.22); border-radius: 13px; background: #fff; color: #826240; font: inherit; cursor: pointer; }
+.shex-world-import-actions button.primary { border-color: var(--world-import-accent); background: var(--world-import-accent); color: #fff; }
+.shex-world-import-actions button:disabled { cursor: not-allowed; opacity: .48; }
+.shex-world-import-preview { margin-top: 18px; }
+.shex-world-import-result span { background: #f5ede5; color: #7e5f3e; }
+.shex-world-import-compat { padding: 10px 12px; border-radius: 12px; background: #f8f4ef; }
+.shex-world-import-compat summary { color: #94724c; font-weight: 650; }
+.shex-world-import-issues { margin: 12px 0; padding: 12px 12px 12px 32px; border: 1px solid rgba(170,72,92,.18); border-radius: 13px; background: #fff3f5; }
+.shex-world-import-status { min-height: 0; margin: 12px 0 0; line-height: 1.55; }
+.shex-world-import-status:empty { display: none; }
+.shex-world-import-status[data-state="busy"] { padding: 10px 12px; border-radius: 12px; background: #f8f4ef; color: #8a6844; }
+.shex-world-import-status[data-state="blocking"] { padding: 11px 12px; border: 1px solid rgba(170,72,92,.2); border-radius: 12px; background: #fff0f3; color: #9b465d; font-weight: 650; }
+@media(max-width:520px) {
+  .shex-world-import-panel { margin-top: 2px; padding: 15px; border-radius: 20px; }
+  .shex-world-import-file-card { grid-template-columns: 38px minmax(0,1fr); padding: 12px; }
+  .shex-world-import-file-icon { width: 38px; height: 38px; }
+  .shex-world-import-choose { grid-column: 1/-1; width: 100%; }
+  .shex-world-import-actions button { flex-basis: 100%; }
+}
+
+/* 合同和文件各占一张轻卡；标题直接放在页面背景上。 */
+.shex-world-import-panel {
+  margin: 6px auto 96px;
+  padding: 14px 4px 24px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.shex-world-import-head { margin-bottom: 24px; }
+.shex-world-import-head h2 { font-size: clamp(20px, 4.5vw, 25px); font-weight: 600; letter-spacing: .01em; }
+.shex-world-import-head p { font-size: 14px; }
+.shex-world-import-panel .shex-world-import-head > button {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.shex-world-import-cards { display: grid; gap: 14px; }
+.shex-world-import-contract-card,
+.shex-world-import-source {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  padding: 18px;
+  border: 1px solid rgba(177,134,88,.17);
+  border-radius: 20px;
+  background: rgba(255,255,255,.88);
+  box-shadow: 0 8px 28px rgba(89,66,41,.045);
+}
+.shex-world-import-contract-card { grid-template-columns: 44px minmax(0, 1fr); }
+.shex-world-import-contract-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-column: 1 / -1; gap: 10px; }
+.shex-world-import-card-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: #f6f0e9;
+  color: #ab7f51;
+  font-size: 22px;
+}
+.shex-world-import-card-icon.is-file { background: #f8f4ef; font-size: 25px; }
+.shex-world-import-card-copy h3 { margin: 0 0 5px; font-size: 16px; line-height: 1.35; }
+.shex-world-import-card-copy p { margin: 0; color: #a9835a; font-size: 13px; line-height: 1.55; overflow-wrap: anywhere; }
+.shex-world-import-file-actions { display: flex; align-items: center; gap: 8px; }
+.shex-world-import-download,
+.shex-world-import-copy,
+.shex-world-import-inspect {
+  display: inline-grid;
+  place-items: center;
+  min-height: 42px;
+  padding: 8px 16px;
+  border: 1px solid #af8455;
+  border-radius: 12px;
+  background: #af8455;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.shex-world-import-copy { border-color: rgba(177,134,88,.25); background: #fff; color: #9b7349; }
+.shex-world-import-copy:hover:not(:disabled) { background: #f9f4ee; }
+.shex-world-import-copy:disabled { opacity: .7; cursor: wait; }
+.shex-world-import-choose { min-height: 42px; font-size: 13px; white-space: nowrap; }
+.shex-world-import-download:hover,
+.shex-world-import-inspect:hover:not(:disabled) { background: #9c7449; }
+.shex-world-import-download:focus-visible,
+.shex-world-import-copy:focus-visible,
+.shex-world-import-inspect:focus-visible { outline: 3px solid rgba(177,134,88,.28); outline-offset: 2px; }
+.shex-world-import-inspect:disabled { opacity: .55; cursor: wait; }
+@media(max-width:520px) {
+  .shex-world-import-panel { padding: 10px 2px 20px; border-radius: 0; }
+  .shex-world-import-head { margin-bottom: 20px; }
+  .shex-world-import-contract-card,
+  .shex-world-import-source { grid-template-columns: 38px minmax(0, 1fr); gap: 10px 12px; padding: 16px; border-radius: 18px; }
+  .shex-world-import-card-icon { width: 38px; height: 38px; border-radius: 12px; }
+  .shex-world-import-contract-actions,
+  .shex-world-import-file-actions { grid-column: 1 / -1; width: 100%; }
+  .shex-world-import-file-actions > button { flex: 1 1 0; width: auto; }
+}
