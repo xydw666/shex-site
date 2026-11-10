@@ -3019,6 +3019,7 @@ SHE.X 会持续更新功能。
           const identity = applyXIdentity();
           const bubble = document.createElement('div');
           bubble.className = 'ix-bubble ta' + (identity.taAvatar ? ' has-avatar' : '');
+          bubble.dataset.xPinyinDemo = '1';
           if (identity.taAvatar) {
             const avatar = document.createElement('img');
             avatar.className = 'ix-avatar';
@@ -3044,13 +3045,28 @@ SHE.X 会持续更新功能。
             return;
           }
           if (tool === 'pinyin') {
-            content.innerHTML = '<p class="ix-plus-note">TA 会自己想说一句，再用拼音打出来。</p><div class="ix-plus-row"><button id="ixPinyinAutoBtn" type="button">再让 TA 打一句</button></div>';
-            const typeOne = () => {
-              const text = window.SHEXGenerateTypingSentence ? window.SHEXGenerateTypingSentence() : '今天也想你了，早点休息。';
-              sendPinyinTypingDemo(text);
+            const readAuto = () => {
+              try { return localStorage.getItem('shex_pinyin_typing_auto_v1') !== '0'; } catch (_) { return true; }
             };
-            content.querySelector('#ixPinyinAutoBtn')?.addEventListener('click', typeOne);
-            typeOne();
+            const render = () => {
+              const on = readAuto();
+              content.innerHTML = '<p class="ix-plus-note">' + (on ? '已开启：TA 的回复（包括 AI 回复）都会用拼音一个字一个字打出来。' : '已关闭：TA 的回复直接显示。') + '</p><div class="ix-plus-row"><button id="ixPinyinToggle" type="button">' + (on ? '关闭拼音打字' : '开启拼音打字') + '</button><button id="ixPinyinDemoBtn" type="button">让 TA 演示一句</button></div>';
+              content.querySelector('#ixPinyinToggle')?.addEventListener('click', () => {
+                const next = !readAuto();
+                try { localStorage.setItem('shex_pinyin_typing_auto_v1', next ? '1' : '0'); } catch (_) {}
+                render();
+              });
+              content.querySelector('#ixPinyinDemoBtn')?.addEventListener('click', () => {
+                const text = window.SHEXGenerateTypingSentence ? window.SHEXGenerateTypingSentence() : '今天也想你了，早点休息。';
+                sendPinyinTypingDemo(text);
+              });
+            };
+            render();
+            // 开关是开着的，就顺手演示一句，方便直观看到效果。
+            if (readAuto()) {
+              const text = window.SHEXGenerateTypingSentence ? window.SHEXGenerateTypingSentence() : '';
+              if (text) sendPinyinTypingDemo(text);
+            }
             return;
           }
           if (tool === 'choice') {
