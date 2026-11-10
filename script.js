@@ -26907,7 +26907,7 @@ SHE.X 会持续更新功能。
       : 'library';
     const showAIControls = active.kind === 'world_run'
       || (active.kind === 'single' && access.canUseAI && selected === 'ai');
-    const aiTools = new Set(['choice', 'sticker', 'action', 'call', 'dating-photo']);
+    const aiTools = new Set(['choice', 'sticker', 'action', 'call', 'pinyin', 'dating-photo']);
     panel.querySelectorAll('.x-clean-tool[data-x-tool]').forEach((button) => {
       if (button.dataset.xTool === 'play-choice') return;
       if (button.dataset.xTool === 'dating-photo') { button.hidden = active.kind !== 'single'; return; }
@@ -26936,6 +26936,7 @@ SHE.X 会持续更新功能。
           <button class="x-clean-tool" type="button" data-x-tool="image">图片</button>
           <button class="x-clean-tool" type="button" data-x-tool="action">动作</button>
           <button class="x-clean-tool" type="button" data-x-tool="call">通话</button>
+          <button class="x-clean-tool" type="button" data-x-tool="pinyin">拼音</button>
           <button class="x-clean-tool" type="button" data-x-tool="dating-photo">发约会照片</button>
         </div>
         <div class="x-clean-tool-detail" data-x-detail="choice"><div class="x-clean-choice-row"><input id="xCleanChoiceInput" placeholder="吃饭,睡觉"><button type="button" id="xCleanChoiceSend">帮我选</button></div></div>
@@ -26943,6 +26944,13 @@ SHE.X 会持续更新功能。
         <div class="x-clean-tool-detail" data-x-detail="lenormand-cards"><div class="x-clean-card-draw-row"><button class="x-clean-chip" type="button" data-card-draw="lenormand" data-card-count="1">一张牌</button><button class="x-clean-chip" type="button" data-card-draw="lenormand" data-card-count="3">三张牌</button><button class="x-clean-chip" type="button" data-card-draw="lenormand" data-card-count="5">五张牌</button></div></div>
         <div class="x-clean-tool-detail" data-x-detail="action"><div class="x-clean-chip-grid"></div></div>
         <div class="x-clean-tool-detail" data-x-detail="call"><p style="padding:16px;text-align:center;color:rgba(90,74,120,.7);">通话功能开发中</p></div>
+        <div class="x-clean-tool-detail" data-x-detail="pinyin">
+          <p style="padding:12px 16px 4px;text-align:center;color:rgba(90,74,120,.7);font-size:13px;" id="xCleanPinyinStatus">读取中…</p>
+          <div style="display:flex;gap:8px;padding:4px 16px 16px;" class="x-clean-card-draw-row">
+            <button class="x-clean-chip" type="button" id="xCleanPinyinToggle">切换</button>
+            <button class="x-clean-chip" type="button" id="xCleanPinyinDemo">让 TA 演示一句</button>
+          </div>
+        </div>
         <div class="x-clean-tool-detail x-clean-sticker-view" data-x-detail="sticker">
           <div class="x-clean-sticker-nav" role="tablist" aria-label="表情包分类">
             <button class="x-clean-sticker-tab is-active" id="xCleanStickerUserTab" type="button" role="tab" aria-selected="true" aria-controls="xCleanUserStickerPage" data-sticker-page="user"><span aria-hidden="true">☺</span>我的表情</button>
@@ -27176,6 +27184,11 @@ SHE.X 会持续更新功能。
         return openDetail('choice');
       }
       if (name === 'action') return showActionChips();
+      if (name === 'pinyin') {
+        if (window.SHEXPinyinBridge?.open) window.SHEXPinyinBridge.open();
+        else openDetail('');
+        return;
+      }
       if (name === 'call') {
         const active = requireActiveConversation();
         if (isAnyCallActive()) {
