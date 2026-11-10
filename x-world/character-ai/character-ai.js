@@ -843,6 +843,17 @@
   async function generateTaskDescriptors(options = {}) {
     let payload;
     const worldRun = String(options.requestKind || '').trim().toLowerCase() === 'world_run';
+    // 演示站点：访客完全不连接外部 AI / 计费服务，直接用本地词库生成回复，
+    // 这样无论聊多少条，都不会触发原站的 X能量 / 充值提示。
+    if ((options.user || {}).guest === true && !worldRun) {
+      const localReply = guestLocalReplyPayload(options.requestId).reply;
+      return {
+        descriptors: [descriptorFromReply(localReply, options.dreamId, options)],
+        cached: false,
+        requestId: String(options.requestId || '').trim(),
+        memoryConsolidation: { ready: false }
+      };
+    }
     // WorldRun owns its R8 settlement inside shexCharacterAI; it must not enter
     // the ordinary character prepare/finalize work-order protocol.
     const serverEndpoint = options.debugMemory === true || worldRun ? '' : serverExecutionEndpoint(options);
