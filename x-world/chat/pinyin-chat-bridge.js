@@ -52,32 +52,76 @@
   function setAutoOn(on) {
     try { localStorage.setItem("shex_pinyin_typing_auto_v1", on ? "1" : "0"); } catch (_) {}
   }
-  // 自主发送：TA 随机主动说一句话
+  // 模式：random=乱码单字，words=拼词，fluent=通顺
+  function readMode() {
+    try {
+      const m = localStorage.getItem("shex_pinyin_mode_v1");
+      if (m && ["random", "words", "fluent"].includes(m)) return m;
+    } catch (_) {}
+    return "words";
+  }
+  function writeMode(m) {
+    try { localStorage.setItem("shex_pinyin_mode_v1", m); } catch (_) {}
+  }
+
+  // 自主发送开关
   function isAutoSpeakOn() {
     try { return localStorage.getItem("shex_pinyin_autospeak_v1") === "1"; } catch (_) { return false; }
   }
   function setAutoSpeakOn(on) {
     try { localStorage.setItem("shex_pinyin_autospeak_v1", on ? "1" : "0"); } catch (_) {}
   }
+  // 自主发送间隔（秒）：默认 20 秒，上限 600 秒（10分钟）
+  const AUTOSPEAK_DEFAULTS = { interval: 20 };
+  function readAutoSpeakInterval() {
+    try {
+      const raw = localStorage.getItem("shex_pinyin_autospeak_interval_v1");
+      if (raw) {
+        const n = Number(raw);
+        if (Number.isFinite(n) && n >= 5 && n <= 600) return n;
+      }
+    } catch (_) {}
+    return AUTOSPEAK_DEFAULTS.interval;
+  }
+  function writeAutoSpeakInterval(n) {
+    try { localStorage.setItem("shex_pinyin_autospeak_interval_v1", String(n)); } catch (_) {}
+  }
+  // 冷却：发完之后至少等多久才能再发（秒）
+  let autoSpeakCooldownUntil = 0;
+
   let autoSpeakTimer = 0;
   function scheduleAutoSpeak() {
     clearTimeout(autoSpeakTimer);
     if (!isAutoSpeakOn() || !panel || !panel.classList.contains("is-open")) return;
-    // 8~22 秒之间随机（有打字动画的时间缓冲）
-    const delay = 8000 + Math.random() * 14000;
+
+    const intervalSec = readAutoSpeakInterval();
+    // 每次 tick 都重新随机，纯概率：interval=20 秒时每 tick 有 ~17% 概率发
+    // interval=10 秒时 ~33%，interval=60 秒时 ~5%
+    const delay = 3000 + Math.random() * Math.max(2000, intervalSec * 500);
     autoSpeakTimer = setTimeout(() => {
-      if (isAutoSpeakOn() && panel && panel.classList.contains("is-open") && logEl) {
-        const text = typeof window.SHEXGenerateTypingSentence === "function"
-          ? window.SHEXGenerateTypingSentence() : "今天也想你了，早点休息。";
-        const bubble = document.createElement("div");
-        bubble.className = "ix-bubble ta";
-        bubble.dataset.xPinyinDemo = "1";
-        const content = document.createElement("span");
-        content.className = "ix-text"; content.textContent = text;
-        bubble.appendChild(content);
-        logEl.appendChild(bubble);
-        logEl.scrollTop = logEl.scrollHeight;
-      }
+      // 检查各种不发的条件
+      if (!isAutoSpeakOn() || !panel || !panel.classList.contains("is-open")) return scheduleAutoSpeak();
+      if (!logEl) return scheduleAutoSpeak();
+      if (Date.now() < autoSpeakCooldownUntil) return scheduleAutoSpeak();
+      // 概率随机：1/intervalSec 概率，interval=20 → ~5% 每秒一次，约每 20 秒一次
+      if (Math.random() * intervalSec > 1) return scheduleAutoSpeak();
+      // 不要有正在打动画的气泡——等打完
+      const all = logEl.querySelectorAll(".ix-bubble.ta");
+      const last = all[all.length - 1];
+      if (last && (last.classList.contains("is-pinyin-typing") || last.dataset.xPinyinDemo === "1")) return scheduleAutoSpeak();
+      // 不要太频繁：冷却 intervalSec 秒
+      autoSpeakCooldownUntil = Date.now() + intervalSec * 1000;
+
+      const text = typeof window.SHEXGenerateTypingSentence === "function"
+        ? window.SHEXGenerateTypingSentence(readMode()) : "想你了。";
+      const bubble = document.createElement("div");
+      bubble.className = "ix-bubble ta";
+      bubble.dataset.xPinyinDemo = "1";
+      const content = document.createElement("span");
+      content.className = "ix-text"; content.textContent = text;
+      bubble.appendChild(content);
+      logEl.appendChild(bubble);
+      logEl.scrollTop = logEl.scrollHeight;
       scheduleAutoSpeak();
     }, delay);
   }
@@ -160,6 +204,14 @@
       '  </div>',
       '  <div class="xpty-settings" hidden>',
       '    <div class="xpty-setting-row">',
+      '      <label>打字模式</label>',
+      '      <div class="xpty-mode-group">',
+      '        <button type="button" class="xpty-mode-btn" data-mode="random">乱码</button>',
+      '        <button type="button" class="xpty-mode-btn" data-mode="words">拼词</button>',
+      '        <button type="button" class="xpty-mode-btn" data-mode="fluent">通顺</button>',
+      '      </div>',
+      '    </div>',
+      '    <div class="xpty-setting-row">',
       '      <label>字母速度</label>',
       '      <input type="range" class="xpty-speed" data-speed="letter" min="30" max="300" step="10">',
       '      <span class="xpty-speed-val" data-speed-val="letter">—</span>',
@@ -174,7 +226,13 @@
       '      <input type="range" class="xpty-speed" data-speed="commit" min="40" max="500" step="10">',
       '      <span class="xpty-speed-val" data-speed-val="commit">—</span>',
       '    </div>',
+      '    <div class="xpty-setting-row">',
+      '      <label>自主发送间隔</label>',
+      '      <input type="range" class="xpty-speed" data-speed="autospeak-interval" min="5" max="600" step="5">',
+      '      <span class="xpty-speed-val" data-speed-val="autospeak-interval">—</span>',
+      '    </div>',
       '    <div class="xpty-settings-actions">',
+      '      <button class="xpty-wordbank" type="button">我的词库</button>',
       '      <button class="xpty-reset" type="button">恢复默认</button>',
       '    </div>',
       '  </div>',
@@ -199,7 +257,9 @@
       demo: panel.querySelector(".xpty-demo"),
       settingsToggle: panel.querySelector(".xpty-settings-toggle"),
       settings: panel.querySelector(".xpty-settings"),
+      wordbankBtn: panel.querySelector(".xpty-wordbank"),
       reset: panel.querySelector(".xpty-reset"),
+      modeBtns: Array.from(panel.querySelectorAll(".xpty-mode-btn")),
       speedInputs: Object.fromEntries(
         Array.from(panel.querySelectorAll(".xpty-speed")).map((el) => [el.dataset.speed, el])
       ),
@@ -312,15 +372,37 @@
         if (input) { input.value = String(s[key]); }
         if (val) val.textContent = s[key] + " ms";
       }
+      // 自主发送间隔单独处理
+      const aiInput = panelElements.speedInputs["autospeak-interval"];
+      const aiVal = panelElements.speedVals["autospeak-interval"];
+      const interval = readAutoSpeakInterval();
+      if (aiInput) aiInput.value = String(interval);
+      if (aiVal) aiVal.textContent = interval + " 秒";
+    }
+    function renderModes() {
+      const cur = readMode();
+      panelElements.modeBtns.forEach((btn) => {
+        const on = btn.dataset.mode === cur;
+        btn.classList.toggle("is-on", on);
+        if (on) btn.style.background = "#b78e65", btn.style.color = "#fff";
+        else { btn.style.background = ""; btn.style.color = ""; }
+      });
     }
     panelElements.settingsToggle?.addEventListener("click", () => {
       const hidden = panelElements.settings.hasAttribute("hidden");
-      if (hidden) renderSpeeds();
+      if (hidden) { renderSpeeds(); renderModes(); }
       panelElements.settings.hidden = !hidden;
     });
+    // 速度滑块事件
     for (const key of Object.keys(panelElements.speedInputs)) {
       const input = panelElements.speedInputs[key];
       input.addEventListener("input", () => {
+        if (key === "autospeak-interval") {
+          writeAutoSpeakInterval(Number(input.value));
+          const v = panelElements.speedVals[key];
+          if (v) v.textContent = input.value + " 秒";
+          return;
+        }
         const s = getSpeed();
         s[key] = Number(input.value) || DEFAULTS[key];
         writeSpeed(s);
@@ -328,14 +410,216 @@
         if (v) v.textContent = s[key] + " ms";
       });
     }
+    // 模式按钮事件
+    panelElements.modeBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const m = btn.dataset.mode;
+        writeMode(m);
+        renderModes();
+        showHint("已切换为" + ({random:"乱码模式",words:"拼词模式",fluent:"通顺模式"}[m] || m));
+      });
+    });
     panelElements.reset?.addEventListener("click", () => {
       writeSpeed({ ...DEFAULTS });
+      writeAutoSpeakInterval(AUTOSPEAK_DEFAULTS.interval);
       renderSpeeds();
-      showHint("已恢复默认速度");
+      renderModes();
+      showHint("已恢复默认");
     });
+    // 我的词库
+    panelElements.wordbankBtn?.addEventListener("click", () => openWordBankModal());
 
     renderPanelState();
     return panel;
+  }
+
+  /* ============ 词库管理浮层 ============ */
+  function guessPinyin(text) {
+    if (!text) return "";
+    const charMap = window.SHEX_CHAR_PINYIN || {};
+    // 单字 → 直接查 char-map
+    if (text.length === 1) return charMap[text] || "";
+    // 多字词组 → 逐字拼
+    let out = "";
+    for (const ch of text) {
+      if (charMap[ch]) out += charMap[ch];
+      else return ""; // 有一个字查不到就放弃，让用户自己填
+    }
+    return out;
+  }
+
+  function openWordBankModal() {
+    const api = window.SHEXPinyinUserBank;
+    if (!api) { showHint("词库模块未加载"); return; }
+    const CJK = /^[\u3400-\u9fff]$/;
+
+    const modal = document.createElement("div");
+    modal.className = "xpty-wordbank-modal";
+    modal.innerHTML = [
+      '<div class="xpty-wb-backdrop"></div>',
+      '<div class="xpty-wb-dialog">',
+      '  <div class="xpty-wb-head">',
+      '    <span class="xpty-wb-title">📚 我的词库</span>',
+      '    <button class="xpty-wb-close" type="button" aria-label="关闭">×</button>',
+      '  </div>',
+      '  <div class="xpty-wb-body">',
+      '    <div class="xpty-wb-note">单字自动补拼音，多字词组拼音请自己填。<br>原站字典不动，你加的合进去，纯随机抽。</div>',
+      '    <div class="xpty-wb-section">',
+      '      <div class="xpty-wb-label">单个添加</div>',
+      '      <div class="xpty-wb-add-row-2">',
+      '        <input type="text" class="xpty-wb-input" placeholder="字或词组，如 晚安">',
+      '        <input type="text" class="xpty-wb-input xpty-wb-pinyin" placeholder="拼音，如 wanan">',
+      '        <button type="button" class="xpty-wb-btn xpty-wb-btn-primary">添加</button>',
+      '      </div>',
+      '      <div class="xpty-wb-auto-hint"></div>',
+      '    </div>',
+      '    <div class="xpty-wb-section">',
+      '      <div class="xpty-wb-label">批量粘贴（一行一条，格式：字=拼音 或 只写字）</div>',
+      '      <textarea class="xpty-wb-textarea" rows="5" placeholder="鱼=yu&#10;晚安=wanan&#10;想你"></textarea>',
+      '      <div class="xpty-wb-add-row">',
+      '        <button type="button" class="xpty-wb-btn xpty-wb-btn-primary xpty-wb-btn-block">批量添加</button>',
+      '      </div>',
+      '    </div>',
+      '    <div class="xpty-wb-section">',
+      '      <div class="xpty-wb-label-row">',
+      '        <span class="xpty-wb-label">已有词条 <em class="xpty-wb-count">0</em></span>',
+      '        <label class="xpty-wb-check"><input type="checkbox" class="xpty-wb-check-all"> 全选</label>',
+      '      </div>',
+      '      <div class="xpty-wb-list"></div>',
+      '      <div class="xpty-wb-list-actions">',
+      '        <button type="button" class="xpty-wb-btn xpty-wb-btn-danger xpty-wb-btn-block-del">删除选中</button>',
+      '        <button type="button" class="xpty-wb-btn xpty-wb-btn-danger-outline xpty-wb-btn-clear">🗑 清空全部</button>',
+      '      </div>',
+      '    </div>',
+      '  </div>',
+      '</div>'
+    ].join("");
+    document.body.appendChild(modal);
+
+    const listEl = modal.querySelector(".xpty-wb-list");
+    const countEl = modal.querySelector(".xpty-wb-count");
+    const allCheck = modal.querySelector(".xpty-wb-check-all");
+    const singleInput = modal.querySelectorAll(".xpty-wb-input")[0];
+    const pinyinInput = modal.querySelectorAll(".xpty-wb-input")[1];
+    const autoHint = modal.querySelector(".xpty-wb-auto-hint");
+    const singleBtn = modal.querySelector(".xpty-wb-btn-primary");
+    const batchInput = modal.querySelector(".xpty-wb-textarea");
+    const batchBtn = modal.querySelector(".xpty-wb-btn-block");
+    const delSelBtn = modal.querySelector(".xpty-wb-btn-block-del");
+    const clearBtn = modal.querySelector(".xpty-wb-btn-clear");
+
+    // 单字时自动推导拼音
+    singleInput.addEventListener("input", () => {
+      const v = singleInput.value.trim();
+      if (v.length === 1 && CJK.test(v)) {
+        const py = guessPinyin(v);
+        if (py && !pinyinInput.value) {
+          pinyinInput.value = py;
+          autoHint.textContent = "已自动填拼音：" + py;
+          setTimeout(() => { if (autoHint.textContent === "已自动填拼音：" + py) autoHint.textContent = ""; }, 1500);
+        }
+      } else {
+        autoHint.textContent = "";
+      }
+    });
+
+    function refreshList() {
+      const arr = api.getAll().slice().reverse();
+      countEl.textContent = String(arr.length);
+      if (!arr.length) {
+        listEl.innerHTML = '<div class="xpty-wb-empty">还没有词条</div>';
+        allCheck.checked = false;
+        return;
+      }
+      listEl.innerHTML = arr.map((e, i) => {
+        const key = e.text + "|" + e.pinyin;
+        return `<div class="xpty-wb-item">
+          <label><input type="checkbox" class="xpty-wb-item-check" data-idx="${i}" data-key="${key}">
+          <span class="xpty-wb-item-text">${e.text.replace(/</g,'<').replace(/>/g,'>')}</span>
+          <span class="xpty-wb-item-py">${e.pinyin}</span>
+          </label>
+          <button class="xpty-wb-item-del" data-key="${key}">×</button>
+        </div>`;
+      }).join("");
+      allCheck.checked = false;
+      listEl.querySelectorAll(".xpty-wb-item-del").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          api.remove([btn.dataset.key]); refreshList();
+        });
+      });
+    }
+    refreshList();
+
+    const close = () => modal.remove();
+    modal.querySelector(".xpty-wb-close").addEventListener("click", close);
+    modal.querySelector(".xpty-wb-backdrop").addEventListener("click", close);
+    modal.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
+
+    singleBtn.addEventListener("click", () => {
+      const text = singleInput.value.trim();
+      const py = pinyinInput.value.trim().toLowerCase();
+      if (!text) return;
+      let finalPy = py || guessPinyin(text);
+      if (!finalPy) { showHint("多字词组请填拼音"); return; }
+      const r = api.add([{ text, pinyin: finalPy }]);
+      if (r.added > 0) {
+        singleInput.value = ""; pinyinInput.value = ""; autoHint.textContent = "";
+        refreshList();
+      }
+      showHint("✓ 添加，总共 " + r.total);
+    });
+    singleInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") { e.preventDefault(); singleBtn.click(); }
+    });
+    pinyinInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") { e.preventDefault(); singleBtn.click(); }
+    });
+
+    batchBtn.addEventListener("click", () => {
+      const lines = (batchInput.value || "").split(/[\n\r]+/).map((s) => s.trim()).filter(Boolean);
+      if (!lines.length) return;
+      const items = [];
+      for (const line of lines) {
+        let text = line, py = "";
+        const eq = line.indexOf("=");
+        const tab = line.indexOf("\t");
+        const sep = eq >= 0 ? eq : tab >= 0 ? tab : -1;
+        if (sep > 0) {
+          text = line.slice(0, sep).trim();
+          py = line.slice(sep + 1).trim().toLowerCase();
+        }
+        if (!text) continue;
+        if (!py) py = guessPinyin(text);
+        if (!py) continue; // 跳过无法推导且没填拼音的
+        items.push({ text, pinyin: py });
+      }
+      if (!items.length) { showHint("没有有效条目"); return; }
+      const r = api.add(items);
+      batchInput.value = ""; refreshList();
+      showHint("✓ 批量添加 " + r.added + " 条，总共 " + r.total);
+    });
+
+    allCheck.addEventListener("change", () => {
+      listEl.querySelectorAll(".xpty-wb-item-check").forEach((c) => { c.checked = allCheck.checked; });
+    });
+
+    delSelBtn.addEventListener("click", () => {
+      const checks = Array.from(listEl.querySelectorAll(".xpty-wb-item-check:checked"));
+      if (!checks.length) return;
+      const keys = checks.map((c) => c.dataset.key);
+      api.remove(keys); refreshList();
+      showHint("已删除 " + keys.length + " 条");
+    });
+
+    clearBtn.addEventListener("click", () => {
+      const total = api.getAll().length;
+      if (total === 0) return;
+      if (!confirm("确定清空全部 " + total + " 条？原站字典不会被删。")) return;
+      api.clear(); refreshList();
+      showHint("已清空");
+    });
+
+    return modal;
   }
 
   function renderPanelState() {
@@ -381,7 +665,7 @@
   function createDemoBubble() {
     if (!logEl) return null;
     const text = typeof window.SHEXGenerateTypingSentence === "function"
-      ? window.SHEXGenerateTypingSentence() : "今天也想你了，早点休息。";
+      ? window.SHEXGenerateTypingSentence(readMode()) : "想你了。";
     const bubble = document.createElement("div");
     bubble.className = "ix-bubble ta";
     bubble.dataset.xPinyinDemo = "1";
@@ -422,7 +706,14 @@
         const char = chars[index];
         if (index >= dumpAfter) { break; } // 长的不逐字演拼音了，直接走 finally
         const pinyin = CJK.test(char) ? charMap[char] : "";
-        if (pinyin && dict[pinyin]) {
+        // 候选字合并：原站 dict + 用户自定义（同拼音条目）
+        const getCandidates = (py) => {
+          const withUser = typeof window.SHEXPinyinDictWithUser === "function"
+            ? window.SHEXPinyinDictWithUser(py)
+            : ((dict[py] || []).slice());
+          return withUser.slice(0, 8);
+        };
+        if (pinyin && (dict[pinyin] || (typeof window.SHEXPinyinDictWithUser === "function" && window.SHEXPinyinDictWithUser(pinyin).length))) {
           let typed = "";
           for (const letter of pinyin) {
             typed += letter;
@@ -430,9 +721,9 @@
             await sleep(speed.letter * (0.8 + Math.random() * 0.6));
             if (!bubble.isConnected) return;
           }
-          let candidates = (dict[pinyin] || []).slice(0, 6);
+          let candidates = getCandidates(pinyin);
           if (!candidates.includes(char)) {
-            if (candidates.length >= 7) candidates.pop();
+            if (candidates.length >= 9) candidates.pop();
             candidates.push(char);
           }
           candidates = shuffle(candidates);
@@ -681,6 +972,15 @@
       "  display:grid;grid-template-columns:70px 1fr 56px;align-items:center;gap:6px;margin-bottom:8px;font-size:12px;color:#6b5440;",
       "}",
       "#xPinyinPanel .xpty-setting-row label{font-size:11px;color:#8c6e52;}",
+      "#xPinyinPanel .xpty-mode-group{display:flex;gap:5px;grid-column:2/-1;}",
+      "#xPinyinPanel .xpty-mode-btn{",
+      "  flex:1;padding:5px 6px;border-radius:8px;border:1px solid rgba(183,142,101,.35);",
+      "  background:#fff;color:#6b5440;font-size:11px;cursor:pointer;transition:all .15s;",
+      "}",
+      "#xPinyinPanel .xpty-mode-btn.is-on{background:#b78e65;color:#fff;border-color:#b78e65;}",
+      "#xPinyinPanel .xpty-mode-btn:hover{background:rgba(183,142,101,.1);}",
+      "#xPinyinPanel .xpty-mode-btn.is-on:hover{background:#a67d54;}",
+      "#xPinyinPanel .xpty-setting-row:first-of-type .xpty-mode-group{margin-top:2px;}",
       "#xPinyinPanel .xpty-speed{",
       "  -webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:rgba(183,142,101,.35);outline:none;",
       "}",
@@ -700,6 +1000,68 @@
       "  color:#6b5440;font-size:11px;cursor:pointer;transition:all .15s;",
       "}",
       "#xPinyinPanel .xpty-reset:hover{background:rgba(183,142,101,.1);}",
+      "#xPinyinPanel .xpty-wordbank{",
+      "  padding:6px 10px;border-radius:8px;border:1px solid #b78e65;background:#b78e65;",
+      "  color:#fff;font-size:11px;cursor:pointer;transition:all .15s;",
+      "}",
+      "#xPinyinPanel .xpty-wordbank:hover{background:#a67d54;}",
+      /* ============ 词库管理浮层 ============ */
+      ".xpty-wordbank-modal{position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;}",
+      ".xpty-wb-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.45);}",
+      ".xpty-wb-dialog{",
+      "  position:relative;background:#fff;border-radius:14px;max-width:420px;width:calc(100vw - 32px);max-height:80vh;overflow:hidden;",
+      "  box-shadow:0 10px 40px rgba(0,0,0,.25);display:flex;flex-direction:column;",
+      "}",
+      ".xpty-wb-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #f1e6db;}",
+      ".xpty-wb-title{font-size:14px;font-weight:600;color:#6b5440;}",
+      ".xpty-wb-close{border:none;background:none;font-size:20px;color:#8c6e52;cursor:pointer;padding:2px 6px;border-radius:6px;}",
+      ".xpty-wb-close:hover{background:rgba(183,142,101,.1);}",
+      ".xpty-wb-body{padding:14px 16px;overflow-y:auto;flex:1;}",
+      ".xpty-wb-note{font-size:11px;color:#8c6e52;margin-bottom:12px;padding:8px 10px;background:#faf4ee;border-radius:8px;line-height:1.5;}",
+      ".xpty-wb-section{margin-bottom:14px;}",
+      ".xpty-wb-label{font-size:12px;color:#6b5440;margin-bottom:6px;font-weight:500;}",
+      ".xpty-wb-label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}",
+      ".xpty-wb-count{color:#b78e65;font-style:normal;font-weight:600;}",
+      ".xpty-wb-check{font-size:11px;color:#6b5440;display:flex;align-items:center;gap:4px;}",
+      ".xpty-wb-add-row{display:flex;gap:6px;}",
+      ".xpty-wb-input,.xpty-wb-textarea{",
+      "  flex:1;padding:8px 10px;border:1px solid #e8d9c8;border-radius:8px;font-size:13px;",
+      "  outline:none;background:#fdfaf6;color:#3d2d20;font-family:inherit;",
+      "}",
+      ".xpty-wb-input:focus,.xpty-wb-textarea:focus{border-color:#b78e65;background:#fff;}",
+      ".xpty-wb-textarea{resize:vertical;min-height:80px;line-height:1.5;}",
+      ".xpty-wb-btn{",
+      "  padding:8px 14px;border-radius:8px;border:1px solid transparent;font-size:12px;font-weight:500;",
+      "  cursor:pointer;transition:all .15s;font-family:inherit;white-space:nowrap;",
+      "}",
+      ".xpty-wb-btn-primary{background:#b78e65;color:#fff;border-color:#b78e65;}",
+      ".xpty-wb-btn-primary:hover{background:#a67d54;}",
+      ".xpty-wb-btn-danger{background:#d46a4e;color:#fff;border-color:#d46a4e;}",
+      ".xpty-wb-btn-danger:hover{background:#c35a3e;}",
+      ".xpty-wb-btn-danger-outline{background:#fff;color:#d46a4e;border-color:#f1c4b5;}",
+      ".xpty-wb-btn-danger-outline:hover{background:#fff3ef;}",
+      ".xpty-wb-btn-block{width:100%;}",
+      ".xpty-wb-list{max-height:180px;overflow-y:auto;border:1px solid #f1e6db;border-radius:8px;background:#fdfaf6;}",
+      ".xpty-wb-empty{padding:20px;text-align:center;color:#b5a08c;font-size:12px;}",
+      ".xpty-wb-item{",
+      "  display:flex;justify-content:space-between;align-items:center;padding:7px 10px;",
+      "  border-bottom:1px solid #f5ebe0;font-size:13px;color:#3d2d20;gap:8px;",
+      "}",
+      ".xpty-wb-item:last-child{border-bottom:none;}",
+      ".xpty-wb-item label{flex:1;display:flex;align-items:center;gap:8px;cursor:pointer;}",
+      ".xpty-wb-item-del{",
+      "  border:none;background:none;color:#c35a3e;font-size:15px;cursor:pointer;padding:2px 8px;",
+      "  border-radius:5px;line-height:1;",
+      "}",
+      ".xpty-wb-item-del:hover{background:#fff3ef;}",
+      ".xpty-wb-list-actions{display:flex;gap:8px;margin-top:10px;}",
+      ".xpty-wb-add-row-2{display:flex;gap:6px;align-items:stretch;}",
+      ".xpty-wb-add-row-2 .xpty-wb-input:first-child{flex:1.2;}",
+      ".xpty-wb-add-row-2 .xpty-wb-pinyin{flex:1;}",
+      ".xpty-wb-auto-hint{font-size:11px;color:#8faa6a;margin-top:4px;}",
+      ".xpty-wb-item label.flex-between{display:flex;justify-content:space-between;flex:1;align-items:center;gap:8px;}",
+      ".xpty-wb-item-text{color:#3d2d20;font-weight:500;}",
+      ".xpty-wb-item-py{color:#b78e65;font-size:11px;background:#faf4ee;padding:2px 6px;border-radius:4px;font-family:'Courier New',monospace;}",
       "@media (max-width:420px){",
       "  #xPinyinPanel .xpty-panel{width:calc(100vw - 24px);}",
       "}"

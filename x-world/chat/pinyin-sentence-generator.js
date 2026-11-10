@@ -1,51 +1,122 @@
 /* SHE.X · 给 X传讯里的「拼音」入口生成 TA 想说的话
-   纯离线：从词池随机拼句，不接 AI，也不依赖预设整句。 */
+   用户自定义条目 + 原站 word-bank.js → 全随机拼句。 */
 (function () {
   "use strict";
   if (window.SHEXGenerateTypingSentence) return;
 
-  const pools = {
-    time: ['刚刚', '这会儿', '今天', '昨天', '晚上', '早上', '最近', '睡前', '下班后', '吃完饭'],
-    thought: ['有点想你', '忽然很想你', '一直在想你', '刚刚想到你了', '特别想和你说说话', '想你想得有点走神'],
-    wish: ['想抱抱你', '想见你', '想听你的声音', '想陪你待一会儿', '想和你一起看月亮', '想牵你的手走一会儿'],
-    care: ['记得按时吃饭', '别熬太晚', '天冷了多穿点', '累了就早点休息', '出门记得带伞', '别总是硬撑着'],
-    smalltalk: ['我这边刚下过雨', '楼下的猫又来蹭我了', '今天的月亮很圆', '买了一袋你爱吃的糖', '刚泡了一杯热牛奶', '把窗户打开了一会儿', '路上看到一棵开花的树', '刚把房间收拾干净'],
-    ending: ['', '，好吗', '，知道吗', '，要听话']
-  };
+  const USER_KEY = "shex_pinyin_user_entries_v1";
 
-  const templates = [
-    '{time}{smalltalk}。',
-    '{time}{thought}。',
-    '{care}{ending}。',
-    '{wish}。',
-    '{time}{thought}，{wish}。',
-    '{care}{ending}，{wish}。',
-    '{smalltalk}，{thought}。',
-    '{time}{smalltalk}，{care}{ending}。',
-    '{thought}，{care}{ending}。',
-    '{wish}，{time}{thought}。',
-    '{care}{ending}，{smalltalk}。',
-    '{time}{wish}。',
-    '{smalltalk}，{care}{ending}。',
-    '{thought}，{time}{wish}。'
-  ];
-
-  const pick = (list) => list[Math.floor(Math.random() * list.length)];
-  let last = '';
-
-  function fill(template) {
-    return template.replace(/\{(\w+)\}/g, (_, key) => (key === 'ending' ? pick(pools.ending) : pick(pools[key] || [''])));
+  function normalize(item) {
+    if (!item) return null;
+    const text = String(item.text || item.word || item.char || "").trim();
+    const pinyin = String(item.pinyin || "").trim().toLowerCase();
+    if (!text || !pinyin || /[^a-z]/.test(pinyin)) return null;
+    return { text, pinyin };
   }
 
-  function generate() {
-    for (let attempt = 0; attempt < 12; attempt += 1) {
-      const text = fill(pick(templates)).replace(/，。/g, '。').replace(/。，/g, '。');
-      if (text !== last && text.length >= 6) {
-        last = text;
-        return text;
-      }
+  function loadUser() {
+    try {
+      const raw = localStorage.getItem(USER_KEY);
+      if (!raw) return [];
+      const arr = JSON.parse(raw);
+      if (!Array.isArray(arr)) return [];
+      const seen = new Set();
+      return arr.map(normalize).filter((e) => e && !(e.text + "|" + e.pinyin && seen.add(e.text + "|" + e.pinyin)));
+    } catch (_) { return []; }
+  }
+  function saveUser(arr) {
+    try {
+      // 去重 + 截 500 条
+      const seen = new Set();
+      const clean = arr.map(normalize).filter((e) => e && !(seen.add(e.text + "|" + e.pinyin))).slice(0, 500);
+      localStorage.setItem(USER_KEY, JSON.stringify(clean));
+    } catch (_) {}
+  }
+
+  // 对外管理接口
+  window.SHEXPinyinUserBank = {
+    getAll() { return loadUser(); },
+    save(arr) { saveUser(arr); },
+    add(items) {
+      const cur = loadUser();
+      const curMap = new Map(cur.map((e) => [e.text + "|" + e.pinyin, e]));
+      let added = 0;
+      (Array.isArray(items) ? items : [items]).forEach((raw) => {
+        const e = normalize(raw);
+        if (!e) return;
+        if (!curMap.has(e.text + "|" + e.pinyin)) {
+          curMap.set(e.text + "|" + e.pinyin, e);
+          added += 1;
+        }
+      });
+      const arr = Array.from(curMap.values());
+      saveUser(arr);
+      return { total: arr.length, added };
+    },
+    remove(keys) {
+      const cur = loadUser();
+      const removeSet = new Set((Array.isArray(keys) ? keys : [keys]).map((k) => String(k)));
+      const arr = cur.filter((e) => !removeSet.has(e.text + "|" + e.pinyin));
+      saveUser(arr);
+      return { total: arr.length, removed: cur.length - arr.length };
+    },
+    clear() { saveUser([]); return 0; }
+  };
+
+  // 合并候选字字典：原站 dict + 用户加的同拼音条目
+  window.SHEXPinyinDictWithUser = function (pinyin) {
+    const base = (window.SHEX_PINYIN_DICT && window.SHEX_PINYIN_DICT[pinyin]) || [];
+    const extras = loadUser().filter((e) => e.pinyin === pinyin).map((e) => e.text);
+    // 合并去重，用户加的放在后面（让原站优先展示）
+    const seen = new Set(base);
+    const merged = base.slice();
+    extras.forEach((w) => { if (!seen.has(w)) { merged.push(w); seen.add(w); } });
+    return merged;
+  };
+
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  function generate(mode) {
+    const userEntries = loadUser();
+    const hasDefaultBank = !!(window.SHEXWordBank && typeof window.SHEXWordBank.generate === "function");
+
+    // 全部候选词池 = 用户词组 + 原站 words + （可选）原站模板的槽
+    let allWords = new Set();
+
+    // 用户加的 text 不管是单字还是词组都算
+    userEntries.forEach((e) => { if (e.text && e.text.length >= 1 && e.text.length <= 6) allWords.add(e.text); });
+
+    // 原站 words 池
+    if (hasDefaultBank && Array.isArray(window.SHEXWordBank.words)) {
+      window.SHEXWordBank.words.forEach((w) => allWords.add(w));
     }
-    return '今天有点想你，记得早点休息。';
+
+    const wordArr = Array.from(allWords);
+
+    // 有足够的词 → 随机拼
+    if (wordArr.length >= 3) {
+      const count = 2 + Math.floor(Math.random() * 3); // 2~4 个词
+      const picked = [];
+      const used = new Set();
+      for (let i = 0; i < count && picked.length < count; i += 1) {
+        const w = pick(wordArr);
+        // 尽量不重复
+        if (used.has(w) && wordArr.length > count) continue;
+        used.add(w);
+        picked.push(w);
+      }
+      const joiners = ["", "，", " ", "，", "..."];
+      let text = picked.join(pick(joiners));
+      if (!/[。！？!?]$/.test(text) && Math.random() < 0.5) text += pick(["。", "！", "？", ""]);
+      if (text.length > 60) text = text.slice(0, 30);
+      if (text.length >= 2) return text;
+    }
+
+    // fallback：原站三档
+    if (hasDefaultBank) return window.SHEXWordBank.generate(mode || "words");
+
+    // 纯兜底
+    return "想你了。";
   }
 
   window.SHEXGenerateTypingSentence = generate;
